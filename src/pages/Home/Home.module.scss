@@ -1,0 +1,171 @@
+.Header {
+    height: 180px;
+    width: 100%;
+}
+
+.TodaysChallenge {
+    width: 100%;
+    background-color: antiquewhite;
+    /*구분용*/
+    border-radius: 20px 20px 0px 0px;
+    /*임의 적용*/
+
+    .HomeHeader {
+        padding-left: 21px;
+        padding-top: 35px;
+        margin: 0;
+
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28;
+        line-height: 33px;
+
+        color: #000000;
+    }
+
+    .HomeText {
+
+        margin: 0;
+        padding-left: 21px;
+        padding-top: 10px;
+
+
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 23px;
+        color: #8F8F8F;
+    }
+
+    .Statistics {
+        width: 100%;
+
+        width: 333px;
+        height: 53px;
+        left: 21px;
+        top: 630px;
+
+        background: #05697F;
+        border-radius: 15px;
+
+    }
+
+}
+
+
+
+
+
+
+.PillChallenge {
+    width: 100%;
+    height: 517px;
+    background-color: #F4F5FA;
+
+    .PillChallengeTitle {
+        display: flex;
+        padding-left: 21px;
+        padding-top: 30px;
+
+
+        .PillImg {
+            width: 28px;
+            height: auto;
+        }
+
+        .PillText {
+            padding-left: 6px;
+            margin-right: auto;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 30px;
+            color: #000000;
+        }
+
+        .PillEdit {
+            padding-right: 25px;
+            margin: 0;
+
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 18px;
+
+            margin: auto;
+            margin-right: 0;
+
+            color: #0E9494;
+
+            .clampR {
+                padding-left: 6px;
+                width: 4px;
+            }
+        }
+
+    }
+}
+
+
+.HabbitChallenge {
+    width: 100%;
+    height: 517px;
+    background-color: #F4F5FA;
+
+    .HabbitChallengeTitle {
+        display: flex;
+        padding-left: 21px;
+        padding-top: 30px;
+
+
+        .HabbitImg {
+            width: 28px;
+            height: auto;
+        }
+
+        .HabbitText {
+            padding-left: 6px;
+            margin-right: auto;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 30px;
+            color: #000000;
+        }
+
+        .HabbitEdit {
+            padding-right: 25px;
+            margin: 0;
+
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 18px;
+
+            margin: auto;
+            margin-right: 0;
+
+            color: #0E9494;
+
+            .clampR {
+                padding-left: 6px;
+                width: 4px;
+            }
+        }
+
+    }
+}
+
+.gap {
+    height: 25px;
+}
