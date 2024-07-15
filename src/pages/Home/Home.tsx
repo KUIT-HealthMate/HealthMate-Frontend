@@ -1,7 +1,7 @@
 import styles from "./Home.module.scss";
 import TodaysChallenge from "./TodayChallenge";
 import SupplementChallenge from "./SupplementChallenge";
-import HabbitChallenge from "./HabbitChallenge";
+import HabitChallenge from "./HabitChallenge";
 
 
 const Home = () => (
@@ -10,7 +10,7 @@ const Home = () => (
         <TodaysChallenge></TodaysChallenge>
         <SupplementChallenge></SupplementChallenge>
         <div className={styles.gap}></div>
-        <HabbitChallenge></HabbitChallenge>
+        <HabitChallenge></HabitChallenge>
         <button className={styles.dailyCheckButton}>일일 건강진단하기</button>
     </div>
 )
