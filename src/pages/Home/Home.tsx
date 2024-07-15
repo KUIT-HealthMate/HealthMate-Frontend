@@ -11,7 +11,7 @@ const Home = () => (
         <SupplementChallenge></SupplementChallenge>
         <div className={styles.gap}></div>
         <HabbitChallenge></HabbitChallenge>
-
+        <button className={styles.dailyCheckButton}>일일 건강진단하기</button>
     </div>
 )
 

@@ -309,3 +309,27 @@
 .gap {
     height: 25px;
 }
+
+.dailyCheckButton {
+    position: fixed;
+    bottom: 29px;
+
+    height: 44.3px;
+    width: 48%;
+    margin-left: 26%;
+
+    background: #F97F59;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 19.9648px;
+
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+    text-align: center;
+
+    color: #FFFFFF;
+}
