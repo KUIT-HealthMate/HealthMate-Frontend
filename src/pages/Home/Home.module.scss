@@ -333,3 +333,75 @@
 
     color: #FFFFFF;
 }
+
+
+// 영양제 챌린지 네모네모
+.PillInfo {
+    height: 111px;
+    width: 88%;
+    margin-left: 6%;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+
+    .PillInfoHeader {
+        display: flex;
+        flex-direction: row;
+
+        .PillInfoName {
+            margin-left: 25px;
+            margin-top: 22px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 19px;
+            line-height: 23px;
+
+            color: #000000;
+        }
+
+        .PillInfoInfo {
+            margin-left: 7px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 18px;
+
+            color: #8F8F8F;
+        }
+    }
+
+    .PillInfoTimes {
+        display: flex;
+        justify-content: space-between;
+        padding-left: 7%;
+        padding-right: 7%;
+
+        .PillInfoTimeButton {
+
+            width: 27%;
+            height: 29.92px;
+            box-sizing: border-box;
+            background: #F5F6F8;
+            border: 1px solid #B3B3B3;
+            border-radius: 100px;
+
+            text-align: center;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 29.92ㅔㅌ;
+
+            color: #B3B3B3;
+
+
+        }
+    }
+
+}
