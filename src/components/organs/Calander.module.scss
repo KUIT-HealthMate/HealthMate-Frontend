@@ -1,0 +1,58 @@
+.calanderContainer {
+  display: flex;
+}
+
+.dayContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dayIdentifier {
+  display: flex;
+}
+
+.selectedItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25.15px;
+  width: 25.15px;
+  color: #0e9494;
+  background-color: #ffffff;
+  border-radius: 100%;
+  margin-bottom: 16px;
+  font-family: Pretendard;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25.15px;
+  width: 25.15px;
+  display: flex;
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-family: Pretendard;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.dateItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25.15px;
+  width: 25.15px;
+  display: flex;
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-weight: 500;
+}

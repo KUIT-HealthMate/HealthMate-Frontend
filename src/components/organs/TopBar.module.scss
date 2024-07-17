@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.topBarContainer {
+  margin: 0;
+  padding: 25px 10px;
+  display: flex;
+  background-size: cover;
+  background-color: #0e9494;
+  flex-direction: column;
+  height: 160px;
+}
+
+.logoContainer {
+  margin-left: 20px;
+  padding-bottom: 18px;
+}
+
+.logo {
+  width: 25px;
+  height: 23px;
+  padding-right: 6px;
+}
+
+.healthMate {
+  width: 135px;
+  height: 16px;
+}
