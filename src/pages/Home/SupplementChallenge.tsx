@@ -2,7 +2,7 @@ import styles from "./Home.module.scss";
 import pillIcon from "../../assets/pill.svg";
 import clampR from "../../assets/clampR.svg";
 import React, { useEffect, useState } from 'react';
-
+import { Link } from "react-router-dom";
 
 export default function SupplementChallenge() {
 
@@ -17,7 +17,7 @@ export default function SupplementChallenge() {
             <div className={styles.PillChallengeTitle}>
                 <img src={pillIcon} className={styles.PillImg}></img>
                 <h1 className={styles.PillText}>영양제 챌린지</h1>
-                <h3 className={styles.PillEdit}>편집하기<img src={clampR} className={styles.clampR}></img></h3>
+                <Link to="/supplementChallengeEdit" className={styles.PillEdit}>편집하기<img src={clampR} className={styles.clampR}></img></Link>
             </div>
 
             <div>
