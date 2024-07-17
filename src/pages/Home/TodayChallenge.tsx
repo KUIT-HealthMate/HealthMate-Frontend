@@ -48,7 +48,9 @@ export default function TodaysChallenge() {
                         {percent >= 50 ? '거의 다 진행하셨네요!' : percent > 0 ? '조금만 더 힘을 내볼까요?' : '건강 챌린지를 추가해보세요!'}
                         <img src={percent >= 50 ? goodIcon : percent > 0 ? badIcon : ''}></img>
                     </p>
+
                 </div>
+                <p className={styles.CoinNoticeText}>획득한 코인은 마이페이지에서 확인하실 수 있어요!</p>
                 <button className={styles.StatisticsButton}><p className={styles.StatisticsButtonText}>전체 챌린지 통계 보기</p></button>
             </div>
         </div >

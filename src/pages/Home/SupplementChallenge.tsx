@@ -4,9 +4,6 @@ import clampR from "../../assets/clampR.svg";
 import React, { useEffect, useState } from 'react';
 
 
-
-//const SupplementChallenge = () => (
-
 export default function SupplementChallenge() {
 
     const [pillInfo, setPillInfo] = useState([
