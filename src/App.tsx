@@ -1,14 +1,11 @@
-import React from "react";
-import BottomBar from "./components/organs/BottomBar";
-import TopBar from "./components/organs/TopBar";
+
+import './App.css';
+import Router from './Router';
 
 function App() {
   return (
-    <div className="App">
-      <TopBar />
-      <BottomBar />
-      <header className="App-header"></header>
-    </div>
+    <Router />
+
   );
 }
 
