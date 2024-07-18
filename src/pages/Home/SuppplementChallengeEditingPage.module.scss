@@ -1,0 +1,174 @@
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+* {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+button {
+  background: none;
+  border:none;
+}
+
+.wrap {
+  width:auto;
+  border:1px solid black;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  padding: 3px 0 12px 11.5px;
+}
+
+.titleBar {
+  display:flex;
+}
+
+.titleBar > button {
+  box-sizing: border-box;
+  padding: 10px 0 17px 21px; 
+  border: none; 
+  background: none;
+}
+
+
+.titleBar > button > img {
+  height: 17px;
+}
+
+.challengeNameWrap {
+  display:flex;
+}
+
+.challengeName {
+  width:50%; /* 다른 챌린지도 생기면 어떡하지? */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap:2px;
+
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 17.9px;
+  text-align: center;
+
+  padding: 14px 0 14px 0;
+
+}
+
+.challengeName:nth-child(1) {
+  border-bottom: 3px solid #0E9494;
+}
+
+.challengeName:nth-child(1) > img {
+  width: 18px;
+  height: 18px;
+}
+
+.challengeName:nth-child(2) {
+  border-bottom: 3px solid #FFFFFF;
+}
+
+.challengeName:nth-child(2) > img {
+  width: 21px;
+  height: 21px;
+  transform: rotate(-82.49deg);
+
+}
+
+.body {
+  margin:27px 21px 0 21px;
+}
+
+.supplementTitle {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 29.83px;
+  text-align: left;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 19px 0;
+}
+
+.editPills {
+  font-family: Pretendard;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 27.45px;
+  text-align: right;
+  color: #0E9494;
+}
+
+.addPills {
+  padding:0;
+}
+
+.addPills > img {
+  width:20px;
+  height:20px;
+}
+
+.supplementWrap {
+  width:auto;
+  height:56px;
+  border-radius: 15px;
+  border: 1px solid #FFFFFF;
+  box-shadow: -2px 0px 20px 0px #00000026;
+
+  margin:10px 0 0 0;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.supplementWrap span:nth-child(1) {
+  margin: 0 0 0 19px;
+}
+
+.supplementWrap span:nth-child(2) {
+  //margin: 0 23px 0 10px;
+}
+
+.supplementWrap div {
+  margin: 0 19px 0 0;
+}
+
+
+.supplementWrap span:nth-child(1) {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 22.67px;
+  text-align: left;
+
+}
+
+.supplementWrap span:nth-child(2) {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 17.9px;
+  text-align: left;
+  color: #8F8F8F;
+
+}
+
+.supplementWrap button {
+  width: 22px;
+  height: 22px;
+}
+
+.completeButton { 
+  width: 100%;
+  height: 53px;
+  border-radius: 15px;
+  opacity: 0px;
+  background: #0E9494;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23.87px;
+  color: #FFFFFF;
+  margin: 86px 0 0 0;
+}
