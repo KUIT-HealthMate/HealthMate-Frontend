@@ -1,28 +1,20 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import SupplementChallengeEditingPage from './pages/Home/SupplementChallengeEditingPage';
+import MyPage from "./pages/MyPage/MyPage";
+import Community from "./pages/Community/Community";
+import HealthChart from "./pages/HealthChart/HealthChart";
 
 const Router = () => {
-    const router = createBrowserRouter([
-        {
-            index: true,
-            path: '/',
-            element: <Home />,
-        },
-        {
-            index: true,
-            path: '/supplementChallengeEdit',
-            element: <SupplementChallengeEditingPage />,
-        }
-        //,
-        // {
-        //     index: true,
-        //     path: '/habitChallengEdit',
-        //     element: <HabitChallengeEditingPage />,
-        // }
-    ]);
-
-    return <RouterProvider router={router} />;
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/chart" element={<HealthChart />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/mypage" element={<MyPage />} />
+      </Routes>
+    </div>
+  );
 };
 
 export default Router;
