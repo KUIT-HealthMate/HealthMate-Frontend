@@ -9,6 +9,7 @@
   right: 0;
   bottom: 0;
   border: 1px solid #dedede;
+  background-color: #ffffff;
 }
 
 .barIcon {
@@ -23,6 +24,10 @@
   width: 68px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .barItemName {
   display: flex;
   align-items: center;
@@ -31,4 +36,8 @@
   font-family: Inter;
   font-size: 12px;
   font-weight: 700;
+  text-decoration: none;
+  &.selected {
+    color: #0e9494;
+  }
 }
