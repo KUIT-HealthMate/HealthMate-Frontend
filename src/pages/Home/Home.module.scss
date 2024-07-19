@@ -1,9 +1,10 @@
 .TodaysChallenge {
     position: absolute;
+    top: 161px;
     width: 100%;
     height: 580px;
     background-color: white;
-    top: 161px;
+
 
     border-radius: 20px 20px 0px 0px;
 
@@ -204,6 +205,8 @@
 
 
 .PillChallenge {
+    position: absolute;
+    top: 767px;
     width: 100%;
     height: 517px;
     background-color: #F4F5FA;
@@ -258,6 +261,8 @@
 
 
 .HabitChallenge {
+    position: absolute;
+    top: 1309px;
     width: 100%;
     height: 517px;
     background-color: #F4F5FA;
@@ -420,18 +425,22 @@
     }
 
     .PillInfoTimes {
-        display: flex;
-        justify-content: space-between;
+        // display: flex;
+        // justify-content: start;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
         padding-left: 7%;
         padding-right: 7%;
+        gap: 5%;
 
         .PillInfoTimeButton {
 
-            width: 27%;
+            width: 100%;
             height: 29.92px;
             box-sizing: border-box;
-            background: #F5F6F8;
-            border: 1px solid #B3B3B3;
+            //  background: #F5F6F8;
+            // border: 1px solid #B3B3B3;
             border-radius: 100px;
 
             text-align: center;
@@ -439,9 +448,9 @@
             font-style: normal;
             font-weight: 500;
             font-size: 15px;
-            line-height: 29.92ㅔㅌ;
+            line-height: 29.92px;
 
-            color: #B3B3B3;
+            //color: #B3B3B3;
 
 
         }
