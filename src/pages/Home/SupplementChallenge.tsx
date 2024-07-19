@@ -13,13 +13,10 @@ export default function SupplementChallenge() {
     ]);
 
     const [timebtnActive, setTimebtnActive] = useState(pillInfo.map(pill => Array(pill.times.length).fill(false)));
-    //   console.log(timebtnActive.length)
 
     function changeTimebtn(pillId: number, idx: number) {
-        console.log("클릭됨");
         console.log(timebtnActive[pillId][idx])
-        // console.log("이전" + timebtnActive);
-        // timebtnActive(idx)
+
         setTimebtnActive(prevState => {
             const newState = prevState.map(arr => [...arr]);
             newState[pillId][idx] = !newState[pillId][idx];
@@ -56,8 +53,9 @@ export default function SupplementChallenge() {
                                                 return (
 
                                                     <div key={idx} className={styles.PillInfoTimeButton} onClick={() => changeTimebtn(pill.id, idx)} style={timebtnActive[pill.id][idx] ?
-                                                        { background: `#F5F6F8`, border: `1px solid #B3B3B3`, color: `#B3B3B3` }
-                                                        : { background: `rgba(14, 148, 148, 0.1)`, border: `px solid #0E9494;`, color: `#0B7575` }}>{time}</div>
+                                                        { background: `rgba(14, 148, 148, 0.1)`, border: `1px solid #0E9494`, color: `#0B7575` }
+                                                        : { background: `#F5F6F8`, border: `1px solid #B3B3B3`, color: `#B3B3B3` }
+                                                    }>{time}</div>
 
                                                 )
 
