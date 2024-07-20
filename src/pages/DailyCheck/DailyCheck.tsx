@@ -27,7 +27,7 @@ const DailyCheck = () => {
 
         <>
 
-            <Survey questionCnt={surveys.length} questions={surveys[currentQuestionIdx].question} candidates={surveys[currentQuestionIdx].candidates} type={1}></Survey>
+            <Survey questionCnt={surveys.length} questions={surveys[currentQuestionIdx].question} candidates={surveys[currentQuestionIdx].candidates} type={1} multipleAble={surveys[currentQuestionIdx].multipleAble}></Survey>
 
             {/* <div>{surveys[currentQuestionIdx].candidate}</div> */}
 

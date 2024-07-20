@@ -3,16 +3,16 @@ import styles from './Survey.module.scss'
 import DailyCheck from '../DailyCheck';
 import { useGlobalStoreSurvey } from '../../../store/storeSurvey';
 import { useNavigate } from 'react-router-dom';
-import { stat } from 'fs';
 
 interface Props {
     questionCnt: number,
     questions: string[],
     candidates: string[],
     type: number // 1: 생활습관 2: 식사습관 3: 수면습관
+    multipleAble: boolean // 복수선택 가능 여부
 }
 
-const Survey = ({ questionCnt, questions, candidates, type }: Props) => {
+const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Props) => {
     console.log(questionCnt)
 
 
@@ -83,13 +83,14 @@ const Survey = ({ questionCnt, questions, candidates, type }: Props) => {
                     })
                 }
             </div>
+            {multipleAble ? <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%` }}>*복수선택 가능</div> : null}
 
-            <div className={styles.candidate}>
+            <div className={styles.candidate} style={candidates.length <= 2 ? { flexDirection: `row`, width: `82%` } : { flexDirection: `column` }}>
                 {
                     candidates.map((candidate, idx) => {
                         return (
                             <div className={styles.candidateBox} onClick={() => { changeBtnColor(idx) }}
-                                style={btnActive[idx] ? { background: `rgba(14, 148, 148, 0.1)`, color: `#0E9494` } : { background: `#FFFFFF`, color: `#8F8F8F` }}>
+                                style={btnActive[idx] ? { background: `rgba(14, 148, 148, 0.1)`, color: `#0E9494`, border: `1px solid #0E9494` } : { background: `#FFFFFF`, color: `#8F8F8F` }}>
                                 <div className={styles.candidateText} >{candidate}</div>
                             </div>
                         )

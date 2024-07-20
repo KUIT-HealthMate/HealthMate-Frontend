@@ -28,7 +28,7 @@ const DailyMealCheck = () => {
     return (
 
         <>
-            <Survey questionCnt={surveysMeal.length} questions={surveysMeal[currentQuestionIdx].question} candidates={surveysMeal[currentQuestionIdx].candidates} type={2}></Survey>
+            <Survey questionCnt={surveysMeal.length} questions={surveysMeal[currentQuestionIdx].question} candidates={surveysMeal[currentQuestionIdx].candidates} type={2} multipleAble={surveysMeal[currentQuestionIdx].multipleAble}></Survey>
         </>
 
     )
