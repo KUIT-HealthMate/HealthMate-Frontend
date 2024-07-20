@@ -1,9 +1,9 @@
 .TodaysChallenge {
   position: absolute;
+  top: 161px;
   width: 100%;
   height: 580px;
   background-color: white;
-  top: 161px;
 
   border-radius: 20px 20px 0px 0px;
 
@@ -140,31 +140,24 @@
     }
 
     .StatisticsButton {
-      display: flex;
       width: 88%;
       height: 53px;
       background: #05697f;
       border-radius: 15px;
       margin-top: 67px;
       margin-bottom: 50px;
-      align-items: center;
-      justify-content: center;
+      border: 0;
+      padding: 0;
 
       .StatisticsButtonText {
         /* 전체 챌린지 통계 보기 */
 
-        // position: absolute;
-        // width: 170px;
-        // height: 24px;
-        // left: calc(50% - 170px/2 + 0.5px);
-        // top: calc(50% - 24px/2 - 304px);
         margin: 0;
         font-family: "Pretendard";
         font-style: normal;
         font-weight: 700;
         font-size: 20px;
         line-height: 24px;
-        /* identical to box height */
 
         color: #ffffff;
       }
@@ -172,7 +165,15 @@
   }
 }
 
+.StatisticsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .PillChallenge {
+  position: absolute;
+  top: 767px;
   width: 100%;
   height: 517px;
   background-color: #f4f5fa;
@@ -223,6 +224,8 @@
 }
 
 .HabitChallenge {
+  position: absolute;
+  top: 1309px;
   width: 100%;
   height: 517px;
   background-color: #f4f5fa;
@@ -323,6 +326,7 @@
   background: #f97f59;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: 19.9648px;
+  border: 0;
 
   font-family: "Pretendard";
   font-style: normal;
@@ -377,17 +381,17 @@
   }
 
   .PillInfoTimes {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
     padding-left: 7%;
     padding-right: 7%;
+    gap: 5%;
 
     .PillInfoTimeButton {
-      width: 27%;
+      width: 100%;
       height: 29.92px;
       box-sizing: border-box;
-      background: #f5f6f8;
-      border: 1px solid #b3b3b3;
       border-radius: 100px;
 
       text-align: center;
@@ -395,9 +399,7 @@
       font-style: normal;
       font-weight: 500;
       font-size: 15px;
-      line-height: 29.92ㅔㅌ;
-
-      color: #b3b3b3;
+      line-height: 29.92px;
     }
   }
 }

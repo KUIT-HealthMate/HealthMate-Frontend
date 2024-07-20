@@ -2,3 +2,18 @@
   display: flex;
   flex-direction: column;
 }
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 0px;
+}
+
+.noticeItem {
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  color: #b3b3b3;
+}

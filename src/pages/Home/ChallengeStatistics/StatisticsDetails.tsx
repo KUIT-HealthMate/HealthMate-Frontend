@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
-import { useState } from "react";
 import s from "./StatisticsDetail.module.scss";
-import Achievement from "./Acheivement";
+import Achievement from "./Achievement";
 import WeeklyCalander from "./Calander/WeeklyCalander";
 import MonthlyCalander from "./Calander/MonthlyCalander";
 
@@ -29,7 +28,7 @@ export default function StatisticsDetails({
         <MonthlyCalander monthSelect={monthSelect} />
       )}
       <div className={s.spacer} />
-      <Achievement date={monthSelect} period={calanderSelect} />
+      <Achievement date={monthSelect} percent={1} />
     </div>
-  );
+  ); //기간 당 성취도를 Calander에서 계산해서 넘기는걸로 하면될듯 spacer랑 achievement
 }

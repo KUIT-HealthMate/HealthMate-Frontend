@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import s from "./MonthlyCalander.module.scss";
 import DailyDetails from "../DailyDetails";
 
@@ -10,10 +10,10 @@ interface CalanderProps {
 export default function MonthlyCalander({ monthSelect }: CalanderProps) {
   const monthlyCalanderFormat: Array<Array<number>> = [[], [], [], [], [], []]; //한달에 최대 6주차까지 있을 수 있음
   const weekName: Array<string> = ["월", "화", "수", "목", "금", "토", "일"];
-  const [selectedDay, setSelectedDay] = useState<null | number>(null);
+  const [selectedDay, setSelectedDay] = useState<null | dayjs.Dayjs>(null);
 
-  const handleSelectedDay = (day: number) => {
-    setSelectedDay(day);
+  const handleSelectedDay = (date: number) => {
+    setSelectedDay(monthSelect.set("date", date));
   };
 
   const daysinMonth = monthSelect.daysInMonth();
@@ -57,11 +57,45 @@ export default function MonthlyCalander({ monthSelect }: CalanderProps) {
     monthlyCalanderFormat[j].push(i);
     if (monthlyCalanderFormat[j].length === 7) j++;
   }
+
+  if (monthlyCalanderFormat[j].length !== 0) {
+    while (monthlyCalanderFormat[j].length !== 7) {
+      monthlyCalanderFormat[j].push(0);
+    }
+  }
+
+  if (monthlyCalanderFormat[monthlyCalanderFormat.length - 1].length === 0)
+    monthlyCalanderFormat.pop();
   console.log(monthlyCalanderFormat);
 
   return (
     <div className={s.calanderContainer}>
-      <div className="calander"></div>
+      <div className={s.calander}>
+        <div className={s.weekIndex}>
+          {weekName.map((name) => (
+            <div className={s.dayName}>{name}</div>
+          ))}
+        </div>
+        <div className={s.calanderItem}>
+          {monthlyCalanderFormat.map((week, wIndex) => (
+            <div className={s.weekContainer}>
+              {monthlyCalanderFormat[wIndex].map((date, dIndex) => (
+                <div
+                  className={`${s.dateContainer} ${
+                    selectedDay !== null && selectedDay.date() === date
+                      ? s.selected
+                      : ""
+                  }`}
+                  onClick={() => handleSelectedDay(date)}
+                >
+                  <div className={s.date}>{date === 0 ? "" : date}</div>
+                  <div className={s.acheivement}></div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
       <div className={s.divider} />
       <DailyDetails date={selectedDay} />
     </div>
