@@ -69,7 +69,7 @@ const usePillInfoStore = create<PillInfoState>((set) => ({
     })),
 
     printIntakeTime: (pill: pillInfo) => {
-        const isBeforeOrAfterMeal:string = (pill.intakeTime[0] == 1) ? "식전" : "식후";
+        const isBeforeOrAfterMeal:string = (pill.intakeTime[0] == 1) ? "식전 " : "식후 ";
         const howMuchMinutes:string = pill.intakeTime[1] + "분 이내";
     
         return isBeforeOrAfterMeal + howMuchMinutes;
