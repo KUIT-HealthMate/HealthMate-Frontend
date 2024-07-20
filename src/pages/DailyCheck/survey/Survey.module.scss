@@ -55,5 +55,31 @@
         }
     }
 
+    .NextButton {
+        background: #05697F;
+        border-radius: 15px;
+        width: 88%;
+        height: 48px;
+        border: #05697F;
+
+        position: absolute;
+        bottom: 33px;
+        // margin-left: 5.6%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        .NextButtonText {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+
+            color: #FFFFFF;
+        }
+    }
 
 }

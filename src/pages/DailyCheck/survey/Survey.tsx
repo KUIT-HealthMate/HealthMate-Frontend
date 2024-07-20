@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './Survey.module.scss'
 
 import GreenButton from '../../../components/organs/GreenButton';
+import DailyCheck from '../DailyCheck';
+import { useGlobalStoreSurvey } from '../../../store/storeSurvey';
 
 interface Props {
     questions: string[],
@@ -9,6 +11,12 @@ interface Props {
 }
 
 const Survey = ({ questions, candidates }: Props) => {
+
+    const { currentQuestionIdx, nextQuestion } = useGlobalStoreSurvey((state) => ({
+        currentQuestionIdx: state.currentQuestionIdx,
+        nextQuestion: state.nextQuestion
+    }));
+
 
     return (
         <div className={styles.survey}>
@@ -27,8 +35,9 @@ const Survey = ({ questions, candidates }: Props) => {
                     })
                 }
             </div>
-
-            {/* <GreenButton text={"다음으로"} ></GreenButton> */}
+            <button className={styles.NextButton} onClick={nextQuestion}>
+                <p className={styles.NextButtonText}>다음으로</p>
+            </button>
 
 
         </div>
