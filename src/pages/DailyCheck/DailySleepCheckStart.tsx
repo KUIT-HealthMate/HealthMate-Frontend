@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./DailyCheck.module.scss";
-import GreenButton from '../../components/organs/GreenButton';
 import dailySleepCheckStart from "../../assets/dailySleepCheckStart.svg"
 import { useGlobalStore } from '../../store/store';
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Survey.module.scss'
-
-import GreenButton from '../../../components/organs/GreenButton';
 import DailyCheck from '../DailyCheck';
 import { useGlobalStoreSurvey } from '../../../store/storeSurvey';
 
@@ -12,7 +10,7 @@ interface Props {
 
 const Survey = ({ questions, candidates }: Props) => {
 
-    const { currentQuestionIdx, nextQuestion } = useGlobalStoreSurvey((state) => ({
+    const { nextQuestion } = useGlobalStoreSurvey((state) => ({
         currentQuestionIdx: state.currentQuestionIdx,
         nextQuestion: state.nextQuestion
     }));

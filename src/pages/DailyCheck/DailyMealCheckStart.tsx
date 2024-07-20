@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "./DailyCheck.module.scss";
 import dailyMealCheckStarticon from "../../assets/dailyMealCheckStart.svg";
 import { useGlobalStore } from '../../store/store';
-
+import { useGlobalStoreSurvey, surveysMeal } from '../../store/storeSurvey';
 
 const DailyMealCheckStart = () => {
     const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
