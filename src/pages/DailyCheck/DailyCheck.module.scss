@@ -1,0 +1,87 @@
+.startPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .startIcon {
+        height: 164px;
+        //margin-top: calc((100% - 164px)*0.5);
+        margin-top: calc(257px);
+
+    }
+
+    .startTitle {
+        //        position: relative;
+        margin-top: 65px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        color: #000000;
+    }
+
+    .startText {
+
+        display: flex;
+
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 18px;
+        text-align: center;
+
+        color: #8F8F8F;
+
+        margin: 0;
+    }
+
+    .startGreeText {
+        color: #0E9494;
+        margin-left: 4px;
+
+    }
+
+    .startButton {
+
+        //임의 위치
+        position: absolute;
+        bottom: 60px;
+
+        background: #05697F;
+        border-radius: 15px;
+        width: 88.8%;
+        height: 48px;
+        border: #05697F;
+
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        /* identical to box height */
+
+        color: #FFFFFF;
+    }
+
+    .startSleepCheck {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 149px;
+        margin-bottom: 130px;
+
+        .startSleepIcon {
+            margin-top: 1030px;
+        }
+
+    }
+
+    .NextButton {
+        width: 1000px;
+    }
+
+
+}
