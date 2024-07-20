@@ -1,450 +1,403 @@
 .TodaysChallenge {
-    position: absolute;
-    width: 100%;
-    height: 580px;
-    background-color: white;
-    top: 161px;
-
-    border-radius: 20px 20px 0px 0px;
-
-
-    .HomeHeader {
-
-        // position: absolute;
-        // top: 201px;
-
-        padding-left: 21px;
-        padding-top: 35px;
-        margin: 0;
-
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 28;
-        line-height: 33px;
-
-        color: #000000;
-    }
-
-    .HomeText {
-
-        margin: 0;
-        padding-left: 21px;
-        padding-top: 10px;
-
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 23px;
-        color: #8F8F8F;
-    }
-
-    .HomeMain {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        margin-top: 37px;
-
-
-        .ChallengeCharWrap {
-            width: 120px;
-            height: 120px;
-
-
-            .ChallengeChart {
-
-
-                width: 120px;
-                padding-bottom: calc(100% - 0px);
-                border-radius: 50%;
-                text-align: center;
-
-                // background: conic-gradient(#7ADCC5 0%, #0E9494 40%, #05697F 80%, #D9D9D9 80% 100%);
-                position: relative;
-
-            }
-
-            .ChartCenter {
-                position: absolute;
-
-                margin-top: 16px;
-                margin-left: 16px;
-                background: white;
-                border-radius: 50%;
-
-                width: 88px;
-                height: 88px;
-
-                .PercentText {
-                    text-align: center;
-                    width: 100%;
-                    height: 100%;
-                    margin: 0;
-                    line-height: 88px;
-                }
-
-                .PercentText::before {
-
-                    content: attr(data-percent);
-                    text-align: center;
-
-                    font-family: 'Pretendard';
-                    font-style: normal;
-                    font-weight: 700;
-                    font-size: 40.0722px;
-
-
-                    // color: #0E9494;
-
-                }
-
-                .PercentText::after {
-                    content: '%';
-
-                    font-family: 'Pretendard';
-                    font-style: normal;
-                    font-weight: 800;
-                    font-size: 20.3482px;
-
-                    //color: #0E9494;
-                }
-
-
-            }
-        }
-
-        .ChallengeState {
-            width: 84%;
-            height: 37px;
-            //background: rgba(122, 220, 197, 0.25);
-
-            border-radius: 100px;
-
-            display: flex;
-            align-items: center;
-            margin-top: 32px;
-
-
-
-            .ChallengeStateText {
-                display: flex;
-                justify-content: center;
-                width: 100%;
-                height: 23px;
-
-                font-family: 'Pretendard';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 18px;
-                text-align: center;
-                //color: #0B7575;
-
-
-
-
-            }
-
-        }
-
-        .CoinNoticeText {
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 13px;
-            line-height: 23px;
-            color: #F97F59;
-            margin: 0;
-            margin-top: 7px;
-        }
-
-        .StatisticsButton {
-
-            width: 88%;
-            height: 53px;
-            background: #05697F;
-            border-radius: 15px;
-            margin-top: 67px;
-            margin-bottom: 50px;
-
-
-            .StatisticsButtonText {
-                /* 전체 챌린지 통계 보기 */
-
-                // position: absolute;
-                // width: 170px;
-                // height: 24px;
-                // left: calc(50% - 170px/2 + 0.5px);
-                // top: calc(50% - 24px/2 - 304px);
-                margin: 0;
-                font-family: 'Pretendard';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 20px;
-                line-height: 24px;
-                /* identical to box height */
-
-                color: #FFFFFF;
-
-
-            }
-
-        }
-
-    }
-
-
-
-}
-
-
-
-
-
-
-.PillChallenge {
-    width: 100%;
-    height: 517px;
-    background-color: #F4F5FA;
-
-    .PillChallengeTitle {
-        display: flex;
-        padding-left: 21px;
-        padding-top: 30px;
-
-
-        .PillImg {
-            width: 28px;
-            height: auto;
-        }
-
-        .PillText {
-            padding-left: 6px;
-            margin-right: auto;
-
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 25px;
-            line-height: 30px;
-            color: #000000;
-        }
-
-        .PillEdit {
-            padding-right: 25px;
-            margin: 0;
-
-
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 15px;
-            line-height: 18px;
-
-            margin: auto;
-            margin-right: 0;
-
-            color: #0E9494;
-
-            .clampR {
-                padding-left: 6px;
-                width: 4px;
-            }
-        }
-
-    }
-}
-
-
-.HabitChallenge {
-    width: 100%;
-    height: 517px;
-    background-color: #F4F5FA;
-
-    .HabitChallengeTitle {
-        display: flex;
-        padding-left: 21px;
-        padding-top: 30px;
-
-
-        .HabitImg {
-            width: 28px;
-            height: auto;
-        }
-
-        .HabitText {
-            padding-left: 6px;
-            margin-right: auto;
-
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 25px;
-            line-height: 30px;
-            color: #000000;
-        }
-
-        .HabitEdit {
-            padding-right: 25px;
-            margin: 0;
-
-
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 15px;
-            line-height: 18px;
-
-            margin: auto;
-            margin-right: 0;
-
-            color: #0E9494;
-
-            .clampR {
-                padding-left: 6px;
-                width: 4px;
-            }
-        }
-
-    }
-
-    .HabitInfo {
-        display: flex;
-        justify-content: space-between;
-
-        width: 88%;
-        height: 68px;
-        margin-left: 6%;
-        margin-bottom: 10px;
-        background: #FFFFFF;
-        border: 1px solid #EBEBEB;
-        box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
-        border-radius: 15px;
-
-        .HabitName {
-            height: 68px;
-            margin: 0;
-            padding-top: 22.5px;
-            margin-left: 25px;
-
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 19px;
-            line-height: 23px;
-
-            color: #000000;
-
-        }
-
-        .HabitCheckmark {
-            height: 34px;
-            margin-top: 17px;
-            margin-right: 24px;
-        }
-
-
-    }
-}
-
-.gap {
-    height: 25px;
-}
-
-.dailyCheckButton {
-    position: fixed;
-    bottom: 89.65px;
-    margin-bottom: 29px;
-
-    height: 44.3px;
-    width: 48%;
-    margin-left: 26%;
-
-    background: #F97F59;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 19.9648px;
-
-
-    font-family: 'Pretendard';
+  position: absolute;
+  width: 100%;
+  height: 580px;
+  background-color: white;
+  top: 161px;
+
+  border-radius: 20px 20px 0px 0px;
+
+  .HomeHeader {
+    // position: absolute;
+    // top: 201px;
+
+    padding-left: 21px;
+    padding-top: 35px;
+    margin: 0;
+
+    font-family: "Pretendard";
     font-style: normal;
     font-weight: 700;
-    font-size: 15px;
-    line-height: 18px;
-    /* identical to box height */
-    text-align: center;
+    font-size: 28;
+    line-height: 33px;
 
-    color: #FFFFFF;
+    color: #000000;
+  }
+
+  .HomeText {
+    margin: 0;
+    padding-left: 21px;
+    padding-top: 10px;
+
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    color: #8f8f8f;
+  }
+
+  .HomeMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 37px;
+
+    .ChallengeCharWrap {
+      width: 120px;
+      height: 120px;
+
+      .ChallengeChart {
+        width: 120px;
+        padding-bottom: calc(100% - 0px);
+        border-radius: 50%;
+        text-align: center;
+
+        // background: conic-gradient(#7ADCC5 0%, #0E9494 40%, #05697F 80%, #D9D9D9 80% 100%);
+        position: relative;
+      }
+
+      .ChartCenter {
+        position: absolute;
+
+        margin-top: 16px;
+        margin-left: 16px;
+        background: white;
+        border-radius: 50%;
+
+        width: 88px;
+        height: 88px;
+
+        .PercentText {
+          text-align: center;
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          line-height: 88px;
+        }
+
+        .PercentText::before {
+          content: attr(data-percent);
+          text-align: center;
+
+          font-family: "Pretendard";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 40.0722px;
+
+          // color: #0E9494;
+        }
+
+        .PercentText::after {
+          content: "%";
+
+          font-family: "Pretendard";
+          font-style: normal;
+          font-weight: 800;
+          font-size: 20.3482px;
+
+          //color: #0E9494;
+        }
+      }
+    }
+
+    .ChallengeState {
+      width: 84%;
+      height: 37px;
+      //background: rgba(122, 220, 197, 0.25);
+
+      border-radius: 100px;
+
+      display: flex;
+      align-items: center;
+      margin-top: 32px;
+
+      .ChallengeStateText {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 23px;
+
+        font-family: "Pretendard";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        text-align: center;
+        //color: #0B7575;
+      }
+    }
+
+    .CoinNoticeText {
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 23px;
+      color: #f97f59;
+      margin: 0;
+      margin-top: 7px;
+    }
+
+    .StatisticsButton {
+      display: flex;
+      width: 88%;
+      height: 53px;
+      background: #05697f;
+      border-radius: 15px;
+      margin-top: 67px;
+      margin-bottom: 50px;
+      align-items: center;
+      justify-content: center;
+
+      .StatisticsButtonText {
+        /* 전체 챌린지 통계 보기 */
+
+        // position: absolute;
+        // width: 170px;
+        // height: 24px;
+        // left: calc(50% - 170px/2 + 0.5px);
+        // top: calc(50% - 24px/2 - 304px);
+        margin: 0;
+        font-family: "Pretendard";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        /* identical to box height */
+
+        color: #ffffff;
+      }
+    }
+  }
 }
 
+.PillChallenge {
+  width: 100%;
+  height: 517px;
+  background-color: #f4f5fa;
 
-// 영양제 챌린지 네모네모
-.PillInfo {
-    height: 111px;
+  .PillChallengeTitle {
+    display: flex;
+    padding-left: 21px;
+    padding-top: 30px;
+
+    .PillImg {
+      width: 28px;
+      height: auto;
+    }
+
+    .PillText {
+      padding-left: 6px;
+      margin-right: auto;
+
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 25px;
+      line-height: 30px;
+      color: #000000;
+    }
+
+    .PillEdit {
+      padding-right: 25px;
+      margin: 0;
+
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+
+      margin: auto;
+      margin-right: 0;
+
+      color: #0e9494;
+
+      .clampR {
+        padding-left: 6px;
+        width: 4px;
+      }
+    }
+  }
+}
+
+.HabitChallenge {
+  width: 100%;
+  height: 517px;
+  background-color: #f4f5fa;
+
+  .HabitChallengeTitle {
+    display: flex;
+    padding-left: 21px;
+    padding-top: 30px;
+
+    .HabitImg {
+      width: 28px;
+      height: auto;
+    }
+
+    .HabitText {
+      padding-left: 6px;
+      margin-right: auto;
+
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 25px;
+      line-height: 30px;
+      color: #000000;
+    }
+
+    .HabitEdit {
+      padding-right: 25px;
+      margin: 0;
+
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+
+      margin: auto;
+      margin-right: 0;
+
+      color: #0e9494;
+
+      .clampR {
+        padding-left: 6px;
+        width: 4px;
+      }
+    }
+  }
+
+  .HabitInfo {
+    display: flex;
+    justify-content: space-between;
+
     width: 88%;
+    height: 68px;
     margin-left: 6%;
     margin-bottom: 10px;
-    background-color: #FFFFFF;
-    border: 1px solid #FFFFFF;
+    background: #ffffff;
+    border: 1px solid #ebebeb;
     box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
 
-    .PillInfoHeader {
-        display: flex;
-        flex-direction: row;
+    .HabitName {
+      height: 68px;
+      margin: 0;
+      padding-top: 22.5px;
+      margin-left: 25px;
 
-        .PillInfoName {
-            margin-left: 25px;
-            margin-top: 22px;
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 19px;
+      line-height: 23px;
 
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 19px;
-            line-height: 23px;
-
-            color: #000000;
-        }
-
-        .PillInfoInfo {
-            margin-left: 7px;
-
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 15px;
-            line-height: 18px;
-
-            color: #8F8F8F;
-        }
+      color: #000000;
     }
 
-    .PillInfoTimes {
-        display: flex;
-        justify-content: space-between;
-        padding-left: 7%;
-        padding-right: 7%;
+    .HabitCheckmark {
+      height: 34px;
+      margin-top: 17px;
+      margin-right: 24px;
+    }
+  }
+}
 
-        .PillInfoTimeButton {
+.gap {
+  height: 25px;
+}
 
-            width: 27%;
-            height: 29.92px;
-            box-sizing: border-box;
-            background: #F5F6F8;
-            border: 1px solid #B3B3B3;
-            border-radius: 100px;
+.dailyCheckButton {
+  position: fixed;
+  bottom: 89.65px;
+  margin-bottom: 29px;
 
-            text-align: center;
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 15px;
-            line-height: 29.92ㅔㅌ;
+  height: 44.3px;
+  width: 48%;
+  margin-left: 26%;
 
-            color: #B3B3B3;
+  background: #f97f59;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 19.9648px;
 
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+  text-align: center;
 
-        }
+  color: #ffffff;
+}
+
+// 영양제 챌린지 네모네모
+.PillInfo {
+  height: 111px;
+  width: 88%;
+  margin-left: 6%;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+
+  .PillInfoHeader {
+    display: flex;
+    flex-direction: row;
+
+    .PillInfoName {
+      margin-left: 25px;
+      margin-top: 22px;
+
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 19px;
+      line-height: 23px;
+
+      color: #000000;
     }
 
+    .PillInfoInfo {
+      margin-left: 7px;
+
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 18px;
+
+      color: #8f8f8f;
+    }
+  }
+
+  .PillInfoTimes {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 7%;
+    padding-right: 7%;
+
+    .PillInfoTimeButton {
+      width: 27%;
+      height: 29.92px;
+      box-sizing: border-box;
+      background: #f5f6f8;
+      border: 1px solid #b3b3b3;
+      border-radius: 100px;
+
+      text-align: center;
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 29.92ㅔㅌ;
+
+      color: #b3b3b3;
+    }
+  }
 }
