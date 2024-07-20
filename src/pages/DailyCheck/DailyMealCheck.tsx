@@ -21,20 +21,14 @@ const DailyMealCheck = () => {
 
 
     const { currentQuestionIdx, nextQuestion } = useGlobalStoreSurvey((state) => ({
-        currentQuestionIdx: state.currentQuestionIdx,
-        nextQuestion: state.nextQuestion
+        currentQuestionIdx: state.mealCurrentQuestionIdx,
+        nextQuestion: state.nextQuestionMeal
     }));
 
     return (
 
         <>
-
-            <Survey questions={surveysMeal[currentQuestionIdx].question} candidates={surveysMeal[currentQuestionIdx].candidates}></Survey>
-
-            {/* <div>{surveys[currentQuestionIdx].candidate}</div> */}
-
-            {/* <button className={styles.NextButton} onClick={NextQuestion}><p className={styles.NextButtonText}>다음으로</p></button> */}
-
+            <Survey questionCnt={surveysMeal.length} questions={surveysMeal[currentQuestionIdx].question} candidates={surveysMeal[currentQuestionIdx].candidates} type={2}></Survey>
         </>
 
     )

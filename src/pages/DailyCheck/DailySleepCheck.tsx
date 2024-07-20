@@ -21,20 +21,14 @@ const DailySleepCheck = () => {
 
 
     const { currentQuestionIdx, nextQuestion } = useGlobalStoreSurvey((state) => ({
-        currentQuestionIdx: state.currentQuestionIdx,
-        nextQuestion: state.nextQuestion
+        currentQuestionIdx: state.sleepCurrentQuestionIdx,
+        nextQuestion: state.nextQuestionSleep
     }));
 
     return (
 
         <>
-
-            <Survey questions={surveysSleep[currentQuestionIdx].question} candidates={surveysSleep[currentQuestionIdx].candidates}></Survey>
-
-            {/* <div>{surveys[currentQuestionIdx].candidate}</div> */}
-
-            {/* <button className={styles.NextButton} onClick={NextQuestion}><p className={styles.NextButtonText}>다음으로</p></button> */}
-
+            <Survey questionCnt={surveysSleep.length} questions={surveysSleep[currentQuestionIdx].question} candidates={surveysSleep[currentQuestionIdx].candidates} type={3}></Survey>
         </>
 
     )

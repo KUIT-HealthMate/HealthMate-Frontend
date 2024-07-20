@@ -45,12 +45,6 @@ interface StoreState {
 
 }
 
-export function useNavigateTo() {
-    console.log("navigateTo")
-    const navigate = useNavigate();
-    return (path: string) => navigate(path);
-}
-
 export const useGlobalStoreSurvey = create<StoreState>((set) => ({
     currentQuestionIdx: 0,
     mealCurrentQuestionIdx: 0,
@@ -64,30 +58,25 @@ export const useGlobalStoreSurvey = create<StoreState>((set) => ({
             return { currentQuestionIdx: state.currentQuestionIdx + 1 };
         } else {
             console.log("다함");
-
             return state;
         }
     }),
 
     nextQuestionMeal: () => set((state) => {
         console.log("nextQuestionMeal");
-        if (state.mealCurrentQuestionIdx < surveys.length - 1) {
+        if (state.mealCurrentQuestionIdx < surveysMeal.length - 1) {
             return { mealCurrentQuestionIdx: state.mealCurrentQuestionIdx + 1 };
         } else {
             console.log("식사패턴 다함");
-            const navigate = useNavigate();
-            navigate('/dailysleepcheckstart')
             return state;
         }
     }),
     nextQuestionSleep: () => set((state) => {
         console.log("nextQuestionMeal");
-        if (state.mealCurrentQuestionIdx < surveys.length - 1) {
-            return { mealCurrentQuestionIdx: state.mealCurrentQuestionIdx + 1 };
+        if (state.sleepCurrentQuestionIdx < surveysSleep.length - 1) {
+            return { sleepCurrentQuestionIdx: state.sleepCurrentQuestionIdx + 1 };
         } else {
-            console.log("식사패턴 다함");
-            const navigate = useNavigate();
-            navigate('/dailysleepcheckstart')
+            console.log("수면패턴 다함");
             return state;
         }
     }),

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "./DailyCheck.module.scss";
 import dailySleepCheckStart from "../../assets/dailySleepCheckStart.svg"
 import { useGlobalStore } from '../../store/store';
-
+import { useNavigate } from 'react-router-dom';
 
 const DailyMealCheckStart = () => {
     const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
@@ -14,7 +14,7 @@ const DailyMealCheckStart = () => {
         };
     }, [setShowBottomBar]
     );
-
+    const navigate = useNavigate();
     return (
         <div className={styles.startPage}>
 
@@ -26,7 +26,7 @@ const DailyMealCheckStart = () => {
 
             <img src={dailySleepCheckStart} className={styles.startSleepIcon}></img>
 
-            <button className={styles.startButton}>식사 패턴 진단 시작하기</button>
+            <button className={styles.startButton} onClick={() => { navigate('/dailysleepcheck') }}>수면 패턴 진단 시작하기</button>
         </div>
     )
 };
