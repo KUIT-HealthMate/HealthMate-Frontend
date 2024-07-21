@@ -29,10 +29,6 @@ const DailyCheck = () => {
 
             <Survey questionCnt={surveys.length} questions={surveys[currentQuestionIdx].question} candidates={surveys[currentQuestionIdx].candidates} type={1} multipleAble={surveys[currentQuestionIdx].multipleAble}></Survey>
 
-            {/* <div>{surveys[currentQuestionIdx].candidate}</div> */}
-
-            {/* <button className={styles.NextButton} onClick={NextQuestion}><p className={styles.NextButtonText}>다음으로</p></button> */}
-
         </>
 
     )

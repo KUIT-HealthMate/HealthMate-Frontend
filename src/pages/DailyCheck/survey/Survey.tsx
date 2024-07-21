@@ -85,7 +85,7 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
             </div>
             {multipleAble ? <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%` }}>*복수선택 가능</div> : null}
 
-            <div className={styles.candidate} style={candidates.length <= 2 ? { flexDirection: `row`, width: `82%` } : { flexDirection: `column` }}>
+            <div className={styles.candidate} style={candidates.length <= 2 ? { flexDirection: `row`, width: `82%`, marginLeft: `9%` } : { flexDirection: `column` }}>
                 {
                     candidates.map((candidate, idx) => {
                         return (
