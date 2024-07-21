@@ -4,6 +4,7 @@ import { useGlobalStore } from '../../store/store';
 import Survey from "../DailyCheck/survey/Survey";
 import exclamationMark from "../../assets/exclamationMark.svg"
 import { useGlobalStoreSurvey, surveysSleep } from '../../store/storeSurvey';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -47,6 +48,7 @@ const DailySymptomCheck = () => {
         })
     }
     useEffect(() => { }, [symptomBtnActive]);
+    const navigate = useNavigate();
 
     return (
         <div className={styles.symptom}>
@@ -88,7 +90,7 @@ const DailySymptomCheck = () => {
                 <hr className={styles.underLine}></hr>
             </div>
 
-            <button className={styles.NextButton}>
+            <button className={styles.NextButton} onClick={() => { navigate('/dailycheckdone') }}>
                 <p className={styles.NextButtonText}>다음으로</p>
             </button>
             <div className={styles.whiteSpace}></div>

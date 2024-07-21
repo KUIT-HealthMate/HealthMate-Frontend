@@ -44,6 +44,25 @@
 
     }
 
+    .toHomeButton {
+        position: absolute;
+        bottom: 108px;
+        margin-bottom: 7px;
+
+        background: #F5F6F8;
+        border: 1px solid #DEDEDE;
+        border-radius: 15px;
+        color: #8F8F8F;
+        width: 88.8%;
+        height: 48px;
+
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+    }
+
     .startButton {
 
         //임의 위치

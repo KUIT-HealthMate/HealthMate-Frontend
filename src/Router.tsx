@@ -15,6 +15,7 @@ import DailyMealCheck from "./pages/DailyCheck/DailyMealCheck";
 import DailySleepCheck from "./pages/DailyCheck/DailySleepCheck";
 import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
+import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
 
 const Router = () => {
   return (
@@ -38,6 +39,8 @@ const Router = () => {
         <Route path="/dailycheck" element={<DailyCheck />} />
         <Route path="/dailymealcheck" element={<DailyMealCheck />} />
         <Route path="/dailysleepcheck" element={<DailySymptomCheck />} />
+        <Route path="/dailycheckdone" element={<DailyCheckDone />} />
+
       </Routes>
     </div>
   );
