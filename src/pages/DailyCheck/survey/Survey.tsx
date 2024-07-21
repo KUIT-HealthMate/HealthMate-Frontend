@@ -38,6 +38,7 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
         })
     }
 
+
     function setBtnDefault() {
         console.log("setBtnDefault");
         setBtnActive(prevState => {
@@ -48,8 +49,20 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
 
     const navigate = useNavigate();
 
+    function handleButtonClick(idx: number, multipleAble: boolean) {
+        if (!multipleAble) { //복수 선택 불가
+            const newArr = Array(candidates.length).fill(false);
+            setBtnActive(newArr);
+        }
+        changeBtnColor(idx)
+    }
+
     function handleClick() {
         console.log("handleClick")
+
+        if (!NextButtonActive()) {
+            return;
+        }
 
         setBtnDefault();
 
@@ -72,6 +85,15 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
 
     }
 
+    function NextButtonActive() {
+        if (btnActive.some(isActive => isActive)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     useEffect(() => { console.log("useeffect"); }, [btnActive]);
 
     return (
@@ -89,7 +111,7 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
                 {
                     candidates.map((candidate, idx) => {
                         return (
-                            <div className={styles.candidateBox} onClick={() => { changeBtnColor(idx) }}
+                            <div className={styles.candidateBox} onClick={() => { handleButtonClick(idx, multipleAble) }}
                                 style={btnActive[idx] ? { background: `rgba(14, 148, 148, 0.1)`, color: `#0E9494`, border: `1px solid #0E9494` } : { background: `#FFFFFF`, color: `#8F8F8F` }}>
                                 <div className={styles.candidateText} >{candidate}</div>
                             </div>
@@ -97,8 +119,8 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
                     })
                 }
             </div>
-            <button className={styles.NextButton} onClick={handleClick}>
-                <p className={styles.NextButtonText}>다음으로</p>
+            <button className={styles.NextButton} onClick={handleClick} style={NextButtonActive() ? {} : { background: `#F5F6F8`, border: `1px solid #DEDEDE` }}>
+                <p className={styles.NextButtonText} style={NextButtonActive() ? {} : { color: `#8F8F8F` }}>다음으로</p>
             </button>
 
 
