@@ -10,23 +10,20 @@ import usePillInfoStore from "../../store/usePillInfoStore";
 export default function SupplementChallenge() {
 
 
-    const { PillInfo, setPillInfo, printIntakeTime, printMealTime} = usePillInfoStore();
+    const { PillInfo, setPillInfo, setIntakeRecord, getIntakeRecord, getIntakeTime, getMealTime} = usePillInfoStore();
 
-    const [timebtnActive, setTimebtnActive] = useState<boolean[][]>(PillInfo.map(pill => Array(pill.dailyIntakePeriod.length).fill(false)));
-
-    function changeTimebtn(pillId: number, idx: number) {
-        console.log(timebtnActive[pillId][idx])
-
-        setTimebtnActive(prevState => {
-            const newState = prevState.map(arr => [...arr]);
-            newState[pillId][idx] = !newState[pillId][idx];
-            console.log(newState);
-            return newState;
-        });
-
+    function changeIdxToString (idx:number):string {
+        if(idx == 1){
+            return "breakfast";
+        } else if(idx == 2){
+            return "lunch";
+        } else if(idx == 3){
+            return "dinner";
+        } else {
+            return "";
+        }
     }
 
-    useEffect(() => { console.log(timebtnActive); }, [timebtnActive]);
 
 
     return (
@@ -44,21 +41,27 @@ export default function SupplementChallenge() {
                         return (
                             <div className={styles.PillInfo}>
                                 <div className={styles.PillInfoHeader}>
-                                    <h1 className={styles.PillInfoName}>{pill.name}</h1> <h5 className={styles.PillInfoInfo}>{printIntakeTime(pill)}</h5>
+                                    <h1 className={styles.PillInfoName}>{pill.name}</h1> <h5 className={styles.PillInfoInfo}>{getIntakeTime(pill)}</h5>
                                 </div>
                                 <div>
                                     <div className={styles.PillInfoTimes}>
                                         {
-                                            pill.dailyIntakePeriod.map((time, idx) => {
+                                            pill.dailyIntakePeriod && Object.entries(pill.dailyIntakePeriod).map(([key, time], idx) => {
+                                                if(time){
                                                 return (
-
-                                                    <div key={idx} className={styles.PillInfoTimeButton} onClick={() => changeTimebtn(pill.id, idx)} style={timebtnActive[pill.id][idx] ?
-                                                        { background: `rgba(14, 148, 148, 0.1)`, border: `1px solid #0E9494`, color: `#0B7575` }
-                                                        : { background: `#F5F6F8`, border: `1px solid #B3B3B3`, color: `#B3B3B3` }
-                                                    }>{printMealTime(idx)}</div>
-
+                                                    <div
+                                                        key={idx}
+                                                        className={styles.PillInfoTimeButton}
+                                                        onClick={() => setIntakeRecord(pill.id, changeIdxToString(idx))}
+                                                        style={getIntakeRecord(pill.id, changeIdxToString(idx))
+                                                            ? { background: `rgba(14, 148, 148, 0.1)`, border: `1px solid #0E9494`, color: `#0B7575` }
+                                                            : { background: `#F5F6F8`, border: `1px solid #B3B3B3`, color: `#B3B3B3` }
+                                                        }
+                                                    >
+                                                        {getMealTime(idx)}
+                                                    </div>
                                                 )
-
+                                            }
                                             })
                                         }
                                     </div>

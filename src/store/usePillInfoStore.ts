@@ -3,63 +3,94 @@ import { create } from "zustand";
 interface pillInfo {
     id: number;
     name: string; // 알약 이름
-    intakeTime: [number, number]; // 섭취 시간 (식전 1 식후 2, 분 number로)
-    dailyIntakePeriod: [boolean, boolean, boolean]; // 일 섭취 시기 (아침, 점심, 저녁)
-    weeklyIntakeFrequency: [
-      boolean,
-      boolean,
-      boolean,
-      boolean,
-      boolean,
-      boolean,
-      boolean
-    ]; // 주 섭취 횟수 (월 ~ 일)
-    notificationTime: [number, number][]; // 팝업 알림 시간 (19:30 이면 19, 30)
+    intakeTime: { beforeOrAfterMeal:number, minutes:number}; // 섭취 시간 (식전 1 식후 2, 분 number로)
+    dailyIntakePeriod: { breakfast: boolean, lunch: boolean, dinner: boolean  }; // 일 섭취 시기 (아침, 점심, 저녁)
+    dailyIntakeRecord: { breakfast: boolean, lunch: boolean, dinner: boolean  };
+    weeklyIntakeFrequency: {
+      monday: boolean,
+      tuesday: boolean,
+      wednesday: boolean,
+      thursday: boolean,
+      friday: boolean,
+      saturday: boolean,
+      sunday: boolean
+    }; // 주 섭취 횟수 (월 ~ 일)
+    notificationTime: {hour:number, minutes:number}[]; // 팝업 알림 시간 (19:30 이면 19, 30)
 }
 
 interface PillInfoState {
     PillInfo: pillInfo[];
     setPillInfo: (pill: pillInfo) => void;
-    printIntakeTime: (pill: pillInfo) => string;
-    printMealTime: (idx: number) => string;
+    setIntakeRecord: (pillId: number, whichMeal: string) => void;
+    getIntakeRecord: (pillId: number, whichMeal: string) => boolean;
+    getIntakeTime: (pill: pillInfo) => string;
+    getMealTime: (idx: number) => string;
+    deletePill: (pillId:number) => void;
 }
 
-const usePillInfoStore = create<PillInfoState>((set) => ({
+const usePillInfoStore = create<PillInfoState>((set, get) => ({
     PillInfo: [
         {
             id: 0,
             name: "베아제",
-            intakeTime: [2, 30],
-            dailyIntakePeriod: [true, true, true],
-            weeklyIntakeFrequency: [true, true, true, true, true, true, true],
+            intakeTime: {beforeOrAfterMeal: 2, minutes: 30},
+            dailyIntakePeriod: {breakfast: true, lunch: true, dinner: true},
+            dailyIntakeRecord: {breakfast: false, lunch: false, dinner: false},
+            weeklyIntakeFrequency: {
+                monday: true,
+                tuesday: true,
+                wednesday: true,
+                thursday: true,
+                friday: true,
+                saturday: true,
+                sunday: true
+              },
             notificationTime: [
-                [7, 30],
-                [12, 0],
-                [18, 0],
+                {hour: 7, minutes: 30},
+                {hour: 12, minutes: 0},
+                {hour: 18, minutes: 0}
             ],
         },
         {
             id: 1,
             name: "비타민",
-            intakeTime: [2, 30],
-            dailyIntakePeriod: [true, true, true],
-            weeklyIntakeFrequency: [true, false, true, false, true, false, false],
+            intakeTime: {beforeOrAfterMeal: 2, minutes: 30},
+            dailyIntakePeriod: {breakfast: true, lunch: true, dinner: true},
+            dailyIntakeRecord: {breakfast: false, lunch: false, dinner: false},
+            weeklyIntakeFrequency: {
+                monday: true,
+                tuesday: false,
+                wednesday: true,
+                thursday: false,
+                friday: true,
+                saturday: false,
+                sunday: false
+              },
             notificationTime: [
-                [7, 35],
-                [12, 5],
-                [18, 5],
+                {hour: 7, minutes: 35},
+                {hour: 12, minutes: 5},
+                {hour: 18, minutes: 5}
             ],
         },
         {
             id: 2,
             name: "루테인",
-            intakeTime: [2, 30],
-            dailyIntakePeriod: [true, false, true],
-            weeklyIntakeFrequency: [true, false, true, true, true, false, true],
+            intakeTime: {beforeOrAfterMeal: 2, minutes: 30},
+            dailyIntakePeriod: {breakfast: true, lunch: false, dinner: true},
+            dailyIntakeRecord: {breakfast: false, lunch: false, dinner: false},
+            weeklyIntakeFrequency: {
+                monday: true,
+                tuesday: false,
+                wednesday: true,
+                thursday: true,
+                friday: false,
+                saturday: true,
+                sunday: true
+              },
             notificationTime: [
-                [7, 40],
-                [12, 10],
-                [18, 10],
+                {hour: 7, minutes: 40},
+                {hour: 12, minutes: 10},
+                {hour: 18, minutes: 10}
             ],
         },
     ],
@@ -68,14 +99,34 @@ const usePillInfoStore = create<PillInfoState>((set) => ({
             PillInfo: [...state.PillInfo, pill],
     })),
 
-    printIntakeTime: (pill: pillInfo) => {
-        const isBeforeOrAfterMeal:string = (pill.intakeTime[0] == 1) ? "식전 " : "식후 ";
-        const howMuchMinutes:string = pill.intakeTime[1] + "분 이내";
+    // 아침, 점심, 저녁에 영양제 먹었다고 버튼 클릭 -> IntakeRecord에서 수정하는 함수
+    setIntakeRecord: (pillId, whichMeal) => {
+        
+        set((state) => ({
+            PillInfo: state.PillInfo.map((pill) =>
+              pill.id === pillId
+                ? { ...pill, dailyIntakeRecord: { ...pill.dailyIntakeRecord, [whichMeal]: !(pill.dailyIntakeRecord as any)[whichMeal] } }
+                : pill
+            )
+          })
+        );
+
+    },
+
+    getIntakeRecord: (pillId, whichMeal) => {
+        const pill = get().PillInfo.find(pill => pill.id == pillId);
+        return pill ? (pill.dailyIntakeRecord as any)[whichMeal] : undefined;
+    },
+    
+
+    getIntakeTime: (pill: pillInfo) => {
+        const isBeforeOrAfterMeal:string = (pill.intakeTime.beforeOrAfterMeal == 1) ? "식전 " : "식후 ";
+        const howMuchMinutes:string = pill.intakeTime.minutes + "분 이내";
     
         return isBeforeOrAfterMeal + howMuchMinutes;
     },
 
-    printMealTime: (idx: number) => {
+    getMealTime: (idx: number) => {
         switch(idx){
             case 0:
                 return "아침";
@@ -87,6 +138,10 @@ const usePillInfoStore = create<PillInfoState>((set) => ({
                 return "";
         }
     },
-}));
+
+    deletePill: (deletingPillId: number) => 
+        set((state) => ({ PillInfo: [...state.PillInfo.filter((pill) => (pill.id != deletingPillId))] })),
+    
+    }));
 
 export default usePillInfoStore;

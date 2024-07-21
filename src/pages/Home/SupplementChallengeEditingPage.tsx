@@ -14,7 +14,7 @@ import s from "./SuppplementChallengeEditingPage.module.scss"
 
 const SupplementChallengeEditingPage = () => {
     const navigate = useNavigate();
-    const { PillInfo, setPillInfo, printIntakeTime, printMealTime} = usePillInfoStore();
+    const { PillInfo, setPillInfo, getIntakeTime, getMealTime, deletePill} = usePillInfoStore();
 
 
     const changeStyleToEditMode = () => {
@@ -83,7 +83,7 @@ const SupplementChallengeEditingPage = () => {
             <div>
                 {
                 PillInfo.map((pill,index) => {
-                    return <div className={s.supplementWrap}><span>{pill.name}</span><span>{"주 "+pill.weeklyIntakeFrequency.filter(value => value).length+"회, "+printIntakeTime(pill)+", "+pill.dailyIntakePeriod.filter(value => value).length+"회"}</span><div className={"editAndDeleteBtn"}><Link to="/SupplementChallengeActualEdit" className="edit_button"><img src={pencilImg} alt=""/></Link><button className="delete_button"><img src={deleteImg} alt=""/></button></div></div>
+                    return <div className={s.supplementWrap}><span>{pill.name}</span><span>{"주 "+Object.values(pill.weeklyIntakeFrequency).filter(value => value).length+"회, "+getIntakeTime(pill)+", "+Object.values(pill.dailyIntakePeriod).filter(value => value).length+"회"}</span><div className={"editAndDeleteBtn"}><Link to="/SupplementChallengeActualEdit" className="edit_button"><img src={pencilImg} alt=""/></Link><button className="delete_button" onClick={() => deletePill(pill.id)}><img src={deleteImg} alt=""/></button></div></div>
                 })
                 }
             </div>
