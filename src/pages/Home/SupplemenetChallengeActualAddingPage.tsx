@@ -1,7 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import s from "./SupplemenetChallengeActualAddingPage.module.scss"
-import leftBracket from "../../assets/leftBraket.svg"
+import s from "./SupplemenetChallengeActualAddingPage.module.scss";
+
+import leftBracket from "../../assets/leftBraket.svg";
+import plusIconImg from "../../assets/plusIcon.svg";
+import InputClearButtonImg from "../../assets/InputClearButton.svg"
 
 
 const SupplemenetChallengeActualAddingPage = () => {
@@ -16,23 +19,23 @@ const SupplemenetChallengeActualAddingPage = () => {
                 <div className={s.title}>알약 챌린지 추가</div>
             </div>
         </div>
-        <div>
+        <div className={s.contentWrap}>
           <div className={s.detailDiv}>
             <span className={s.detailTitle}>알약 이름</span>
-            <input type="text" />
+            <input type="text" placeholder='알약 이름을 입력해주세요' /><button className={s.inputClearButton}><img src={InputClearButtonImg} alt="" /></button>
           </div>
           <div className={s.detailDiv}>
             <span className={s.detailTitle}>섭취 시간</span>
-            <div>
+            <div className={s.beforeOrAfterMealWrap}>
               <button type="button" className={s.smallButton}>식전</button>
               <button type="button" className={s.smallButton}>식후</button>
-              <input type="text" />
+              <input type="text" /><button className={s.inputClearButton}><img src={InputClearButtonImg} alt="" /></button>
               <span>분 이내</span>
             </div>
           </div>
           <div className={s.detailDiv}>
             <span className={s.detailTitle}>일 섭취 시기</span>
-            <div>
+            <div className={s.eatingTimeButtonWrap}>
               <button type="button" className={s.smallButton}>아침</button>
               <button type="button" className={s.smallButton}>점심</button>
               <button type="button" className={s.smallButton}>저녁</button>
@@ -40,7 +43,7 @@ const SupplemenetChallengeActualAddingPage = () => {
           </div>
           <div className={s.detailDiv}>
             <span className={s.detailTitle}>주 섭취 횟수</span>
-            <div>
+            <div className={s.weekDayButtonWrap}>
               <button type="button" className={s.bigButton}>월</button>
               <button type="button" className={s.bigButton}>화</button>
               <button type="button" className={s.bigButton}>수</button>
@@ -51,11 +54,11 @@ const SupplemenetChallengeActualAddingPage = () => {
             </div>
           </div>
           <div className={s.detailDiv}>
-            <div>
+            <div className={s.messengerAlarmHeader}>
               <span className={s.detailTitle}>키키오톡 알림 시간</span>
-              <button type="button">+</button>
+              <button type="button" className={s.plusButton}><img src={plusIconImg} alt="" /></button>
             </div>
-            <div>
+            <div className={s.messengerAlarmBody}>
               <span></span>
             </div>
           </div>

@@ -5,9 +5,13 @@
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+
 button {
-  background: none;
-  border:none;
+    background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer;
+}
+
+img {
+    display:block;
 }
 
 button:hover {
@@ -93,7 +97,54 @@ input {
     border: 1px solid var(--2, #DEDEDE)
 }
 
+.contentWrap {
+    padding: 5px 21px;
+}
+
+
 .detailDiv {
+    padding: 40px 0 48px 0;
     display:flex;
     flex-direction: column;
+    border-bottom: 1px solid var(--2, #DEDEDE);
+    gap:22px;
+}
+
+.detailDiv > input {
+    font-size: 19px;
+    padding-left: 10px;
+}
+
+.beforeOrAfterMealWrap button:nth-child(1) {
+    margin-right: 6px;
+}
+
+.beforeOrAfterMealWrap button:nth-child(2) {
+    margin-right: 29px;
+}
+
+.beforeOrAfterMealWrap > input {
+    margin-right: 11px;
+}
+
+.eatingTimeButtonWrap {
+    display:flex;
+    gap:6px;
+}
+
+.weekDayButtonWrap {
+    display:flex;
+    flex-direction: row;
+    gap:6px;
+}
+
+.plusButton > img{
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.messengerAlarmHeader {
+    display:flex;
+    justify-content: space-between;
 }
