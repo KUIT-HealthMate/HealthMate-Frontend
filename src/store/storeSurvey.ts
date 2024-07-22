@@ -1,6 +1,7 @@
 import create from 'zustand';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { stat } from 'fs';
 
 interface Survey {
     id: number;
@@ -8,7 +9,6 @@ interface Survey {
     candidates: string[];
     multipleAble: boolean;
 }
-
 
 
 export const surveys: Survey[] = [
@@ -40,45 +40,49 @@ interface StoreState {
     currentQuestionIdx: number;
     mealCurrentQuestionIdx: number;
     sleepCurrentQuestionIdx: number;
+    progressPercent: number;
     nextQuestion: () => void;
     nextQuestionMeal: () => void;
     nextQuestionSleep: () => void;
 
 }
 
-export const useGlobalStoreSurvey = create<StoreState>((set) => ({
+
+export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
     currentQuestionIdx: 0,
     mealCurrentQuestionIdx: 0,
     sleepCurrentQuestionIdx: 0,
+    progressPercent: 0,
     useNavigateTo: null,
     nextQuestion: () => set((state) => {
-
         console.log("nextQuestion");
+        const newProgressPercent = state.progressPercent + 6.25
         if (state.currentQuestionIdx < surveys.length - 1) {
-
-            return { currentQuestionIdx: state.currentQuestionIdx + 1 };
+            return { currentQuestionIdx: state.currentQuestionIdx + 1, progressPercent: newProgressPercent };
         } else {
             console.log("다함");
-            return state;
+            return { progressPercent: newProgressPercent };
         }
     }),
 
     nextQuestionMeal: () => set((state) => {
         console.log("nextQuestionMeal");
+        const newProgressPercent = state.progressPercent + 6.25
         if (state.mealCurrentQuestionIdx < surveysMeal.length - 1) {
-            return { mealCurrentQuestionIdx: state.mealCurrentQuestionIdx + 1 };
+            return { mealCurrentQuestionIdx: state.mealCurrentQuestionIdx + 1, progressPercent: newProgressPercent };
         } else {
             console.log("식사패턴 다함");
-            return state;
+            return { progressPercent: newProgressPercent };
         }
     }),
     nextQuestionSleep: () => set((state) => {
         console.log("nextQuestionMeal");
+        const newProgressPercent = state.progressPercent + 1
         if (state.sleepCurrentQuestionIdx < surveysSleep.length - 1) {
-            return { sleepCurrentQuestionIdx: state.sleepCurrentQuestionIdx + 1 };
+            return { sleepCurrentQuestionIdx: state.sleepCurrentQuestionIdx + 1, progressPercent: newProgressPercent };
         } else {
             console.log("수면패턴 다함");
-            return state;
+            return { progressPercent: newProgressPercent };
         }
     }),
 }));

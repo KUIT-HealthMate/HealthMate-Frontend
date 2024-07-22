@@ -38,7 +38,7 @@ const Router = () => {
 
         <Route path="/dailycheck" element={<DailyCheck />} />
         <Route path="/dailymealcheck" element={<DailyMealCheck />} />
-        <Route path="/dailysleepcheck" element={<DailySymptomCheck />} />
+        <Route path="/dailysleepcheck" element={<DailySleepCheck />} />
         <Route path="/dailycheckdone" element={<DailyCheckDone />} />
 
       </Routes>

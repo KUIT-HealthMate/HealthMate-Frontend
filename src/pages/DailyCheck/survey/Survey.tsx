@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Survey.module.scss'
-import DailyCheck from '../DailyCheck';
+import ProgressBar from './ProgressBar';
 import { useGlobalStoreSurvey } from '../../../store/storeSurvey';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ interface Props {
     candidates: string[],
     type: number // 1: 생활습관 2: 식사습관 3: 수면습관
     multipleAble: boolean // 복수선택 가능 여부
+    //  progressPercent: number // 진행률
 }
 
 const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Props) => {
@@ -79,7 +80,7 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
         } else {
             nextQuestion.nextQuestionSleep();
             if (nextQuestion.sleepCurrentQuestionIdx >= questionCnt - 1) {
-                navigate('/')
+                navigate('/dailysymptomcheckstart')
             }
         }
 
@@ -97,34 +98,37 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
     useEffect(() => { console.log("useeffect"); }, [btnActive]);
 
     return (
-        <div className={styles.survey}>
-            <div className={styles.question}>
-                {
-                    questions.map((question, idx) => {
-                        return (<div className={styles.questionText}>{question}</div>)
-                    })
-                }
+        <>
+            <ProgressBar></ProgressBar>
+            <div className={styles.survey}>
+                <div className={styles.question}>
+                    {
+                        questions.map((question, idx) => {
+                            return (<div className={styles.questionText}>{question}</div>)
+                        })
+                    }
+                </div>
+                {multipleAble ? <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%` }}>*복수선택 가능</div> : null}
+
+                <div className={styles.candidate} style={candidates.length <= 2 ? { flexDirection: `row`, width: `82%`, marginLeft: `9%` } : { flexDirection: `column` }}>
+                    {
+                        candidates.map((candidate, idx) => {
+                            return (
+                                <div className={styles.candidateBox} onClick={() => { handleButtonClick(idx, multipleAble) }}
+                                    style={btnActive[idx] ? { background: `rgba(14, 148, 148, 0.1)`, color: `#0E9494`, border: `1px solid #0E9494` } : { background: `#FFFFFF`, color: `#8F8F8F` }}>
+                                    <div className={styles.candidateText} >{candidate}</div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <button className={styles.NextButton} onClick={handleClick} style={NextButtonActive() ? {} : { background: `#F5F6F8`, border: `1px solid #DEDEDE` }}>
+                    <p className={styles.NextButtonText} style={NextButtonActive() ? {} : { color: `#8F8F8F` }}>다음으로</p>
+                </button>
+
+
             </div>
-            {multipleAble ? <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%` }}>*복수선택 가능</div> : null}
-
-            <div className={styles.candidate} style={candidates.length <= 2 ? { flexDirection: `row`, width: `82%`, marginLeft: `9%` } : { flexDirection: `column` }}>
-                {
-                    candidates.map((candidate, idx) => {
-                        return (
-                            <div className={styles.candidateBox} onClick={() => { handleButtonClick(idx, multipleAble) }}
-                                style={btnActive[idx] ? { background: `rgba(14, 148, 148, 0.1)`, color: `#0E9494`, border: `1px solid #0E9494` } : { background: `#FFFFFF`, color: `#8F8F8F` }}>
-                                <div className={styles.candidateText} >{candidate}</div>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-            <button className={styles.NextButton} onClick={handleClick} style={NextButtonActive() ? {} : { background: `#F5F6F8`, border: `1px solid #DEDEDE` }}>
-                <p className={styles.NextButtonText} style={NextButtonActive() ? {} : { color: `#8F8F8F` }}>다음으로</p>
-            </button>
-
-
-        </div>
+        </>
     )
 };
 
