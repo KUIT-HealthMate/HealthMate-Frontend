@@ -25,11 +25,11 @@ const DailyCheck = () => {
 
     return (
 
-        <>
+        <div className={styles.surveyWrap}>
 
             <Survey questionCnt={surveys.length} questions={surveys[currentQuestionIdx].question} candidates={surveys[currentQuestionIdx].candidates} type={1} multipleAble={surveys[currentQuestionIdx].multipleAble}></Survey>
 
-        </>
+        </div>
 
     )
 };

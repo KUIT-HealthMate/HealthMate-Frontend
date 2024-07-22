@@ -4,16 +4,36 @@
     justify-content: center;
     align-items: center;
 
-    .startIcon {
-        height: 164px;
-        //margin-top: calc((100% - 164px)*0.5);
-        margin-top: calc(257px);
 
+
+    .startIcons {
+
+        display: flex;
+        justify-content: center;
+
+        .startBackgroundIcon {
+            position: absolute;
+            top: 190px;
+            height: 310px;
+            //margin-top: calc(257px);
+
+        }
+
+        .startIcon {
+            position: absolute;
+            top: 257px;
+            height: 164px;
+            //   margin-top: calc(257px);
+
+        }
     }
 
+
+
+
     .startTitle {
-        //        position: relative;
-        margin-top: 65px;
+        // position: relative;
+        margin-top: 465px;
         font-family: 'Inter';
         font-style: normal;
         font-weight: 700;
@@ -90,12 +110,33 @@
         flex-direction: column;
         align-items: center;
         margin-top: 149px;
-        margin-bottom: 130px;
+        //    margin-bottom: 130px;
 
-        .startSleepIcon {
-            margin-top: 1030px;
+
+    }
+
+    .startSleepIcons {
+
+        display: flex;
+        justify-content: center;
+        position: absolute;
+
+
+        .startSleepBackgroundIcon {
+            position: absolute;
+            top: 190px;
+            height: 310px;
+            //margin-top: calc(257px);
+
         }
 
+        .startSleepIcon {
+            position: absolute;
+            top: 257px;
+            height: 164px;
+            //   margin-top: calc(257px);
+
+        }
     }
 
     .NextButton {
