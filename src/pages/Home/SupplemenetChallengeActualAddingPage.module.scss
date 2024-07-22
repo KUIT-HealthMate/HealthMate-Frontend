@@ -11,7 +11,7 @@ button {
 }
 
 img {
-    display:block;
+    display:inline-block;
 }
 
 button:hover {
@@ -68,7 +68,7 @@ button:hover {
 }
 
 .completeButton {
-    width: 333px;
+    width: 100%;
     height: 48px;
     background-color: #0E9494;
     border-radius: 15px;
@@ -148,3 +148,9 @@ input {
     display:flex;
     justify-content: space-between;
 }
+
+.bottomBarCover {
+    width:auto;
+    height:91px;
+}
+
