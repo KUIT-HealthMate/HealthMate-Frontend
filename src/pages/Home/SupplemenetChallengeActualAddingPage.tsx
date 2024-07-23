@@ -44,43 +44,28 @@ const SupplemenetChallengeActualAddingPage = () => {
 
   const handleBeforeOrAfterMeal = (value: number): void => {
     newPill.intakeTime.beforeOrAfterMeal = value;
-    console.log("z");
-
-    (document.querySelectorAll('.' + s.smallButton) as NodeListOf<HTMLButtonElement>).forEach((button, index) => {
-
-      if(index == (value-1)){
-        button.style.background = "rgba(14, 148, 148, 0.1)";
-        button.style.border = "1px solid #0E9494";
-        button.style.color = "#0B7575";
-      } else {
-        button.style.background = "#f5f6f8";
-        button.style.border = "1px solid #B3B3B3";
-        button.style.color = "#B3B3B3";
-      }
-    })
   }
 
   const handleMealMinute = (value: string): void => {
     newPill.intakeTime.minutes = value as unknown as number;
   }
 
-  const handleEatingTiming = (e: React.MouseEvent<HTMLButtonElement>, value:string): void => {
+  const handleEatingTiming = (e: ChangeEvent<HTMLInputElement>, value:string): void => {
     newPill.dailyIntakePeriod = { ...newPill.dailyIntakePeriod, [value]: !(newPill.dailyIntakePeriod as any)[value] };
-    changeButtonCSS(e);
-  }
-
-  const changeButtonCSS = (e: React.MouseEvent<HTMLButtonElement>) :void => {
     
   }
 
-  const handleEatingDay = (e: React.MouseEvent<HTMLButtonElement>, value:string): void => {
+  
+
+  const handleEatingDay = (e: ChangeEvent<HTMLInputElement>, value:string): void => {
     newPill.weeklyIntakeFrequency = { ...newPill.weeklyIntakeFrequency, [value]: !(newPill.weeklyIntakeFrequency as any)[value] };
-    changeButtonCSS(e);
+    
   }
 
   const handleChanges = ():void => {
-    
-    setPillInfo({...newPill, id:Math.ceil(Math.random() * 100)});
+    setPillInfo({...newPill, id:uuid() });
+    console.log({...newPill, id:uuid() });
+    navigate(-1);
     newPill = initPill();
   }
 
@@ -101,8 +86,10 @@ const SupplemenetChallengeActualAddingPage = () => {
           <div className={s.detailDiv}>
             <span className={s.detailTitle}>섭취 시간</span>
             <div className={s.beforeOrAfterMealWrap}>
-              <button type="button" className={s.smallButton} onClick={() => handleBeforeOrAfterMeal(1)}>식전</button>
-              <button type="button" className={s.smallButton} onClick={() => handleBeforeOrAfterMeal(2)}>식후</button>
+              <input type="radio" name='beforeOrAfterMeal' id="before" onChange={() => handleBeforeOrAfterMeal(1)}/>
+              <label htmlFor="before" className={s.smallButton} >식전</label>
+              <input type="radio" name='beforeOrAfterMeal' id="after" onChange={() => handleBeforeOrAfterMeal(2)}/>
+              <label htmlFor="after" className={s.smallButton} >식후</label>
               <input type="text" onChange={(e: ChangeEvent<HTMLInputElement>) => { handleMealMinute(e.target.value); }}/><button className={s.inputClearButton}><img src={InputClearButtonImg} alt="" /></button>
               <span>분 이내</span>
             </div>
@@ -110,21 +97,31 @@ const SupplemenetChallengeActualAddingPage = () => {
           <div className={s.detailDiv}>
             <span className={s.detailTitle}>일 섭취 시기</span>
             <div className={s.eatingTimeButtonWrap}>
-              <button type="button" className={s.smallButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingTiming(e,"breakfast")}>아침</button>
-              <button type="button" className={s.smallButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingTiming(e,"lunch")}>점심</button>
-              <button type="button" className={s.smallButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingTiming(e,"dinner")}>저녁</button>
+              <input type="checkbox" id="morning" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingTiming(e,"breakfast")}/>
+              <label htmlFor="morning" className={s.smallButton}>아침</label>
+              <input type="checkbox" id="afternoon" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingTiming(e,"lunch")}/>
+              <label htmlFor="afternoon" className={s.smallButton}>점심</label>
+              <input type="checkbox" id="evening" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingTiming(e,"dinner")}/>
+              <label htmlFor="evening" className={s.smallButton}>저녁</label>
             </div>
           </div>
           <div className={s.detailDiv}>
             <span className={s.detailTitle}>주 섭취 횟수</span>
             <div className={s.weekDayButtonWrap}>
-              <button type="button" className={s.bigButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingDay(e,"monday")}>월</button>
-              <button type="button" className={s.bigButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingDay(e,"tuesday")}>화</button>
-              <button type="button" className={s.bigButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingDay(e,"wednesday")}>수</button>
-              <button type="button" className={s.bigButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingDay(e,"thursday")}>목</button>
-              <button type="button" className={s.bigButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingDay(e,"friday")}>금</button>
-              <button type="button" className={s.bigButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingDay(e,"saturday")}>토</button>
-              <button type="button" className={s.bigButton} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleEatingDay(e,"sunday")}>일</button>
+              <input type="checkbox" id="mon" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingDay(e,"monday")}/>
+              <label htmlFor="mon" className={s.bigButton}>월</label>
+              <input type="checkbox" id="tue" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingDay(e,"tuesday")}/>
+              <label htmlFor="tue" className={s.bigButton}>화</label>
+              <input type="checkbox" id="wed" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingDay(e,"wednesday")}/>
+              <label htmlFor="wed" className={s.bigButton}>수</label>
+              <input type="checkbox" id="thu" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingDay(e,"thursday")}/>
+              <label htmlFor="thu" className={s.bigButton}>목</label>
+              <input type="checkbox" id="fri" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingDay(e,"friday")}/>
+              <label htmlFor="fri" className={s.bigButton}>금</label>
+              <input type="checkbox" id="sat" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingDay(e,"saturday")}/>
+              <label htmlFor="sat" className={s.bigButton}>토</label>
+              <input type="checkbox" id="sun" onChange={(e:ChangeEvent<HTMLInputElement>) => handleEatingDay(e,"sunday")}/>
+              <label htmlFor="sun" className={s.bigButton}>일</label>
             </div>
           </div>
           <div className={s.detailDiv}>

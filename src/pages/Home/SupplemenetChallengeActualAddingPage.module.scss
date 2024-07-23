@@ -10,6 +10,18 @@ button {
     background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer;
 }
 
+input:checked + label {
+    background : rgba(14, 148, 148, 0.1);
+    border : 1px solid #0E9494;
+    color : #0B7575;  
+}
+
+label {
+    display:block;
+    text-align:center;
+    box-sizing: border-box;
+}
+
 img {
     display:inline-block;
 }
@@ -54,11 +66,13 @@ button:hover {
     
     font-size: 19px;
     color: #B3B3B3;
+    line-height:30px;
 }
 
 .bigButton {
     width: 42px;
     height: 42px;
+    line-height: 42px;
     border-radius: 15px;
     border: 1px solid #B3B3B3;
     background-color: #f5f6f8;

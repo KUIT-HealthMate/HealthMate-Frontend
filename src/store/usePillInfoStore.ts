@@ -4,17 +4,17 @@ import pillInfo from "./pillInfo";
 interface PillInfoState {
     PillInfo: pillInfo[];
     setPillInfo: (pill: pillInfo) => void;
-    setIntakeRecord: (pillId: number, whichMeal: string) => void;
-    getIntakeRecord: (pillId: number, whichMeal: string) => boolean;
+    setIntakeRecord: (pillId: string, whichMeal: string) => void;
+    getIntakeRecord: (pillId: string, whichMeal: string) => boolean;
     getIntakeTime: (pill: pillInfo) => string;
     getMealTime: (idx: number) => string;
-    deletePill: (pillId:number) => void;
+    deletePill: (pillId:string) => void;
 }
 
 const usePillInfoStore = create<PillInfoState>((set, get) => ({
     PillInfo: [
         {
-            id: 0,
+            id: "0",
             name: "베아제",
             intakeTime: {beforeOrAfterMeal: 2, minutes: 30},
             dailyIntakePeriod: {breakfast: true, lunch: true, dinner: true},
@@ -35,7 +35,7 @@ const usePillInfoStore = create<PillInfoState>((set, get) => ({
             ],
         },
         {
-            id: 1,
+            id: "1",
             name: "비타민",
             intakeTime: {beforeOrAfterMeal: 2, minutes: 30},
             dailyIntakePeriod: {breakfast: true, lunch: true, dinner: true},
@@ -56,7 +56,7 @@ const usePillInfoStore = create<PillInfoState>((set, get) => ({
             ],
         },
         {
-            id: 2,
+            id: "2",
             name: "루테인",
             intakeTime: {beforeOrAfterMeal: 2, minutes: 30},
             dailyIntakePeriod: {breakfast: true, lunch: false, dinner: true},
@@ -87,7 +87,7 @@ const usePillInfoStore = create<PillInfoState>((set, get) => ({
         
         set((state) => ({
             PillInfo: state.PillInfo.map((pill) =>
-              pill.id === pillId
+              pill.id == pillId
                 ? { ...pill, dailyIntakeRecord: { ...pill.dailyIntakeRecord, [whichMeal]: !(pill.dailyIntakeRecord as any)[whichMeal] } }
                 : pill
             )
@@ -122,7 +122,7 @@ const usePillInfoStore = create<PillInfoState>((set, get) => ({
         }
     },
 
-    deletePill: (deletingPillId: number) => 
+    deletePill: (deletingPillId: string) => 
         set((state) => ({ PillInfo: [...state.PillInfo.filter((pill) => (pill.id != deletingPillId))] })),
     
     }));
