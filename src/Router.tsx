@@ -4,8 +4,8 @@ import MyPage from "./pages/MyPage/MyPage";
 import Community from "./pages/Community/Community";
 import HealthChart from "./pages/HealthChart/HealthChart";
 import SupplementChallengeEditingPage from "./pages/Home/SupplementChallengeEditingPage";
-import SupplementChallengeActualEditingPage from "./pages/Home/SupplementChallengeActualEditingPage";
-import SupplemenetChallengeActualAddingPage from "./pages/Home/SupplemenetChallengeActualAddingPage";
+import PillEditingPage from "./pages/Home/PillEditingPage"; 
+import PillAddingPage from "./pages/Home/PillAddingPage";
 
 const Router = () => {
   return (
@@ -16,8 +16,8 @@ const Router = () => {
         <Route path="/community" element={<Community />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage/>}/>
-        <Route path="/supplementChallengeActualAdd" element={<SupplemenetChallengeActualAddingPage/>}/>
-        <Route path="/supplementChallengeActualEdit" element={<SupplementChallengeActualEditingPage/>}/>
+        <Route path="/PillAddingPage" element={<PillAddingPage/>}/>
+        <Route path="/PillEditingPage" element={<PillEditingPage/>}/>
       </Routes>
     </div>
   );

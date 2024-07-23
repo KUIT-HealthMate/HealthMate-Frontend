@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
-import s from "./SupplemenetChallengeActualAddingPage.module.scss";
+import s from "./PillAddingPage.module.scss";
 import usePillInfoStore from '../../store/usePillInfoStore';
 import pillInfo from '../../store/pillInfo';
 import uuid from "react-uuid";

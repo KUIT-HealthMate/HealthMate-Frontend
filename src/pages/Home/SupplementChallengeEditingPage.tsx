@@ -77,13 +77,13 @@ const SupplementChallengeEditingPage = () => {
         <div className={s.body}>
             <div className={s.supplementTitle}>
                 <span>복용할 알약</span>
-                <Link to="/SupplementChallengeActualAdd" className={s.addPills}><img src={plusIconImg} alt="plus" /></Link>
+                <Link to="/PillAddingPage" className={s.addPills}><img src={plusIconImg} alt="plus" /></Link>
                 <button className={s.editPills} onClick={changeStyleToEditMode}>편집</button>
             </div>
             <div>
                 {
                 PillInfo.map((pill,index) => {
-                    return <div className={s.supplementWrap}><span>{pill.name}</span><span>{"주 "+Object.values(pill.weeklyIntakeFrequency).filter(value => value).length+"회, "+getIntakeTime(pill)+", "+Object.values(pill.dailyIntakePeriod).filter(value => value).length+"회"}</span><div className={"editAndDeleteBtn"}><Link to="/SupplementChallengeActualEdit" className="edit_button"><img src={pencilImg} alt=""/></Link><button className="delete_button" onClick={() => deletePill(pill.id)}><img src={deleteImg} alt=""/></button></div></div>
+                    return <div className={s.supplementWrap}><span>{pill.name}</span><span>{"주 "+Object.values(pill.weeklyIntakeFrequency).filter(value => value).length+"회, "+getIntakeTime(pill)+", "+Object.values(pill.dailyIntakePeriod).filter(value => value).length+"회"}</span><div className={"editAndDeleteBtn"}><Link to="/PillEditingPage" className="edit_button"><img src={pencilImg} alt=""/></Link><button className="delete_button" onClick={() => deletePill(pill.id)}><img src={deleteImg} alt=""/></button></div></div>
                 })
                 }
             </div>
