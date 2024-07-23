@@ -2,6 +2,13 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
 
 * {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* 인터넷익스플로러 */
+    user-select: none;
+}   
+
+* {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
@@ -14,6 +21,14 @@ input:checked + label {
     background : rgba(14, 148, 148, 0.1);
     border : 1px solid #0E9494;
     color : #0B7575;  
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+input[type="checkbox"] {
+    display:none;
 }
 
 label {
@@ -129,15 +144,19 @@ input {
     padding-left: 10px;
 }
 
-.beforeOrAfterMealWrap button:nth-child(1) {
+.beforeOrAfterMealWrap {
+    display:flex;
+}
+
+.beforeOrAfterMealWrap label:nth-child(2) {
     margin-right: 6px;
 }
 
-.beforeOrAfterMealWrap button:nth-child(2) {
+.beforeOrAfterMealWrap label:nth-child(4) {
     margin-right: 29px;
 }
 
-.beforeOrAfterMealWrap > input {
+.beforeOrAfterMealWrap > input:nth-child(3) {
     margin-right: 11px;
 }
 

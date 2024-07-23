@@ -38,16 +38,20 @@ const SupplemenetChallengeActualAddingPage = () => {
 
   // input 에서 이상한 값(특수문자 등) 이 들어오면 정규식 사용하여 걸러내는 기능 추가 예정
 
-  const handlePillName = (value: string):void => {
-    newPill.name = value;
+  const handlePillName = (inputElement: HTMLInputElement):void => {
+    const filteredValue = inputElement.value.replace(/[^a-zA-Zㄱ-ㅎ가-힣]/g, '');
+    inputElement.value = filteredValue;
+    newPill.name = filteredValue;
   }
 
   const handleBeforeOrAfterMeal = (value: number): void => {
     newPill.intakeTime.beforeOrAfterMeal = value;
   }
 
-  const handleMealMinute = (value: string): void => {
-    newPill.intakeTime.minutes = value as unknown as number;
+  const handleMealMinute = (inputElement: HTMLInputElement): void => {
+    const filteredValue = inputElement.value.replace(/[^0-9]/g, '');
+    inputElement.value = filteredValue;
+    newPill.intakeTime.minutes = filteredValue as unknown as number;
   }
 
   const handleEatingTiming = (e: ChangeEvent<HTMLInputElement>, value:string): void => {
@@ -81,7 +85,7 @@ const SupplemenetChallengeActualAddingPage = () => {
         <div className={s.contentWrap}>
           <div className={s.detailDiv}>
             <span className={s.detailTitle} >알약 이름</span>
-            <input type="text" placeholder='알약 이름을 입력해주세요' onChange={(e: ChangeEvent<HTMLInputElement>) => { handlePillName(e.target.value); }}/><button className={s.inputClearButton}><img src={InputClearButtonImg} alt="" /></button>
+            <input type="text" placeholder='알약 이름을 입력해주세요' onChange={(e: ChangeEvent<HTMLInputElement>) => { handlePillName(e.target); }}/><button className={s.inputClearButton}><img src={InputClearButtonImg} alt="" /></button>
           </div>
           <div className={s.detailDiv}>
             <span className={s.detailTitle}>섭취 시간</span>
@@ -90,7 +94,7 @@ const SupplemenetChallengeActualAddingPage = () => {
               <label htmlFor="before" className={s.smallButton} >식전</label>
               <input type="radio" name='beforeOrAfterMeal' id="after" onChange={() => handleBeforeOrAfterMeal(2)}/>
               <label htmlFor="after" className={s.smallButton} >식후</label>
-              <input type="text" onChange={(e: ChangeEvent<HTMLInputElement>) => { handleMealMinute(e.target.value); }}/><button className={s.inputClearButton}><img src={InputClearButtonImg} alt="" /></button>
+              <input type="number" onChange={(e: ChangeEvent<HTMLInputElement>) => { handleMealMinute(e.target); }}/><button className={s.inputClearButton}><img src={InputClearButtonImg} alt="" /></button>
               <span>분 이내</span>
             </div>
           </div>
