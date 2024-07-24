@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import usePillInfoStore from '../../../store/usePillInfoStore';
 
-import leftBracket from "../../assets/leftBraket.svg"
-import pillImg from "../../assets/pill.png";
-import dummbellImg from "../../assets/dumbbell.png";
-import plusIconImg from "../../assets/plusIcon.svg";
-import deleteImg from "../../assets/deleteIcon.svg";
-import pencilImg from "../../assets/pencil.svg";
-import s from "./SuppplementChallengeEditingPage.module.scss"
+import leftBracket from "../../../assets/leftBraket.svg";
+import pillImg from "../../../assets/pill.png";
+import dummbellImg from "../../../assets/dumbbell.png";
+import plusIconImg from "../../../assets/plusIcon.svg";
+import deleteImg from "../../../assets/deleteIcon.svg";
+import pencilImg from "../../../assets/pencil.svg";
+import s from "./SuppplementChallengeEditingPage.module.scss";
 
 
 const SupplementChallengeEditingPage = () => {

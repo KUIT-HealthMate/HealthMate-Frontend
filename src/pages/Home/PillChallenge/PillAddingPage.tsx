@@ -5,9 +5,9 @@ import usePillInfoStore from '../../../store/usePillInfoStore';
 import pillInfo from '../../../store/pillInfo';
 import uuid from "react-uuid";
 
-import leftBracket from "../../assets/leftBraket.svg";
-import plusIconImg from "../../assets/plusIcon.svg";
-import InputClearButtonImg from "../../assets/InputClearButton.svg"
+import leftBracket from "../../../assets/leftBraket.svg";
+import plusIconImg from "../../../assets/plusIcon.svg";
+import InputClearButtonImg from "../../../assets/InputClearButton.svg"
 
 
 const initPill = ():Omit<pillInfo, "id"> => {

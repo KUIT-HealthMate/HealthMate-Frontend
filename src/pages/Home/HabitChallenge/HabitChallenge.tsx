@@ -1,9 +1,9 @@
-import styles from "./Home.module.scss";
+import styles from "../Home.module.scss";
 
-import clampR from "../../assets/clampR.svg";
-import habitIcon from "../../assets/habiticon.svg";
-import checkmark from "../../assets/checkmark.svg";
-import uncheckmark from "../../assets/uncheckmark.svg";
+import clampR from "../../../assets/clampR.svg";
+import habitIcon from "../../../assets/habiticon.svg";
+import checkmark from "../../../assets/checkmark.svg";
+import uncheckmark from "../../../assets/uncheckmark.svg";
 
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
