@@ -5,10 +5,10 @@ import Community from "./pages/Community/Community";
 import HealthChart from "./pages/HealthChart/HealthChart";
 import ChallengeStatistics from "./pages/Home/ChallengeStatistics/ChallengeStatistics";
 
-import SupplementChallengeEditingPage from "./pages/Home/SupplementChallengeEditingPage";
+import SupplementChallengeEditingPage from "./pages/Home/PillChallenge/SupplementChallengeEditingPage";
 
-import PillEditingPage from "./pages/Home/PillEditingPage"; 
-import PillAddingPage from "./pages/Home/PillAddingPage";
+import PillEditingPage from "./pages/Home/PillChallenge/PillEditingPage"; 
+import PillAddingPage from "./pages/Home/PillChallenge/PillAddingPage";
 import DailyCheckStart from "./pages/DailyCheck/DailyCheckStart";
 import DailyMealCheckStart from "./pages/DailyCheck/DailyMealCheckStart";
 import DailySleepCheckStart from "./pages/DailyCheck/DailySleepCheckStart";
