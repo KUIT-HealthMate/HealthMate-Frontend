@@ -35,11 +35,6 @@ const Router = () => {
         <Route path="/PillAddingPage" element={<PillAddingPage/>}/>
         <Route path="/PillEditingPage" element={<PillEditingPage/>}/>
 
-
-        <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage />} />
-        <Route path="/supplementChallengeActualAdd" element={<SupplemenetChallengeActualAddingPage />} />
-        <Route path="/supplementChallengeActualEdit" element={<SupplementChallengeActualEditingPage />} />
-
         <Route path="/dailycheckstart" element={<DailyCheckStart />} />
         <Route path="/dailymealcheckstart" element={<DailyMealCheckStart />} />
         <Route path="/dailysleepcheckstart" element={<DailySleepCheckStart />} />
