@@ -1,6 +1,6 @@
-import styles from "./Home.module.scss";
-import pillIcon from "../../assets/pill.svg";
-import clampR from "../../assets/clampR.svg";
+import styles from "../Home.module.scss";
+import pillIcon from "../../../assets/pill.svg";
+import clampR from "../../../assets/clampR.svg";
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import usePillInfoStore from "../../../store/usePillInfoStore";

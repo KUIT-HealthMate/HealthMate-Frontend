@@ -1,0 +1,17 @@
+.AlarmTimeInputWrapper {
+    position:fixed;
+    bottom:0px;
+    width:100%;
+    height:100%;
+    background-color: gray;
+    opacity: 50%;
+}   
+
+.AlarmTimeInputContent {
+    position:absolute;
+    bottom:0px;
+    width:100%;
+    height:455px;
+    opacity: 100%;
+    background-color: rgba(255, 0, 0, 0.318);
+}
