@@ -1,0 +1,85 @@
+.calanderContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.divider {
+  border: 1px solid #d9d9d9;
+  margin: 35px;
+}
+
+.spacer {
+  display: flex;
+  width: 100%;
+  height: 32px;
+  background-color: #f4f5fa;
+}
+
+.calander {
+  padding: 12px 21px;
+}
+
+.weekIndex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dayName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12%;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-weight: 500;
+  color: #b3b3b3;
+  padding-bottom: 12px;
+}
+
+.calanderItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.weekContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 0px 21px;
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 12%;
+  border-radius: 5px;
+  background-color: none;
+  padding: 3px 0px;
+  &.selected {
+    background: #0e949433;
+  }
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.acheivement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 17px;
+  border-radius: 100px;
+}
