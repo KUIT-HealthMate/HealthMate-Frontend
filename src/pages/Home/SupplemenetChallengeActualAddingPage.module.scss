@@ -1,0 +1,156 @@
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+* {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+
+button {
+    background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer;
+}
+
+img {
+    display:inline-block;
+}
+
+button:hover {
+  cursor:pointer;
+}
+
+.wrap {
+  width:auto;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  padding: 3px 0 12px 11.5px;
+}
+
+.titleBar {
+  display:flex;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.titleBar > button {
+  box-sizing: border-box;
+  padding: 10px 0 17px 21px; 
+  border: none; 
+  background: none;
+}
+
+
+.titleBar > button > img {
+  height: 17px;
+}
+
+.smallButton {
+    width: 78px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid #B3B3B3;
+    background-color: #f5f6f8;
+    
+    font-size: 19px;
+    color: #B3B3B3;
+}
+
+.bigButton {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+    border: 1px solid #B3B3B3;
+    background-color: #f5f6f8;
+    
+    font-size: 19px;
+    color: #B3B3B3;
+}
+
+.completeButton {
+    width: 100%;
+    height: 48px;
+    background-color: #0E9494;
+    border-radius: 15px;
+
+    font-family: Pretendard;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23.87px;
+    text-align: center;
+    color:#FFFFFF;
+    
+}
+
+.detailTitle {
+    font-family: Pretendard;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23.87px;
+    text-align: left;
+}
+
+input {
+    height:39px;
+    border-radius: 5px;
+    padding:0;
+    border: 1px solid var(--2, #DEDEDE)
+}
+
+.contentWrap {
+    padding: 5px 21px;
+}
+
+
+.detailDiv {
+    padding: 40px 0 48px 0;
+    display:flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--2, #DEDEDE);
+    gap:22px;
+}
+
+.detailDiv > input {
+    font-size: 19px;
+    padding-left: 10px;
+}
+
+.beforeOrAfterMealWrap button:nth-child(1) {
+    margin-right: 6px;
+}
+
+.beforeOrAfterMealWrap button:nth-child(2) {
+    margin-right: 29px;
+}
+
+.beforeOrAfterMealWrap > input {
+    margin-right: 11px;
+}
+
+.eatingTimeButtonWrap {
+    display:flex;
+    gap:6px;
+}
+
+.weekDayButtonWrap {
+    display:flex;
+    flex-direction: row;
+    gap:6px;
+}
+
+.plusButton > img{
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.messengerAlarmHeader {
+    display:flex;
+    justify-content: space-between;
+}
+
+.bottomBarCover {
+    width:auto;
+    height:91px;
+}
+

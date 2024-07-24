@@ -1,0 +1,231 @@
+.survey {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-top: 230px;
+
+
+    .question {
+        margin-left: 8.8%;
+
+        .questionText {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 20px;
+            line-height: 24px;
+
+            color: #000000;
+        }
+    }
+
+    .candidate {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 34px;
+        gap: 8px;
+
+        .candidateBox {
+            width: 84%;
+            height: 54px;
+            padding-top: auto;
+
+            display: flex;
+            align-items: center;
+
+            // background: #FFFFFF;
+
+            box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+
+            .candidateText {
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 19px;
+                letter-spacing: -0.165px;
+
+                margin-left: 17px;
+
+                // color: #8F8F8F;
+            }
+        }
+    }
+
+    .NextButton {
+        background: #05697F;
+        border-radius: 15px;
+        width: 88%;
+        margin-left: 6%;
+        height: 48px;
+        border: #05697F;
+
+        position: absolute;
+        bottom: 33px;
+        // margin-left: 5.6%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        .NextButtonText {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+
+            color: #FFFFFF;
+        }
+    }
+
+}
+
+
+.symptom {
+    padding-top: 180px;
+
+    .symptomTitle {
+        margin-left: 8.8%;
+
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+
+        color: #000000;
+
+    }
+
+    .symptomInfo {
+        // margin-left: 7.2%;
+        width: 91%;
+        margin-left: 4.5%;
+
+        .symptomCategory {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 16px;
+            line-height: 19px;
+
+            color: #8F8F8F;
+        }
+
+        .symptomNames {
+            display: flex;
+            flex-direction: row;
+
+            margin-top: 12px;
+
+
+            .symptomNameWrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 2%;
+
+                // width: 100%;
+                height: 29px;
+
+
+                background: #F5F6F8;
+                border: 1px solid #DEDEDE;
+                border-radius: 100px;
+                padding-left: 4%;
+                padding-right: 4%;
+
+                .symptomName {
+                    font-family: 'Inter';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 12px;
+                    line-height: 15px;
+
+
+                    // padding-left: 14px;
+                    // padding-right: 14px;
+                    color: #818181;
+
+                }
+            }
+
+
+        }
+
+        .divider {
+
+            margin-top: 24px;
+            margin-bottom: 27px;
+        }
+    }
+
+    .findKeyword {
+
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .findKeywordText {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+
+            margin-top: 192px;
+
+            align-items: center;
+            justify-content: center;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+
+            color: #939393;
+        }
+
+        .underLine {
+            width: 13%; //임의
+            border: 2px solid #DEDEDE;
+        }
+    }
+
+    .NextButton {
+        background: #05697F;
+        border-radius: 15px;
+        width: 88%;
+        margin-left: 6%;
+        margin-top: 38px;
+        margin-bottom: 30px;
+        height: 48px;
+        border: #05697F;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .NextButtonText {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+
+            color: #FFFFFF;
+        }
+    }
+
+    .whiteSpace {
+        height: 30px;
+    }
+
+}
