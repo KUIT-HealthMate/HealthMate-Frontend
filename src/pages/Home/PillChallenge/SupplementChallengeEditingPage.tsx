@@ -18,45 +18,50 @@ const SupplementChallengeEditingPage = () => {
 
 
     const changeStyleToEditMode = () => {
-        console.log("1");
-        const plusBtn = document.querySelectorAll("."+s.addPills) as NodeListOf<HTMLElement>;
-        const editActivateBtn = document.querySelectorAll("."+s.editPills) as NodeListOf<HTMLElement>;
-        const confirmBtn = document.querySelectorAll("."+s.completeButton) as NodeListOf<HTMLElement>;
-        const editAndDeleteBtn = document.querySelectorAll(".editAndDeleteBtn") as NodeListOf<HTMLElement>;
+        const plusBtn = document.getElementsByClassName(s.addPills) as HTMLCollectionOf<Element>
+        const editActivateBtn = document.getElementsByClassName(s.editPills) as HTMLCollectionOf<Element>;
+        const confirmBtn = document.getElementsByClassName(s.completeButton) as HTMLCollectionOf<Element>;
+        const editAndDeleteBtn = document.getElementsByClassName("editAndDeleteBtn") as HTMLCollectionOf<Element>;
 
-        
-        for(const element of plusBtn){
-            element.style.display = "block";
+        for(var i=0; i< plusBtn.length; i++){
+            var div = plusBtn[i] as HTMLElement;
+            div.style.display = "block";
         }
-        for(const element of confirmBtn){
-            element.style.display = "block";
+        for(var i=0; i< editActivateBtn.length; i++){
+            var div = editActivateBtn[i] as HTMLElement;
+            div.style.display = "none";
         }
-        for(const element of editAndDeleteBtn){
-            element.style.display = "block";
+        for(var i=0; i< confirmBtn.length; i++){
+            var div = confirmBtn[i] as HTMLElement;
+            div.style.display = "block";
         }
-        for(const element of editActivateBtn){
-            element.style.display = "none";
+        for(var i=0; i< editAndDeleteBtn.length; i++){
+            var div = editAndDeleteBtn[i] as HTMLElement;
+            div.style.display = "block";
         }
     };
 
     const changeStyleToNormalMode = () => {
-        const plusBtn = document.querySelectorAll("."+s.addPills) as NodeListOf<HTMLElement>;
-        const editActivateBtn = document.querySelectorAll("."+s.editPills) as NodeListOf<HTMLElement>;
-        const confirmBtn = document.querySelectorAll("."+s.completeButton) as NodeListOf<HTMLElement>;
-        const editAndDeleteBtn = document.querySelectorAll(".editAndDeleteBtn") as NodeListOf<HTMLElement>;
+        const plusBtn = document.getElementsByClassName(s.addPills) as HTMLCollectionOf<Element>
+        const editActivateBtn = document.getElementsByClassName(s.editPills) as HTMLCollectionOf<Element>;
+        const confirmBtn = document.getElementsByClassName(s.completeButton) as HTMLCollectionOf<Element>;
+        const editAndDeleteBtn = document.getElementsByClassName("editAndDeleteBtn") as HTMLCollectionOf<Element>;
 
-        
-        for(const element of plusBtn){
-            element.style.display = "none";
+        for(var i=0; i< plusBtn.length; i++){
+            var div = plusBtn[i] as HTMLElement;
+            div.style.display = "none";
         }
-        for(const element of confirmBtn){
-            element.style.display = "none";
+        for(var i=0; i< editActivateBtn.length; i++){
+            var div = editActivateBtn[i] as HTMLElement;
+            div.style.display = "block";
         }
-        for(const element of editAndDeleteBtn){
-            element.style.display = "none";
+        for(var i=0; i< confirmBtn.length; i++){
+            var div = confirmBtn[i] as HTMLElement;
+            div.style.display = "none";
         }
-        for(const element of editActivateBtn){
-            element.style.display = "block";
+        for(var i=0; i< editAndDeleteBtn.length; i++){
+            var div = editAndDeleteBtn[i] as HTMLElement;
+            div.style.display = "none";
         }
     };
 
