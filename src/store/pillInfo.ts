@@ -16,4 +16,6 @@ export interface pillInfo {
     notificationTime: {hour:number, minutes:number}[]; // 팝업 알림 시간 (19:30 이면 19, 30)
 }
 
+
+
 export default pillInfo;

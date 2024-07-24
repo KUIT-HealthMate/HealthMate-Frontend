@@ -3,7 +3,7 @@ import pillIcon from "../../assets/pill.svg";
 import clampR from "../../assets/clampR.svg";
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import usePillInfoStore from "../../store/usePillInfoStore";
+import usePillInfoStore from "../../../store/usePillInfoStore";
 
 
 
