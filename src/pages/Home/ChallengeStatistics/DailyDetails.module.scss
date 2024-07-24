@@ -1,0 +1,28 @@
+.dailyChallengeContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 120px;
+  padding-bottom: 180px;
+}
+
+.noticeItem {
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  color: #b3b3b3;
+}
+
+.date {
+  padding-left: 21px;
+  padding-bottom: 40px;
+  font-family: Pretendard;
+  font-size: 19px;
+  font-weight: 700;
+}

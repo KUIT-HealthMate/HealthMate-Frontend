@@ -1,0 +1,28 @@
+.pageTopBarContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 60px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.backButton {
+  display: flex;
+  width: 12px;
+  height: 24px;
+  padding-left: 21px;
+  align-items: center;
+  justify-content: center;
+}
+
+.barName {
+  display: flex;
+  padding: 0px 12px;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -3px;
+  align-items: center;
+  justify-content: center;
+}
