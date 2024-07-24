@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import s from "./WeeklyCalander.module.scss";
 import DailyDetails from "../DailyDetails";
 
@@ -15,6 +15,11 @@ export default function WeeklyCalander({ monthSelect }: CalanderProps) {
   const handleSelectedDay = (day: number) => {
     setSelectedDay(monthSelect.set("date", day));
   };
+
+  useEffect(() => {
+    setSelectedDay(null);
+  }, [monthSelect]);
+
   //monthSelect.startOf('weeks') 하면 해당 주의 첫번째 일요일 나옴
   const firstdayOfWeek = monthSelect.startOf("weeks").add(1, "day");
   while (firstdayOfWeek.month() < monthSelect.month())

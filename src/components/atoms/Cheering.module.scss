@@ -1,0 +1,47 @@
+.rowAchievementContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #f97f5940;
+  height: 38px;
+  border-radius: 100px;
+}
+
+.highAchievementContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #7adcc540;
+  height: 38px;
+  border-radius: 100px;
+}
+
+.rowAchievement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f97f59;
+}
+
+.highAchievement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0b7575;
+}
+
+.good {
+  margin-left: 8px;
+  width: 32.96px;
+  height: 32.96px;
+}

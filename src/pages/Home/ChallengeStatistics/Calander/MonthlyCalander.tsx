@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import s from "./MonthlyCalander.module.scss";
 import DailyDetails from "../DailyDetails";
 
@@ -15,6 +15,10 @@ export default function MonthlyCalander({ monthSelect }: CalanderProps) {
   const handleSelectedDay = (date: number) => {
     setSelectedDay(monthSelect.set("date", date));
   };
+
+  useEffect(() => {
+    setSelectedDay(null);
+  }, [monthSelect]);
 
   const daysinMonth = monthSelect.daysInMonth();
 
