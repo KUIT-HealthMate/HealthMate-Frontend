@@ -6,8 +6,9 @@ import HealthChart from "./pages/HealthChart/HealthChart";
 import ChallengeStatistics from "./pages/Home/ChallengeStatistics/ChallengeStatistics";
 
 import SupplementChallengeEditingPage from "./pages/Home/SupplementChallengeEditingPage";
-import SupplementChallengeActualEditingPage from "./pages/Home/SupplementChallengeActualEditingPage";
-import SupplemenetChallengeActualAddingPage from "./pages/Home/SupplemenetChallengeActualAddingPage";
+
+import PillEditingPage from "./pages/Home/PillEditingPage"; 
+import PillAddingPage from "./pages/Home/PillAddingPage";
 import DailyCheckStart from "./pages/DailyCheck/DailyCheckStart";
 import DailyMealCheckStart from "./pages/DailyCheck/DailyMealCheckStart";
 import DailySleepCheckStart from "./pages/DailyCheck/DailySleepCheckStart";
@@ -18,6 +19,7 @@ import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
 import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
 
+
 const Router = () => {
   return (
     <div>
@@ -27,19 +29,11 @@ const Router = () => {
         <Route path="/community" element={<Community />} />
         <Route path="/mypage" element={<MyPage />} />
 
+
         <Route path="/statistics" element={<ChallengeStatistics />} />
-        <Route
-          path="/supplementChallengeEdit"
-          element={<SupplementChallengeEditingPage />}
-        />
-        <Route
-          path="/supplementChallengeActualAdd"
-          element={<SupplemenetChallengeActualAddingPage />}
-        />
-        <Route
-          path="/supplementChallengeActualEdit"
-          element={<SupplementChallengeActualEditingPage />}
-        />
+        <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage/>}/>
+        <Route path="/PillAddingPage" element={<PillAddingPage/>}/>
+        <Route path="/PillEditingPage" element={<PillEditingPage/>}/>
 
 
         <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage />} />
@@ -56,6 +50,7 @@ const Router = () => {
         <Route path="/dailymealcheck" element={<DailyMealCheck />} />
         <Route path="/dailysleepcheck" element={<DailySleepCheck />} />
         <Route path="/dailycheckdone" element={<DailyCheckDone />} />
+
 
       </Routes>
     </div>
