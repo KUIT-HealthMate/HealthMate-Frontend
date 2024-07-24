@@ -38,8 +38,6 @@ const SupplemenetChallengeActualAddingPage = () => {
 
   let newPill: Omit<pillInfo, "id"> = initPill();
 
-  // input 에서 이상한 값(특수문자 등) 이 들어오면 정규식 사용하여 걸러내는 기능 추가 예정
-
   const handlePillName = (inputElement: HTMLInputElement):void => {
     const filteredValue = inputElement.value.replace(/[^a-zA-Zㄱ-ㅎ가-힣]/g, '');
     inputElement.value = filteredValue;

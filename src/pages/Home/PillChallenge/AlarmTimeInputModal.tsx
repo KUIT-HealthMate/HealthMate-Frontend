@@ -1,5 +1,6 @@
-import React, { useRef } from 'react'
-import s from "../PillChallenge/AlarmTimeInputModal.module.scss"
+import React, { useRef } from 'react';
+import s from "../PillChallenge/AlarmTimeInputModal.module.scss";
+import blackX from "../../../assets/blackX.svg";
 import modal from "../PillChallenge/PillAddingPage";
 
 interface Props {
@@ -16,7 +17,16 @@ const AlarmTimeInputModal:React.FC<Props> = ({modal, setModal}) => {
             setModal(false);
         }
     }}>
-        <div className={s.AlarmTimeInputContent}>hello</div>
+        <div className={s.AlarmTimeInputContent}>
+          <div className={s.TitleBar}>
+            <span className={s.AlarmTimeInputTitle}>알림 시간 설정</span>
+            <button type="button" onClick={() => setModal(false)}><img src={blackX} alt="" /></button>
+          </div>
+          <div>
+
+          </div>
+          <button type="button" className={s.AlarmTimeInputCompleteButton}>완료</button>
+        </div>
     </div>
   )
 }
