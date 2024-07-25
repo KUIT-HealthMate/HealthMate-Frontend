@@ -4,10 +4,14 @@ import s from "./PillAddingPage.module.scss";
 import usePillInfoStore from "../../../store/usePillInfoStore";
 import pillInfo from "../../../store/pillInfo";
 import uuid from "react-uuid";
+import { useState } from 'react';
 
 import leftBracket from "../../../assets/leftBraket.svg";
 import plusIconImg from "../../../assets/plusIcon.svg";
-import InputClearButtonImg from "../../../assets/InputClearButton.svg";
+
+import InputClearButtonImg from "../../../assets/InputClearButton.svg"
+import AlarmTimeInputModal from './AlarmTimeInputModal';
+
 
 const initPill = (): Omit<pillInfo, "id"> => {
   return {
@@ -41,13 +45,16 @@ const SupplemenetChallengeActualAddingPage = () => {
 
   let newPill: Omit<pillInfo, "id"> = initPill();
 
-  // input 에서 이상한 값(특수문자 등) 이 들어오면 정규식 사용하여 걸러내는 기능 추가 예정
+
+  const handlePillName = (inputElement: HTMLInputElement):void => {
+    const filteredValue = inputElement.value.replace(/[^a-zA-Zㄱ-ㅎ가-힣]/g, '');
 
   const handlePillName = (inputElement: HTMLInputElement): void => {
     const filteredValue = inputElement.value.replace(
       /[^a-zA-Zㄱ-ㅎ가-힣]/g,
       ""
     );
+
     inputElement.value = filteredValue;
     newPill.name = filteredValue;
   };
@@ -89,7 +96,10 @@ const SupplemenetChallengeActualAddingPage = () => {
     newPill = initPill();
   };
 
+  const [modal, setModal] = useState(false);
+
   return (
+    <>
     <div className={s.wrap}>
       <div className={s.statusBar}></div>
       <div className={s.header}>
@@ -257,16 +267,25 @@ const SupplemenetChallengeActualAddingPage = () => {
             </label>
           </div>
         </div>
-        <div className={s.detailDiv}>
-          <div className={s.messengerAlarmHeader}>
-            <span className={s.detailTitle}>키키오톡 알림 시간</span>
-            <button type="button" className={s.plusButton}>
-              <img src={plusIconImg} alt="" />
-            </button>
+        
+          <div className={s.detailDiv}>
+            <div className={s.messengerAlarmHeader}>
+              <span className={s.detailTitle}>키키오톡 알림 시간</span>
+              <button type="button" onClick={() => setModal(true)}className={s.plusButton}><img src={plusIconImg} alt="" /></button>
+
+            </div>
+            <div className={s.messengerAlarmBody}>
+              <span></span>
+            </div>
           </div>
+          <button type="button" className={s.completeButton} onClick={() => handleChanges()}>완료</button>
+          
+          <div className={s.bottomBarCover}></div>
+
           <div className={s.messengerAlarmBody}>
             <span></span>
           </div>
+
         </div>
         <button
           type="button"
@@ -278,7 +297,15 @@ const SupplemenetChallengeActualAddingPage = () => {
         <div className={s.bottomBarCover}></div>
       </div>
     </div>
+
+    {
+      modal === true ? <AlarmTimeInputModal modal={modal} setModal={setModal}/> : null
+    }
+    </>
+  )
+}
   );
 };
+
 
 export default SupplemenetChallengeActualAddingPage;
