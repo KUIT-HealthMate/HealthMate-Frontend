@@ -5,6 +5,8 @@ import usePillInfoStore from "../../../store/usePillInfoStore";
 import pillInfo from "../../../store/pillInfo";
 import uuid from "react-uuid";
 import { useState } from 'react';
+import { useGlobalStore } from "../../../store/store";
+import { useEffect } from "react";
 
 import leftBracket from "../../../assets/leftBraket.svg";
 import plusIconImg from "../../../assets/plusIcon.svg";
@@ -42,12 +44,9 @@ const SupplemenetChallengeActualAddingPage = () => {
     getIntakeTime,
     getMealTime,
   } = usePillInfoStore();
-
+  
   let newPill: Omit<pillInfo, "id"> = initPill();
 
-
-  const handlePillName = (inputElement: HTMLInputElement):void => {
-    const filteredValue = inputElement.value.replace(/[^a-zA-Zㄱ-ㅎ가-힣]/g, '');
 
   const handlePillName = (inputElement: HTMLInputElement): void => {
     const filteredValue = inputElement.value.replace(
@@ -287,25 +286,17 @@ const SupplemenetChallengeActualAddingPage = () => {
           </div>
 
         </div>
-        <button
-          type="button"
-          className={s.completeButton}
-          onClick={() => handleChanges()}
-        >
-          완료
-        </button>
+        
         <div className={s.bottomBarCover}></div>
-      </div>
+      
     </div>
-
-    {
-      modal === true ? <AlarmTimeInputModal modal={modal} setModal={setModal}/> : null
-    }
+          `{
+            modal === true ? <AlarmTimeInputModal modal={modal} setModal={setModal}/> : null
+          }`
     </>
   )
 }
-  );
-};
+
 
 
 export default SupplemenetChallengeActualAddingPage;
