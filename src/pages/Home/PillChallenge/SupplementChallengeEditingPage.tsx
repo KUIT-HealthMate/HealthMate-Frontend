@@ -3,6 +3,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import usePillInfoStore from '../../../store/usePillInfoStore';
+import { useEffect } from 'react';
+import { useGlobalStore } from '../../../store/store';
 
 import leftBracket from "../../../assets/leftBraket.svg";
 import pillImg from "../../../assets/pill.png";
@@ -11,8 +13,20 @@ import plusIconImg from "../../../assets/plusIcon.svg";
 import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
 import s from "./SuppplementChallengeEditingPage.module.scss";
+import PageTopBar from '../../../components/organs/PageTopBar';
 
 const SupplementChallengeEditingPage = () => {
+    
+    const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
+    useEffect(() => {
+        console.log("마운트됨")
+        setShowBottomBar();
+        return () => {
+            setShowBottomBar();
+        };
+    }, [setShowBottomBar]
+    );
+  
   const navigate = useNavigate();
   const { PillInfo, setPillInfo, getIntakeTime, getMealTime, deletePill } =
     usePillInfoStore();
