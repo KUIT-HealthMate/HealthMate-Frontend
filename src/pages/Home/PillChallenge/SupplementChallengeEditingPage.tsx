@@ -12,15 +12,6 @@ import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
 import s from "./SuppplementChallengeEditingPage.module.scss";
 
-
-import leftBracket from "../../../assets/leftBraket.svg";
-import pillImg from "../../../assets/pill.png";
-import dummbellImg from "../../../assets/dumbbell.png";
-import plusIconImg from "../../../assets/plusIcon.svg";
-import deleteImg from "../../../assets/deleteIcon.svg";
-import pencilImg from "../../../assets/pencil.svg";
-import s from "./SuppplementChallengeEditingPage.module.scss";
-
 const SupplementChallengeEditingPage = () => {
   const navigate = useNavigate();
   const { PillInfo, setPillInfo, getIntakeTime, getMealTime, deletePill } =
@@ -47,7 +38,9 @@ const SupplementChallengeEditingPage = () => {
         }
         for(var i=0; i< editAndDeleteBtn.length; i++){
             var div = editAndDeleteBtn[i] as HTMLElement;
-            div.style.display = "block";
+            div.style.display = "flex";
+            div.style.gap="5px";
+            div.style.alignItems= "center";
         }
     };
 

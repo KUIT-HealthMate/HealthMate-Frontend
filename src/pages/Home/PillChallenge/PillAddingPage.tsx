@@ -46,9 +46,6 @@ const SupplemenetChallengeActualAddingPage = () => {
   let newPill: Omit<pillInfo, "id"> = initPill();
 
 
-  const handlePillName = (inputElement: HTMLInputElement):void => {
-    const filteredValue = inputElement.value.replace(/[^a-zA-Zㄱ-ㅎ가-힣]/g, '');
-
   const handlePillName = (inputElement: HTMLInputElement): void => {
     const filteredValue = inputElement.value.replace(
       /[^a-zA-Zㄱ-ㅎ가-힣]/g,
@@ -295,17 +292,15 @@ const SupplemenetChallengeActualAddingPage = () => {
           완료
         </button>
         <div className={s.bottomBarCover}></div>
-      </div>
+      
     </div>
-
-    {
-      modal === true ? <AlarmTimeInputModal modal={modal} setModal={setModal}/> : null
-    }
+          `{
+            modal === true ? <AlarmTimeInputModal modal={modal} setModal={setModal}/> : null
+          }`
     </>
   )
 }
-  );
-};
+
 
 
 export default SupplemenetChallengeActualAddingPage;
