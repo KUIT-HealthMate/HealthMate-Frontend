@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import s from "../PillChallenge/AlarmTimeInputModal.module.scss";
 import blackX from "../../../assets/blackX.svg";
-import modal from "../PillChallenge/PillAddingPage";
+import modal from "../PillChallenge/PillManagePage";
 
 interface Props {
     modal: boolean;

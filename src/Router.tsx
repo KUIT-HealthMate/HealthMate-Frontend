@@ -7,8 +7,7 @@ import ChallengeStatistics from "./pages/Home/ChallengeStatistics/ChallengeStati
 
 import SupplementChallengeEditingPage from "./pages/Home/PillChallenge/SupplementChallengeEditingPage";
 
-import PillEditingPage from "./pages/Home/PillChallenge/PillEditingPage"; 
-import PillAddingPage from "./pages/Home/PillChallenge/PillAddingPage";
+import PillManagePage from "./pages/Home/PillChallenge/PillManagePage"; 
 import DailyCheckStart from "./pages/DailyCheck/DailyCheckStart";
 import DailyMealCheckStart from "./pages/DailyCheck/DailyMealCheckStart";
 import DailySleepCheckStart from "./pages/DailyCheck/DailySleepCheckStart";
@@ -32,8 +31,8 @@ const Router = () => {
 
         <Route path="/statistics" element={<ChallengeStatistics />} />
         <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage/>}/>
-        <Route path="/PillAddingPage" element={<PillAddingPage/>}/>
-        <Route path="/PillEditingPage/:id" element={<PillEditingPage/>}/>
+        <Route path="/PillAddingPage" element={<PillManagePage/>}/>
+        <Route path="/PillEditingPage/:id" element={<PillManagePage/>}/>
 
         <Route path="/dailycheckstart" element={<DailyCheckStart />} />
         <Route path="/dailymealcheckstart" element={<DailyMealCheckStart />} />

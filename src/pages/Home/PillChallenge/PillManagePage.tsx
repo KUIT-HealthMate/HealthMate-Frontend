@@ -14,6 +14,7 @@ import plusIconImg from "../../../assets/plusIcon.svg";
 import InputClearButtonImg from "../../../assets/InputClearButton.svg"
 import AlarmTimeInputModal from './AlarmTimeInputModal';
 
+
 const initPill = (): Omit<pillInfo, "id"> => {
   return {
     name: "", // 알약 이름
@@ -35,16 +36,31 @@ const initPill = (): Omit<pillInfo, "id"> => {
 
 const PillEditingPage = () => {
   const navigate = useNavigate();
-  const editingPillId = useParams().id as string;
-
+  
   const {
     PillInfo,
     setPillInfo,
     getPillCopy,
     setPill
   } = usePillInfoStore();
-  
-  let newPill: Omit<pillInfo, "id"> = getPillCopy(editingPillId);
+
+  let editingPillId:string;
+  let newPill: Omit<pillInfo, "id">;
+  let isAddingNewPill: boolean;
+  const alreadyExistingPillId: string = useParams().id as string;
+
+  if(alreadyExistingPillId == undefined) {
+    isAddingNewPill = true;
+  } else {
+    isAddingNewPill = false;
+  }
+
+  if(isAddingNewPill){
+    newPill = initPill();
+  } else {
+    editingPillId = alreadyExistingPillId;
+    newPill = getPillCopy(editingPillId);
+  }
   console.log(newPill);
 
 
@@ -89,7 +105,11 @@ const PillEditingPage = () => {
   };
 
   const handleChanges = (): void => {
-    setPill(editingPillId, newPill);
+    if(isAddingNewPill) {
+      setPillInfo({ ...newPill, id: uuid() });
+    } else {
+      setPill(editingPillId, newPill);
+    }
     navigate(-1);
   };
 
