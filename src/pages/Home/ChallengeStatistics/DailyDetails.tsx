@@ -7,7 +7,7 @@ interface DateProps {
 }
 
 export default function DailyDetails({ date }: DateProps) {
-  //date를 주고 서버한테 그 날짜에 있는 챌린지들과 그 성취도를 받는다.
+  //date에 맞는 정보들을 렌더링.
   const pillList = date ? julyMock[date.date()].supplementChallenges : null;
   const habbitList = date ? julyMock[date.date()].habitChallenges : null;
 
