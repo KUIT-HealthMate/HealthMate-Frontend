@@ -4,8 +4,19 @@ import pillInfo from "./pillInfo";
 interface PillInfoState {
     PillInfo: pillInfo[];
     setPillInfo: (pill: pillInfo) => void;
+
+    setIntakePeriod: (pillId:string, whichMeal: string) => void;
+    getIntakePeriod: (pillId:string, whichMeal: string) => boolean;
+
     setIntakeRecord: (pillId: string, whichMeal: string) => void;
     getIntakeRecord: (pillId: string, whichMeal: string) => boolean;
+
+    setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => void;
+    getWeeklyIntakeFrequency: (pillId: string, whichDay: string) => boolean;
+
+    setNotificationTime: (pillId: string, hour: number, minutes: number) => void;
+    getNotificationTime: (pillId: string, index: number) => { hour: number, minutes: number }
+
     getIntakeTime: (pill: pillInfo) => string;
     getMealTime: (idx: number) => string;
     deletePill: (pillId:string) => void;
@@ -82,9 +93,24 @@ const usePillInfoStore = create<PillInfoState>((set, get) => ({
             PillInfo: [...state.PillInfo, pill],
     })),
 
+    setIntakePeriod: (pillId: string, whichMeal: string) => {
+        set((state) => ({
+            PillInfo: state.PillInfo.map((pill) =>
+              pill.id == pillId
+                ? { ...pill, dailyIntakePeriod: { ...pill.dailyIntakePeriod, [whichMeal]: !(pill.dailyIntakePeriod as any)[whichMeal] } }
+                : pill
+            )
+          })
+        );
+    },
+
+    getIntakePeriod: (pillId: string, whichMeal: string) => {
+        const pill = get().PillInfo.find(pill => pill.id == pillId);
+        return pill ? (pill.dailyIntakePeriod as any)[whichMeal] : undefined;
+    },
+
     // 아침, 점심, 저녁에 영양제 먹었다고 버튼 클릭 -> IntakeRecord에서 수정하는 함수
-    setIntakeRecord: (pillId, whichMeal) => {
-        
+    setIntakeRecord: (pillId: string, whichMeal: string) => {        
         set((state) => ({
             PillInfo: state.PillInfo.map((pill) =>
               pill.id == pillId
@@ -93,14 +119,39 @@ const usePillInfoStore = create<PillInfoState>((set, get) => ({
             )
           })
         );
-
     },
 
-    getIntakeRecord: (pillId, whichMeal) => {
+    getIntakeRecord: (pillId: string, whichMeal: string) => {
         const pill = get().PillInfo.find(pill => pill.id == pillId);
         return pill ? (pill.dailyIntakeRecord as any)[whichMeal] : undefined;
     },
     
+    setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
+        set((state) => ({
+            PillInfo: state.PillInfo.map((pill) =>
+              pill.id == pillId
+                ? { ...pill, weeklyIntakeFrequency: { ...pill.weeklyIntakeFrequency, [whichDay]: !(pill.weeklyIntakeFrequency as any)[whichDay] } }
+                : pill
+            )
+          })
+        );
+    },
+
+    getWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
+        const pill = get().PillInfo.find(pill => pill.id == pillId);
+        return pill ? (pill.weeklyIntakeFrequency as any)[whichDay] : undefined;
+    },
+
+    setNotificationTime: (pillId: string, hour: number, minutes: number) => {
+    
+    },
+    
+    getNotificationTime: (pillId: string, index: number) => {
+        return { hour: 0, minutes: 0 }
+    },
+
+
+
 
     getIntakeTime: (pill: pillInfo) => {
         const isBeforeOrAfterMeal:string = (pill.intakeTime.beforeOrAfterMeal == 1) ? "식전 " : "식후 ";
