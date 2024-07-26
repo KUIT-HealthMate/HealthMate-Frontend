@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import s from "./PillAddingPage.module.scss";
+import s from "./PillAddorEditingPage.module.scss";
 import usePillInfoStore from "../../../store/usePillInfoStore";
 import pillInfo from "../../../store/pillInfo";
 import uuid from "react-uuid";
@@ -15,25 +15,6 @@ import InputClearButtonImg from "../../../assets/InputClearButton.svg"
 import AlarmTimeInputModal from './AlarmTimeInputModal';
 
 
-const initPill = (): Omit<pillInfo, "id"> => {
-  return {
-    name: "", // 알약 이름
-    intakeTime: { beforeOrAfterMeal: 0, minutes: 0 }, // 섭취 시간 (식전 1 식후 2, 분 number로)
-    dailyIntakePeriod: { breakfast: false, lunch: false, dinner: false }, // 일 섭취 시기 (아침, 점심, 저녁)
-    dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
-    weeklyIntakeFrequency: {
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
-    }, // 주 섭취 횟수 (월 ~ 일)
-    notificationTime: [{ hour: 0, minutes: 0 }], // 팝업 알림 시간 (19:30 이면 19, 30)
-  };
-};
-
 const SupplemenetChallengeActualAddingPage = () => {
   const navigate = useNavigate();
   const {
@@ -44,6 +25,25 @@ const SupplemenetChallengeActualAddingPage = () => {
     getIntakeTime,
     getMealTime,
   } = usePillInfoStore();
+
+  const initPill = (): Omit<pillInfo, "id"> => {
+    return {
+      name: "", // 알약 이름
+      intakeTime: { beforeOrAfterMeal: 0, minutes: 0 }, // 섭취 시간 (식전 1 식후 2, 분 number로)
+      dailyIntakePeriod: { breakfast: false, lunch: false, dinner: false }, // 일 섭취 시기 (아침, 점심, 저녁)
+      dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
+      weeklyIntakeFrequency: {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+      }, // 주 섭취 횟수 (월 ~ 일)
+      notificationTime: [{ hour: 0, minutes: 0 }], // 팝업 알림 시간 (19:30 이면 19, 30)
+    };
+  };
   
   let newPill: Omit<pillInfo, "id"> = initPill();
 
