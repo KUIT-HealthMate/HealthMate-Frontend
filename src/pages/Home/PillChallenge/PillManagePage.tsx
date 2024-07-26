@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import s from "./PillAddorEditingPage.module.scss";
+import s from "./PillManagePage.module.scss";
 import usePillInfoStore from "../../../store/usePillInfoStore";
 import pillInfo from "../../../store/pillInfo";
 import uuid from "react-uuid";
@@ -113,6 +113,14 @@ const PillEditingPage = () => {
     navigate(-1);
   };
 
+  const handleInputClear = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const buttonElement = e.currentTarget;
+    const inputElement = buttonElement.closest(`.${s.inputWrap}`)?.querySelector("input") as HTMLInputElement;
+    if (inputElement) {
+      inputElement.value = '';
+    }
+  };
+
   const [modal, setModal] = useState(false);
 
   return (
@@ -130,17 +138,20 @@ const PillEditingPage = () => {
       <div className={s.contentWrap}>
         <div className={s.detailDiv}>
           <span className={s.detailTitle}>알약 이름</span>
-          <input
-            type="text"
-            placeholder="알약 이름을 입력해주세요"
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              handlePillName(e.target);
-            }}
-            defaultValue={newPill.name}
-          />
-          <button className={s.inputClearButton}>
-            <img src={InputClearButtonImg} alt="" />
-          </button>
+          <div className={s.inputWrap}>
+            <input
+              className={s.nameInput}
+              type="text"
+              placeholder="알약 이름을 입력해주세요"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                handlePillName(e.target);
+              }}
+              defaultValue={newPill.name}
+            />
+            <button className={s.inputClearButton} onClick={handleInputClear}>
+              <img className={s.inputClearButtonImg} src={InputClearButtonImg} alt="" />
+            </button>
+          </div>
         </div>
         <div className={s.detailDiv}>
           <span className={s.detailTitle}>섭취 시간</span>
@@ -165,17 +176,20 @@ const PillEditingPage = () => {
             <label htmlFor="after" className={s.smallButton}>
               식후
             </label>
+            <div className={s.inputWrap}>
             <input
+              className={s.minuteInput}
               type="number"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 handleMealMinute(e.target);
               }}
               defaultValue={newPill.intakeTime.minutes}
             />
-            <button className={s.inputClearButton}>
-              <img src={InputClearButtonImg} alt="" />
+            <button className={s.inputClearButton} onClick={handleInputClear}>
+              <img className={s.inputClearButtonImg} src={InputClearButtonImg} alt="" />
             </button>
-            <span>분 이내</span>
+            </div>
+            <span className={s.minuteInputText}>분 이내</span>
           </div>
         </div>
         <div className={s.detailDiv}>

@@ -119,11 +119,43 @@ button:hover {
     text-align: left;
 }
 
+.inputWrap {
+    position: relative;
+    display: inline-block;
+}
+
 input {
     height:39px;
     border-radius: 5px;
     padding:0;
-    border: 1px solid var(--2, #DEDEDE)
+    border: 1px solid var(--2, #DEDEDE);
+    box-sizing: border-box;
+}
+
+.nameInput {
+    width:100%;
+    padding-left: 10px;
+}
+
+.minuteInput {
+    width:77px;
+    padding-left: 16px;
+}
+
+.minuteInputText {
+    margin-left: 11px;
+}
+
+.inputClearButton {
+    position:absolute;
+    right:9.99px;
+    top:10px;
+}
+
+.inputClearButtonImg {
+    display:block;
+    width:18.99px;
+    height:18.99px;
 }
 
 .contentWrap {
@@ -146,6 +178,7 @@ input {
 
 .beforeOrAfterMealWrap {
     display:flex;
+    align-items: center;
 }
 
 .beforeOrAfterMealWrap label:nth-child(2) {
