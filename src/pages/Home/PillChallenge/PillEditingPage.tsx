@@ -35,24 +35,17 @@ const initPill = (): Omit<pillInfo, "id"> => {
 
 const PillEditingPage = () => {
   const navigate = useNavigate();
-  const { pillId } = useParams();
+  const editingPillId = useParams().id as string;
+
   const {
     PillInfo,
     setPillInfo,
-    setIntakePeriod,
-    getIntakePeriod,
-    setIntakeRecord,
-    getIntakeRecord,
-    setWeeklyIntakeFrequency,
-    getWeeklyIntakeFrequency,
-    setNotificationTime,
-    getNotificationTime,
-    getIntakeTime,
-    getMealTime,
-    deletePill,
+    getPillCopy,
+    setPill
   } = usePillInfoStore();
   
-  let newPill: Omit<pillInfo, "id"> = initPill();
+  let newPill: Omit<pillInfo, "id"> = getPillCopy(editingPillId);
+  console.log(newPill);
 
 
   const handlePillName = (inputElement: HTMLInputElement): void => {
@@ -96,10 +89,8 @@ const PillEditingPage = () => {
   };
 
   const handleChanges = (): void => {
-    setPillInfo({ ...newPill, id: uuid() });
-    console.log({ ...newPill, id: uuid() });
+    setPill(editingPillId, newPill);
     navigate(-1);
-    newPill = initPill();
   };
 
   const [modal, setModal] = useState(false);
@@ -113,7 +104,7 @@ const PillEditingPage = () => {
           <button onClick={() => navigate(-1)}>
             <img src={leftBracket} alt="" />
           </button>
-          <div className={s.title}>알약 챌린지 추가</div>
+          <div className={s.title}>알약 정보 편집</div>
         </div>
       </div>
       <div className={s.contentWrap}>
@@ -125,6 +116,7 @@ const PillEditingPage = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               handlePillName(e.target);
             }}
+            defaultValue={newPill.name}
           />
           <button className={s.inputClearButton}>
             <img src={InputClearButtonImg} alt="" />
@@ -138,6 +130,7 @@ const PillEditingPage = () => {
               name="beforeOrAfterMeal"
               id="before"
               onChange={() => handleBeforeOrAfterMeal(1)}
+              defaultChecked={newPill.intakeTime.beforeOrAfterMeal == 1}
             />
             <label htmlFor="before" className={s.smallButton}>
               식전
@@ -147,6 +140,7 @@ const PillEditingPage = () => {
               name="beforeOrAfterMeal"
               id="after"
               onChange={() => handleBeforeOrAfterMeal(2)}
+              defaultChecked={newPill.intakeTime.beforeOrAfterMeal == 2}
             />
             <label htmlFor="after" className={s.smallButton}>
               식후
@@ -156,6 +150,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 handleMealMinute(e.target);
               }}
+              defaultValue={newPill.intakeTime.minutes}
             />
             <button className={s.inputClearButton}>
               <img src={InputClearButtonImg} alt="" />
@@ -172,6 +167,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingTiming(e, "breakfast")
               }
+              defaultChecked={newPill.dailyIntakePeriod.breakfast}
             />
             <label htmlFor="morning" className={s.smallButton}>
               아침
@@ -182,6 +178,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingTiming(e, "lunch")
               }
+              defaultChecked={newPill.dailyIntakePeriod.lunch}
             />
             <label htmlFor="afternoon" className={s.smallButton}>
               점심
@@ -192,6 +189,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingTiming(e, "dinner")
               }
+              defaultChecked={newPill.dailyIntakePeriod.dinner}
             />
             <label htmlFor="evening" className={s.smallButton}>
               저녁
@@ -207,6 +205,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingDay(e, "monday")
               }
+              defaultChecked={newPill.weeklyIntakeFrequency.monday}
             />
             <label htmlFor="mon" className={s.bigButton}>
               월
@@ -217,6 +216,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingDay(e, "tuesday")
               }
+              defaultChecked={newPill.weeklyIntakeFrequency.tuesday}
             />
             <label htmlFor="tue" className={s.bigButton}>
               화
@@ -227,6 +227,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingDay(e, "wednesday")
               }
+              defaultChecked={newPill.weeklyIntakeFrequency.wednesday}
             />
             <label htmlFor="wed" className={s.bigButton}>
               수
@@ -237,6 +238,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingDay(e, "thursday")
               }
+              defaultChecked={newPill.weeklyIntakeFrequency.thursday}
             />
             <label htmlFor="thu" className={s.bigButton}>
               목
@@ -247,6 +249,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingDay(e, "friday")
               }
+              defaultChecked={newPill.weeklyIntakeFrequency.friday}
             />
             <label htmlFor="fri" className={s.bigButton}>
               금
@@ -257,6 +260,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingDay(e, "saturday")
               }
+              defaultChecked={newPill.weeklyIntakeFrequency.saturday}
             />
             <label htmlFor="sat" className={s.bigButton}>
               토
@@ -267,6 +271,7 @@ const PillEditingPage = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleEatingDay(e, "sunday")
               }
+              defaultChecked={newPill.weeklyIntakeFrequency.sunday}
             />
             <label htmlFor="sun" className={s.bigButton}>
               일
