@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import s from "./MonthlyCalander.module.scss";
 import DailyDetails from "../DailyDetails";
 import { CalanderDataType } from "./WeeklyCalander";
+import { CalanderDataInterface } from "../../../../test/mock/mockup";
 
 interface CalanderProps {
   periodSelect: dayjs.Dayjs;
+  data: CalanderDataInterface;
 }
 
-export default function MonthlyCalander({ periodSelect }: CalanderProps) {
+export default function MonthlyCalander({ periodSelect, data }: CalanderProps) {
   const monthlyCalanderFormat: Array<Array<CalanderDataType>> = [
     [],
     [],
@@ -27,6 +29,18 @@ export default function MonthlyCalander({ periodSelect }: CalanderProps) {
   useEffect(() => {
     setSelectedDay(null);
   }, [periodSelect]);
+
+  const selectColor = (percent: number) => {
+    if (percent <= 30) {
+      return s.under30;
+    } else if (percent <= 50) {
+      return s.under50;
+    } else if (percent < 100) {
+      return s.over80;
+    } else if (percent === 100) {
+      return s.perfect;
+    } else return "";
+  };
 
   switch (periodSelect.startOf("month").format("dddd")) {
     case "월요일":
@@ -111,7 +125,17 @@ export default function MonthlyCalander({ periodSelect }: CalanderProps) {
                   <div className={s.date}>
                     {date?.date() === null ? "" : date?.date()}
                   </div>
-                  <div className={s.acheivement}></div>
+                  <div
+                    className={`${s.acheivement} ${
+                      date !== null
+                        ? selectColor(data[date?.date()].dailyAccomplishment)
+                        : ""
+                    }`}
+                  >
+                    {date !== null
+                      ? `${data[date?.date()].dailyAccomplishment}%`
+                      : ""}
+                  </div>
                 </div>
               ))}
             </div>
@@ -119,7 +143,7 @@ export default function MonthlyCalander({ periodSelect }: CalanderProps) {
         </div>
       </div>
       <div className={s.divider} />
-      <DailyDetails date={selectedDay} />
+      <DailyDetails date={selectedDay} data={data} />
     </div>
   );
 }

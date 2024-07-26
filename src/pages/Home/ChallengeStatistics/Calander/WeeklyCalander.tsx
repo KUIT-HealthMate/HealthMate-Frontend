@@ -2,14 +2,16 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import s from "./WeeklyCalander.module.scss";
 import DailyDetails from "../DailyDetails";
+import { CalanderDataInterface } from "../../../../test/mock/mockup";
 
 export type CalanderDataType = dayjs.Dayjs | null;
 
 interface CalanderProps {
   periodSelect: dayjs.Dayjs;
+  data: CalanderDataInterface;
 }
 
-export default function WeeklyCalander({ periodSelect }: CalanderProps) {
+export default function WeeklyCalander({ periodSelect, data }: CalanderProps) {
   const weeklyCalanderFormat: Array<CalanderDataType> = []; //한달에 최대 6주차까지 있을 수 있음
   const weekName: Array<string> = ["월", "화", "수", "목", "금", "토", "일"];
   const [selectedDay, setSelectedDay] = useState<null | dayjs.Dayjs>(null);
@@ -21,6 +23,18 @@ export default function WeeklyCalander({ periodSelect }: CalanderProps) {
   useEffect(() => {
     setSelectedDay(null);
   }, [periodSelect]);
+
+  const selectColor = (percent: number) => {
+    if (percent <= 30) {
+      return s.under30;
+    } else if (percent <= 50) {
+      return s.under50;
+    } else if (percent < 100) {
+      return s.over80;
+    } else if (percent === 100) {
+      return s.perfect;
+    } else return "";
+  };
 
   //monthSelect.startOf('weeks') 하면 해당 주의 첫번째 일요일 나옴
   const firstdayOfWeek = periodSelect.startOf("weeks").add(1, "day");
@@ -93,13 +107,23 @@ export default function WeeklyCalander({ periodSelect }: CalanderProps) {
               <div className={s.date}>
                 {date?.date() === null ? "" : date?.date()}
               </div>
-              <div className={s.acheivement}></div>
+              <div
+                className={`${s.acheivement} ${
+                  date !== null
+                    ? selectColor(data[date?.date()].dailyAccomplishment)
+                    : ""
+                }`}
+              >
+                {date !== null
+                  ? `${data[date?.date()].dailyAccomplishment}%`
+                  : ""}
+              </div>
             </div>
           ))}
         </div>
       </div>
       <div className={s.divider} />
-      <DailyDetails date={selectedDay} />
+      <DailyDetails date={selectedDay} data={data} />
     </div>
   );
 }

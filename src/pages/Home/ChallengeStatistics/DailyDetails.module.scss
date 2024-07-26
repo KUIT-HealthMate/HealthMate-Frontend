@@ -13,7 +13,7 @@
 }
 
 .noticeItem {
-  font-family: Pretendard;
+  font-family: "Pretendard";
   font-size: 18px;
   font-weight: 700;
   color: #b3b3b3;
@@ -21,8 +21,54 @@
 
 .date {
   padding-left: 21px;
-  padding-bottom: 40px;
-  font-family: Pretendard;
+  padding-bottom: 24px;
+  font-family: "Pretendard";
   font-size: 19px;
   font-weight: 700;
+}
+
+.challenges {
+  display: flex;
+  width: auto;
+  padding-left: 21px;
+  padding-right: 21px;
+  padding-bottom: 48px;
+}
+
+.challengeItems {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.itemContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0px;
+}
+
+.challengeName {
+  font-family: "Pretendard";
+  font-size: 18px;
+  font-weight: 500;
+  &.failed {
+    color: #f97f59;
+  }
+}
+
+.success {
+  font-family: "Pretendard";
+  font-size: 18px;
+  font-weight: 700;
+  color: #05697f;
+}
+
+.fail {
+  font-family: "Pretendard";
+  font-size: 18px;
+  font-weight: 700;
+  color: #f97f59;
 }

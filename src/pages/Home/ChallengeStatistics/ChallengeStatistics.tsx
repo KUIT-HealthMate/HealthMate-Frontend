@@ -6,6 +6,9 @@ import forward from "../../../assets/forward.svg";
 import backward from "../../../assets/backward.svg";
 import s from "./ChallengeStatistics.module.scss";
 import StatisticsDetails from "./StatisticsDetails";
+//현재 목업데이터를 챌린지 통계화면에서 로드 후 props로 하위 컴포넌트에 전달
+import { julyMock } from "../../../test/mock/mockup";
+//데이터 로드(월간/주간달력선택, 기간변경 시 마다)
 
 export default function ChallengeStatistics() {
   const enableBottomBar = useGlobalStore((state) => state.setShowBottomBar);
@@ -80,6 +83,7 @@ export default function ChallengeStatistics() {
       <StatisticsDetails
         calanderSelect={calanderSelect}
         periodSelect={period}
+        data={julyMock}
       />
     </>
     //link가 아니라 주간/월간 선택값(boolean)에 따라서 캘린더만 다르게 렌더링

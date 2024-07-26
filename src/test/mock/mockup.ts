@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 //   habitChallenges: ["습관1", "습관2"],
 // };
 
-interface DailyChallenges {
+export interface DailyChallenges {
   supplementChallenges: {
     pill: string;
     dailyIntakePeriod: {
@@ -23,12 +23,12 @@ interface DailyChallenges {
   dailyAccomplishment: number;
 }
 
-interface CalanderMockInterface {
+export interface CalanderDataInterface {
   [key: number]: DailyChallenges;
   periodAverage: number;
 }
 
-export const julyMock: CalanderMockInterface = {
+export const julyMock: CalanderDataInterface = {
   1: {
     supplementChallenges: [
       {
@@ -237,7 +237,7 @@ export const julyMock: CalanderMockInterface = {
     supplementChallenges: [
       {
         pill: "알약1",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: true },
+        dailyIntakePeriod: { breakfast: false, lunch: false, dinner: true },
       },
       {
         pill: "알약2",
