@@ -35,6 +35,18 @@ const initPill = (): Omit<pillInfo, "id"> => {
 };
 
 const PillEditingPage = () => {
+  //하단 바 안보이게
+  const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
+    useEffect(() => {
+        console.log("마운트됨")
+        setShowBottomBar();
+        return () => {
+            setShowBottomBar();
+        };
+    }, [setShowBottomBar]
+    );
+
+
   const navigate = useNavigate();
   
   const {
@@ -132,7 +144,7 @@ const PillEditingPage = () => {
           <button onClick={() => navigate(-1)}>
             <img src={leftBracket} alt="" />
           </button>
-          <div className={s.title}>알약 정보 편집</div>
+          <div className={s.title}>{isAddingNewPill ? "알약 챌린지 추가" : "알약 정보 편집"}</div>
         </div>
       </div>
       <div className={s.contentWrap}>
