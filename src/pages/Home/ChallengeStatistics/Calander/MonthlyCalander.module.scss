@@ -78,8 +78,27 @@
 
 .acheivement {
   display: flex;
+  width: 80%;
   align-items: center;
   justify-content: center;
   height: 17px;
   border-radius: 100px;
+  color: #ffffff;
+  font-family: "Pretendard";
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 4px;
+
+  &.under30 {
+    background-color: #f97f59;
+  }
+  &.under50 {
+    background-color: #86c9c9;
+  }
+  &.over80 {
+    background-color: #0e9494;
+  }
+  &.perfect {
+    background-color: #05697f;
+  }
 }

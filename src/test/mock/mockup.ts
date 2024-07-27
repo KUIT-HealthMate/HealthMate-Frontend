@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 //   habitChallenges: ["습관1", "습관2"],
 // };
 
-interface DailyChallenges {
+export interface DailyChallenges {
   supplementChallenges: {
     pill: string;
     dailyIntakePeriod: {
@@ -20,13 +20,15 @@ interface DailyChallenges {
     habbit: string;
     accomplished: boolean;
   }[];
+  dailyAccomplishment: number;
 }
 
-interface CalanderMockInterface {
+export interface CalanderDataInterface {
   [key: number]: DailyChallenges;
+  periodAverage: number;
 }
 
-export const julyMock: CalanderMockInterface = {
+export const julyMock: CalanderDataInterface = {
   1: {
     supplementChallenges: [
       {
@@ -42,6 +44,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "앞구르기", accomplished: true },
       { habbit: "물구나무", accomplished: false },
     ],
+    dailyAccomplishment: 75,
   },
   2: {
     supplementChallenges: [
@@ -58,6 +61,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   3: {
     supplementChallenges: [
@@ -74,6 +78,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   4: {
     supplementChallenges: [
@@ -90,6 +95,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   5: {
     supplementChallenges: [
@@ -106,6 +112,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   6: {
     supplementChallenges: [
@@ -122,6 +129,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   7: {
     supplementChallenges: [
@@ -138,6 +146,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   8: {
     supplementChallenges: [
@@ -154,6 +163,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   9: {
     supplementChallenges: [
@@ -170,6 +180,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   10: {
     supplementChallenges: [
@@ -186,6 +197,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   11: {
     supplementChallenges: [
@@ -202,6 +214,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "앞구르기", accomplished: true },
       { habbit: "물구나무", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   12: {
     supplementChallenges: [
@@ -218,22 +231,24 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "앞구르기", accomplished: true },
       { habbit: "물구나무", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   13: {
     supplementChallenges: [
       {
         pill: "알약1",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: true },
+        dailyIntakePeriod: { breakfast: false, lunch: false, dinner: true },
       },
       {
         pill: "알약2",
-        dailyIntakePeriod: { breakfast: true, lunch: true, dinner: true },
+        dailyIntakePeriod: { breakfast: false, lunch: false, dinner: true },
       },
     ],
     habitChallenges: [
-      { habbit: "앞구르기", accomplished: true },
+      { habbit: "꼭꼭씹어먹기", accomplished: false },
       { habbit: "물구나무", accomplished: false },
     ],
+    dailyAccomplishment: 25,
   },
   14: {
     supplementChallenges: [
@@ -250,6 +265,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "앞구르기", accomplished: true },
       { habbit: "물구나무", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   15: {
     supplementChallenges: [
@@ -263,9 +279,10 @@ export const julyMock: CalanderMockInterface = {
       },
     ],
     habitChallenges: [
-      { habbit: "앞구르기", accomplished: true },
+      { habbit: "꼭꼭씹어먹기", accomplished: true },
       { habbit: "물구나무", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   16: {
     supplementChallenges: [
@@ -280,8 +297,9 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "노래하기", accomplished: true },
     ],
+    dailyAccomplishment: 75,
   },
   17: {
     supplementChallenges: [
@@ -291,13 +309,14 @@ export const julyMock: CalanderMockInterface = {
       },
       {
         pill: "알약2",
-        dailyIntakePeriod: { breakfast: true, lunch: true, dinner: true },
+        dailyIntakePeriod: { breakfast: false, lunch: false, dinner: false },
       },
     ],
     habitChallenges: [
-      { habbit: "앞구르기", accomplished: true },
-      { habbit: "물구나무", accomplished: false },
+      { habbit: "꼭꼭씹어먹기", accomplished: true },
+      { habbit: "물구나무", accomplished: true },
     ],
+    dailyAccomplishment: 50,
   },
   18: {
     supplementChallenges: [
@@ -314,12 +333,13 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   19: {
     supplementChallenges: [
       {
         pill: "알약8",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: false },
+        dailyIntakePeriod: { breakfast: true, lunch: true, dinner: false },
       },
       {
         pill: "알약12",
@@ -328,8 +348,9 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "꼭꼭씹어먹기", accomplished: false },
     ],
+    dailyAccomplishment: 75,
   },
   20: {
     supplementChallenges: [
@@ -346,12 +367,13 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   21: {
     supplementChallenges: [
       {
         pill: "알약8",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: false },
+        dailyIntakePeriod: { breakfast: true, lunch: true, dinner: true },
       },
       {
         pill: "알약12",
@@ -360,8 +382,9 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "노래하기", accomplished: true },
     ],
+    dailyAccomplishment: 100,
   },
   22: {
     supplementChallenges: [
@@ -375,15 +398,16 @@ export const julyMock: CalanderMockInterface = {
       },
     ],
     habitChallenges: [
-      { habbit: "날기", accomplished: true },
+      { habbit: "꼭꼭씹어먹기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
   23: {
     supplementChallenges: [
       {
         pill: "알약8",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: false },
+        dailyIntakePeriod: { breakfast: true, lunch: true, dinner: true },
       },
       {
         pill: "알약12",
@@ -392,8 +416,9 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "노래하기", accomplished: true },
     ],
+    dailyAccomplishment: 100,
   },
   24: {
     supplementChallenges: [
@@ -403,13 +428,14 @@ export const julyMock: CalanderMockInterface = {
       },
       {
         pill: "알약12",
-        dailyIntakePeriod: { breakfast: true, lunch: true, dinner: true },
+        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: true },
       },
     ],
     habitChallenges: [
-      { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "안날기", accomplished: true },
+      { habbit: "노래하기", accomplished: true },
     ],
+    dailyAccomplishment: 75,
   },
   25: {
     supplementChallenges: [
@@ -423,9 +449,10 @@ export const julyMock: CalanderMockInterface = {
       },
     ],
     habitChallenges: [
-      { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "안날기", accomplished: true },
+      { habbit: "노래하기", accomplished: true },
     ],
+    dailyAccomplishment: 75,
   },
   26: {
     supplementChallenges: [
@@ -440,14 +467,15 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "춤추기", accomplished: true },
     ],
+    dailyAccomplishment: 75,
   },
   27: {
     supplementChallenges: [
       {
         pill: "알약8",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: false },
+        dailyIntakePeriod: { breakfast: true, lunch: true, dinner: false },
       },
       {
         pill: "알약12",
@@ -456,14 +484,15 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "춤추기", accomplished: false },
     ],
+    dailyAccomplishment: 75,
   },
   28: {
     supplementChallenges: [
       {
         pill: "알약8",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: false },
+        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: true },
       },
       {
         pill: "알약12",
@@ -472,14 +501,15 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "춤추기", accomplished: false },
     ],
+    dailyAccomplishment: 75,
   },
   29: {
     supplementChallenges: [
       {
         pill: "알약8",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: false },
+        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: true },
       },
       {
         pill: "알약12",
@@ -488,14 +518,15 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "춤추기", accomplished: false },
     ],
+    dailyAccomplishment: 75,
   },
   30: {
     supplementChallenges: [
       {
         pill: "알약8",
-        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: false },
+        dailyIntakePeriod: { breakfast: true, lunch: false, dinner: true },
       },
       {
         pill: "알약12",
@@ -506,6 +537,7 @@ export const julyMock: CalanderMockInterface = {
       { habbit: "날기", accomplished: true },
       { habbit: "노래하기", accomplished: false },
     ],
+    dailyAccomplishment: 75,
   },
   31: {
     supplementChallenges: [
@@ -520,7 +552,9 @@ export const julyMock: CalanderMockInterface = {
     ],
     habitChallenges: [
       { habbit: "날기", accomplished: true },
-      { habbit: "노래하기", accomplished: false },
+      { habbit: "춤추기", accomplished: false },
     ],
+    dailyAccomplishment: 62,
   },
+  periodAverage: 82,
 };
