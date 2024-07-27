@@ -37,15 +37,29 @@ const RoundedBar = (props: any) => {
     );
 };
 
-const CustomBarLabel = (props: any) => {
+const CustomBarLabelMy = (props: any) => {
     const { value, fill, x, y, width, height } = props;
 
     return <text
         x={x + (width / 2)}
         y={y}
-        dy={-10}
+        dy={'-2.5px'}
         fill={'#05697F'}
-        fontSize='1.2em'
+        fontSize='10px'
+        textAnchor="middle">
+        {value}
+    </text>;
+}
+
+const CustomBarLabelAvg = (props: any) => {
+    const { value, fill, x, y, width, height } = props;
+
+    return <text
+        x={x + (width / 2)}
+        y={y}
+        dy={'-2.5px'}
+        fill={'#B3B3B3'}
+        fontSize='10px'
         textAnchor="middle">
         {value}
     </text>;
@@ -54,25 +68,29 @@ const CustomBarLabel = (props: any) => {
 const BarGraph: React.FC = () => {
 
     return (
-        <BarChart width={600} height={500} data={data}>
-            <defs>
-                <linearGradient id="colorMyScore" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#0E9494" stopOpacity={1} />
-                    <stop offset="95%" stopColor="#7ADCC5" stopOpacity={1} />
-                </linearGradient>
-                <linearGradient id="colorAvgScore" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#F97F59" stopOpacity={1} />
-                    <stop offset="95%" stopColor="#F2F5D8" stopOpacity={1} />
-                </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar className={styles.barText} dataKey="myScore" fill="url(#colorMyScore)" name="내 점수" shape={RoundedBar} label={CustomBarLabel} />
-            <Bar dataKey="avgScore" fill="url(#colorAvgScore)" name="사용자 평균" shape={RoundedBar} label={CustomBarLabel} />
-        </BarChart>
+        <ResponsiveContainer width='76%' height={170}>
+            <BarChart data={data} margin={{ top: 10, right: 20, bottom: 20, left: 80 }}>
+                <defs>
+                    <linearGradient id="colorMyScore" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#0E9494" stopOpacity={1} />
+                        <stop offset="95%" stopColor="#7ADCC5" stopOpacity={1} />
+                    </linearGradient>
+                    <linearGradient id="colorAvgScore" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#F97F59" stopOpacity={1} />
+                        <stop offset="95%" stopColor="#F2F5D8" stopOpacity={1} />
+                    </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="10 0" vertical={false} />
+                <XAxis dataKey="date" dy={'10px'} tick={{
+                    stroke: '#8F8F8F', strokeWidth: 1.2, fontSize: '14px', fontFamily: 'Pretendard'
+                    , fontStyle: "normal", fontWeight: 500
+                }} />
+
+                {/* <Legend /> */}
+                <Bar dataKey="myScore" fill="url(#colorMyScore)" name="내 점수" shape={RoundedBar} label={CustomBarLabelMy} />
+                <Bar dataKey="avgScore" fill="url(#colorAvgScore)" name="사용자 평균" shape={RoundedBar} label={CustomBarLabelAvg} />
+            </BarChart>
+        </ResponsiveContainer>
     )
 
 }
