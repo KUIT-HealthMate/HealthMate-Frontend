@@ -37,29 +37,42 @@ const RoundedBar = (props: any) => {
     );
 };
 
+const CustomBarLabel = (props: any) => {
+    const { value, fill, x, y, width, height } = props;
+
+    return <text
+        x={x + (width / 2)}
+        y={y}
+        dy={-10}
+        fill={'#05697F'}
+        fontSize='1.2em'
+        textAnchor="middle">
+        {value}
+    </text>;
+}
 
 const BarGraph: React.FC = () => {
 
-
     return (
-        // <div className={styles.barGraph}>
-        <ResponsiveContainer className={styles.BarGraphWrap} width="100%" height={400}>
-            <BarChart className={styles.BarGraph}
-                data={data}
-                margin={{
-                    top: 20, right: 30, left: 20, bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="0" vertical={false} />
-                <XAxis className={styles.labelNames} dataKey="date" />
-
-                {/* <Tooltip /> */}
-                {/* <Legend /> */}
-                <Bar dataKey="myScore" fill="#82ca9d" name="내 점수" shape={RoundedBar} />
-                <Bar dataKey="avgScore" fill="#ff7f7f" name="사용자 평균" />
-            </BarChart>
-        </ResponsiveContainer>
-        // </div>
+        <BarChart width={600} height={500} data={data}>
+            <defs>
+                <linearGradient id="colorMyScore" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#0E9494" stopOpacity={1} />
+                    <stop offset="95%" stopColor="#7ADCC5" stopOpacity={1} />
+                </linearGradient>
+                <linearGradient id="colorAvgScore" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#F97F59" stopOpacity={1} />
+                    <stop offset="95%" stopColor="#F2F5D8" stopOpacity={1} />
+                </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar className={styles.barText} dataKey="myScore" fill="url(#colorMyScore)" name="내 점수" shape={RoundedBar} label={CustomBarLabel} />
+            <Bar dataKey="avgScore" fill="url(#colorAvgScore)" name="사용자 평균" shape={RoundedBar} label={CustomBarLabel} />
+        </BarChart>
     )
 
 }
