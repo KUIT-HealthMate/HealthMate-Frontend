@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 import usePillInfoStore from "../../../store/usePillInfoStore";
 
 export default function SupplementChallenge() {
-
-  
   const {
     PillInfo,
     setPillInfo,

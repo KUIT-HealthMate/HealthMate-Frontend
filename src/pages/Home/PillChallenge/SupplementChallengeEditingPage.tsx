@@ -1,10 +1,9 @@
-
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import usePillInfoStore from '../../../store/usePillInfoStore';
-import { useEffect } from 'react';
-import { useGlobalStore } from '../../../store/store';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import usePillInfoStore from "../../../store/usePillInfoStore";
+import { useEffect } from "react";
+import { useGlobalStore } from "../../../store/store";
 
 import leftBracket from "../../../assets/leftBraket.svg";
 import pillImg from "../../../assets/pill.png";
@@ -13,74 +12,87 @@ import plusIconImg from "../../../assets/plusIcon.svg";
 import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
 import s from "./SuppplementChallengeEditingPage.module.scss";
-import PageTopBar from '../../../components/organs/PageTopBar';
+
+import PageTopBar from "../../../components/organs/PageTopBar";
 
 const SupplementChallengeEditingPage = () => {
-    
-    const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
-    useEffect(() => {
-        console.log("마운트됨")
-        setShowBottomBar();
-        return () => {
-            setShowBottomBar();
-        };
-    }, [setShowBottomBar]
-    );
-  
+  const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
+  useEffect(() => {
+    console.log("마운트됨");
+    setShowBottomBar();
+    return () => {
+      setShowBottomBar();
+    };
+  }, [setShowBottomBar]);
   const navigate = useNavigate();
   const { PillInfo, setPillInfo, getIntakeTime, getMealTime, deletePill } =
     usePillInfoStore();
 
+  const changeStyleToEditMode = () => {
+    const plusBtn = document.getElementsByClassName(
+      s.addPills
+    ) as HTMLCollectionOf<Element>;
+    const editActivateBtn = document.getElementsByClassName(
+      s.editPills
+    ) as HTMLCollectionOf<Element>;
+    const confirmBtn = document.getElementsByClassName(
+      s.completeButton
+    ) as HTMLCollectionOf<Element>;
+    const editAndDeleteBtn = document.getElementsByClassName(
+      "editAndDeleteBtn"
+    ) as HTMLCollectionOf<Element>;
 
-    const changeStyleToEditMode = () => {
-        const plusBtn = document.getElementsByClassName(s.addPills) as HTMLCollectionOf<Element>
-        const editActivateBtn = document.getElementsByClassName(s.editPills) as HTMLCollectionOf<Element>;
-        const confirmBtn = document.getElementsByClassName(s.completeButton) as HTMLCollectionOf<Element>;
-        const editAndDeleteBtn = document.getElementsByClassName("editAndDeleteBtn") as HTMLCollectionOf<Element>;
+    for (var i = 0; i < plusBtn.length; i++) {
+      var div = plusBtn[i] as HTMLElement;
+      div.style.display = "block";
+    }
+    for (var i = 0; i < editActivateBtn.length; i++) {
+      var div = editActivateBtn[i] as HTMLElement;
+      div.style.display = "none";
+    }
+    for (var i = 0; i < confirmBtn.length; i++) {
+      var div = confirmBtn[i] as HTMLElement;
+      div.style.display = "block";
+    }
+    for (var i = 0; i < editAndDeleteBtn.length; i++) {
+      var div = editAndDeleteBtn[i] as HTMLElement;
+      div.style.display = "flex";
+      div.style.gap = "5px";
+      div.style.alignItems = "center";
+    }
+  };
 
-        for(var i=0; i< plusBtn.length; i++){
-            var div = plusBtn[i] as HTMLElement;
-            div.style.display = "block";
-        }
-        for(var i=0; i< editActivateBtn.length; i++){
-            var div = editActivateBtn[i] as HTMLElement;
-            div.style.display = "none";
-        }
-        for(var i=0; i< confirmBtn.length; i++){
-            var div = confirmBtn[i] as HTMLElement;
-            div.style.display = "block";
-        }
-        for(var i=0; i< editAndDeleteBtn.length; i++){
-            var div = editAndDeleteBtn[i] as HTMLElement;
-            div.style.display = "flex";
-            div.style.gap="5px";
-            div.style.alignItems= "center";
-        }
-    };
+  const changeStyleToNormalMode = () => {
+    const plusBtn = document.getElementsByClassName(
+      s.addPills
+    ) as HTMLCollectionOf<Element>;
+    const editActivateBtn = document.getElementsByClassName(
+      s.editPills
+    ) as HTMLCollectionOf<Element>;
+    const confirmBtn = document.getElementsByClassName(
+      s.completeButton
+    ) as HTMLCollectionOf<Element>;
+    const editAndDeleteBtn = document.getElementsByClassName(
+      "editAndDeleteBtn"
+    ) as HTMLCollectionOf<Element>;
 
-    const changeStyleToNormalMode = () => {
-        const plusBtn = document.getElementsByClassName(s.addPills) as HTMLCollectionOf<Element>
-        const editActivateBtn = document.getElementsByClassName(s.editPills) as HTMLCollectionOf<Element>;
-        const confirmBtn = document.getElementsByClassName(s.completeButton) as HTMLCollectionOf<Element>;
-        const editAndDeleteBtn = document.getElementsByClassName("editAndDeleteBtn") as HTMLCollectionOf<Element>;
-
-        for(var i=0; i< plusBtn.length; i++){
-            var div = plusBtn[i] as HTMLElement;
-            div.style.display = "none";
-        }
-        for(var i=0; i< editActivateBtn.length; i++){
-            var div = editActivateBtn[i] as HTMLElement;
-            div.style.display = "block";
-        }
-        for(var i=0; i< confirmBtn.length; i++){
-            var div = confirmBtn[i] as HTMLElement;
-            div.style.display = "none";
-        }
-        for(var i=0; i< editAndDeleteBtn.length; i++){
-            var div = editAndDeleteBtn[i] as HTMLElement;
-            div.style.display = "none";
-        }
-    };
+    for (var i = 0; i < plusBtn.length; i++) {
+      var div = plusBtn[i] as HTMLElement;
+      div.style.display = "none";
+    }
+    for (var i = 0; i < editActivateBtn.length; i++) {
+      var div = editActivateBtn[i] as HTMLElement;
+      div.style.display = "block";
+    }
+    for (var i = 0; i < confirmBtn.length; i++) {
+      var div = confirmBtn[i] as HTMLElement;
+      div.style.display = "none";
+    }
+    for (var i = 0; i < editAndDeleteBtn.length; i++) {
+      var div = editAndDeleteBtn[i] as HTMLElement;
+      div.style.display = "none";
+    }
+  };
 
   return (
     <div className={s.wrap}>

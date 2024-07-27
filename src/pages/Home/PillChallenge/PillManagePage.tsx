@@ -4,16 +4,15 @@ import s from "./PillManagePage.module.scss";
 import usePillInfoStore from "../../../store/usePillInfoStore";
 import pillInfo from "../../../store/pillInfo";
 import uuid from "react-uuid";
-import { useState } from 'react';
+import { useState } from "react";
 import { useGlobalStore } from "../../../store/store";
 import { useEffect } from "react";
 
 import leftBracket from "../../../assets/leftBraket.svg";
 import plusIconImg from "../../../assets/plusIcon.svg";
 
-import InputClearButtonImg from "../../../assets/InputClearButton.svg"
-import AlarmTimeInputModal from './AlarmTimeInputModal';
-
+import InputClearButtonImg from "../../../assets/InputClearButton.svg";
+import AlarmTimeInputModal from "./AlarmTimeInputModal";
 
 const initPill = (): Omit<pillInfo, "id"> => {
   return {
@@ -192,8 +191,9 @@ const PillEditingPage = () => {
             <input
               className={s.minuteInput}
               type="number"
+
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleMealMinute(e.target);
+                handlePillName(e.target);
               }}
               defaultValue={newPill.intakeTime.minutes}
             />
@@ -322,39 +322,50 @@ const PillEditingPage = () => {
             <label htmlFor="sun" className={s.bigButton}>
               일
             </label>
+
           </div>
+          
         </div>
-        
+
           <div className={s.detailDiv}>
             <div className={s.messengerAlarmHeader}>
               <span className={s.detailTitle}>키키오톡 알림 시간</span>
-              <button type="button" onClick={() => setModal(true)}className={s.plusButton}><img src={plusIconImg} alt="" /></button>
-
+              <button
+                type="button"
+                onClick={() => setModal(true)}
+                className={s.plusButton}
+              >
+                <img src={plusIconImg} alt="" />
+              </button>
             </div>
             <div className={s.messengerAlarmBody}>
               <span></span>
             </div>
           </div>
-          <button type="button" className={s.completeButton} onClick={() => handleChanges()}>완료</button>
-          
+          <button
+            type="button"
+            className={s.completeButton}
+            onClick={() => handleChanges()}
+          >
+            완료
+          </button>
+
           <div className={s.bottomBarCover}></div>
 
           <div className={s.messengerAlarmBody}>
             <span></span>
           </div>
-
         </div>
-        
+
         <div className={s.bottomBarCover}></div>
-      
-    </div>
-          `{
-            modal === true ? <AlarmTimeInputModal modal={modal} setModal={setModal}/> : null
-          }`
+      </div>
+      `
+      {modal === true ? (
+        <AlarmTimeInputModal modal={modal} setModal={setModal} />
+      ) : null}
+      `
     </>
-  )
-}
-
-
+  );
+};
 
 export default PillEditingPage;
