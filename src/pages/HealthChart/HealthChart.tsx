@@ -1,3 +1,7 @@
+import DailyHealthChart from "./DailyHealthChart/DailyHealthChart";
+
 export default function HealthChart() {
-  return <div>건강차트</div>;
+  return <div>
+    <DailyHealthChart></DailyHealthChart>
+  </div>;
 }
