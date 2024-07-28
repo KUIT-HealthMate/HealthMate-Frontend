@@ -27,7 +27,7 @@ interface PillInfoState {
     getPillCopy: (pillId:string) => Omit<pillInfo,"id">;
 
     // id와 일치하는 pill의 요소들을 주어진 pill로 설정합니다. 
-    setPill: (pillId: string, inputPill: Omit<pillInfo,"id">) => void; 
+    setPill: (pillId: string, inputPill: Omit<Omit<pillInfo,"id">,"notificationTime">, alarmTime:{hour:number, minutes:number}[]) => void; 
 }
 
 const usePillInfoStore = create<PillInfoState>((set, get) => ({
@@ -212,7 +212,7 @@ const usePillInfoStore = create<PillInfoState>((set, get) => ({
 
     },
 
-        setPill: (pillId: string, inputPill: Omit<pillInfo, "id">) => {
+        setPill: (pillId: string, inputPill: Omit<Omit<pillInfo, "id">,"notificationTime">, alarmTime:{hour:number, minutes:number}[]) => {
             set((state) => ({
                 PillInfo: state.PillInfo.map((targetPill) =>
                 targetPill.id == pillId
@@ -230,7 +230,7 @@ const usePillInfoStore = create<PillInfoState>((set, get) => ({
                             saturday: inputPill.weeklyIntakeFrequency.saturday,
                             sunday: inputPill.weeklyIntakeFrequency.sunday
                           },
-                        notificationTime: inputPill.notificationTime.map(time => ({...time}))}
+                        notificationTime: alarmTime.map(time => ({...time}))}
                     : targetPill
                 )
             })

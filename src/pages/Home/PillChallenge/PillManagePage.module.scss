@@ -173,6 +173,10 @@ input {
     gap:22px;
 }
 
+.detailDiv:nth-child(5) {
+    border: none;
+}
+
 .detailDiv > input {
     font-size: 19px;
     padding-left: 10px;
@@ -222,3 +226,21 @@ input {
     height:91px;
 }
 
+
+.alarmTimeWrap {
+    display:flex;
+    justify-content: space-between;
+    margin: 10px 0 10px 0;
+}
+
+.alarmTimeWrap > span {
+    font-size: 19px;
+    font-weight: 500;
+    text-align: left;
+    color: #8f8f8f;
+}
+
+.alarmTimeWrap > div {
+    display:flex;
+    gap:6px;
+}
