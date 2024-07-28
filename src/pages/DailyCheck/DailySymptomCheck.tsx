@@ -20,7 +20,7 @@ const DailySymptomCheck = () => {
         };
     }, [setShowBottomBar]
     );
-
+    const limit = 3;
     const symptomInfo = [
         { id: 0, title: "내과 관련 증상", symptoms: ["발열", "복통", "소화불량", "메스꺼움"] },
         { id: 1, title: "외과 관련 증상", symptoms: ["급성 복통"] },
@@ -42,6 +42,16 @@ const DailySymptomCheck = () => {
     const [symptomBtnActive, setSymptomBtnActive] = useState<boolean[][]>(symptomInfo.map(symptomDetail => Array(symptomDetail.symptoms.length).fill(false)));
 
     function checkSymptom(symptom: number, symptomIdx: number) {
+
+        const checkCnt = symptomBtnActive.flat().filter(element => element).length;
+        console.log("체크된거수: " + checkCnt);
+
+        if (checkCnt >= limit && !symptomBtnActive[symptom][symptomIdx]) {
+            console.error("더 이상 선택 불가");
+            return;
+
+        }
+
         setSymptomBtnActive(prevState => {
             const newState = prevState.map(arr => [...arr]);
             newState[symptom][symptomIdx] = !newState[symptom][symptomIdx];

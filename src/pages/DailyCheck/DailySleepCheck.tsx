@@ -26,10 +26,10 @@ const DailySleepCheck = () => {
     }));
 
     return (
-
         <>
-            <Survey questionCnt={surveysSleep.length} questions={surveysSleep[currentQuestionIdx].question} candidates={surveysSleep[currentQuestionIdx].candidates} type={3} multipleAble={surveysSleep[currentQuestionIdx].multipleAble}></Survey>
+            <Survey questionCnt={surveysSleep.length} questions={surveysSleep[currentQuestionIdx].question} candidates={surveysSleep[currentQuestionIdx].candidates} type={3} multipleAble={surveysSleep[currentQuestionIdx].multipleAble} limit={surveysSleep[currentQuestionIdx].limit} ></Survey>
         </>
+
 
     )
 };

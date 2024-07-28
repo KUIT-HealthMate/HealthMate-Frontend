@@ -9,13 +9,12 @@ interface Props {
     questions: string[],
     candidates: string[],
     type: number // 1: 생활습관 2: 식사습관 3: 수면습관
-    multipleAble: boolean // 복수선택 가능 여부
+    multipleAble: boolean, // 복수선택 가능 여부
+    limit: number
     //  progressPercent: number // 진행률
 }
 
-const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Props) => {
-    console.log(questionCnt)
-
+const Survey = ({ questionCnt, questions, candidates, type, multipleAble, limit }: Props) => {
 
     const nextQuestion = useGlobalStoreSurvey((state) => ({
         currentQuestionIdx: state.currentQuestionIdx,
@@ -41,10 +40,15 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
 
 
     function setBtnDefault() {
-        console.log("setBtnDefault");
+
+
         setBtnActive(prevState => {
+            console.log("setBtnDefault");
+            console.log(prevState);
+
             const newState = prevState.map(() => false);
             return newState;
+
         })
     }
 
@@ -54,6 +58,17 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
         if (!multipleAble) { //복수 선택 불가
             const newArr = Array(candidates.length).fill(false);
             setBtnActive(newArr);
+        }
+
+        else {
+            // 체크한거 수 세서 >limit 면 changeBtnColor X
+            const trueCnt = btnActive.filter(element => element).length;
+            if (trueCnt >= limit && !btnActive[idx]) {
+                console.error("더 이상 선택 불가");
+                return
+            }
+            console.log("trueCnt: " + trueCnt);
+            console.log(btnActive)
         }
         changeBtnColor(idx)
     }
@@ -88,6 +103,7 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
 
     function NextButtonActive() {
         if (btnActive.some(isActive => isActive)) {
+
             return true;
         } else {
             return false;
@@ -95,7 +111,7 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble }: Prop
 
     }
 
-    useEffect(() => { console.log("useeffect"); }, [btnActive]);
+    useEffect(() => { console.log("useeffect_Survey"); }, [btnActive]);
 
     return (
         <>

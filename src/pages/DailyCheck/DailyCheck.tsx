@@ -27,9 +27,9 @@ const DailyCheck = () => {
     return (
         <div className={styles.surveyWrap}>
 
-            <Survey questionCnt={surveys.length} questions={surveys[currentQuestionIdx].question} candidates={surveys[currentQuestionIdx].candidates} type={1} multipleAble={surveys[currentQuestionIdx].multipleAble}></Survey>
+            <Survey questionCnt={surveys.length} questions={surveys[currentQuestionIdx].question} candidates={surveys[currentQuestionIdx].candidates} type={1} multipleAble={surveys[currentQuestionIdx].multipleAble} limit={surveys[currentQuestionIdx].limit} ></Survey>
 
-        </div>
+        </div >
 
     )
 };
