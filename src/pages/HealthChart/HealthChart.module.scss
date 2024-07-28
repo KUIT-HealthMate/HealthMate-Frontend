@@ -1,0 +1,60 @@
+.healthChart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f4f5fa;
+}
+
+.selector {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.periodSelector {
+  display: flex;
+  flex-direction: row;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #dedede;
+  background-color: #ffffff;
+  margin: 0px 21px;
+}
+
+.linkButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 50%;
+  border-radius: 8px;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #8f8f8f;
+  &.selected {
+    color: #0e9494;
+    border: 1px solid #0e9494;
+  }
+}
+
+.dateSelector {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.arrow {
+  width: 38px;
+  height: 14px;
+  padding: 0px 35px;
+}
+
+.date {
+  font-family: "Pretendard";
+  font-size: 18px;
+  font-weight: 700;
+}

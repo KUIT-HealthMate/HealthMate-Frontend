@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import s from "./PageTopBar.module.scss";
-import backButton from "../../assets/backButton.svg";
+import backButton from "../../../assets/backButton.svg";
 
 interface PageTopBarProps {
   barName: string;

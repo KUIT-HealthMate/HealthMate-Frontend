@@ -1,6 +1,6 @@
-import smallLogo from "../../assets/mainLogoS.png";
-import healthMate from "../../assets/healthMateS.png";
-import Calander from "./Calander";
+import smallLogo from "../../../assets/mainLogoS.png";
+import healthMate from "../../../assets/healthMateS.png";
+import Calander from "../Calander";
 import s from "./TopBar.module.scss";
 
 export default function TopBar() {
