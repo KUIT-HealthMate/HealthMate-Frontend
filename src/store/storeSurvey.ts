@@ -56,7 +56,7 @@ export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
     useNavigateTo: null,
     nextQuestion: () => set((state) => {
         console.log("nextQuestion");
-        const newProgressPercent = state.progressPercent + 6.25
+        const newProgressPercent = state.progressPercent + 5.88
         if (state.currentQuestionIdx < surveys.length - 1) {
             return { currentQuestionIdx: state.currentQuestionIdx + 1, progressPercent: newProgressPercent };
         } else {
@@ -67,7 +67,7 @@ export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
 
     nextQuestionMeal: () => set((state) => {
         console.log("nextQuestionMeal");
-        const newProgressPercent = state.progressPercent + 6.25
+        const newProgressPercent = state.progressPercent + 5.88
         if (state.mealCurrentQuestionIdx < surveysMeal.length - 1) {
             return { mealCurrentQuestionIdx: state.mealCurrentQuestionIdx + 1, progressPercent: newProgressPercent };
         } else {
@@ -77,7 +77,7 @@ export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
     }),
     nextQuestionSleep: () => set((state) => {
         console.log("nextQuestionMeal");
-        const newProgressPercent = state.progressPercent + 1
+        const newProgressPercent = state.progressPercent + 5.88
         if (state.sleepCurrentQuestionIdx < surveysSleep.length - 1) {
             return { sleepCurrentQuestionIdx: state.sleepCurrentQuestionIdx + 1, progressPercent: newProgressPercent };
         } else {

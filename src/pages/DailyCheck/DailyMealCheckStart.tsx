@@ -5,6 +5,7 @@ import dailyCheckBackground from "../../assets/dailCheckBackground.svg";
 import { useGlobalStore } from '../../store/store';
 import { useGlobalStoreSurvey, surveysMeal } from '../../store/storeSurvey';
 import { useNavigate } from 'react-router-dom';
+import dailyMealCheckStart from "../../assets/dailyMealCheckStart.svg";
 
 const DailyMealCheckStart = () => {
     const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
@@ -22,7 +23,7 @@ const DailyMealCheckStart = () => {
         <div className={styles.startPage}>
             <div className={styles.startIcons}>
                 <img src={dailyCheckBackground} className={styles.startBackgroundIcon}></img>
-                {/* <img src={dailyCheckStartIcon} className={styles.startIcon}></img> */}
+                <img src={dailyMealCheckStart} className={styles.startIcon}></img>
             </div>
             <div style={{ height: `44px` }}></div>
             <h1 className={styles.startTitle}>잘 하고 있어요!</h1>

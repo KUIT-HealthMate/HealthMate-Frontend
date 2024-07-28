@@ -5,6 +5,8 @@ import Survey from "../DailyCheck/survey/Survey";
 import exclamationMark from "../../assets/exclamationMark.svg"
 import { useGlobalStoreSurvey, surveysSleep } from '../../store/storeSurvey';
 import { useNavigate } from 'react-router-dom';
+import ProgressBar from './survey/ProgressBar';
+
 
 
 
@@ -51,52 +53,54 @@ const DailySymptomCheck = () => {
     const navigate = useNavigate();
 
     return (
-        <div className={styles.symptom}>
-            <div className={styles.symptomTitle}>오늘 느껴진 이상 증세가</div>
-            <div className={styles.symptomTitle}>있으신가요?</div>
-            <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%`, marginBottom: `91px` }}>*복수선택 가능</div>
+        <>
+            <ProgressBar></ProgressBar>
+            <div className={styles.symptom}>
+                <div className={styles.symptomTitle}>오늘 느껴진 이상 증세가</div>
+                <div className={styles.symptomTitle}>있으신가요?</div>
+                <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%`, marginBottom: `91px` }}>*복수선택 가능</div>
 
-            {
-                symptomInfo.map((symptomCategory, symptomCategoryIdx) => {
-                    return (
-                        <div className={styles.symptomInfo}>
-                            <div key={symptomCategoryIdx} className={styles.symptomCategory}>{symptomCategory.title}</div>
-                            <div className={styles.symptomNames}>
-                                {
-                                    symptomCategory.symptoms.map((symptom, symptomIdx) => {
-                                        return (
-                                            <div className={styles.symptomNameWrap} onClick={() => { checkSymptom(symptomCategoryIdx, symptomIdx) }}
-                                                style={symptomBtnActive[symptomCategoryIdx][symptomIdx] ?
-                                                    { background: `rgba(14, 148, 148, 0.1)`, border: `1px solid #0E9494` }
-                                                    : {}
-                                                }>
-                                                <div className={styles.symptomName} style={symptomBtnActive[symptomCategoryIdx][symptomIdx] ? { color: `#0B7575` } : {}}>
-                                                    #{symptom}
+                {
+                    symptomInfo.map((symptomCategory, symptomCategoryIdx) => {
+                        return (
+                            <div className={styles.symptomInfo}>
+                                <div key={symptomCategoryIdx} className={styles.symptomCategory}>{symptomCategory.title}</div>
+                                <div className={styles.symptomNames}>
+                                    {
+                                        symptomCategory.symptoms.map((symptom, symptomIdx) => {
+                                            return (
+                                                <div className={styles.symptomNameWrap} onClick={() => { checkSymptom(symptomCategoryIdx, symptomIdx) }}
+                                                    style={symptomBtnActive[symptomCategoryIdx][symptomIdx] ?
+                                                        { background: `rgba(14, 148, 148, 0.1)`, border: `1px solid #0E9494` }
+                                                        : {}
+                                                    }>
+                                                    <div className={styles.symptomName} style={symptomBtnActive[symptomCategoryIdx][symptomIdx] ? { color: `#0B7575` } : {}}>
+                                                        #{symptom}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    })
-                                }
+                                            )
+                                        })
+                                    }
+                                </div>
+                                {symptomCategoryIdx == 13 ? null : <hr className={styles.divider}></hr>}
                             </div>
-                            {symptomCategoryIdx == 13 ? null : <hr className={styles.divider}></hr>}
-                        </div>
-                    )
-                })
-            }
-            <div className={styles.findKeyword}>
-                <div className={styles.findKeywordText}>
-                    <img src={exclamationMark}></img><div>찾는 키워드가 없나요?</div>
+                        )
+                    })
+                }
+                <div className={styles.findKeyword}>
+                    <div className={styles.findKeywordText}>
+                        <img src={exclamationMark}></img><div>찾는 키워드가 없나요?</div>
+                    </div>
+                    <hr className={styles.underLine}></hr>
                 </div>
-                <hr className={styles.underLine}></hr>
+
+                <button className={styles.NextButton} onClick={() => { navigate('/dailycheckdone') }}>
+                    <p className={styles.NextButtonText}>다음으로</p>
+                </button>
+                <div className={styles.whiteSpace}></div>
+
             </div>
-
-            <button className={styles.NextButton} onClick={() => { navigate('/dailycheckdone') }}>
-                <p className={styles.NextButtonText}>다음으로</p>
-            </button>
-            <div className={styles.whiteSpace}></div>
-
-        </div>
-
+        </>
     )
 };
 

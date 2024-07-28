@@ -7,22 +7,28 @@
 
 
     .startIcons {
-
+        position: absolute;
         display: flex;
         justify-content: center;
+        align-items: center;
 
         .startBackgroundIcon {
             position: absolute;
-            top: 190px;
-            height: 310px;
-            //margin-top: calc(257px);
+            object-fit: cover;
+
+            //임의 300
+            height: 300px;
+            width: 300px;
+
 
         }
 
         .startIcon {
             position: absolute;
-            top: 257px;
+            // top: 257px;
+            width: 164px;
             height: 164px;
+
             //   margin-top: calc(257px);
 
         }
@@ -110,31 +116,62 @@
         flex-direction: column;
         align-items: center;
         margin-top: 149px;
+
         //    margin-bottom: 130px;
+        .startTitle {
+            // position: relative;
+            margin-top: 465px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            color: #000000;
+        }
+
+        .startText {
+
+            display: flex;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 18px;
+            text-align: center;
+
+            color: #8F8F8F;
+
+            margin: 0;
+        }
 
 
     }
 
     .startSleepIcons {
-
+        position: relative;
+        top: 225px;
         display: flex;
         justify-content: center;
-        position: absolute;
+        align-items: center;
+
 
 
         .startSleepBackgroundIcon {
             position: absolute;
-            top: 190px;
-            height: 310px;
-            //margin-top: calc(257px);
+            object-fit: cover;
+
+            //임의 300
+            height: 300px;
+            width: 300px;
 
         }
 
         .startSleepIcon {
             position: absolute;
-            top: 257px;
+            // top: 257px;
+            width: 164px;
             height: 164px;
-            //   margin-top: calc(257px);
 
         }
     }
