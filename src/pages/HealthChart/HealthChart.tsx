@@ -1,7 +1,8 @@
-import Chart from "./BarGraph/Chart";
+import DailyHealthChart from "./DailyHealthChart/DailyHealthChart";
 
 export default function HealthChart() {
   return <div>
-    <Chart></Chart>
+    <DailyHealthChart></DailyHealthChart>
+
   </div>;
 }
