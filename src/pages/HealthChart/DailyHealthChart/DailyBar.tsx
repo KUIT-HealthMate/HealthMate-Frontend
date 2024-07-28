@@ -18,11 +18,11 @@ const DailyBar = (props: propsType) => {
             <div className={styles.progressBar}>
                 <div className={styles.progress} style={{ width: `${props.score}%` }}>
                     <div className={styles.numZero}>0</div>
-                    <div className={styles.circleZero} style={{ left: `${props.avg}%` }}></div>
+                    <div className={styles.circleZero} style={props.score >= props.avg ? { left: `${props.avg}%` } : { left: `${props.avg}%`, background: `#119695` }}></div>
                     <div className={styles.numScore}>{props.score}</div>
-
                 </div>
-                <div className={styles.fullScore}>100</div>
+                {props.score == 100 ? null : <div className={styles.fullScore}>100</div>}
+
                 <p className={styles.numAvg} style={{ left: `calc(${props.avg}% - 20px)` }}>평균 {props.avg}점</p>
             </div>
 
