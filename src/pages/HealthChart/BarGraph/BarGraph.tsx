@@ -116,10 +116,10 @@ const BarGraph: React.FC = () => {
                             <stop offset="95%" stopColor="#F2F5D8" stopOpacity={1} />
                         </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="10 0" vertical={false} />
-                    <XAxis dataKey="date" dy={'10px'} tick={{
-                        stroke: '#8F8F8F', strokeWidth: 1.2, fontSize: '14px', fontFamily: 'Pretendard'
-                        , fontStyle: "normal", fontWeight: 500
+                    <CartesianGrid vertical={false} />
+                    <XAxis dataKey="date" dy={'10px'} axisLine={false} tickLine={false} tick={{
+                        stroke: '#8F8F8F', strokeWidth: 1, fontSize: '14px', fontFamily: 'Pretendard'
+                        , fontStyle: "normal", fontWeight: 500, fill: '#8F8F8F'
                     }} />
 
                     <Bar dataKey="myScore" fill="url(#colorMyScore)" name="내 점수" shape={RoundedBar} label={CustomBarLabelMy} barSize={barSize} />
