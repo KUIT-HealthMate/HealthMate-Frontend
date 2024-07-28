@@ -1,7 +1,7 @@
-import BarGarph from "./BarGraph/BarGraph";
+import Chart from "./BarGraph/Chart";
 
 export default function HealthChart() {
-  return <div>건강차트
-    <BarGarph></BarGarph>
+  return <div>
+    <Chart></Chart>
   </div>;
 }
