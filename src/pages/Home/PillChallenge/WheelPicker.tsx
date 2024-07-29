@@ -18,8 +18,6 @@ import { useRef, useEffect, useState } from "react";
     const ListCenter = styled.div`
     background: rgba(14,148,148,0.1);
     box-sizing: border-box;
-    border-top: 1.3px solid black;
-    border-bottom: 1.3px solid black;
     height: 37px;
     position: sticky;
     top: 37px;
@@ -38,10 +36,11 @@ import { useRef, useEffect, useState } from "react";
     list: (string | number)[];
     onSelectedChange?: (selected: string | number) => void;
     initialIndex: number;
+    pickerStyle?: React.CSSProperties;
     children?: React.ReactNode;
     }
 
-    const WheelPicker = ({ list, onSelectedChange, initialIndex }: ScrollPickerProps) => {
+    const WheelPicker = ({ list, onSelectedChange, initialIndex, pickerStyle }: ScrollPickerProps) => {
     const SCROLL_DEBOUNCE_TIME = 74;
 
     const newList = ["", ...list, ""];
@@ -80,8 +79,8 @@ import { useRef, useEffect, useState } from "react";
     }, []);
 
     return (
-        <List ref={ref} onScroll={handleScroll}>
-        <ListCenter />
+        <List ref={ref} onScroll={handleScroll} >
+        <ListCenter style={pickerStyle}/>
         {newList.map((item, index) => (
             <ListItem
             key={index}

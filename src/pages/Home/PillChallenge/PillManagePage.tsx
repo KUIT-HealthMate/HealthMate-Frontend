@@ -9,12 +9,16 @@ import { useGlobalStore } from "../../../store/store";
 import { useEffect } from "react";
 
 import leftBracket from "../../../assets/leftBraket.svg";
-import plusIconImg from "../../../assets/plusIcon.svg";
-import deleteImg from "../../../assets/deleteIcon.svg";
-import pencilImg from "../../../assets/pencil.svg";
+
 
 import InputClearButtonImg from "../../../assets/InputClearButton.svg";
 import AlarmTimeInputModal from "./AlarmTimeInputModal";
+import NameInputSection from "./NameInputSection";
+import IntakeTimeSection from "./IntakeTimeSection";
+import IntakePeriodSection from "./IntakePeriodSection";
+import IntakeDaySection from "./IntakeDaySection";
+import AlarmTimeSection from "./AlarmTimeSection";
+
 
 const initPill = (): Omit<Omit<pillInfo, "id">, "notificationTime"> => {
   return {
@@ -147,15 +151,15 @@ const PillEditingPage = () => {
   };
 
   // 이벤트 핸들러: input clear button
-  const handleInputClear = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const buttonElement = e.currentTarget;
-    const inputElement = buttonElement
-      .closest(`.${s.inputWrap}`)
-      ?.querySelector("input") as HTMLInputElement;
-    if (inputElement) {
-      inputElement.value = "";
-    }
-  };
+  // const handleInputClear = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   const buttonElement = e.currentTarget;
+  //   const inputElement = buttonElement
+  //     .closest(`.${s.inputWrap}`)
+  //     ?.querySelector("input") as HTMLInputElement;
+  //   if (inputElement) {
+  //     inputElement.value = "";
+  //   }
+  // };
 
 
   const [amOrPm, setAmOrPm] = useState(0);
@@ -232,226 +236,21 @@ const PillEditingPage = () => {
           </div>
         </div>
         <div className={s.contentWrap}>
-          <div className={s.detailDiv}>
-            <span className={s.detailTitle}>알약 이름</span>
-            <div className={s.inputWrap}>
-              <input
-                className={s.nameInput}
-                type="text"
-                placeholder="알약 이름을 입력해주세요"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          <NameInputSection placeHolderMessage = {"알약 이름을 입력해주세요"} handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
                   handlePillName(e.target);
-                }}
-                defaultValue={newPill.name}
-              />
-              <button className={s.inputClearButton} onClick={handleInputClear}>
-                <img
-                  className={s.inputClearButtonImg}
-                  src={InputClearButtonImg}
-                  alt=""
-                />
-              </button>
-            </div>
-          </div>
-          <div className={s.detailDiv}>
-            <span className={s.detailTitle}>섭취 시간</span>
-            <div className={s.beforeOrAfterMealWrap}>
-              <input
-                type="radio"
-                name="beforeOrAfterMeal"
-                id="before"
-                onChange={() => handleBeforeOrAfterMeal(1)}
-                defaultChecked={newPill.intakeTime.beforeOrAfterMeal == 1}
-              />
-              <label htmlFor="before" className={s.smallButton}>
-                식전
-              </label>
-              <input
-                type="radio"
-                name="beforeOrAfterMeal"
-                id="after"
-                onChange={() => handleBeforeOrAfterMeal(2)}
-                defaultChecked={newPill.intakeTime.beforeOrAfterMeal == 2}
-              />
-              <label htmlFor="after" className={s.smallButton}>
-                식후
-              </label>
-              <div className={s.inputWrap}>
-                <input
-                  className={s.minuteInput}
-                  type="number"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          }} defaultValue={newPill.name} />
+          
+          <IntakeTimeSection handleButtonFunc={(idx:number) => handleBeforeOrAfterMeal(idx)} isChecked={newPill.intakeTime.beforeOrAfterMeal} handleMinuteFunc={(e: ChangeEvent<HTMLInputElement>) => {
                     handleMealMinute(e.target);
-                  }}
-                  defaultValue={newPill.intakeTime.minutes}
-                />
-                <button
-                  className={s.inputClearButton}
-                  onClick={handleInputClear}
-                >
-                  <img
-                    className={s.inputClearButtonImg}
-                    src={InputClearButtonImg}
-                    alt=""
-                  />
-                </button>
-              </div>
-              <span className={s.minuteInputText}>분 이내</span>
-            </div>
-          </div>
-          <div className={s.detailDiv}>
-            <span className={s.detailTitle}>일 섭취 시기</span>
-            <div className={s.eatingTimeButtonWrap}>
-              <input
-                type="checkbox"
-                id="morning"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingTiming(e, "breakfast")
-                }
-                defaultChecked={newPill.dailyIntakePeriod.breakfast}
-              />
-              <label htmlFor="morning" className={s.smallButton}>
-                아침
-              </label>
-              <input
-                type="checkbox"
-                id="afternoon"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingTiming(e, "lunch")
-                }
-                defaultChecked={newPill.dailyIntakePeriod.lunch}
-              />
-              <label htmlFor="afternoon" className={s.smallButton}>
-                점심
-              </label>
-              <input
-                type="checkbox"
-                id="evening"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingTiming(e, "dinner")
-                }
-                defaultChecked={newPill.dailyIntakePeriod.dinner}
-              />
-              <label htmlFor="evening" className={s.smallButton}>
-                저녁
-              </label>
-            </div>
-          </div>
-          <div className={s.detailDiv}>
-            <span className={s.detailTitle}>주 섭취 횟수</span>
-            <div className={s.weekDayButtonWrap}>
-              <input
-                type="checkbox"
-                id="mon"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingDay(e, "monday")
-                }
-                defaultChecked={newPill.weeklyIntakeFrequency.monday}
-              />
-              <label htmlFor="mon" className={s.bigButton}>
-                월
-              </label>
-              <input
-                type="checkbox"
-                id="tue"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingDay(e, "tuesday")
-                }
-                defaultChecked={newPill.weeklyIntakeFrequency.tuesday}
-              />
-              <label htmlFor="tue" className={s.bigButton}>
-                화
-              </label>
-              <input
-                type="checkbox"
-                id="wed"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingDay(e, "wednesday")
-                }
-                defaultChecked={newPill.weeklyIntakeFrequency.wednesday}
-              />
-              <label htmlFor="wed" className={s.bigButton}>
-                수
-              </label>
-              <input
-                type="checkbox"
-                id="thu"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingDay(e, "thursday")
-                }
-                defaultChecked={newPill.weeklyIntakeFrequency.thursday}
-              />
-              <label htmlFor="thu" className={s.bigButton}>
-                목
-              </label>
-              <input
-                type="checkbox"
-                id="fri"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingDay(e, "friday")
-                }
-                defaultChecked={newPill.weeklyIntakeFrequency.friday}
-              />
-              <label htmlFor="fri" className={s.bigButton}>
-                금
-              </label>
-              <input
-                type="checkbox"
-                id="sat"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingDay(e, "saturday")
-                }
-                defaultChecked={newPill.weeklyIntakeFrequency.saturday}
-              />
-              <label htmlFor="sat" className={s.bigButton}>
-                토
-              </label>
-              <input
-                type="checkbox"
-                id="sun"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handleEatingDay(e, "sunday")
-                }
-                defaultChecked={newPill.weeklyIntakeFrequency.sunday}
-              />
-              <label htmlFor="sun" className={s.bigButton}>
-                일
-              </label>
-            </div>
-          </div>
-
-          <div className={s.detailDiv}>
-            <div className={s.messengerAlarmHeader}>
-              <span className={s.detailTitle}>키키오톡 알림 시간</span>
-              <button
-                type="button"
-                onClick={() => setModal(true)}
-                className={s.plusButton}
-              >
-                <img src={plusIconImg} alt="" />
-              </button>
-            </div>
-            <div className={s.messengerAlarmBody}>
-              {alarmTime && alarmTime.map((value, index) => {
-                return (
-                  <div className={s.alarmTimeWrap}>
-                    <span>
-                      {value.hour < 12 ? "오전 " : "오후 "}
-                      {(value.hour % 12 != 0 ? value.hour % 12 : 12).toString().padStart(2,'0')} : {(value.minutes).toString().padStart(2,'0')}
-                    </span>
-                    <div className={"editAndDeleteBtn"}>
-                      <button className="edit_button" onClick={() => editAlarmTime(index)}>
-                        <img src={pencilImg} alt="" />
-                      </button>
-                      <button className="delete_button" onClick={() => deleteAlarmTime(index)}>
-                        <img src={deleteImg} alt="" />
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+                  }} defaultValue={newPill.intakeTime.minutes}/>
+          
+          <IntakePeriodSection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, mealInfo:string) =>
+                  handleEatingTiming(e, mealInfo)} defaultChecked={newPill.dailyIntakePeriod} />
+          <IntakeDaySection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, dayInfo:string) =>
+                  handleEatingDay(e, dayInfo)} defaultChecked={newPill.weeklyIntakeFrequency} /> 
+          
+          <AlarmTimeSection alarmTime={alarmTime} plusButtonOnClick={() => setModal(true)} editButtonOnClick={(index: number) => editAlarmTime(index)} deleteButtonOnClick={(index: number) => deleteAlarmTime(index)}/>
+            
           <button
             type="button"
             className={s.completeButton}
