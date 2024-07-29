@@ -1,15 +1,31 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import s from "../PillChallenge/AlarmTimeInputModal.module.scss";
 import blackX from "../../../assets/blackX.svg";
-import modal from "../PillChallenge/PillAddingPage";
+import modal from "../PillChallenge/PillManagePage";
+import WheelPicker from "./WheelPicker";
+import PillManagePage from "./PillManagePage";
 
 interface Props {
     modal: boolean;
     setModal: React.Dispatch<React.SetStateAction<boolean>>;
+    amOrPm: number;
+    setAmOrPm: React.Dispatch<React.SetStateAction<number>>;
+    hour: number;
+    setHour: React.Dispatch<React.SetStateAction<number>>;
+    minutes: number;
+    setMinutes: React.Dispatch<React.SetStateAction<number>>;
+    handleAlarmTime: () => void;
 }
 
-const AlarmTimeInputModal:React.FC<Props> = ({modal, setModal}) => {
+const AlarmTimeInputModal:React.FC<Props> = ({modal, setModal, amOrPm, setAmOrPm, hour, setHour, minutes, setMinutes, handleAlarmTime}) => {
   const modalBackground = useRef();
+
+  
+
+  const handleTimeSet = () => {
+    setModal(false);
+    handleAlarmTime();
+  }
 
   return (
     <div className={s.AlarmTimeInputWrapper} ref={modalBackground as any} onClick={e => {
@@ -22,10 +38,13 @@ const AlarmTimeInputModal:React.FC<Props> = ({modal, setModal}) => {
             <span className={s.AlarmTimeInputTitle}>알림 시간 설정</span>
             <button type="button" onClick={() => setModal(false)}><img src={blackX} alt="" /></button>
           </div>
-          <div>
-
+          <div className={s.wheelPickerWrap}>
+            <WheelPicker list={["오전","오후"]} initialIndex={amOrPm} onSelectedChange={(selected) => { selected == "오전" ? setAmOrPm(0) : setAmOrPm(1); console.log(selected); console.log(amOrPm)}} > </ WheelPicker>
+            <WheelPicker list={["12","01","02","03","04","05","06","07","08","09","10","11"]} initialIndex={hour} onSelectedChange={(selected) => { setHour(selected as unknown as number); console.log(hour)}} > </ WheelPicker>
+            <WheelPicker list={[":"]} onSelectedChange={() => {}} initialIndex={0}> </ WheelPicker>
+            <WheelPicker list={["00","05","10","15","20","25","30","35","40","45","50","55"]} initialIndex={minutes == 0 ? minutes : minutes/5} onSelectedChange={(selected) => { setMinutes(selected as unknown as number); console.log(minutes)}} > </ WheelPicker>
           </div>
-          <button type="button" className={s.AlarmTimeInputCompleteButton}>완료</button>
+          <button type="button" className={s.AlarmTimeInputCompleteButton} onClick={() => handleTimeSet()}>완료</button>
         </div>
     </div>
   )

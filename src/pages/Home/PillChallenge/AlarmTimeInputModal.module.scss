@@ -18,11 +18,14 @@
     position:absolute;
     bottom:0px;
     width:100%;
-    height:455px;
+    height:378px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 15px 15px 0 0;
     box-sizing: border-box;
     padding:20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .TitleBar {
@@ -47,4 +50,8 @@ img {
     text-align: left;
     color: #FFFFFF;
     text-align: center;
+}
+
+.wheelPickerWrap {
+    display:flex;
 }
