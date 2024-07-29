@@ -57,6 +57,8 @@ button:hover {
 
 .titleBar {
   display:flex;
+  height:60px;
+  align-items: center;
   border-bottom: 1px solid #D9D9D9;
 }
 
@@ -119,11 +121,43 @@ button:hover {
     text-align: left;
 }
 
+.inputWrap {
+    position: relative;
+    display: inline-block;
+}
+
 input {
     height:39px;
     border-radius: 5px;
     padding:0;
-    border: 1px solid var(--2, #DEDEDE)
+    border: 1px solid var(--2, #DEDEDE);
+    box-sizing: border-box;
+}
+
+.nameInput {
+    width:100%;
+    padding-left: 10px;
+}
+
+.minuteInput {
+    width:77px;
+    padding-left: 16px;
+}
+
+.minuteInputText {
+    margin-left: 11px;
+}
+
+.inputClearButton {
+    position:absolute;
+    right:9.99px;
+    top:10px;
+}
+
+.inputClearButtonImg {
+    display:block;
+    width:18.99px;
+    height:18.99px;
 }
 
 .contentWrap {
@@ -139,6 +173,10 @@ input {
     gap:22px;
 }
 
+.detailDiv:nth-child(5) {
+    border: none;
+}
+
 .detailDiv > input {
     font-size: 19px;
     padding-left: 10px;
@@ -146,6 +184,7 @@ input {
 
 .beforeOrAfterMealWrap {
     display:flex;
+    align-items: center;
 }
 
 .beforeOrAfterMealWrap label:nth-child(2) {
@@ -187,3 +226,21 @@ input {
     height:91px;
 }
 
+
+.alarmTimeWrap {
+    display:flex;
+    justify-content: space-between;
+    margin: 10px 0 10px 0;
+}
+
+.alarmTimeWrap > span {
+    font-size: 19px;
+    font-weight: 500;
+    text-align: left;
+    color: #8f8f8f;
+}
+
+.alarmTimeWrap > div {
+    display:flex;
+    gap:6px;
+}

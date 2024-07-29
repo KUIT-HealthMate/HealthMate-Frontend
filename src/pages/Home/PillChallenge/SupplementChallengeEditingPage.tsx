@@ -144,7 +144,7 @@ const SupplementChallengeEditingPage = () => {
                     "회"}
                 </span>
                 <div className={"editAndDeleteBtn"}>
-                  <Link to="/PillEditingPage" className="edit_button">
+                  <Link to={`/PillEditingPage/${pill.id}`} className="edit_button">
                     <img src={pencilImg} alt="" />
                   </Link>
                   <button
