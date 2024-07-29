@@ -1,6 +1,6 @@
 import { useState } from "react";
 import LinearChart from "./LinearChart/LinearChart";
-import HabbitScore from "../../components/organs/HabbitScore/HabbitScore";
+import HabbitScore from "./HabbitScore/HabbitScore";
 import s from "./HealthChart.module.scss";
 import dayjs from "dayjs";
 import backWard from "../../assets/backward.svg";

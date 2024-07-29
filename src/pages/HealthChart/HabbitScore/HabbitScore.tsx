@@ -1,4 +1,5 @@
-import { periodName } from "../../../pages/HealthChart/HealthChart";
+import { periodName } from "../HealthChart";
+import s from "./HabbitScore.module.scss";
 
 interface HabbitScoreProps {
   period: periodName;
@@ -11,8 +12,6 @@ export default function HabbitScore({
   periodScore,
   averageScore,
 }: HabbitScoreProps) {
-  const difference = periodScore - averageScore;
-
   const showingPeriod = (period: periodName) => {
     if (period === "daily") return "일간";
     else if (period === "weekly") return "주간";
@@ -34,20 +33,34 @@ export default function HabbitScore({
   };
 
   return (
-    <div className="componentContainer">
-      <div className="contentContainer">
-        <div className="titleContainer">
-          <div className="title">{`내 ${showingPeriod(
+    <div className={s.componentContainer}>
+      <div className={s.contentContainer}>
+        <div className={s.titleContainer}>
+          <div className={s.title}>{`내 ${showingPeriod(
             period
           )} 생활습관은`}</div>
-          <div className="score">{`${periodScore}점`}</div>
-          <div className="title">이에요</div>
+          <div className={s.score}>{`${periodScore}점`}</div>
+          <div className={s.title}>이에요</div>
         </div>
 
-        <div className="subtitle">
-          {periodScore > averageScore
-            ? `사용자 평균 대비 ${difference}점 높아요`
-            : `사용자 평균 대비 ${difference}점 낮아요`}
+        <div className={s.subtitle}>
+          {periodScore > averageScore ? (
+            <div className="write">
+              <div className="normal">사용자 평균 대비</div>
+              <div className="difference">{`${
+                periodScore - averageScore
+              }점`}</div>
+              <div className="normal">높아요</div>
+            </div>
+          ) : (
+            <div className="write">
+              <div className="normal">사용자 평균 대비</div>
+              <div className="difference">{`${
+                averageScore - periodScore
+              }점`}</div>
+              <div className="normal">낮아요</div>
+            </div>
+          )}
         </div>
         <div className="status">{aboutHabbitState(periodScore)}</div>
       </div>

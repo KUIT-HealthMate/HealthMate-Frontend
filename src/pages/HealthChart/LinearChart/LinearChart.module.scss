@@ -1,0 +1,96 @@
+.componentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin: 21px;
+  height: 280px;
+  box-shadow: -2px 0px 20px 0px #00000026;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: "Pretendard";
+  font-size: 20px;
+  font-weight: 700;
+  padding: 16px;
+}
+
+.change {
+  width: 18px;
+  height: 18px;
+  padding: 21px;
+}
+
+.linearChartContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LinearChartContainer canvas {
+}
+
+.xContainer {
+  display: flex;
+  justify-content: center;
+  padding: 0px 21px;
+}
+
+.xAxis {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.xAtom {
+  font-family: "Pretendard";
+  font-size: 14px;
+  font-weight: 700;
+  color: #8f8f8f;
+}
+
+.bottom {
+  display: flex;
+  margin-top: 26px;
+  margin-left: 44px;
+  margin-bottom: 21px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+}
+
+.myScore {
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  background: #67cfbc;
+  align-items: center;
+}
+
+.averageScore {
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  margin-left: 21px;
+  background: #f97f59;
+  align-items: center;
+}
+
+.text {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-size: 11px;
+  color: #8f8f8f;
+}

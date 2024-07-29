@@ -1,18 +1,43 @@
 import React from "react";
 import LinearChartSetting from "./LinearChartSetting";
+import s from "./LinearChart.module.scss";
+import changeChartButton from "../../../assets/changChartButton.svg";
 
-const dates = ["11일", "12일", "13일", "14일", "15일", "16일", "17일"];
+const dates = [11, 12, 13, 14, 15, 16, 17];
 const myScores = [80, 60, 100, 80, 75, 80, 55];
 const averageScores = [40, 20, 50, 70, 15, 40, 55];
 
 export default function LinearChart() {
   return (
-    <div>
+    <div className={s.componentContainer}>
+      <div className={s.top}>
+        <div className={s.title}>차트보기</div>
+        <img src={changeChartButton} alt="changeChart" className={s.change} />
+      </div>
+      <div className={s.linearChartContainer}></div>
+      <div></div>
       <LinearChartSetting
         dates={dates}
         myScores={myScores}
         averageScores={averageScores}
       />
+      <div className={s.xContainer}>
+        <div className={s.xAxis}>
+          {dates.map((date) => (
+            <div className={s.xAtom}>{`${date}일`}</div>
+          ))}
+        </div>
+      </div>
+      <div className={s.bottom}>
+        <div className={s.legend}>
+          <div className={s.myScore}></div>
+          <div className={s.text}>내 점수</div>
+        </div>
+        <div className={s.legend}>
+          <div className={s.averageScore}></div>
+          <div className={s.text}>사용자 평균</div>
+        </div>
+      </div>
     </div>
   );
 }

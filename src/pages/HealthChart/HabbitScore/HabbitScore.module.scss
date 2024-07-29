@@ -1,0 +1,30 @@
+.componentContainer {
+  height: 232px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin: 0px 21px;
+  box-shadow: -2px 0px 20px 0px #00000026;
+}
+
+.contentContainer {
+  margin: 30px 21px 21px 21px;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  font-family: "Pretendard";
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.score {
+  font-family: "Pretendard";
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0px 6px;
+  color: #0e9494;
+}

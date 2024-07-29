@@ -8,7 +8,7 @@ import s from "./LinearChartSetting.module.scss";
 Chart.register(ChartDataLabels);
 
 interface ChartProps {
-  dates: string[];
+  dates: number[];
   myScores: number[];
   averageScores: number[];
 }
@@ -31,7 +31,7 @@ export default function LinearChartSetting({
       gradientMy.addColorStop(0, "#7ADCC599");
       gradientMy.addColorStop(1, "#FFFFFF99");
 
-      const gradientAvg = ctx.createLinearGradient(0, 0, 0, 240);
+      const gradientAvg = ctx.createLinearGradient(0, 0, 0, 180);
       gradientAvg.addColorStop(0, "#F97F59");
       gradientAvg.addColorStop(1, "#FFFFFF99");
 
@@ -52,8 +52,8 @@ export default function LinearChartSetting({
         pointBorderColor: "#F97F59",
         pointHoverBackgroundColor: "#ffffff",
         pointHoverBorderColor: "#F97F59",
-        pointBorderWidth: 4,
-        pointRadius: 5,
+        pointBorderWidth: 3.5,
+        pointRadius: 4,
         order: 0,
         borderWidth: 1.5,
       },
@@ -66,8 +66,8 @@ export default function LinearChartSetting({
         pointBorderColor: "#0E9494",
         pointHoverBackgroundColor: "#ffffff",
         pointHoverBorderColor: "#0E9494",
-        pointBorderWidth: 4,
-        pointRadius: 5,
+        pointBorderWidth: 3.5,
+        pointRadius: 4,
         order: 1,
         borderWidth: 1.5,
       },
@@ -77,17 +77,18 @@ export default function LinearChartSetting({
   const options = {
     type: "line",
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
       },
       datalabels: {
-        display: (context: any) => context.datasetIndex === 1, // Only display for myScores (datasetIndex 1)
+        display: (context: any) => context.datasetIndex === 1,
         color: "#0E9494",
         align: "top" as "top",
         anchor: "end" as "end",
         font: { family: "Pretendard", weight: "600" as "bold", size: 14 },
-        formatter: (value: any) => `${value}`, // Format the label to show the value
+        formatter: (value: any) => `${value}`,
       },
     },
     label: {},
@@ -113,8 +114,7 @@ export default function LinearChartSetting({
   };
 
   return (
-    <div>
-      <div>차트 보기</div>
+    <div className={s.componentContainer}>
       <Line
         ref={chartRef}
         data={data}
