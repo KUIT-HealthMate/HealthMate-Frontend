@@ -3,7 +3,7 @@ import styles from "./survey/Survey.module.scss";
 import { useGlobalStore } from '../../store/store';
 import Survey from "../DailyCheck/survey/Survey";
 import exclamationMark from "../../assets/exclamationMark.svg"
-import { useGlobalStoreSurvey, surveysSleep } from '../../store/storeSurvey';
+import { useGlobalStoreSurvey } from '../../store/storeSurvey';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from './survey/ProgressBar';
 

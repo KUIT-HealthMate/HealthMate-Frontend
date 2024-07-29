@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Survey.module.scss'
 import ProgressBar from './ProgressBar';
-import { useGlobalStoreSurvey } from '../../../store/storeSurvey';
+import { surveys, useGlobalStoreSurvey } from '../../../store/storeSurvey';
 import { useNavigate } from 'react-router-dom';
+import leftBracket from "../../../assets/leftBraket.svg";
 
 interface Props {
-    questionCnt: number,
+    // questionCnt: number, // 질문 갯수
     questions: string[],
     candidates: string[],
     type: number // 1: 생활습관 2: 식사습관 3: 수면습관
@@ -14,15 +15,18 @@ interface Props {
     //  progressPercent: number // 진행률
 }
 
-const Survey = ({ questionCnt, questions, candidates, type, multipleAble, limit }: Props) => {
 
+const Survey = ({ questions, candidates, type, multipleAble, limit }: Props) => {
     const nextQuestion = useGlobalStoreSurvey((state) => ({
         currentQuestionIdx: state.currentQuestionIdx,
-        mealCurrentQuestionIdx: state.mealCurrentQuestionIdx,
-        sleepCurrentQuestionIdx: state.sleepCurrentQuestionIdx,
+        // mealCurrentQuestionIdx: state.mealCurrentQuestionIdx,
+        // sleepCurrentQuestionIdx: state.sleepCurrentQuestionIdx,
         nextQuestion: state.nextQuestion,
-        nextQuestionMeal: state.nextQuestionMeal,
-        nextQuestionSleep: state.nextQuestionSleep
+
+
+    }));
+    const previousQuestion = useGlobalStoreSurvey((state) => ({
+        previousQuestion: state.previousQuestion,
 
     }));
 
@@ -52,7 +56,7 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble, limit 
         })
     }
 
-    const navigate = useNavigate();
+
 
     function handleButtonClick(idx: number, multipleAble: boolean) {
         if (!multipleAble) { //복수 선택 불가
@@ -82,22 +86,40 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble, limit 
 
         setBtnDefault();
 
+
+        nextQuestion.nextQuestion();
+
         if (type == 1) {
-            nextQuestion.nextQuestion();
-            if (nextQuestion.currentQuestionIdx >= questionCnt - 1) {
+            if (nextQuestion.currentQuestionIdx >= 4) {
                 navigate('/dailymealcheckstart')
             }
         } else if (type == 2) {
-            nextQuestion.nextQuestionMeal();
-            if (nextQuestion.mealCurrentQuestionIdx >= questionCnt - 1) {
+            if (nextQuestion.currentQuestionIdx >= 11) {
                 navigate('/dailysleepcheckstart')
             }
         } else {
-            nextQuestion.nextQuestionSleep();
-            if (nextQuestion.sleepCurrentQuestionIdx >= questionCnt - 1) {
+            if (nextQuestion.currentQuestionIdx >= 15) {
                 navigate('/dailysymptomcheckstart')
             }
         }
+
+        // if (type == 1) {
+        //     nextQuestion.nextQuestion();
+        //     if (nextQuestion.currentQuestionIdx >= questionCnt - 1) {
+        //         navigate('/dailymealcheckstart')
+        //     }
+        // } else if (type == 2) {
+        //     //nextQuestion.nextQuestionMeal();
+        //     nextQuestion.nextQuestion();
+        //     if (nextQuestion.mealCurrentQuestionIdx >= questionCnt - 1) {
+        //         navigate('/dailysleepcheckstart')
+        //     }
+        // } else {
+        //     nextQuestion.nextQuestionSleep();
+        //     if (nextQuestion.sleepCurrentQuestionIdx >= questionCnt - 1) {
+        //         navigate('/dailysymptomcheckstart')
+        //     }
+        // }
 
     }
 
@@ -111,19 +133,36 @@ const Survey = ({ questionCnt, questions, candidates, type, multipleAble, limit 
 
     }
 
+
+
+
     useEffect(() => { console.log("useeffect_Survey"); }, [btnActive]);
 
+
+    const navigate = useNavigate();
+
+    function goBack() {
+        console.log("goback");
+
+        previousQuestion.previousQuestion();
+    }
+
+    console.log("현재 문제 번호: " + nextQuestion.currentQuestionIdx);
     return (
         <>
+            <div className={styles.backButton} onClick={goBack}>
+                <img style={{ width: `8.89px`, height: `16px` }} src={leftBracket} />
+            </div>
             <ProgressBar></ProgressBar>
             <div className={styles.surveyWrap}>
                 <div className={styles.survey}>
                     <div className={styles.question}>
-                        {
+                        <div className={styles.questionText}>{surveys[nextQuestion.currentQuestionIdx].question}</div>
+                        {/* {
                             questions.map((question, idx) => {
                                 return (<div className={styles.questionText}>{question}</div>)
                             })
-                        }
+                        } */}
                     </div>
                     {multipleAble ? <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%` }}>*복수선택 가능</div> : null}
 

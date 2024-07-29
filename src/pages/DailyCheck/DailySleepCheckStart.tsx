@@ -30,7 +30,7 @@ const DailyMealCheckStart = () => {
                 <img src={dailySleepCheckStart} className={styles.startSleepIcon}></img>
             </div>
 
-            <button className={styles.startButton} onClick={() => { navigate('/dailysleepcheck') }}>수면 패턴 진단 시작하기</button>
+            <button className={styles.startButton} onClick={() => { navigate('/dailycheck') }}>수면 패턴 진단 시작하기</button>
         </div>
     )
 };
