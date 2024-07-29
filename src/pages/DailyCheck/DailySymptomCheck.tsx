@@ -66,7 +66,7 @@ const DailySymptomCheck = () => {
         <>
             <ProgressBar></ProgressBar>
             <div className={styles.symptom}>
-                <div className={styles.symptomTitle}>오늘 느껴진 이상 증세가</div>
+                <div className={styles.symptomTitle} style={{ marginTop: `75px` }}>오늘 느껴진 이상 증세가</div>
                 <div className={styles.symptomTitle}>있으신가요?</div>
                 <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%`, marginBottom: `91px` }}>*복수선택 가능</div>
 
@@ -104,7 +104,7 @@ const DailySymptomCheck = () => {
                     <hr className={styles.underLine}></hr>
                 </div>
 
-                <button className={styles.NextButton} onClick={() => { navigate('/dailycheckdone') }}>
+                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `33px` }} onClick={() => { navigate('/dailycheckdone') }}>
                     <p className={styles.NextButtonText}>다음으로</p>
                 </button>
                 <div className={styles.whiteSpace}></div>

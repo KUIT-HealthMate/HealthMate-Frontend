@@ -1,9 +1,12 @@
 .surveyWrap {
     display: flex;
-
+    height: calc(100vh - 84px - 81px);
+    justify-content: center;
 
     .survey {
-        padding-top: 20%;
+
+        // padding-top: auto;
+        // padding-bottom: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -94,7 +97,7 @@
 }
 
 .symptom {
-    padding-top: 180px;
+    //   padding-top: 75px;
 
     .symptomTitle {
         margin-left: 8.8%;
@@ -185,7 +188,7 @@
             flex-direction: row;
             width: 100%;
 
-            margin-top: 192px;
+            margin-top: 132px;
 
             align-items: center;
             justify-content: center;
@@ -230,7 +233,7 @@
     }
 
     .whiteSpace {
-        height: 30px;
+        height: 156px;
     }
 
 }
