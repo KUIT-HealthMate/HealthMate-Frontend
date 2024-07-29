@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
-import s from "../PillChallenge/AlarmTimeInputModal.module.scss";
-import blackX from "../../../assets/blackX.svg";
-import modal from "../PillChallenge/PillManagePage";
+import s from "./AlarmTimeInputModal.module.scss";
+import blackX from "../../../../assets/blackX.svg";
+import modal from "../PillManagePage";
 import WheelPicker from "./WheelPicker";
-import PillManagePage from "./PillManagePage";
+import PillManagePage from "../PillManagePage";
 
 interface Props {
     modal: boolean;

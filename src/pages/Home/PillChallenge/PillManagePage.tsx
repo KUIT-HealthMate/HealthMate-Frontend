@@ -12,12 +12,12 @@ import leftBracket from "../../../assets/leftBraket.svg";
 
 
 import InputClearButtonImg from "../../../assets/InputClearButton.svg";
-import AlarmTimeInputModal from "./AlarmTimeInputModal";
-import NameInputSection from "./NameInputSection";
-import IntakeTimeSection from "./IntakeTimeSection";
-import IntakePeriodSection from "./IntakePeriodSection";
-import IntakeDaySection from "./IntakeDaySection";
-import AlarmTimeSection from "./AlarmTimeSection";
+import AlarmTimeInputModal from "./components/AlarmTimeInputModal";
+import NameInputSection from "./components/NameInputSection";
+import IntakeTimeSection from "./components/IntakeTimeSection";
+import IntakePeriodSection from "./components/IntakePeriodSection";
+import IntakeDaySection from "./components/IntakeDaySection";
+import AlarmTimeSection from "./components/AlarmTimeSection";
 
 
 const initPill = (): Omit<Omit<pillInfo, "id">, "notificationTime"> => {

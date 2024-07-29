@@ -1,6 +1,6 @@
 import React from 'react'
-import InputClearButtonImg from "../../../assets/InputClearButton.svg";
-import s from "./PillManagePage.module.scss"
+import InputClearButtonImg from "../../../../assets/InputClearButton.svg";
+import s from "../PillManagePage.module.scss"
 
 const InputClearButton = () => {
   return (

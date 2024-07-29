@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import s from "./PillManagePage.module.scss"
+import s from "../PillManagePage.module.scss"
 import InputClearButton from './InputClearButton';
 
 interface Props {

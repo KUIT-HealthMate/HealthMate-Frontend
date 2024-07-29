@@ -9,7 +9,7 @@ interface PillInfoState {
     getIntakePeriod: (pillId:string, whichMeal: string) => boolean;
 
     setIntakeRecord: (pillId: string, whichMeal: string) => void;
-    getIntakeRecord: (pillId: string, whichMeal: string) => boolean;
+    getIntakeRecord: (pillId: string, whichMeal: string) => boolean | undefined;
 
     setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => void;
     getWeeklyIntakeFrequency: (pillId: string, whichDay: string) => boolean;

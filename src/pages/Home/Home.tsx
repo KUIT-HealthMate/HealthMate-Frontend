@@ -1,7 +1,7 @@
 import styles from "./Home.module.scss";
 import TodaysChallenge from "./TodayChallenge";
 import SupplementChallenge from "./PillChallenge/SupplementChallenge";
-import HabitChallenge from "./HabitChallenge/HabitChallenge";
+import HabitChallenge from "./PillChallenge/HabitChallenge";
 import TopBar from "../../components/organs/TopBar";
 
 
