@@ -38,6 +38,7 @@ const initHabit = (): Omit<Omit<habitInfo, "id">, "notificationTime"> => {
 };
 
 const HabitEditingPage = () => {
+
   //하단 바 안보이게
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
@@ -52,16 +53,15 @@ const HabitEditingPage = () => {
 
   const { HabitInfo, setHabitInfo, getHabitCopy, setHabit } = useHabitInfoStore();
 
-  let editingHabitId: string;
-
   //notificationTime은 화면에 계속 렌더링되어야 하므로 분리하여 state로 관리
-  let newHabit: Omit<Omit<habitInfo, "id">, "notificationTime">;
+  const [newHabit, setNewHabit] = useState<Omit<Omit<habitInfo, "id">, "notificationTime">>(initHabit);
 
   //새로 추가하는 화면인지, 편집하는 화면인지를 구분함.
   let isAddingNewHabit: boolean;
 
   //편집하는 화면이라면, 어떤 id의 habit을 편집하는지에 대한 정보.
   const alreadyExistingHabitId: string = useParams().id as string;
+  const [editingHabitId, setEditingHabitId] = useState<string>(alreadyExistingHabitId);
 
   // 분리된 notificationTime
   const [alarmTime, setAlarmTime] = useState<
@@ -77,55 +77,29 @@ const HabitEditingPage = () => {
     isAddingNewHabit = false;
   }
 
-  let tempNotificationTime:{ hour: number; minutes: number }[];
 
-  newHabit = initHabit();
-  if (isAddingNewHabit) {
-    newHabit = initHabit();
-  } else {
-    editingHabitId = alreadyExistingHabitId;
-
-    // notificationTime 속성을 분리한다.
-    const { notificationTime, ...rest } = getHabitCopy(editingHabitId);
-    newHabit = rest;
-    tempNotificationTime = notificationTime;
-    // 기존 존재하는 챌린지 편집일 경우 notificationTime도 초기화
-    
-  }
-
-  
   useEffect(() => {
     if(!isAddingNewHabit){
-      setAlarmTime(tempNotificationTime);
+      // notificationTime 속성을 분리한다.
+      const { notificationTime, ...rest } = getHabitCopy(editingHabitId);
+      setNewHabit(rest);
+      setAlarmTime(notificationTime);
+      console.log("setted");
+      // 기존 존재하는 챌린지 편집일 경우 notificationTime도 초기화
     }
-  }, []);
+  }, [editingHabitId]);
   
-  console.log(newHabit);
 
-  // 이벤트 핸들러: 알약 이름
+  // 이벤트 핸들러: 수행할 습관 이름
   const handleHabitName = (inputElement: HTMLInputElement): void => {
-    console.log(newHabit);
     const filteredValue = inputElement.value.replace(
       /[^a-zA-Zㄱ-ㅎ가-힣]/g,
       ""
     );
 
     inputElement.value = filteredValue;
-    newHabit.name = filteredValue;
-    console.log("handleHabitName end, " + newHabit.name);
+    setNewHabit({...newHabit,name:filteredValue});
   };
-  console.log("+");
-
-    // 이벤트 핸들러: 주 섭취 횟수
-    const handleExecuteDay = (
-      e: ChangeEvent<HTMLInputElement>,
-      value: string
-    ): void => {
-      newHabit.weeklyExecutionFrequency = {
-        ...newHabit.weeklyExecutionFrequency,
-        [value]: !(newHabit.weeklyExecutionFrequency as any)[value],
-      };
-    };
 
   const [amOrPm, setAmOrPm] = useState(0);
   const [hour, setHour] = useState(0);
@@ -133,7 +107,6 @@ const HabitEditingPage = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState(0);
   const handleAlarmTime = () => {
-    console.log("handleAlarmTime start, " + newHabit.name);
     console.log("handleAlarmTime: " + amOrPm + hour + minutes);
     let hourIn24: number = amOrPm * 12 + (hour % 12);
     if(isEditMode) {
@@ -149,15 +122,12 @@ const HabitEditingPage = () => {
       }))
     } else {
       setAlarmTime([...alarmTime, { hour: hourIn24, minutes: minutes }]);
-      console.log("handleAlarmTime End");
-      console.log(alarmTime);
     }
 
     setAmOrPm(0);
     setHour(0);
     setMinutes(0);
     setIsEditMode(false);
-    console.log("handleAlarmTime end, " + newHabit.name);
   };
 
   const editAlarmTime = (index: number) => {
@@ -182,10 +152,13 @@ const HabitEditingPage = () => {
 
   // 적용된 변화들을 habitStore에 적용시킨다.
   const handleChanges = (): void => {
+    console.log(newHabit);
     if (isAddingNewHabit) {
       setHabitInfo({ ...newHabit, id: uuid(), notificationTime: alarmTime });
+      console.log(HabitInfo);
     } else {
       setHabit(editingHabitId, newHabit, alarmTime);
+      console.log(HabitInfo[0]);
     }
     navigate(-1);
   };
@@ -207,10 +180,8 @@ const HabitEditingPage = () => {
         <div className={s.contentWrap}>
           <NameInputSection placeHolderMessage = {"운동 이름을 입력해주세요"} handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
                   handleHabitName(e.target);
-          }} defaultValue={newHabit.name} />
-        
-          <IntakeDaySection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, dayInfo:string) =>
-                  handleExecuteDay(e, dayInfo)} defaultChecked={newHabit.weeklyExecutionFrequency} /> 
+          }} defaultValue={newHabit.name} challengeType={"habit"}/>
+          
           
           <AlarmTimeSection alarmTime={alarmTime} plusButtonOnClick={() => setModal(true)} editButtonOnClick={(index: number) => editAlarmTime(index)} deleteButtonOnClick={(index: number) => deleteAlarmTime(index)}/>
             

@@ -222,7 +222,7 @@ const PillEditingPage = () => {
         <div className={s.contentWrap}>
           <NameInputSection placeHolderMessage = {"알약 이름을 입력해주세요"} handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
                   handlePillName(e.target);
-          }} defaultValue={newPill.name} />
+          }} defaultValue={newPill.name} challengeType={"pill"}/>
           
           <IntakeTimeSection handleButtonFunc={(idx:number) => handleBeforeOrAfterMeal(idx)} handleMinuteFunc={(e: ChangeEvent<HTMLInputElement>) => {
                     handleMealMinute(e.target);
