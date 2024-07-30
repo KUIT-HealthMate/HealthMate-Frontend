@@ -8,6 +8,7 @@ import forWard from "../../assets/forward.svg";
 import { chartMock } from "../../test/mock/mockupForChart";
 import Chart from "./BarGraph/Chart";
 import ChartTopBar from "./ChartTopBar";
+import DailyHealthChart from "./DailyHealthChart/DailyHealthChart";
 
 export type periodName = "daily" | "weekly" | "monthly";
 export type chartDataType = "habbit" | "mealPattern" | "sleepingPattern";
@@ -148,6 +149,7 @@ export default function HealthChart() {
           periodScore={chartMock.totalScore}
           averageScore={chartMock.averageScore}
         />
+        {period === "daily" && <DailyHealthChart />}
       </div>
     </div>
   );
