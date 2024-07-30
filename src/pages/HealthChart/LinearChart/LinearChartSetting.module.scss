@@ -1,8 +1,8 @@
 .componentContainer {
-  flex: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 180px;
+}
+
+.componentContainer canvas {
+  width: 100% !important;
 }

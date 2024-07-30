@@ -27,7 +27,7 @@ export default function LinearChartSetting({
     if (chartRef.current) {
       const chart = chartRef.current;
       const ctx = chart.ctx;
-      const gradientMy = ctx.createLinearGradient(0, 0, 0, 200);
+      const gradientMy = ctx.createLinearGradient(0, 0, 0, 140);
       gradientMy.addColorStop(0, "#7ADCC599");
       gradientMy.addColorStop(1, "#FFFFFF99");
 
@@ -52,8 +52,8 @@ export default function LinearChartSetting({
         pointBorderColor: "#F97F59",
         pointHoverBackgroundColor: "#ffffff",
         pointHoverBorderColor: "#F97F59",
-        pointBorderWidth: 3.5,
-        pointRadius: 4,
+        pointBorderWidth: 2.8,
+        pointRadius: 3.5,
         order: 0,
         borderWidth: 1.5,
       },
@@ -66,8 +66,8 @@ export default function LinearChartSetting({
         pointBorderColor: "#0E9494",
         pointHoverBackgroundColor: "#ffffff",
         pointHoverBorderColor: "#0E9494",
-        pointBorderWidth: 3.5,
-        pointRadius: 4,
+        pointBorderWidth: 2.8,
+        pointRadius: 3.5,
         order: 1,
         borderWidth: 1.5,
       },
@@ -87,11 +87,23 @@ export default function LinearChartSetting({
         color: "#0E9494",
         align: "top" as "top",
         anchor: "end" as "end",
-        font: { family: "Pretendard", weight: "600" as "bold", size: 14 },
+        font: { family: "Pretendard", weight: "600" as "bold", size: 12 },
         formatter: (value: any) => `${value}`,
+        offset: -1,
       },
     },
     label: {},
+    layout: {
+      margin: {
+        bottom: 0,
+      },
+      border: {
+        bottom: 0,
+      },
+      padding: {
+        bottom: 0,
+      },
+    },
     scales: {
       x: {
         display: false,

@@ -44,25 +44,53 @@ export default function HabbitScore({
         </div>
 
         <div className={s.subtitle}>
-          {periodScore > averageScore ? (
-            <div className="write">
-              <div className="normal">사용자 평균 대비</div>
-              <div className="difference">{`${
-                periodScore - averageScore
-              }점`}</div>
-              <div className="normal">높아요</div>
+          {periodScore === averageScore ? (
+            <div className={s.write}>
+              <div className={s.normal}>사용자 평균과 같아요</div>
             </div>
           ) : (
-            <div className="write">
-              <div className="normal">사용자 평균 대비</div>
-              <div className="difference">{`${
-                averageScore - periodScore
-              }점`}</div>
-              <div className="normal">낮아요</div>
+            <div>
+              {periodScore > averageScore ? (
+                <div className={s.write}>
+                  <div className={s.normal}>사용자 평균 대비</div>
+                  <div className={s.difference}>{`${
+                    periodScore - averageScore
+                  }점`}</div>
+                  <div className={s.normal}>높아요</div>
+                </div>
+              ) : (
+                <div className={s.write}>
+                  <div className={s.normal}>사용자 평균 대비</div>
+                  <div className={s.difference}>{`${
+                    averageScore - periodScore
+                  }점`}</div>
+                  <div className={s.normal}>낮아요</div>
+                </div>
+              )}
             </div>
           )}
+          <div className={s.status}>{aboutHabbitState(periodScore)}</div>
+          <div className={s.barContainer}>
+            <div className={s.bar}>
+              <div
+                className={s.averageBar}
+                style={{ width: `${averageScore}%` }}
+              >
+                <div className={s.averageCircle} />
+              </div>
+              <div className={s.userBar} style={{ width: `${periodScore}%` }}>
+                <div className={s.userLabel}>{periodScore}</div>
+              </div>
+              <div className={s.maxScore}>100</div>
+            </div>
+          </div>
         </div>
-        <div className="status">{aboutHabbitState(periodScore)}</div>
+        <div className={s.noticeContainer}>
+          <div
+            className={s.notice}
+            style={{ width: `${averageScore}%` }}
+          >{`평균 ${averageScore}점`}</div>
+        </div>
       </div>
     </div>
   );

@@ -48,12 +48,15 @@
 }
 
 .arrow {
+  margin-top: 3px;
   width: 38px;
   height: 14px;
-  padding: 0px 35px;
+  padding: 0px 0px;
 }
 
 .date {
+  display: flex;
+  align-items: center;
   font-family: "Pretendard";
   font-size: 18px;
   font-weight: 700;

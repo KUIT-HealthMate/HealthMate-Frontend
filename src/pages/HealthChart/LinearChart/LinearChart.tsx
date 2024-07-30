@@ -2,25 +2,47 @@ import React from "react";
 import LinearChartSetting from "./LinearChartSetting";
 import s from "./LinearChart.module.scss";
 import changeChartButton from "../../../assets/changChartButton.svg";
+import { ChartDataType } from "../../../test/mock/mockupForChart";
 
 const dates = [11, 12, 13, 14, 15, 16, 17];
 const myScores = [80, 60, 100, 80, 75, 80, 55];
-const averageScores = [40, 20, 50, 70, 15, 40, 55];
+const averageScores = [40, 20, 45, 70, 15, 46, 55];
 
-export default function LinearChart() {
+export interface ChartProps {
+  data: ChartDataType;
+  barOrLine: () => void;
+}
+
+export default function LinearChart({ data, barOrLine }: ChartProps) {
   return (
     <div className={s.componentContainer}>
       <div className={s.top}>
         <div className={s.title}>차트보기</div>
-        <img src={changeChartButton} alt="changeChart" className={s.change} />
+        <img
+          src={changeChartButton}
+          alt="changeChart"
+          className={s.change}
+          onClick={barOrLine}
+        />
       </div>
-      <div className={s.linearChartContainer}></div>
-      <div></div>
-      <LinearChartSetting
-        dates={dates}
-        myScores={myScores}
-        averageScores={averageScores}
-      />
+      <div className={s.chartAndColumns}>
+        <div className={s.linearChartContainer}>
+          <LinearChartSetting
+            dates={dates}
+            myScores={myScores}
+            averageScores={averageScores}
+          />
+        </div>
+        <div className={s.columns}>
+          <div className={s.lineContainer}>
+            <div className={s.greyLine1} />
+            <div className={s.greyLine1} />
+            <div className={s.greyLine1} />
+            <div className={s.greyLine2} />
+          </div>
+        </div>
+      </div>
+
       <div className={s.xContainer}>
         <div className={s.xAxis}>
           {dates.map((date) => (
