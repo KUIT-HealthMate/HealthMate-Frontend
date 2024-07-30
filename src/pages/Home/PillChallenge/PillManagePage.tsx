@@ -1,7 +1,13 @@
 import React, { ChangeEvent } from "react";
+<<<<<<< HEAD:src/pages/Home/PillChallenge/PillManagePage.tsx
 import { useNavigate, useParams } from "react-router-dom";
 import s from "./PillManagePage.module.scss";
 import usePillInfoStore from "../../../store/usePillInfoStore";
+=======
+import { useNavigate } from "react-router-dom";
+import s from "./PillAddingPage.module.scss";
+import { usePillInfoStore } from "../../../store/usePillInfoStore";
+>>>>>>> 4f1d0ef (Feat: 영양제 챌린지 클릭시 옆으로(스와이프로 바꿔야함)):src/pages/Home/PillChallenge/PillAddingPage.tsx
 import pillInfo from "../../../store/pillInfo";
 import uuid from "react-uuid";
 import { useState } from "react";
