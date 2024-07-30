@@ -4,12 +4,12 @@ import InputClearButton from './InputClearButton';
 
 interface Props {
     handleButtonFunc: (idx: number) => void;
-    isChecked: number;
     handleMinuteFunc: (e: ChangeEvent<HTMLInputElement>) => void
-    defaultValue: number
+    defaultValues: { beforeOrAfterMeal: number; minutes: number; }; //number;
 }
 
-const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, isChecked, handleMinuteFunc, defaultValue}) => {
+const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, handleMinuteFunc, defaultValues}) => {
+  
   return (
     <div className={s.detailDiv}>
             <span className={s.detailTitle}>섭취 시간</span>
@@ -19,7 +19,7 @@ const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, isChecked, handleM
                 name="beforeOrAfterMeal"
                 id="before"
                 onChange={() => handleButtonFunc(1)}
-                defaultChecked={isChecked == 1}
+                checked={defaultValues.beforeOrAfterMeal == 1}
               />
               <label htmlFor="before" className={s.smallButton}>
                 식전
@@ -29,7 +29,7 @@ const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, isChecked, handleM
                 name="beforeOrAfterMeal"
                 id="after"
                 onChange={() => handleButtonFunc(2)}
-                defaultChecked={isChecked == 2}
+                checked={defaultValues.beforeOrAfterMeal == 2}
               />
               <label htmlFor="after" className={s.smallButton}>
                 식후
@@ -41,7 +41,7 @@ const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, isChecked, handleM
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     handleMinuteFunc(e);
                   }}
-                  defaultValue={defaultValue}
+                  value={defaultValues.minutes}
                 />
                 <InputClearButton />
               </div>

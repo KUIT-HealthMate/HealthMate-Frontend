@@ -83,6 +83,11 @@ const ChallengeDisplay:React.FC<Props> = ({item, getIntakeTime, deleteFunc, chal
         }
       };
 
+      const hello = (item:pillInfo | habitInfo) => {
+        console.log(item) 
+        return item.name;
+      }
+
   return (
     <>
       {displayInfo == challengeType && (
@@ -93,7 +98,7 @@ const ChallengeDisplay:React.FC<Props> = ({item, getIntakeTime, deleteFunc, chal
                 ? "복용할 알약"
                 : "수행할 생활습관 챌린지"}
             </span>
-            <Link to="/PillAddingPage" className={s.addPills}>
+            <Link to={`/${challengeType}AddingPage`} className={s.addPills}>
               <img src={plusIconImg} alt="plus" />
             </Link>
             <button className={s.editPills} onClick={changeStyleToEditMode}>
@@ -104,7 +109,7 @@ const ChallengeDisplay:React.FC<Props> = ({item, getIntakeTime, deleteFunc, chal
             {item.map((item, index) => {
               return (
                 <div className={s.supplementWrap}>
-                  <span>{item.name}</span>
+                  <span>{hello(item)}</span>
                   {challengeType == "pill" && (
                     <span>
                       {"주 " +
@@ -122,7 +127,7 @@ const ChallengeDisplay:React.FC<Props> = ({item, getIntakeTime, deleteFunc, chal
                   )}
                   <div className={"editAndDeleteBtn"}>
                     <Link
-                      to={`/PillEditingPage/${item.id}`}
+                      to={`/${challengeType}EditingPage/${item.id}`}
                       className="edit_button"
                     >
                       <img src={pencilImg} alt="" />

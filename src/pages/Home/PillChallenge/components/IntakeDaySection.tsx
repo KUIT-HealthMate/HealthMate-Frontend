@@ -25,7 +25,7 @@ const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) =>
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "monday")
                 }
-                defaultChecked={defaultChecked.monday}
+                checked={defaultChecked.monday}
               />
               <label htmlFor="mon" className={s.bigButton}>
                 월
@@ -36,7 +36,7 @@ const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) =>
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "tuesday")
                 }
-                defaultChecked={defaultChecked.tuesday}
+                checked={defaultChecked.tuesday}
               />
               <label htmlFor="tue" className={s.bigButton}>
                 화
@@ -47,7 +47,7 @@ const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) =>
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "wednesday")
                 }
-                defaultChecked={defaultChecked.wednesday}
+                checked={defaultChecked.wednesday}
               />
               <label htmlFor="wed" className={s.bigButton}>
                 수
@@ -58,7 +58,7 @@ const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) =>
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "thursday")
                 }
-                defaultChecked={defaultChecked.thursday}
+                checked={defaultChecked.thursday}
               />
               <label htmlFor="thu" className={s.bigButton}>
                 목
@@ -69,7 +69,7 @@ const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) =>
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "friday")
                 }
-                defaultChecked={defaultChecked.friday}
+                checked={defaultChecked.friday}
               />
               <label htmlFor="fri" className={s.bigButton}>
                 금
@@ -80,7 +80,7 @@ const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) =>
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "saturday")
                 }
-                defaultChecked={defaultChecked.saturday}
+                checked={defaultChecked.saturday}
               />
               <label htmlFor="sat" className={s.bigButton}>
                 토
@@ -91,7 +91,7 @@ const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) =>
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "sunday")
                 }
-                defaultChecked={defaultChecked.sunday}
+                checked={defaultChecked.sunday}
               />
               <label htmlFor="sun" className={s.bigButton}>
                 일

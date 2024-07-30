@@ -22,7 +22,7 @@ const IntakePeriodSection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "breakfast")
                 }
-                defaultChecked={defaultChecked.breakfast}
+                checked={defaultChecked.breakfast}
               />
               <label htmlFor="morning" className={s.smallButton}>
                 아침
@@ -33,7 +33,7 @@ const IntakePeriodSection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "lunch")
                 }
-                defaultChecked={defaultChecked.lunch}
+                checked={defaultChecked.lunch}
               />
               <label htmlFor="afternoon" className={s.smallButton}>
                 점심
@@ -44,7 +44,7 @@ const IntakePeriodSection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handlePeriodFunc(e, "dinner")
                 }
-                defaultChecked={defaultChecked.dinner}
+                checked={defaultChecked.dinner}
               />
               <label htmlFor="evening" className={s.smallButton}>
                 저녁

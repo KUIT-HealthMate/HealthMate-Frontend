@@ -17,6 +17,7 @@ import DailySleepCheck from "./pages/DailyCheck/DailySleepCheck";
 import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
 import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
+import HabitManagePage from "./pages/Home/PillChallenge/HabitManagePage";
 
 const Router = () => {
   return (
@@ -29,9 +30,10 @@ const Router = () => {
 
         <Route path="/statistics" element={<ChallengeStatistics />} />
         <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage/>}/>
-        <Route path="/PillAddingPage" element={<PillManagePage/>}/>
-        <Route path="/PillEditingPage/:id" element={<PillManagePage/>}/>
-
+        <Route path="/pillAddingPage" element={<PillManagePage/>}/>
+        <Route path="/pillEditingPage/:id" element={<PillManagePage/>}/>
+        <Route path="/habitAddingPage" element={<HabitManagePage/>}/>
+        <Route path="/habitEditingPage/:id" element={<HabitManagePage/>}/>
 
         <Route path="/dailycheckstart" element={<DailyCheckStart />} />
         <Route path="/dailymealcheckstart" element={<DailyMealCheckStart />} />
