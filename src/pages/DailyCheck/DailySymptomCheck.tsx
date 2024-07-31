@@ -8,9 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import ProgressBar from './survey/ProgressBar';
 
 
+interface symptomProps {
+    title1: string,
+    title2: string
+}
 
-
-const DailySymptomCheck = () => {
+const DailySymptomCheck = (props: symptomProps) => {
     const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
     useEffect(() => {
         console.log("마운트됨")
@@ -35,7 +38,7 @@ const DailySymptomCheck = () => {
         { id: 10, title: "이비인후과 관련 증상", symptoms: ["목통증", "청력저하"] },
         { id: 11, title: "비뇨의학과 관련 증상", symptoms: ["비뇨 관련 문제"] },
         { id: 12, title: "치과 관련 증상", symptoms: ["치과", "잇몸출혈"] },
-        { id: 13, title: "기타 상태 ", symptoms: ["증상없음"] }
+        // { id: 13, title: "기타 상태 ", symptoms: ["증상없음"] }
     ]
 
 
@@ -66,8 +69,8 @@ const DailySymptomCheck = () => {
         <>
             <ProgressBar></ProgressBar>
             <div className={styles.symptom}>
-                <div className={styles.symptomTitle} style={{ marginTop: `75px` }}>오늘 느껴진 이상 증세가</div>
-                <div className={styles.symptomTitle}>있으신가요?</div>
+                <div className={styles.symptomTitle} style={{ marginTop: `75px` }}>{props.title1}</div>
+                <div className={styles.symptomTitle}>{props.title2}</div>
                 <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%`, marginBottom: `91px` }}>*복수선택 가능</div>
 
                 {
