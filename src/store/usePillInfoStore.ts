@@ -5,7 +5,7 @@ import { stat } from "fs";
 interface PillInfoState {
     PillInfo: pillInfo[];
     setPillInfo: (pill: pillInfo) => void;
-    
+
     setIntakePeriod: (pillId: string, whichMeal: string) => void;
     getIntakePeriod: (pillId: string, whichMeal: string) => boolean;
 
@@ -142,6 +142,7 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
     // 아침, 점심, 저녁에 영양제 먹었다고 버튼 클릭 -> IntakeRecord에서 수정하는 함수
 
     setIntakeRecord: (pillId: string, whichMeal: string) => {
+
         set((state) => ({
             PillInfo: state.PillInfo.map((pill) =>
                 pill.id == pillId
@@ -180,6 +181,7 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
     getNotificationTime: (pillId: string, index: number) => {
         return { hour: 0, minutes: 0 }
     },
+
 
 
     getIntakeTime: (pill: pillInfo) => {
@@ -261,7 +263,7 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
         );
     }
 }));
-    
+
 
 // export default usePillInfoStore;
 // export default pillPageNum;
