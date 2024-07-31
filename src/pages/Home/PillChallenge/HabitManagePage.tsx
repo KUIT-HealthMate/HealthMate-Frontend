@@ -1,10 +1,8 @@
 import React, { ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import s from "./PillManagePage.module.scss";
-import { usePillInfoStore } from "../../../store/usePillInfoStore";
-
-
-import pillInfo from "../../../store/pillInfo";
+import useHabitInfoStore from "../../../store/useHabitInfoStore";
+import habitInfo from "../../../store/habitInfo";
 import uuid from "react-uuid";
 import { useState } from "react";
 import { useGlobalStore } from "../../../store/store";
@@ -22,13 +20,11 @@ import IntakeDaySection from "./components/IntakeDaySection";
 import AlarmTimeSection from "./components/AlarmTimeSection";
 
 
-const initPill = (): Omit<Omit<pillInfo, "id">, "notificationTime"> => {
+const initHabit = (): Omit<Omit<habitInfo, "id">, "notificationTime"> => {
   return {
     name: "", // 알약 이름
-    intakeTime: { beforeOrAfterMeal: 0, minutes: 0 }, // 섭취 시간 (식전 1 식후 2, 분 number로)
-    dailyIntakePeriod: { breakfast: false, lunch: false, dinner: false }, // 일 섭취 시기 (아침, 점심, 저녁)
-    dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
-    weeklyIntakeFrequency: {
+    executionRecord: false,
+    weeklyExecutionFrequency: {
       monday: false,
       tuesday: false,
       wednesday: false,
@@ -41,7 +37,7 @@ const initPill = (): Omit<Omit<pillInfo, "id">, "notificationTime"> => {
   };
 };
 
-const PillEditingPage = () => {
+const HabitEditingPage = () => {
 
   //하단 바 안보이게
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
@@ -55,17 +51,17 @@ const PillEditingPage = () => {
 
   const navigate = useNavigate();
 
-  const { PillInfo, setPillInfo, getPillCopy, setPill } = usePillInfoStore();
+  const { HabitInfo, setHabitInfo, getHabitCopy, setHabit } = useHabitInfoStore();
 
   //notificationTime은 화면에 계속 렌더링되어야 하므로 분리하여 state로 관리
-  const [newPill, setNewPill] = useState<Omit<Omit<pillInfo, "id">, "notificationTime">>(initPill);
+  const [newHabit, setNewHabit] = useState<Omit<Omit<habitInfo, "id">, "notificationTime">>(initHabit);
 
   //새로 추가하는 화면인지, 편집하는 화면인지를 구분함.
-  let isAddingNewPill: boolean;
+  let isAddingNewHabit: boolean;
 
-  //편집하는 화면이라면, 어떤 id의 pill을 편집하는지에 대한 정보.
-  const alreadyExistingPillId: string = useParams().id as string;
-  const [editingPillId, setEditingPillId] = useState<string>(alreadyExistingPillId);
+  //편집하는 화면이라면, 어떤 id의 habit을 편집하는지에 대한 정보.
+  const alreadyExistingHabitId: string = useParams().id as string;
+  const [editingHabitId, setEditingHabitId] = useState<string>(alreadyExistingHabitId);
 
   // 분리된 notificationTime
   const [alarmTime, setAlarmTime] = useState<
@@ -75,74 +71,34 @@ const PillEditingPage = () => {
   // 알림톡 시간을 위한 모달창. true 시 모달창이 표시됨.
   const [modal, setModal] = useState(false);
 
-  if (alreadyExistingPillId == undefined) {
-    isAddingNewPill = true;
+  if (alreadyExistingHabitId == undefined) {
+    isAddingNewHabit = true;
   } else {
-    isAddingNewPill = false;
+    isAddingNewHabit = false;
   }
 
 
   useEffect(() => {
-    if(!isAddingNewPill){
+    if(!isAddingNewHabit){
       // notificationTime 속성을 분리한다.
-      const { notificationTime, ...rest } = getPillCopy(editingPillId);
-      setNewPill(rest);
+      const { notificationTime, ...rest } = getHabitCopy(editingHabitId);
+      setNewHabit(rest);
       setAlarmTime(notificationTime);
       console.log("setted");
       // 기존 존재하는 챌린지 편집일 경우 notificationTime도 초기화
     }
-  }, [editingPillId]);
+  }, [editingHabitId]);
   
 
-  // 이벤트 핸들러: 알약 이름
-  const handlePillName = (inputElement: HTMLInputElement): void => {
+  // 이벤트 핸들러: 수행할 습관 이름
+  const handleHabitName = (inputElement: HTMLInputElement): void => {
     const filteredValue = inputElement.value.replace(
       /[^a-zA-Zㄱ-ㅎ가-힣]/g,
       ""
     );
 
     inputElement.value = filteredValue;
-    setNewPill({...newPill,name:filteredValue});
-  };
-
-  // 이벤트 핸들러: 식전 / 식후
-  const handleBeforeOrAfterMeal = (value: number): void => {
-    setNewPill({...newPill, intakeTime:{...newPill.intakeTime, beforeOrAfterMeal: value}});
-    // newPill.intakeTime.beforeOrAfterMeal = value;
-  };
-
-  // 이벤트 핸들러: 식사 전후 복용 시간
-  const handleMealMinute = (inputElement: HTMLInputElement): void => {
-    const filteredValue = inputElement.value.replace(/[^0-9]/g, "");
-    inputElement.value = filteredValue;
-
-    setNewPill({...newPill,intakeTime:{...newPill.intakeTime, minutes:filteredValue as unknown as number}});
-  };
-
-  // 이벤트 핸들러: 일 섭취 시기
-  const handleEatingTiming = (
-    e: ChangeEvent<HTMLInputElement>,
-    value: string
-  ): void => {
-
-    setNewPill({...newPill, dailyIntakePeriod: {
-      ...newPill.dailyIntakePeriod,
-      [value]: !(newPill.dailyIntakePeriod as any)[value],
-    }});
-
-  };
-
-  // 이벤트 핸들러: 주 섭취 횟수
-  const handleEatingDay = (
-    e: ChangeEvent<HTMLInputElement>,
-    value: string
-  ): void => {
-    
-    setNewPill({...newPill,weeklyIntakeFrequency: {
-      ...newPill.weeklyIntakeFrequency,
-      [value]: !(newPill.weeklyIntakeFrequency as any)[value],
-    }})
-    
+    setNewHabit({...newHabit,name:filteredValue});
   };
 
   const [amOrPm, setAmOrPm] = useState(0);
@@ -194,15 +150,15 @@ const PillEditingPage = () => {
     });
   }
 
-  // 적용된 변화들을 pillStore에 적용시킨다.
+  // 적용된 변화들을 habitStore에 적용시킨다.
   const handleChanges = (): void => {
-    console.log(newPill);
-    if (isAddingNewPill) {
-      setPillInfo({ ...newPill, id: uuid(), notificationTime: alarmTime });
-      console.log(PillInfo);
+    console.log(newHabit);
+    if (isAddingNewHabit) {
+      setHabitInfo({ ...newHabit, id: uuid(), notificationTime: alarmTime });
+      console.log(HabitInfo);
     } else {
-      setPill(editingPillId, newPill, alarmTime);
-      console.log(PillInfo[0]);
+      setHabit(editingHabitId, newHabit, alarmTime);
+      console.log(HabitInfo[0]);
     }
     navigate(-1);
   };
@@ -217,23 +173,15 @@ const PillEditingPage = () => {
               <img src={leftBracket} alt="" />
             </button>
             <div className={s.title}>
-              {isAddingNewPill ? "알약 챌린지 추가" : "알약 정보 편집"}
+              {isAddingNewHabit ? "운동 챌린지 추가" : "운동 정보 편집"}
             </div>
           </div>
         </div>
         <div className={s.contentWrap}>
-          <NameInputSection placeHolderMessage = {"알약 이름을 입력해주세요"} handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
-                  handlePillName(e.target);
-          }} defaultValue={newPill.name} challengeType={"pill"}/>
+          <NameInputSection placeHolderMessage = {"운동 이름을 입력해주세요"} handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleHabitName(e.target);
+          }} defaultValue={newHabit.name} challengeType={"habit"}/>
           
-          <IntakeTimeSection handleButtonFunc={(idx:number) => handleBeforeOrAfterMeal(idx)} handleMinuteFunc={(e: ChangeEvent<HTMLInputElement>) => {
-                    handleMealMinute(e.target);
-          }} defaultValues={newPill.intakeTime}/>
-          
-          <IntakePeriodSection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, mealInfo:string) =>
-                  handleEatingTiming(e, mealInfo)} defaultChecked={newPill.dailyIntakePeriod} />
-          <IntakeDaySection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, dayInfo:string) =>
-                  handleEatingDay(e, dayInfo)} defaultChecked={newPill.weeklyIntakeFrequency} /> 
           
           <AlarmTimeSection alarmTime={alarmTime} plusButtonOnClick={() => setModal(true)} editButtonOnClick={(index: number) => editAlarmTime(index)} deleteButtonOnClick={(index: number) => deleteAlarmTime(index)}/>
             
@@ -273,4 +221,4 @@ const PillEditingPage = () => {
   );
 };
 
-export default PillEditingPage;
+export default HabitEditingPage;
