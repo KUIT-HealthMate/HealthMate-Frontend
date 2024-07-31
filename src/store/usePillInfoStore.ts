@@ -5,7 +5,7 @@ import { stat } from "fs";
 interface PillInfoState {
     PillInfo: pillInfo[];
     setPillInfo: (pill: pillInfo) => void;
-
+    
     setIntakePeriod: (pillId: string, whichMeal: string) => void;
     getIntakePeriod: (pillId: string, whichMeal: string) => boolean;
 
