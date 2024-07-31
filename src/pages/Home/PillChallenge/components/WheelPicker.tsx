@@ -1,19 +1,19 @@
 import styled from "@emotion/styled";
 import { useRef, useEffect, useState } from "react";
 
-    const List = styled.ul`
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    width: 33%;
-    height: 111px;
-    overflow-y: scroll;
-    position: relative;
-    ::-webkit-scrollbar{
-        display:none;
-    }
-    `;
+const List = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 33%;
+  height: 111px;
+  overflow-y: scroll;
+  position: relative;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
     const ListCenter = styled.div`
     background: rgba(14,148,148,0.1);
@@ -39,7 +39,7 @@ import { useRef, useEffect, useState } from "react";
     pickerStyle?: React.CSSProperties;
     children?: React.ReactNode;
     }
-
+    
     const WheelPicker = ({ list, onSelectedChange, initialIndex, pickerStyle }: ScrollPickerProps) => {
     const SCROLL_DEBOUNCE_TIME = 74;
 

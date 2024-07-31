@@ -1,7 +1,9 @@
 import React, { ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import s from "./PillManagePage.module.scss";
-import usePillInfoStore from "../../../store/usePillInfoStore";
+import { usePillInfoStore } from "../../../store/usePillInfoStore";
+
+
 import pillInfo from "../../../store/pillInfo";
 import uuid from "react-uuid";
 import { useState } from "react";

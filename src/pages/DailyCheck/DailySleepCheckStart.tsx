@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./DailyCheck.module.scss";
 import dailyCheckBackground from "../../assets/dailCheckBackground.svg";
-import dailyCheckStartIcon from "../../assets/dailySleepCheckStart.svg";
+import dailySleepCheckStart from "../../assets/dailySleepCheckStart.svg";
 import { useGlobalStore } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,10 +27,10 @@ const DailyMealCheckStart = () => {
 
             <div className={styles.startSleepIcons}>
                 <img src={dailyCheckBackground} className={styles.startSleepBackgroundIcon}></img>
-                <img src={dailyCheckStartIcon} className={styles.startSleepIcon}></img>
+                <img src={dailySleepCheckStart} className={styles.startSleepIcon}></img>
             </div>
 
-            <button className={styles.startButton} onClick={() => { navigate('/dailysleepcheck') }}>수면 패턴 진단 시작하기</button>
+            <button className={styles.startButton} onClick={() => { navigate('/dailycheck') }}>수면 패턴 진단 시작하기</button>
         </div>
     )
 };

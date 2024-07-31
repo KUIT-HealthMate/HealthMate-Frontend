@@ -1,37 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import styles from "./DailyCheck.module.scss";
-import { useGlobalStore } from '../../store/store';
-import Survey from "../DailyCheck/survey/Survey";
+// import React, { useEffect, useState } from 'react';
+// import styles from "./DailyCheck.module.scss";
+// import { useGlobalStore } from '../../store/store';
+// import Survey from "../DailyCheck/survey/Survey";
 
-import { useGlobalStoreSurvey, surveysMeal } from '../../store/storeSurvey';
-
-
-
-const DailyMealCheck = () => {
-    const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
-    useEffect(() => {
-        console.log("마운트됨")
-        setShowBottomBar();
-        return () => {
-            setShowBottomBar();
-        };
-    }, [setShowBottomBar]
-    );
+// import { useGlobalStoreSurvey, surveys } from '../../store/storeSurvey';
 
 
 
-    const { currentQuestionIdx, nextQuestion } = useGlobalStoreSurvey((state) => ({
-        currentQuestionIdx: state.mealCurrentQuestionIdx,
-        nextQuestion: state.nextQuestionMeal
-    }));
+// const DailyMealCheck = () => {
+//     const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
+//     useEffect(() => {
+//         console.log("마운트됨")
+//         setShowBottomBar();
+//         return () => {
+//             setShowBottomBar();
+//         };
+//     }, [setShowBottomBar]
+//     );
 
-    return (
 
-        <>
-            <Survey questionCnt={surveysMeal.length} questions={surveysMeal[currentQuestionIdx].question} candidates={surveysMeal[currentQuestionIdx].candidates} type={2} multipleAble={surveysMeal[currentQuestionIdx].multipleAble}></Survey>
-        </>
 
-    )
-};
+//     const { currentQuestionIdx, nextQuestion } = useGlobalStoreSurvey((state) => ({
+//         currentQuestionIdx: state.currentQuestionIdx,
+//         nextQuestion: state.nextQuestion
+//         // currentQuestionIdx: state.mealCurrentQuestionIdx,
+//         // nextQuestion: state.nextQuestionMeal
+//     }));
 
-export default DailyMealCheck;
+//     return (
+//         <>
+//             <Survey questions={surveys[currentQuestionIdx].question} candidates={surveys[currentQuestionIdx].candidates} type={2} multipleAble={surveys[currentQuestionIdx].multipleAble} limit={surveys[currentQuestionIdx].limit} ></Survey>
+//         </>
+
+//     )
+// };
+
+export default null;

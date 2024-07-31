@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import usePillInfoStore from "../../../store/usePillInfoStore";
+import { usePillInfoStore } from "../../../store/usePillInfoStore";
 import { useEffect } from "react";
 import { useGlobalStore } from "../../../store/store";
 import useHabitInfoStore from "../../../store/useHabitInfoStore";
@@ -15,8 +15,9 @@ import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
 import s from "./SuppplementChallengeEditingPage.module.scss";
 
-import PageTopBar from "../../../components/organs/PageTopBar";
+
 import ChallengeDisplay from "./ChallengeDisplay";
+import PageTopBar from "../../../components/organs/Bars/PageTopBar";
 
 const SupplementChallengeEditingPage = () => {
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);

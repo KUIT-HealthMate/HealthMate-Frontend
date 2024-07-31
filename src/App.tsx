@@ -1,4 +1,4 @@
-import BottomBar from "./components/organs/BottomBar";
+import BottomBar from "./components/organs/Bars/BottomBar";
 import Router from "./Router";
 import { useGlobalStore } from "./store/store";
 
