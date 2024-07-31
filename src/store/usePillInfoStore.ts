@@ -141,12 +141,9 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
     },
 
     // 아침, 점심, 저녁에 영양제 먹었다고 버튼 클릭 -> IntakeRecord에서 수정하는 함수
-<<<<<<< HEAD
-    setIntakeRecord: (pillId: string, whichMeal: string) => {
-=======
-    setIntakeRecord: (pillId, whichMeal) => {
 
->>>>>>> 4f1d0ef (Feat: 영양제 챌린지 클릭시 옆으로(스와이프로 바꿔야함))
+    setIntakeRecord: (pillId: string, whichMeal: string) => {
+
         set((state) => ({
             PillInfo: state.PillInfo.map((pill) =>
                 pill.id == pillId
@@ -161,7 +158,6 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
         const pill = get().PillInfo.find(pill => pill.id == pillId);
         return pill ? (pill.dailyIntakeRecord as any)[whichMeal] : undefined;
     },
-<<<<<<< HEAD
 
     setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
         set((state) => ({
@@ -188,8 +184,6 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
     },
 
 
-=======
->>>>>>> 4f1d0ef (Feat: 영양제 챌린지 클릭시 옆으로(스와이프로 바꿔야함))
 
 
     getIntakeTime: (pill: pillInfo) => {
@@ -214,7 +208,6 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
 
     deletePill: (deletingPillId: string) =>
         set((state) => ({ PillInfo: [...state.PillInfo.filter((pill) => (pill.id != deletingPillId))] })),
-<<<<<<< HEAD
 
     getPillCopy: (pillId: string) => {
 
@@ -271,12 +264,7 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
         );
     }
 }));
-    
 
-=======
->>>>>>> 4f1d0ef (Feat: 영양제 챌린지 클릭시 옆으로(스와이프로 바꿔야함))
-
-}));
 
 // export default usePillInfoStore;
 // export default pillPageNum;
