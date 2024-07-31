@@ -36,7 +36,6 @@ interface PillInfoState {
 interface pillPageNumState {
     currentPillPageNum: number;
     setPillPageNum: (goNext: boolean) => void;
-
 }
 
 export const pillPage = create<pillPageNumState>((set, get) => ({
@@ -185,7 +184,6 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
 
 
 
-
     getIntakeTime: (pill: pillInfo) => {
         const isBeforeOrAfterMeal: string = (pill.intakeTime.beforeOrAfterMeal == 1) ? "식전 " : "식후 ";
         const howMuchMinutes: string = pill.intakeTime.minutes + "분 이내";
@@ -208,6 +206,7 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
 
     deletePill: (deletingPillId: string) =>
         set((state) => ({ PillInfo: [...state.PillInfo.filter((pill) => (pill.id != deletingPillId))] })),
+
 
     getPillCopy: (pillId: string) => {
 
