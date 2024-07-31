@@ -37,7 +37,7 @@ const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, handleMinuteFunc, 
               <div className={s.inputWrap}>
                 <input
                   className={s.minuteInput}
-                  type="number"
+                  type="text"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     handleMinuteFunc(e);
                   }}
