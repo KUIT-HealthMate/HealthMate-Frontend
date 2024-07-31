@@ -1,0 +1,31 @@
+.title {
+  padding: 21px;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -3px;
+}
+
+.selectorContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.selector {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  color: #b3b3b3;
+  padding-bottom: 12px;
+  letter-spacing: -2px;
+  &.selected {
+    color: #000000;
+    border-bottom: 3px solid #0e9494;
+  }
+}

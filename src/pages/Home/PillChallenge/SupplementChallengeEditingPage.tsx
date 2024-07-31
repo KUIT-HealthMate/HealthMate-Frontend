@@ -13,7 +13,7 @@ import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
 import s from "./SuppplementChallengeEditingPage.module.scss";
 
-import PageTopBar from "../../../components/organs/PageTopBar";
+import PageTopBar from "../../../components/organs/Bars/PageTopBar";
 
 const SupplementChallengeEditingPage = () => {
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);

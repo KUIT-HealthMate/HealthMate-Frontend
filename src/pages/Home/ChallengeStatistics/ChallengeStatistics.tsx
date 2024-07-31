@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dayjs from "dayjs";
-import PageTopBar from "../../../components/organs/PageTopBar";
+import PageTopBar from "../../../components/organs/Bars/PageTopBar";
 import { useGlobalStore } from "../../../store/store";
 import forward from "../../../assets/forward.svg";
 import backward from "../../../assets/backward.svg";

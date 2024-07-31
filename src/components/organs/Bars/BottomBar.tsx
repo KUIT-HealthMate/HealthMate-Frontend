@@ -1,12 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import home from "../../assets/home.svg";
-import chart from "../../assets/chart.svg";
-import community from "../../assets/community.svg";
-import myPage from "../../assets/myPage.svg";
-import sHome from "../../assets/selectedHome.svg";
-import sChart from "../../assets/selectedChart.svg";
-import sCommunity from "../../assets/selectedCommunity.svg";
-import sMyPage from "../../assets/selectedMyPage.svg";
+import home from "../../../assets/home.svg";
+import chart from "../../../assets/chart.svg";
+import community from "../../../assets/community.svg";
+import myPage from "../../../assets/myPage.svg";
+import sHome from "../../../assets/selectedHome.svg";
+import sChart from "../../../assets/selectedChart.svg";
+import sCommunity from "../../../assets/selectedCommunity.svg";
+import sMyPage from "../../../assets/selectedMyPage.svg";
 import s from "./BottomBar.module.scss";
 
 interface BarItem {

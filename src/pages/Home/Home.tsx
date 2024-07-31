@@ -2,13 +2,11 @@ import styles from "./Home.module.scss";
 import TodaysChallenge from "./TodayChallenge";
 import SupplementChallenge from "./PillChallenge/SupplementChallenge";
 import HabitChallenge from "./HabitChallenge/HabitChallenge";
-import TopBar from "../../components/organs/TopBar";
-
+import TopBar from "../../components/organs/Bars/TopBar";
 
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-
   const navigate = useNavigate();
 
   return (
@@ -19,10 +17,16 @@ const Home = () => {
       <SupplementChallenge></SupplementChallenge>
       <div className={styles.gap}></div>
       <HabitChallenge></HabitChallenge>
-      <button className={styles.dailyCheckButton} onClick={() => { navigate('/dailycheckstart') }}>일일 건강진단하기</button>
+      <button
+        className={styles.dailyCheckButton}
+        onClick={() => {
+          navigate("/dailycheckstart");
+        }}
+      >
+        일일 건강진단하기
+      </button>
     </div>
-  )
+  );
 };
-
 
 export default Home;
