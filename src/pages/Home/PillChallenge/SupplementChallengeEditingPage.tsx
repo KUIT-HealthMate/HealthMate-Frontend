@@ -41,10 +41,10 @@ const SupplementChallengeEditingPage = () => {
     const buttons = document.getElementsByClassName(s.challengeName);
     if(type == "pill"){
       (buttons[0] as HTMLElement).style.borderBottom = "3px solid #0E9494";
-      (buttons[1] as HTMLElement).style.borderBottom = "none";
+      (buttons[1] as HTMLElement).style.borderBottom = "3px solid #FFFFFF";
     } else {
       (buttons[1] as HTMLElement).style.borderBottom = "3px solid #0E9494";
-      (buttons[0] as HTMLElement).style.borderBottom = "none";
+      (buttons[0] as HTMLElement).style.borderBottom = "3px solid #FFFFFF";
     }
   }
 

@@ -36,7 +36,7 @@ const AlarmTimeInputModal:React.FC<Props> = ({modal, setModal, amOrPm, setAmOrPm
         <div className={s.AlarmTimeInputContent}>
           <div className={s.TitleBar}>
             <span className={s.AlarmTimeInputTitle}>알림 시간 설정</span>
-            <button type="button" onClick={() => setModal(false)}><img src={blackX} alt="" /></button>
+            <button type="button" onClick={() => setModal(false)}><img className={s.modalXButton}src={blackX} alt="" /></button>
           </div>
           <div className={s.wheelPickerWrap}>
             <WheelPicker list={["오전","오후"]} pickerStyle={{borderRadius:'10px 0 0 10px'}}initialIndex={amOrPm} onSelectedChange={(selected) => { selected == "오전" ? setAmOrPm(0) : setAmOrPm(1); console.log(selected); console.log(amOrPm)}} > </ WheelPicker>

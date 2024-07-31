@@ -219,6 +219,9 @@
         padding-left: 6px;
         width: 4px;
       }
+
+      display:flex;
+      align-items: center;
     }
   }
 }
@@ -271,6 +274,8 @@
         padding-left: 6px;
         width: 4px;
       }
+      display:flex;
+      align-items: center;
     }
   }
 
@@ -337,4 +342,6 @@
   text-align: center;
 
   color: #ffffff;
+
+  z-index: 99;
 }
