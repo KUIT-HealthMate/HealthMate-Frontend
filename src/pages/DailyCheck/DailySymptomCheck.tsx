@@ -11,6 +11,8 @@ import ProgressBar from './survey/ProgressBar';
 interface symptomProps {
     title1: string,
     title2: string
+
+    buttonNavigate: string,
 }
 
 const DailySymptomCheck = (props: symptomProps) => {
@@ -107,7 +109,7 @@ const DailySymptomCheck = (props: symptomProps) => {
                     <hr className={styles.underLine}></hr>
                 </div>
 
-                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `33px` }} onClick={() => { navigate('/dailycheckdone') }}>
+                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `33px` }} onClick={() => (navigate(props.buttonNavigate))}>
                     <p className={styles.NextButtonText}>다음으로</p>
                 </button>
                 <div className={styles.whiteSpace}></div>

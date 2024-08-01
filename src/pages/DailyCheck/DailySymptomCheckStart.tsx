@@ -7,15 +7,18 @@ import { useNavigate } from 'react-router-dom';
 
 interface symptomStartProps {
     title1: string,
-
     text1: string,
     greentext: string,
     text2: string,
     buttonText: string,
+    buttonNavigate: string,
+
 }
 
 
+
 const DailySymptomCheckStart = (props: symptomStartProps) => {
+
     const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
     useEffect(() => {
         console.log("마운트됨")
@@ -38,7 +41,7 @@ const DailySymptomCheckStart = (props: symptomStartProps) => {
             <div className={styles.startText}>{props.text1}</div>
             <div className={styles.startText}><div className={styles.startGreeText}>{props.greentext}</div>{props.text2}</div>
 
-            <button className={styles.startButton} onClick={() => { navigate('/dailysymptomcheck') }}>{props.buttonText}</button>
+            <button className={styles.startButton} onClick={() => (navigate(props.buttonNavigate))}>{props.buttonText}</button>
         </div>
     )
 };
