@@ -1,0 +1,69 @@
+.pageWrap {
+    width:calc(100vw - 33px);
+    height:calc(100vh);
+
+    position:relative;
+
+    .emailCheckSection {
+        width:100%;
+        margin: 76px 8px 0 16px;
+
+        display:flex;
+        flex-direction: column;
+
+        > button {
+            width:25px;
+            height:24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            > img {
+                width:11.29px;
+            }
+
+            margin-bottom: 16px;
+        }
+
+        > span {
+            margin-bottom: 28px;
+
+            font-family: Pretendard;
+            font-size: 26px;
+            font-weight: 700;
+        }
+    
+        .emailWrap {
+            display:flex;
+            flex-direction: row;
+            gap: 10px;
+
+            > span {
+                font-family: Pretendard;
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+    
+    }
+    
+    .emailNextButton {
+        position:absolute; 
+        margin:16px;
+        bottom:52px;
+        
+        background: #05697F;
+        color: #FFFFFF;
+
+        box-sizing: border-box;
+        width: calc(100% - 16px);
+        height: 59px;
+        border-radius: 10px;
+
+
+        font-family: Pretendard;
+        font-size: 18px;
+        font-weight: 600;
+    } 
+}
+

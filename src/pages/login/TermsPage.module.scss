@@ -1,0 +1,97 @@
+.AlarmTimeInputWrapper {
+    position:fixed;
+    bottom:0px;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}   
+
+
+
+.AlarmTimeInputContent {
+    position:absolute;
+    bottom:0px;
+    width:100%;
+    height:378px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 15px 15px 0 0;
+    box-sizing: border-box;
+    padding:20px;
+    display:flex;
+    flex-direction: column; 
+}
+
+.AgreeTermsTitle {
+    font-family: Pretendard;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 39px;
+    text-align: left;
+}
+
+.TitleBar {
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 19px;
+}
+
+.TermsDetailWrap {
+    display:flex;
+    flex-direction: column;
+
+    .agreeAllTerms {
+        height:53px;
+        display:flex;
+        gap:12px;
+        align-items: center;
+        border-radius: 10px;
+        background: #E9E9E9;
+
+        > img {
+            margin-left: 12px;
+        }
+
+        > span {
+            font-family: Pretendard;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 21.48px;
+            text-align: left;
+        }
+    }
+
+    .eachTermWrap {
+        margin-top: 28px;
+
+        > img {
+            margin-right: 12px;
+        }
+    }
+}
+
+.TermsDetailWrap div {
+    display: flex;
+}
+
+.eachTermWrap {
+    > span {
+        font-family: Pretendard;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 19.09px;
+        text-align: left;
+    }
+}
+
+.agreeTermsCompleteButton {
+    width:100%;
+    height: 59px;
+    border-radius: 15px;
+    background: #0E9494;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23.87px;
+    text-align: left;
+    color: #FFFFFF;
+    text-align: center;
+}
