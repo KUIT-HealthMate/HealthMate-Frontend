@@ -4,8 +4,9 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
+import TermsPage from './Terms/TermsPage';
+
 import s from "./EmailCheckPage.module.scss"
-import TermsPage from './TermsPage';
 
 import kakaoTalkIconWithBackground from "../../assets/loginPage/kakakTalkIconWithBackground.svg";
 import leftBraket from "../../assets/leftBraket.svg";

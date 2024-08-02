@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import {useGlobalStore} from "../../store/store";
 
+import s from "./LoginPage.module.scss";
+
 import healthMateIcon from "../../assets/loginPage/healthMateIcon.svg";
 import healthMateTitleImg from "../../assets/loginPage/healthMateTitleImg.svg";
 import kakaoTalkIcon from "../../assets/loginPage/kakaoTalkIcon.svg";
 
-import s from "./LoginPage.module.scss";
 
 const LogInPage = () => {
   const { setShowBottomBar } = useGlobalStore();
