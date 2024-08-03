@@ -31,6 +31,32 @@ const OnBoardingCheckPurpose = () => {
     }, [setShowBottomBar]
     );
 
+    const [purposeCheck, setPurposeCheck] = useState(purposeButtons.map(purposeButton => false));
+
+    console.log(purposeCheck)
+
+    function changeBtnColor(idx: number) {
+        setPurposeCheck(prevState => {
+            const newState = [...prevState]
+            newState[idx] = !newState[idx];
+            console.log(newState);
+            return newState;
+        })
+    }
+
+    function handleClick(idx: number) {
+
+        //2개 이상 복수선택 막음
+        const trueCnt = purposeCheck.filter(element => element).length;
+        console.log(trueCnt)
+        console.log(purposeCheck[idx])
+        if (trueCnt >= 2 && !purposeCheck[idx]) {
+            console.log("2개 이상 선택 불가")
+            return;
+        }
+        changeBtnColor(idx)
+    }
+
     const navigate = useNavigate();
     return (
         <>
@@ -48,8 +74,10 @@ const OnBoardingCheckPurpose = () => {
                     purposeButtons.map((purposeButton, idx) => {
                         return (
                             < div className={styles.iconBox}>
-                                <div className={styles.iconWrap}>
-                                    <img className={styles.iconImage} src={purposeButton.icon}></img>
+                                <div className={styles.iconWrap} onClick={() => { handleClick(idx) }} style={
+                                    purposeCheck[idx] == true ? { background: `rgba(14, 148, 148, 0.1)`, color: `#0E9494`, border: `1px solid #0E9494` } : {}
+                                }>
+                                    <img className={styles.iconImage} src={purposeButton.icon} ></img>
                                 </div>
                                 <div className={styles.iconText}>{purposeButton.text}</div>
                             </div>
@@ -60,9 +88,12 @@ const OnBoardingCheckPurpose = () => {
 
             </div >
 
-            <button className={styles.NextButton} style={{ position: `fixed`, bottom: `33px` }} onClick={() => (navigate('/'))}>
+            < button className={styles.NextButton} disabled={purposeCheck.filter(element => element).length > 0 ? false : true} onClick={() => (navigate('/'))}
+                style={purposeCheck.filter(element => element).length > 0 ? { position: `fixed`, bottom: `33px` }
+                    : { position: `fixed`, bottom: `33px`, background: `#F5F6F8`, color: `#8F8F8F` }}>
                 <p className={styles.NextButtonText}>다음으로</p>
-            </button>
+            </button >
+
         </>
     )
 }

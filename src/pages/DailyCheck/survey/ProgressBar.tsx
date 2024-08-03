@@ -11,6 +11,7 @@ const ProgressBar = () => {
     console.log("progressPercent: " + progressPercent);
 
 
+
     return (
         <div className={styles.progressBarWrap}>
             <div className={styles.progressBar}>
