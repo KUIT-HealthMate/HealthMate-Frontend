@@ -48,7 +48,11 @@ export default function ChallengeStatistics() {
 
   return (
     <>
-      <PageTopBar barName="챌린지 통계" setBottomBarState={enableBottomBar} />
+      <PageTopBar
+        barName="챌린지 통계"
+        setBottomBarState={enableBottomBar}
+        link="/"
+      />
       <div className={s.selectorContainer}>
         <div className={s.dateSelector}>
           <img

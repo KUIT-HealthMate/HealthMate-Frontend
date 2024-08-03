@@ -7,7 +7,7 @@ import ChallengeStatistics from "./pages/Home/ChallengeStatistics/ChallengeStati
 
 import SupplementChallengeEditingPage from "./pages/Home/PillChallenge/SupplementChallengeEditingPage";
 
-import PillManagePage from "./pages/Home/PillChallenge/PillManagePage"; 
+import PillManagePage from "./pages/Home/PillChallenge/PillManagePage";
 import DailyCheckStart from "./pages/DailyCheck/DailyCheckStart";
 import DailyMealCheckStart from "./pages/DailyCheck/DailyMealCheckStart";
 import DailySleepCheckStart from "./pages/DailyCheck/DailySleepCheckStart";
@@ -18,6 +18,7 @@ import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
 import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
 import HabitManagePage from "./pages/Home/PillChallenge/HabitManagePage";
+import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
 
 const Router = () => {
   return (
@@ -29,11 +30,14 @@ const Router = () => {
         <Route path="/mypage" element={<MyPage />} />
 
         <Route path="/statistics" element={<ChallengeStatistics />} />
-        <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage/>}/>
-        <Route path="/pillAddingPage" element={<PillManagePage/>}/>
-        <Route path="/pillEditingPage/:id" element={<PillManagePage/>}/>
-        <Route path="/habitAddingPage" element={<HabitManagePage/>}/>
-        <Route path="/habitEditingPage/:id" element={<HabitManagePage/>}/>
+        <Route
+          path="/supplementChallengeEdit"
+          element={<SupplementChallengeEditingPage />}
+        />
+        <Route path="/pillAddingPage" element={<PillManagePage />} />
+        <Route path="/pillEditingPage/:id" element={<PillManagePage />} />
+        <Route path="/habitAddingPage" element={<HabitManagePage />} />
+        <Route path="/habitEditingPage/:id" element={<HabitManagePage />} />
 
         <Route path="/dailycheckstart" element={<DailyCheckStart />} />
         <Route path="/dailymealcheckstart" element={<DailyMealCheckStart />} />
@@ -51,6 +55,8 @@ const Router = () => {
         {/* <Route path="/dailymealcheck" element={<DailyMealCheck />} />
         <Route path="/dailysleepcheck" element={<DailySleepCheck />} /> */}
         <Route path="/dailycheckdone" element={<DailyCheckDone />} />
+
+        <Route path="/usage" element={<CoinDepositAndUsage />} />
       </Routes>
     </div>
   );
