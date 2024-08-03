@@ -21,6 +21,7 @@ import HabitManagePage from "./pages/Home/PillChallenge/HabitManagePage";
 
 import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoarding";
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
+import { Welcome } from "./pages/OnBoarding/OnBoarding";
 
 const Router = () => {
   return (
@@ -44,8 +45,8 @@ const Router = () => {
           path="/dailysleepcheckstart"
           element={<DailySleepCheckStart />}
         />
-        <Route path="/dailysymptomcheckstart" element={<DailySymptomCheckStart title1="마지막이에요" text1="마지막으로 쿠잇님의" greentext="오늘 느낀 이상증상" text2="을 알아보고 싶어요." buttonText="이상증상 체크하기" buttonNavigate="/dailycheckdone" />} />
-        <Route path="/dailysymptomcheck" element={<DailySymptomCheck title1="오늘 느껴진 이상 증세가" title2="있으신가요?" buttonNavigate="/dailycheckdone" />} />
+        <Route path="/dailysymptomcheckstart" element={<DailySymptomCheckStart title1="마지막이에요" text1="마지막으로 쿠잇님의" greentext="오늘 느낀 이상증상" text2="을 알아보고 싶어요." buttonText="이상증상 체크하기" buttonNavigate="/dailycheckdone" iconName="dailyCheckStartIcon" />} />
+        <Route path="/dailysymptomcheck" element={<DailySymptomCheck title1="오늘 느껴진 이상 증세가" title2="있으신가요?" buttonNavigatePass="/dailycheckdone" buttonNavigate="/dailycheckdone" />} />
 
         <Route path="/dailycheck" element={<DailyCheck />} />
         <Route path="/dailycheckdone" element={<DailyCheckDone />} />
@@ -53,6 +54,7 @@ const Router = () => {
         <Route path="/onboarding" element={<OnBoarding />} />
         <Route path="/onboarding_checksymptom" element={<OnBoardingCheckSymptom />} />
         <Route path="/onboarding_checkpurpose" element={<OnBoardingCheckPurpose />} />
+        <Route path="/welcome" element={<Welcome />} />
       </Routes>
     </div>
   );

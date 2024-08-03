@@ -9,6 +9,7 @@ import purpose6 from "../../assets/onboarding/purpose6.svg";
 import { useGlobalStore } from '../../store/store';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
 
 const purposeButtons = [
     { icon: purpose1, text: "루틴" },
@@ -45,7 +46,6 @@ const OnBoardingCheckPurpose = () => {
     }
 
     function handleClick(idx: number) {
-
         //2개 이상 복수선택 막음
         const trueCnt = purposeCheck.filter(element => element).length;
         console.log(trueCnt)
@@ -60,7 +60,11 @@ const OnBoardingCheckPurpose = () => {
     const navigate = useNavigate();
     return (
         <>
-            <ProgressBar></ProgressBar>
+            <TopBarWithCancel></TopBarWithCancel>
+            {/* <div className={styles.backButton} onClick={() => navigate(-1)}>
+                <img style={{ width: `8.89px`, height: `16px` }} src={leftBracket} />
+            </div> */}
+            <ProgressBar percent={50}></ProgressBar>
             <div className={styles.purposeTop}>
                 <div className={styles.purposeTitle}>어떤 목적으로</div>
                 <div className={styles.purposeTitle}>헬스메이트를 찾아주셨나요?</div>
@@ -88,7 +92,7 @@ const OnBoardingCheckPurpose = () => {
 
             </div >
 
-            < button className={styles.NextButton} disabled={purposeCheck.filter(element => element).length > 0 ? false : true} onClick={() => (navigate('/'))}
+            < button className={styles.NextButton} disabled={purposeCheck.filter(element => element).length > 0 ? false : true} onClick={() => (navigate('/welcome'))}
                 style={purposeCheck.filter(element => element).length > 0 ? { position: `fixed`, bottom: `33px` }
                     : { position: `fixed`, bottom: `33px`, background: `#F5F6F8`, color: `#8F8F8F` }}>
                 <p className={styles.NextButtonText}>다음으로</p>

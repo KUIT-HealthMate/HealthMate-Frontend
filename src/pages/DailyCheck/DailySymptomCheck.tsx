@@ -6,12 +6,14 @@ import exclamationMark from "../../assets/exclamationMark.svg"
 import { useGlobalStoreSurvey } from '../../store/storeSurvey';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from './survey/ProgressBar';
+import TopBarWithCancel from '../../components/organs/Bars/TopBarWithCancel';
 
 
 interface symptomProps {
     title1: string,
     title2: string
 
+    buttonNavigatePass: string;
     buttonNavigate: string,
 }
 
@@ -67,9 +69,16 @@ const DailySymptomCheck = (props: symptomProps) => {
     useEffect(() => { }, [symptomBtnActive]);
     const navigate = useNavigate();
 
+    const { progressPercent } = useGlobalStoreSurvey((state) => ({
+        progressPercent: state.progressPercent
+    }));
+
+    console.log("progressPercent: " + progressPercent);
+
     return (
         <>
-            <ProgressBar></ProgressBar>
+            <TopBarWithCancel></TopBarWithCancel>
+            <ProgressBar percent={progressPercent}></ProgressBar>
             <div className={styles.symptom}>
                 <div className={styles.symptomTitle} style={{ marginTop: `75px` }}>{props.title1}</div>
                 <div className={styles.symptomTitle}>{props.title2}</div>
@@ -109,6 +118,9 @@ const DailySymptomCheck = (props: symptomProps) => {
                     <hr className={styles.underLine}></hr>
                 </div>
 
+                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `88px`, background: `#F5F6F8`, color: `#8F8F8F`, border: `1px solid #DEDEDE` }} onClick={() => (navigate(props.buttonNavigatePass))}>
+                    <p className={styles.NextButtonText}>건너뛰기</p>
+                </button>
                 <button className={styles.NextButton} style={{ position: `fixed`, bottom: `33px` }} onClick={() => (navigate(props.buttonNavigate))}>
                     <p className={styles.NextButtonText}>다음으로</p>
                 </button>

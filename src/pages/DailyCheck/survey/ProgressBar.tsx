@@ -1,21 +1,19 @@
 import styles from './ProgressBar.module.scss'
 import { useState } from 'react'
 import { useGlobalStoreSurvey } from '../../../store/storeSurvey'
+import { Props } from 'recharts/types/container/Surface'
+import React from 'react';
 
-const ProgressBar = () => {
+interface percentProps {
+    percent: number;
+}
 
-    const { progressPercent } = useGlobalStoreSurvey((state) => ({
-        progressPercent: state.progressPercent
-    }));
-
-    console.log("progressPercent: " + progressPercent);
-
-
+const ProgressBar = (props: percentProps) => {
 
     return (
         <div className={styles.progressBarWrap}>
             <div className={styles.progressBar}>
-                <div className={styles.progress} style={{ width: `${progressPercent}%` }}></div>
+                <div className={styles.progress} style={{ width: `${props.percent}%` }}></div>
             </div>
         </div>
     )

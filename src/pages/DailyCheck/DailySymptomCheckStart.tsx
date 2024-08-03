@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "./DailyCheck.module.scss";
 import dailyCheckBackground from "../../assets/dailCheckBackground.svg";
 import dailyCheckStartIcon from "../../assets/symptompage.svg";
+import welcomeIcon from "../../assets/onboarding/welcomeIcom.svg";
 import { useGlobalStore } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +14,7 @@ interface symptomStartProps {
     buttonText: string,
     buttonNavigate: string,
 
+    iconName: string,
 }
 
 
@@ -32,9 +34,10 @@ const DailySymptomCheckStart = (props: symptomStartProps) => {
     const navigate = useNavigate();
     return (
         <div className={styles.startPage}>
+
             <div className={styles.startIcons}>
-                <img src={dailyCheckBackground} className={styles.startBackgroundIcon} ></img>
-                <img src={dailyCheckStartIcon} className={styles.startIcon}></img>
+                <img src={dailyCheckBackground} className={styles.startSleepBackgroundIcon}></img>
+                <img src={props.iconName == "dailyCheckStartIcon" ? dailyCheckStartIcon : welcomeIcon} className={styles.startIcon}></img>
             </div>
             <div style={{ height: `44px` }}></div>
             <h1 className={styles.startTitle}>{props.title1}</h1>
