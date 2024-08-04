@@ -1,0 +1,48 @@
+.coinRecordContainer {
+  height: 80px;
+  margin: 20px 21px;
+  border-radius: 15px;
+  background-color: #f5f6f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.date {
+  font-family: "Pretendard";
+  font-size: 13px;
+  font-weight: 500;
+  color: #8f8f8f;
+  padding-left: 18px;
+  padding-bottom: 8px;
+}
+
+.noticeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 18px;
+}
+
+.notice {
+  font-family: "Pretendard";
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.plus {
+  padding-right: 18px;
+  font-family: "Pretendard";
+  font-size: 15px;
+  font-weight: 800;
+  color: #05697f;
+}
+
+.minus {
+  padding-right: 18px;
+  font-family: "Pretendard";
+  font-size: 15px;
+  font-weight: 800;
+  color: #f97f59;
+}
