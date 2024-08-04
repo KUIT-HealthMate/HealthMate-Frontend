@@ -83,7 +83,6 @@ export default function HabitChallenge() {
         })}
 
       </Swiper>
-      {/* <div style={{ height: `300px` }}></div> */}
     </div>
   );
 }
