@@ -18,12 +18,18 @@ import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
 import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
 import HabitManagePage from "./pages/Home/PillChallenge/HabitManagePage";
+
+import LoginPage from "./pages/login/LoginPage";
+import EmailCheckPage from "./pages/login/EmailCheckPage";
 import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
 
 const Router = () => {
   return (
     <div>
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/emailCheck" element={<EmailCheckPage />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/chart" element={<HealthChart />} />
         <Route path="/community" element={<Community />} />
