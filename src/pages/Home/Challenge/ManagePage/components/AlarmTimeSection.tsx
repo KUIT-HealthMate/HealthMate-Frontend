@@ -1,9 +1,9 @@
 import React from 'react'
-import s from "../PillManagePage.module.scss";
+import s from "../ManagePage.module.scss";
 
-import plusIconImg from "../../../../assets/plusIcon.svg";
-import deleteImg from "../../../../assets/deleteIcon.svg";
-import pencilImg from "../../../../assets/pencil.svg";
+import plusIconImg from "../../../../../assets/plusIcon.svg";
+import deleteImg from "../../../../../assets/deleteIcon.svg";
+import pencilImg from "../../../../../assets/pencil.svg";
 
 interface Props {
     alarmTime: {

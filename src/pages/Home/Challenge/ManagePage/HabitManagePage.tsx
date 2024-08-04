@@ -1,41 +1,32 @@
 import React, { ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import s from "./PillManagePage.module.scss";
-import useHabitInfoStore from "../../../store/useHabitInfoStore";
-import habitInfo from "../../../store/habitInfo";
+import s from "./ManagePage.module.scss";
+import useHabitInfoStore from "../../../../store/useHabitInfoStore";
+import habitInfo from "../../../../store/habitInfo";
 import uuid from "react-uuid";
 import { useState } from "react";
-import { useGlobalStore } from "../../../store/store";
+import { useGlobalStore } from "../../../../store/store";
 import { useEffect } from "react";
 
-import leftBracket from "../../../assets/leftBraket.svg";
+import leftBracket from "../../../../assets/leftBraket.svg";
 
 
-import InputClearButtonImg from "../../../assets/InputClearButton.svg";
+import InputClearButtonImg from "../../../../assets/InputClearButton.svg";
 import AlarmTimeInputModal from "./components/AlarmTimeInputModal";
 import NameInputSection from "./components/NameInputSection";
 import IntakeTimeSection from "./components/IntakeTimeSection";
 import IntakePeriodSection from "./components/IntakePeriodSection";
-import IntakeDaySection from "./components/IntakeDaySection";
+import ChallengeDaySection from "./components/ChallengeDaySection";
 import AlarmTimeSection from "./components/AlarmTimeSection";
 
+import handleChallengeName from "./utils/handleChallengeName";
+import handleChallengeDay from "./utils/handleChallengeDay";
+import { initHabit } from "./utils/initChallenge";
+import CompleteChangeButton from "./components/CompleteChangeButton";
+import handleAlarmTime from "./utils/Alarm/handleAlarmTime";
+import editAlarmTime from "./utils/Alarm/editAlarmTime";
+import deleteAlarmTime from "./utils/Alarm/deleteAlarmTime";
 
-const initHabit = (): Omit<Omit<habitInfo, "id">, "notificationTime"> => {
-  return {
-    name: "", // 알약 이름
-    executionRecord: false,
-    weeklyExecutionFrequency: {
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
-    }, // 주 섭취 횟수 (월 ~ 일)
-    //notificationTime: [{ hour: 0, minutes: 0 }], // 팝업 알림 시간 (19:30 이면 19, 30)
-  };
-};
 
 const HabitEditingPage = () => {
 
@@ -90,78 +81,12 @@ const HabitEditingPage = () => {
   }, [editingHabitId]);
   
 
-  // 이벤트 핸들러: 수행할 습관 이름
-  const handleHabitName = (inputElement: HTMLInputElement): void => {
-    const filteredValue = inputElement.value.replace(
-      /[^a-zA-Zㄱ-ㅎ가-힣]/g,
-      ""
-    );
-
-    inputElement.value = filteredValue;
-    setNewHabit({...newHabit,name:filteredValue});
-  };
-
   const [amOrPm, setAmOrPm] = useState(0);
   const [hour, setHour] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState(0);
-  const handleAlarmTime = () => {
-    console.log("handleAlarmTime: " + amOrPm + hour + minutes);
-    let hourIn24: number = amOrPm * 12 + (hour % 12);
-    if(isEditMode) {
-      setAlarmTime(alarmTime.map((item,index) => {
-        if(index == editIndex){
-          return {
-            ...item,
-            hour: hourIn24,
-            minutes: minutes,
-          };
-        }
-        return item;
-      }))
-    } else {
-      setAlarmTime([...alarmTime, { hour: hourIn24, minutes: minutes }]);
-    }
-
-    setAmOrPm(0);
-    setHour(0);
-    setMinutes(0);
-    setIsEditMode(false);
-  };
-
-  const editAlarmTime = (index: number) => {
-    alarmTime.map((item, idx) => {
-      if(idx == index) {
-        item.hour < 12 ? setAmOrPm(0) : setAmOrPm(1);
-        setHour(item.hour % 12);
-        setMinutes(item.minutes);
-      }
-      setEditIndex(index);
-      setModal(true);
-      setIsEditMode(true);
-    });
-  }
-
-  const deleteAlarmTime = (index: number) => {
-    setAlarmTime(prevItems => {
-      // 새로운 배열을 생성하면서 해당 인덱스의 아이템을 제외
-      return prevItems.filter((_, i) => i !== index);
-    });
-  }
-
-  // 적용된 변화들을 habitStore에 적용시킨다.
-  const handleChanges = (): void => {
-    console.log(newHabit);
-    if (isAddingNewHabit) {
-      setHabitInfo({ ...newHabit, id: uuid(), notificationTime: alarmTime });
-      console.log(HabitInfo);
-    } else {
-      setHabit(editingHabitId, newHabit, alarmTime);
-      console.log(HabitInfo[0]);
-    }
-    navigate(-1);
-  };
+  
 
   return (
     <>
@@ -179,19 +104,15 @@ const HabitEditingPage = () => {
         </div>
         <div className={s.contentWrap}>
           <NameInputSection placeHolderMessage = {"운동 이름을 입력해주세요"} handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
-                  handleHabitName(e.target);
+                  handleChallengeName<habitInfo>(e.target,setNewHabit,newHabit);
           }} defaultValue={newHabit.name} challengeType={"habit"}/>
           
+          <ChallengeDaySection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, dayInfo:string) =>
+                  handleChallengeDay<habitInfo>(e,setNewHabit,newHabit,dayInfo)} defaultChecked={newHabit.weeklyExecutionFrequency} /> 
           
-          <AlarmTimeSection alarmTime={alarmTime} plusButtonOnClick={() => setModal(true)} editButtonOnClick={(index: number) => editAlarmTime(index)} deleteButtonOnClick={(index: number) => deleteAlarmTime(index)}/>
+          <AlarmTimeSection alarmTime={alarmTime} plusButtonOnClick={() => setModal(true)} editButtonOnClick={(index: number) => editAlarmTime(index, setHour, setMinutes, alarmTime, setAmOrPm, setEditIndex, setModal, setIsEditMode)} deleteButtonOnClick={(index: number) => deleteAlarmTime(index,setAlarmTime,alarmTime)}/>
             
-          <button
-            type="button"
-            className={s.completeButton}
-            onClick={() => handleChanges()}
-          >
-            완료
-          </button>
+          <CompleteChangeButton<habitInfo> isAddingNewChallenge={isAddingNewHabit} newChallenge={newHabit} alarmTime={alarmTime} editingChallengeId={editingHabitId} />
 
           <div className={s.bottomBarCover}></div>
 
@@ -213,7 +134,7 @@ const HabitEditingPage = () => {
           setHour={setHour}
           minutes={minutes}
           setMinutes={setMinutes}
-          handleAlarmTime={handleAlarmTime}
+          handleAlarmTime={() => handleAlarmTime(amOrPm,hour,minutes,isEditMode,setAlarmTime,alarmTime,editIndex,setAmOrPm,setHour,setMinutes,setIsEditMode)}
         />
       ) : null}
       

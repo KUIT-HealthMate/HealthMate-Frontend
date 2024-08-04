@@ -1,16 +1,16 @@
 import React, { ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import s from "./PillManagePage.module.scss";
-import { usePillInfoStore } from "../../../store/usePillInfoStore";
+import s from "./ManagePage.module.scss";
+import { usePillInfoStore } from "../../../../store/usePillInfoStore";
 
 
-import pillInfo from "../../../store/pillInfo";
+import pillInfo from "../../../../store/pillInfo";
 import uuid from "react-uuid";
 import { useState } from "react";
-import { useGlobalStore } from "../../../store/store";
+import { useGlobalStore } from "../../../../store/store";
 import { useEffect } from "react";
 
-import leftBracket from "../../../assets/leftBraket.svg";
+import leftBracket from "../../../../assets/leftBraket.svg";
 
 
 import InputClearButtonImg from "../../../assets/InputClearButton.svg";
@@ -18,28 +18,17 @@ import AlarmTimeInputModal from "./components/AlarmTimeInputModal";
 import NameInputSection from "./components/NameInputSection";
 import IntakeTimeSection from "./components/IntakeTimeSection";
 import IntakePeriodSection from "./components/IntakePeriodSection";
-import IntakeDaySection from "./components/IntakeDaySection";
+import ChallengeDaySection from "./components/ChallengeDaySection";
 import AlarmTimeSection from "./components/AlarmTimeSection";
 
+import handleChallengeName from "./utils/handleChallengeName";
+import handleChallengeDay from "./utils/handleChallengeDay";
+import { initPill } from "./utils/initChallenge";
+import CompleteChangeButton from "./components/CompleteChangeButton";
+import editAlarmTime from "./utils/Alarm/editAlarmTime";
+import deleteAlarmTime from "./utils/Alarm/deleteAlarmTime";
+import handleAlarmTime from "./utils/Alarm/handleAlarmTime";
 
-const initPill = (): Omit<Omit<pillInfo, "id">, "notificationTime"> => {
-  return {
-    name: "", // 알약 이름
-    intakeTime: { beforeOrAfterMeal: 0, minutes: 0 }, // 섭취 시간 (식전 1 식후 2, 분 number로)
-    dailyIntakePeriod: { breakfast: false, lunch: false, dinner: false }, // 일 섭취 시기 (아침, 점심, 저녁)
-    dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
-    weeklyIntakeFrequency: {
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
-    }, // 주 섭취 횟수 (월 ~ 일)
-    //notificationTime: [{ hour: 0, minutes: 0 }], // 팝업 알림 시간 (19:30 이면 19, 30)
-  };
-};
 
 const PillEditingPage = () => {
 
@@ -94,17 +83,6 @@ const PillEditingPage = () => {
   }, [editingPillId]);
   
 
-  // 이벤트 핸들러: 알약 이름
-  const handlePillName = (inputElement: HTMLInputElement): void => {
-    const filteredValue = inputElement.value.replace(
-      /[^a-zA-Zㄱ-ㅎ가-힣]/g,
-      ""
-    );
-
-    inputElement.value = filteredValue;
-    setNewPill({...newPill,name:filteredValue});
-  };
-
   // 이벤트 핸들러: 식전 / 식후
   const handleBeforeOrAfterMeal = (value: number): void => {
     setNewPill({...newPill, intakeTime:{...newPill.intakeTime, beforeOrAfterMeal: value}});
@@ -132,80 +110,12 @@ const PillEditingPage = () => {
 
   };
 
-  // 이벤트 핸들러: 주 섭취 횟수
-  const handleEatingDay = (
-    e: ChangeEvent<HTMLInputElement>,
-    value: string
-  ): void => {
-    
-    setNewPill({...newPill,weeklyIntakeFrequency: {
-      ...newPill.weeklyIntakeFrequency,
-      [value]: !(newPill.weeklyIntakeFrequency as any)[value],
-    }})
-    
-  };
-
   const [amOrPm, setAmOrPm] = useState(0);
   const [hour, setHour] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState(0);
-  const handleAlarmTime = () => {
-    console.log("handleAlarmTime: " + amOrPm + hour + minutes);
-    let hourIn24: number = amOrPm * 12 + (hour % 12);
-    if(isEditMode) {
-      setAlarmTime(alarmTime.map((item,index) => {
-        if(index == editIndex){
-          return {
-            ...item,
-            hour: hourIn24,
-            minutes: minutes,
-          };
-        }
-        return item;
-      }))
-    } else {
-      setAlarmTime([...alarmTime, { hour: hourIn24, minutes: minutes }]);
-    }
 
-    setAmOrPm(0);
-    setHour(0);
-    setMinutes(0);
-    setIsEditMode(false);
-  };
-
-  const editAlarmTime = (index: number) => {
-    alarmTime.map((item, idx) => {
-      if(idx == index) {
-        item.hour < 12 ? setAmOrPm(0) : setAmOrPm(1);
-        setHour(item.hour % 12);
-        setMinutes(item.minutes);
-      }
-      setEditIndex(index);
-      setModal(true);
-      setIsEditMode(true);
-    });
-  }
-
-  const deleteAlarmTime = (index: number) => {
-    setAlarmTime(prevItems => {
-      // 새로운 배열을 생성하면서 해당 인덱스의 아이템을 제외
-      return prevItems.filter((_, i) => i !== index);
-    });
-  }
-
-  // 적용된 변화들을 pillStore에 적용시킨다.
-  const handleChanges = (): void => {
-    console.log(newPill);
-    if (isAddingNewPill) {
-      setPillInfo({ ...newPill, id: uuid(), notificationTime: alarmTime });
-      console.log(PillInfo);
-    } else {
-      setPill(editingPillId, newPill, alarmTime);
-      console.log(PillInfo[0]);
-    }
-    navigate(-1);
-  };
 
   return (
     <>
@@ -223,7 +133,7 @@ const PillEditingPage = () => {
         </div>
         <div className={s.contentWrap}>
           <NameInputSection placeHolderMessage = {"알약 이름을 입력해주세요"} handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
-                  handlePillName(e.target);
+                  handleChallengeName<pillInfo>(e.target,setNewPill,newPill);
           }} defaultValue={newPill.name} challengeType={"pill"}/>
           
           <IntakeTimeSection handleButtonFunc={(idx:number) => handleBeforeOrAfterMeal(idx)} handleMinuteFunc={(e: ChangeEvent<HTMLInputElement>) => {
@@ -232,18 +142,13 @@ const PillEditingPage = () => {
           
           <IntakePeriodSection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, mealInfo:string) =>
                   handleEatingTiming(e, mealInfo)} defaultChecked={newPill.dailyIntakePeriod} />
-          <IntakeDaySection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, dayInfo:string) =>
-                  handleEatingDay(e, dayInfo)} defaultChecked={newPill.weeklyIntakeFrequency} /> 
+          <ChallengeDaySection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, dayInfo:string) => {
+                  handleChallengeDay<pillInfo>(e,setNewPill,newPill,dayInfo)
+          }} defaultChecked={newPill.weeklyIntakeFrequency} /> 
           
-          <AlarmTimeSection alarmTime={alarmTime} plusButtonOnClick={() => setModal(true)} editButtonOnClick={(index: number) => editAlarmTime(index)} deleteButtonOnClick={(index: number) => deleteAlarmTime(index)}/>
+          <AlarmTimeSection alarmTime={alarmTime} plusButtonOnClick={() => setModal(true)} editButtonOnClick={(index: number) => editAlarmTime(index, setHour, setMinutes, alarmTime, setAmOrPm, setEditIndex, setModal, setIsEditMode)} deleteButtonOnClick={(index: number) => deleteAlarmTime(index,setAlarmTime,alarmTime)}/>
             
-          <button
-            type="button"
-            className={s.completeButton}
-            onClick={() => handleChanges()}
-          >
-            완료
-          </button>
+          <CompleteChangeButton<pillInfo> isAddingNewChallenge={isAddingNewPill} newChallenge={newPill} alarmTime={alarmTime} editingChallengeId={editingPillId} />
 
           <div className={s.bottomBarCover}></div>
 
@@ -265,7 +170,7 @@ const PillEditingPage = () => {
           setHour={setHour}
           minutes={minutes}
           setMinutes={setMinutes}
-          handleAlarmTime={handleAlarmTime}
+          handleAlarmTime={() => handleAlarmTime(amOrPm,hour,minutes,isEditMode,setAlarmTime,alarmTime,editIndex,setAmOrPm,setHour,setMinutes,setIsEditMode)}
         />
       ) : null}
       

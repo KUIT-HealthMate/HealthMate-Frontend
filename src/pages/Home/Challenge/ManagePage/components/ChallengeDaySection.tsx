@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import s from "../PillManagePage.module.scss";
+import s from "../ManagePage.module.scss";
 
 interface Props {
     handlePeriodFunc: (e: ChangeEvent<HTMLInputElement>, dayInfo: string) => void
@@ -14,7 +14,7 @@ interface Props {
     }
 }
 
-const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) => {
+const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) => {
   return (
     <div className={s.detailDiv}>
             <span className={s.detailTitle}>주 섭취 횟수</span>
@@ -101,4 +101,4 @@ const IntakeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) =>
   )
 }
 
-export default IntakeDaySection
+export default ChallengeDaySection
