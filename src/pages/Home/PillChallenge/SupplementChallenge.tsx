@@ -8,10 +8,11 @@ import { Link } from "react-router-dom";
 import { usePillInfoStore, pillPage } from "../../../store/usePillInfoStore";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from "swiper";
-import "swiper/css";
+import SwiperCore, { Pagination, Navigation } from 'swiper';
+import 'swiper/swiper-bundle.min.css';
+import pillInfo from "../../../store/pillInfo";
 
-
+SwiperCore.use([Pagination, Navigation]);
 
 export default function SupplementChallenge() {
   const {
@@ -23,14 +24,23 @@ export default function SupplementChallenge() {
     getMealTime,
   } = usePillInfoStore();
 
-  const { currentPillPageNum, setPillPageNum } = pillPage();
-  const [newPillInfo, setNewPillInfo] = useState(PillInfo.slice(0, 3));
+  const splitPillInfo = (array: pillInfo[]) => {
+    const result = [];
+    for (let i = 0; i < array.length; i += 3) {
+      result.push(array.slice(i, i + 3))
+    }
+    return result;
+  }
 
-  const handleClick = (currentPillPageNum: number) => {
-    setPillPageNum(true);
-    console.log("clieck!" + currentPillPageNum)
-    setNewPillInfo(PillInfo.slice(3 * (currentPillPageNum), 3 * (currentPillPageNum) + 3));
-  };
+
+  const [newPillInfos, setNewPillInfos] = useState<pillInfo[][]>([]);
+
+  useEffect(() => {
+    const chunks = splitPillInfo(PillInfo);
+    setNewPillInfos(chunks);
+
+
+  }, []);
 
   return (
     <div className={styles.PillChallenge}>
@@ -42,46 +52,28 @@ export default function SupplementChallenge() {
         </Link>
       </div>
 
-      {/* 
+      {/* <div onClick={() => handleClick(currentPillPageNum)}> */}
+      <div>
+        <Swiper className={styles.swiper} spaceBetween={0} slidesPerView={1} pagination={{ clickable: true }} >
 
+          {newPillInfos.map((chunk, chunkindex) => {
 
-      <Container>
-
-        {Array.from({ length: 9 }).map((_, pageIndex) => (
-          <Page key={pageIndex}>
-            <p>{pageIndex}</p>
-            {PillInfo.slice(pageIndex * 3, pageIndex * 3 + 3).map((pill, index) => (
-              <SupplementContainer key={index}>
-                <SupplementComponent pill={pill} index={pageIndex * 3 + index} />
-              </SupplementContainer>
-            ))}
-          </Page>
-        ))}
-      </Container> */}
-
-
-      <div onClick={() => handleClick(currentPillPageNum)}>
-        <Swiper spaceBetween={50} slidesPerView={2} >
-
-          {newPillInfo.map((pill, index) => {
-
-            console.log("indes: " + index)
-            // if (index >= currentPillPageNum + 3) {
-
-            //   // 다음 페이지로
-
-            //   return;
-            // }
 
             return (
-              <>
-                <SupplementComponent pill={pill} index={index}></SupplementComponent>
-                {/* <SupplementComponent pill={pill} index={index}></SupplementComponent>
-              <SupplementComponent pill={pill} index={index}></SupplementComponent> */}
-              </>
-            );
+              <SwiperSlide>{
+                chunk.map((pill, pillIndex) => {
+                  return (
+                    <SupplementComponent pill={pill} index={pillIndex}></SupplementComponent>
+                  )
+                })
+              }
+              </SwiperSlide>
+            )
+
 
           })}
+
+
 
 
         </Swiper>
