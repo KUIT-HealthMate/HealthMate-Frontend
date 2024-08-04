@@ -3,17 +3,20 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import s from "./TermsPage.module.scss";
 import TermsData from "./assets/TermsData";
+import TermsCheck from "./assets/TermsCheck";
 
 import uncheckedCheckBox from "../../../assets/loginPage/uncheckedCheckbox.svg";
 import checkedCheckBox from "../../../assets/loginPage/checkedCheckbox.svg";
 import rightBraket from "../../../assets/loginPage/rightBraket.svg";
 import EachTerm from "./EachTerm";
 import TermsDetailPage from "./TermsDetailPage";
+import Terms from "./assets/Terms";
 
 interface Props {
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 
 const TermsPage: React.FC<Props> = ({ modal, setModal }) => {
   const modalBackground = useRef();
@@ -25,24 +28,30 @@ const TermsPage: React.FC<Props> = ({ modal, setModal }) => {
 
   // 약관 동의 정보
   const [allAgreeCheck, setAllAgreeCheck] = useState<boolean>(false);
-  const [checks, setChecks] = useState<boolean[]>(
-    new Array(TermsData.length).fill(false)
+
+  const [checks, setChecks] = useState<TermsCheck[]>(
+    TermsData.map(item => ({
+      isEssential: item.isEssential,
+      isChecked: false,
+    }))
   );
 
-  const isAllChecksTrue = ():boolean => {
+  const isAllEssentialChecksTrue = ():boolean => {
     let isTrue:boolean = true;
     checks.map((value, index) => {
-      if(value == false){
-        isTrue = false;
+      if(value.isEssential == true){
+        if(value.isChecked == false){
+          isTrue = false;
+        }
       }
-    })
+    });
 
     return isTrue;
   }
 
   const agreeAllTerms = (value: boolean) => {
     setAllAgreeCheck(value);
-    setChecks(new Array(TermsData.length).fill(value));
+    setChecks(checks.map(checks => ({ ...checks, isChecked: value })));
   };
 
   // 완료 누르면 동의정보 서버로 전송 (선택항목에 동의여부 정보 전송 필요)
@@ -91,7 +100,7 @@ const TermsPage: React.FC<Props> = ({ modal, setModal }) => {
               );
             })}
           </div>
-          {isAllChecksTrue() ? (
+          {isAllEssentialChecksTrue() ? (
             <Link
               to="/"
               className={s.agreeTermsCompleteButton}

@@ -3,6 +3,7 @@ import React from "react";
 import s from "./TermsPage.module.scss";
 import Terms from "./assets/Terms";
 import setMatchingModals from "./setMatchingModal";
+import TermsCheck from "./assets/TermsCheck";
 
 import uncheckedCheckBox from "../../../assets/loginPage/uncheckedCheckbox.svg";
 import checkedCheckBox from "../../../assets/loginPage/checkedCheckbox.svg";
@@ -13,8 +14,8 @@ interface Props {
   index: number;
   modals: boolean[];
   setModals: React.Dispatch<React.SetStateAction<boolean[]>>;
-  checks: boolean[];
-  setChecks: React.Dispatch<React.SetStateAction<boolean[]>>;
+  checks: TermsCheck[];
+  setChecks: React.Dispatch<React.SetStateAction<TermsCheck[]>>;
 }
 
 const EachTerm: React.FC<Props> = ({
@@ -27,13 +28,13 @@ const EachTerm: React.FC<Props> = ({
 }) => {
   const agreeThisTerm = (value: boolean) => {
     const temp = [...checks];
-    temp[index] = value;
+    temp[index].isChecked = value;
     setChecks(temp);
   };
   return (
     <div className={s.eachTermWrap}>
       <div className={s.buttonAndText}>
-        {checks[index] ? (
+        {checks[index].isChecked ? (
           <img
             src={checkedCheckBox}
             alt="Checked"
