@@ -11,7 +11,7 @@ export const OnBoarding = () => {
 
 export const OnBoardingCheckSymptom = () => {
     return (
-        <DailySymptomCheck title1="쿠잇님이 현재 겪고있는 증상을" title2="선택해주세요" buttonNavigatePass="/onboarding_checkpurpose" buttonNavigate="/onboarding_checkpurpose"></DailySymptomCheck>
+        <DailySymptomCheck title1="쿠잇님이 현재 겪고있는 증상을" title2="선택해주세요" buttonNavigatePass="/onboarding_checkpurpose" buttonNavigate="/onboarding_checkpurpose" findKeywordNavigate="/onboarding_checkpurpose"></DailySymptomCheck>
     )
 }
 

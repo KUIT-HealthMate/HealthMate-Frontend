@@ -15,9 +15,12 @@ interface symptomProps {
 
     buttonNavigatePass: string;
     buttonNavigate: string,
+
+    findKeywordNavigate: string;
 }
 
 const DailySymptomCheck = (props: symptomProps) => {
+    console.log("findKeywordNavigate: ", props.findKeywordNavigate)
     const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
     useEffect(() => {
         console.log("마운트됨")
@@ -113,7 +116,7 @@ const DailySymptomCheck = (props: symptomProps) => {
                 }
                 <div className={styles.findKeyword}>
                     <div className={styles.findKeywordText}>
-                        <img src={exclamationMark}></img><div>찾는 키워드가 없나요?</div>
+                        <img src={exclamationMark}></img><div onClick={() => navigate("/findkeyword", { state: { value: props.findKeywordNavigate } })}>찾는 키워드가 없나요?</div>
                     </div>
                     <hr className={styles.underLine}></hr>
                 </div>
@@ -126,7 +129,7 @@ const DailySymptomCheck = (props: symptomProps) => {
                 </button>
                 <div className={styles.whiteSpace}></div>
 
-            </div>
+            </div >
         </>
     )
 };
