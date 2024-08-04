@@ -18,6 +18,7 @@ import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
 import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
 import HabitManagePage from "./pages/Home/PillChallenge/HabitManagePage";
+import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
 
 import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoarding";
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
@@ -35,6 +36,7 @@ const Router = () => {
 
         <Route path="/statistics" element={<ChallengeStatistics />} />
         <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage />} />
+
         <Route path="/pillAddingPage" element={<PillManagePage />} />
         <Route path="/pillEditingPage/:id" element={<PillManagePage />} />
         <Route path="/habitAddingPage" element={<HabitManagePage />} />
@@ -57,6 +59,9 @@ const Router = () => {
         <Route path="/onboarding_checkpurpose" element={<OnBoardingCheckPurpose />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/findkeyword" element={<FindKeyword />} />
+
+        <Route path="/usage" element={<CoinDepositAndUsage />} />
+
       </Routes>
     </div>
   );

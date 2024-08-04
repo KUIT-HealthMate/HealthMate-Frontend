@@ -1,0 +1,83 @@
+.topBarContainer {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #ffffff;
+}
+
+.nickNameContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.nickName {
+  font-family: "Pretendard";
+  font-size: 22px;
+  font-weight: 700;
+  color: #0e9494;
+}
+
+.honorific {
+  font-family: "Pretendard";
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.beHealthy {
+  font-family: "Pretendard";
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.editNickNameContainer {
+  display: flex;
+  flex-direction: row;
+  padding-top: 6px;
+  align-items: center;
+}
+
+.editName {
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 700;
+  color: #b7b7b7;
+}
+
+.editArrow {
+  color: #b7b7b7;
+  padding-left: 6px;
+}
+
+.profileImgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-right: 40px;
+  padding-bottom: 10px;
+}
+
+.profileImg {
+  width: 76px;
+  height: 75px;
+}
+
+.profileEdit {
+  display: flex;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  right: 32px;
+  bottom: 32px;
+  position: absolute;
+}
