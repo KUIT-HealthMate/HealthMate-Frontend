@@ -5,9 +5,9 @@ import Community from "./pages/Community/Community";
 import HealthChart from "./pages/HealthChart/HealthChart";
 import ChallengeStatistics from "./pages/Home/ChallengeStatistics/ChallengeStatistics";
 
-import SupplementChallengeEditingPage from "./pages/Home/PillChallenge/SupplementChallengeEditingPage";
+import SupplementChallengeEditingPage from "./pages/Home/Challenge/SupplementChallengeEditingPage";
 
-import PillManagePage from "./pages/Home/PillChallenge/PillManagePage";
+import PillManagePage from "./pages/Home/Challenge/PillManagePage";
 import DailyCheckStart from "./pages/DailyCheck/DailyCheckStart";
 import DailyMealCheckStart from "./pages/DailyCheck/DailyMealCheckStart";
 import DailySleepCheckStart from "./pages/DailyCheck/DailySleepCheckStart";
@@ -17,7 +17,7 @@ import DailyCheck from "./pages/DailyCheck/DailyCheck";
 import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
 import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
-import HabitManagePage from "./pages/Home/PillChallenge/HabitManagePage";
+import HabitManagePage from "./pages/Home/Challenge/HabitManagePage";
 
 import LoginPage from "./pages/login/LoginPage";
 import EmailCheckPage from "./pages/login/EmailCheckPage";

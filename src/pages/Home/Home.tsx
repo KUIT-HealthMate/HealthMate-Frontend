@@ -1,8 +1,8 @@
 import styles from "./Home.module.scss";
 import TodaysChallenge from "./TodayChallenge";
-import SupplementChallenge from "./PillChallenge/SupplementChallenge";
+import SupplementChallenge from "./Challenge/SupplementChallenge";
 
-import HabitChallenge from "./PillChallenge/HabitChallenge";
+import HabitChallenge from "./Challenge/HabitChallenge";
 import TopBar from "../../components/organs/Bars/TopBar";
 
 import { useNavigate } from "react-router-dom";
