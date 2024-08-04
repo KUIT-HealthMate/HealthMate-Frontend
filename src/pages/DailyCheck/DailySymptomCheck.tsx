@@ -121,8 +121,8 @@ const DailySymptomCheck = (props: symptomProps) => {
                     <hr className={styles.underLine}></hr>
                 </div>
 
-                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `88px`, background: `#F5F6F8`, color: `#8F8F8F`, border: `1px solid #DEDEDE` }} onClick={() => (navigate(props.buttonNavigatePass))}>
-                    <p className={styles.NextButtonText}>건너뛰기</p>
+                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `88px`, background: `#F5F6F8`, border: `1px solid #DEDEDE` }} onClick={() => (navigate(props.buttonNavigatePass))}>
+                    <p className={styles.NextButtonText} style={{ color: `#8F8F8F` }}>건너뛰기</p>
                 </button>
                 <button className={styles.NextButton} style={{ position: `fixed`, bottom: `33px` }} onClick={() => (navigate(props.buttonNavigate))}>
                     <p className={styles.NextButtonText}>다음으로</p>
