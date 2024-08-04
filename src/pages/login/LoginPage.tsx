@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import {useGlobalStore} from "../../store/store";
 
-import s from "./LoginPage.module.scss";
+import s from "./styles/LoginPage.module.scss";
 
 import healthMateIcon from "../../assets/loginPage/healthMateIcon.svg";
 import healthMateTitleImg from "../../assets/loginPage/healthMateTitleImg.svg";

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import s from "./TermsPage.module.scss";
+import s from "../styles/TermsPage.module.scss";
 import TermsData from "./assets/TermsData";
 import TermsCheck from "./assets/TermsCheck";
 
 import uncheckedCheckBox from "../../../assets/loginPage/uncheckedCheckbox.svg";
 import checkedCheckBox from "../../../assets/loginPage/checkedCheckbox.svg";
 import rightBraket from "../../../assets/loginPage/rightBraket.svg";
-import EachTerm from "./EachTerm";
-import TermsDetailPage from "./TermsDetailPage";
+import EachTerm from "./EachTerm/EachTerm";
+import TermsDetailPage from "./EachTerm/ContentInEachTermPage";
 import Terms from "./assets/Terms";
 
 interface Props {

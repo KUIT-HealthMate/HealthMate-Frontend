@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 
-import s from "./TermsPage.module.scss";
-import Terms from './assets/Terms';
-import setMatchingModals from './setMatchingModal';
+import s from "../../styles/TermsPage.module.scss";
+import Terms from '../assets/Terms';
+import setMatchingModals from '../utils/setMatchingModal';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
