@@ -1,0 +1,21 @@
+name: build file
+on:
+  push:
+    branches: -main
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
+
+      - name: Cache node modules
+        uses: actions/chache@v1
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
