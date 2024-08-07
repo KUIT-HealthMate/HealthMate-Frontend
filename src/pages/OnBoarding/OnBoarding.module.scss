@@ -1,0 +1,113 @@
+.purposeTop {
+    height: 166px;
+    width: 100%;
+    padding-top: 24px;
+    padding-left: 7.2%;
+
+    .purposeTitle {
+        color: #000000;
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    .purposeText {
+        padding-top: 28px;
+
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+
+        color: #9E9FA4;
+    }
+
+}
+
+.icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 50px;
+
+    width: 86%;
+    height: 308px;
+    padding-top: 35px;
+    padding-left: 7%;
+
+    align-items: center;
+    justify-items: center;
+
+    .iconBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+
+        .iconWrap {
+            background: #FFFFFF;
+            border: 1.1px solid #FFFFFF;
+            box-shadow: -1px 2px 20.4px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+
+            height: 100px;
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+            .iconImage {
+                margin-top: 14px;
+                width: 100px;
+
+            }
+        }
+
+        .iconText {
+            margin-top: 10px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            text-align: center;
+
+            color: #000000;
+        }
+    }
+}
+
+
+
+
+.NextButton {
+    background: #05697F;
+    border-radius: 15px;
+    width: 88%;
+    margin-left: 6%;
+    height: 48px;
+    border: #05697F;
+
+    position: absolute;
+    bottom: 33px;
+    // margin-left: 5.6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+
+    .NextButtonText {
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+
+    }
+}

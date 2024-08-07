@@ -1,0 +1,66 @@
+.findKeyword {
+    display: flex;
+    flex-direction: column;
+
+    .findKeywordWrap {
+        width: 100%;
+        padding-left: 7%;
+        padding-right: 7%;
+        position: absolute;
+        top: 171px;
+
+        .findKeywordText {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+
+            color: #000000;
+        }
+
+
+        .findKeywordInput {
+            width: 86%;
+            margin-top: 27px;
+            background-color: #F4F5FA;
+            border: 1px solid #D9D9D9;
+            border-radius: 5px;
+            // color: #D9D9D9;
+
+            padding-left: 9px;
+
+
+        }
+
+
+    }
+
+
+    .NextButton {
+        background: #05697F;
+        border-radius: 15px;
+        width: 88%;
+        margin-left: 6%;
+        height: 48px;
+        border: #05697F;
+
+        position: absolute;
+        bottom: 33px;
+        // margin-left: 5.6%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFFFFF;
+
+        .NextButtonText {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+
+        }
+    }
+}

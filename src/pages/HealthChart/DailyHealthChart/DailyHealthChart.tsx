@@ -22,14 +22,9 @@ const DailyHealthChart = () => {
                         );
 
                     })}
-
-
-
-
-
                 </div>
-
             </div>
+
         </div>
     )
 }

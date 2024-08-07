@@ -9,6 +9,13 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import useHabitInfoStore from "../../../store/useHabitInfoStore";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Pagination, Navigation } from 'swiper';
+import 'swiper/swiper-bundle.min.css';
+import habitInfo from "../../../store/habitInfo";
+
+SwiperCore.use([Pagination, Navigation]);
+
 export default function HabitChallenge() {
   const {
     HabitInfo,
@@ -16,6 +23,25 @@ export default function HabitChallenge() {
     setExecutionRecord,
     getExecutionRecord,
   } = useHabitInfoStore();
+
+  const splitHabits = (array: habitInfo[]) => {
+    const result = [];
+    for (let i = 0; i < array.length; i += 4) {
+      result.push(array.slice(i, i + 4))
+    }
+    return result;
+  }
+
+  const [newHabits, setNewHabits] = useState<habitInfo[][]>([]);
+
+  useEffect(() => {
+    const chunks = splitHabits(HabitInfo);
+    setNewHabits(chunks);
+
+  }, []);
+
+
+
 
   const hello = (habitid: string) => {
     console.log(getExecutionRecord(habitid));
@@ -31,19 +57,32 @@ export default function HabitChallenge() {
           편집하기<img src={clampR} className={styles.clampR}></img>
         </Link>
       </div>
-      {HabitInfo.map((habit, index) => {
-        return (
-          <div className={styles.HabitInfo}>
-            <p className={styles.HabitName}>{habit.name}</p>
-            <img
-              className={styles.HabitCheckmark}
-              onClick={() => {setExecutionRecord(habit.id); console.log(habit.id + habit.executionRecord)}}
-              src={hello(habit.id)
-              }
-            ></img>
-          </div>
-        );
-      })}
+
+      <Swiper className={styles.swiper} style={{ height: `352px` }} spaceBetween={0} slidesPerView={1} pagination={{ clickable: true }} >
+        {newHabits.map((chunk, chunkIndex) => {
+
+          return (
+            <SwiperSlide>{
+              chunk.map((habit, habitIndex) => {
+                return (
+                  <div className={styles.HabitInfo}>
+                    <p className={styles.HabitName}>{habit.name}</p>
+                    <img
+                      className={styles.HabitCheckmark}
+                      onClick={() => { setExecutionRecord(habit.id); console.log(habit.id + habit.executionRecord) }}
+                      src={hello(habit.id)
+                      }
+                    ></img>
+                  </div>
+                )
+              })
+            }
+            </SwiperSlide>
+          )
+
+        })}
+
+      </Swiper>
     </div>
   );
 }

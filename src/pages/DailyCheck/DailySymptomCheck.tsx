@@ -6,11 +6,21 @@ import exclamationMark from "../../assets/exclamationMark.svg"
 import { useGlobalStoreSurvey } from '../../store/storeSurvey';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from './survey/ProgressBar';
+import TopBarWithCancel from '../../components/organs/Bars/TopBarWithCancel';
 
 
+interface symptomProps {
+    title1: string,
+    title2: string
 
+    buttonNavigatePass: string;
+    buttonNavigate: string,
 
-const DailySymptomCheck = () => {
+    findKeywordNavigate: string;
+}
+
+const DailySymptomCheck = (props: symptomProps) => {
+    console.log("findKeywordNavigate: ", props.findKeywordNavigate)
     const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
     useEffect(() => {
         console.log("마운트됨")
@@ -35,7 +45,7 @@ const DailySymptomCheck = () => {
         { id: 10, title: "이비인후과 관련 증상", symptoms: ["목통증", "청력저하"] },
         { id: 11, title: "비뇨의학과 관련 증상", symptoms: ["비뇨 관련 문제"] },
         { id: 12, title: "치과 관련 증상", symptoms: ["치과", "잇몸출혈"] },
-        { id: 13, title: "기타 상태 ", symptoms: ["증상없음"] }
+        // { id: 13, title: "기타 상태 ", symptoms: ["증상없음"] }
     ]
 
 
@@ -62,12 +72,19 @@ const DailySymptomCheck = () => {
     useEffect(() => { }, [symptomBtnActive]);
     const navigate = useNavigate();
 
+    const { progressPercent } = useGlobalStoreSurvey((state) => ({
+        progressPercent: state.progressPercent
+    }));
+
+    console.log("progressPercent: " + progressPercent);
+
     return (
         <>
-            <ProgressBar></ProgressBar>
+            <TopBarWithCancel></TopBarWithCancel>
+            <ProgressBar percent={progressPercent}></ProgressBar>
             <div className={styles.symptom}>
-                <div className={styles.symptomTitle} style={{ marginTop: `75px` }}>오늘 느껴진 이상 증세가</div>
-                <div className={styles.symptomTitle}>있으신가요?</div>
+                <div className={styles.symptomTitle} style={{ marginTop: `75px` }}>{props.title1}</div>
+                <div className={styles.symptomTitle}>{props.title2}</div>
                 <div style={{ color: `#F97F59`, marginTop: `14px`, marginLeft: `8.8%`, marginBottom: `91px` }}>*복수선택 가능</div>
 
                 {
@@ -99,17 +116,20 @@ const DailySymptomCheck = () => {
                 }
                 <div className={styles.findKeyword}>
                     <div className={styles.findKeywordText}>
-                        <img src={exclamationMark}></img><div>찾는 키워드가 없나요?</div>
+                        <img src={exclamationMark}></img><div onClick={() => navigate("/findkeyword", { state: { value: props.findKeywordNavigate } })}>찾는 키워드가 없나요?</div>
                     </div>
                     <hr className={styles.underLine}></hr>
                 </div>
 
-                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `33px` }} onClick={() => { navigate('/dailycheckdone') }}>
+                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `88px`, background: `#F5F6F8`, border: `1px solid #DEDEDE` }} onClick={() => (navigate(props.buttonNavigatePass))}>
+                    <p className={styles.NextButtonText} style={{ color: `#8F8F8F` }}>건너뛰기</p>
+                </button>
+                <button className={styles.NextButton} style={{ position: `fixed`, bottom: `33px` }} onClick={() => (navigate(props.buttonNavigate))}>
                     <p className={styles.NextButtonText}>다음으로</p>
                 </button>
                 <div className={styles.whiteSpace}></div>
 
-            </div>
+            </div >
         </>
     )
 };

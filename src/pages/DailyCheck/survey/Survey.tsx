@@ -16,6 +16,7 @@ interface Props {
 }
 
 
+
 const Survey = ({ questions, candidates, type, multipleAble, limit }: Props) => {
     const nextQuestion = useGlobalStoreSurvey((state) => ({
         currentQuestionIdx: state.currentQuestionIdx,
@@ -44,7 +45,6 @@ const Survey = ({ questions, candidates, type, multipleAble, limit }: Props) => 
 
 
     function setBtnDefault() {
-
 
         setBtnActive(prevState => {
             console.log("setBtnDefault");
@@ -102,25 +102,6 @@ const Survey = ({ questions, candidates, type, multipleAble, limit }: Props) => 
                 navigate('/dailysymptomcheckstart')
             }
         }
-
-        // if (type == 1) {
-        //     nextQuestion.nextQuestion();
-        //     if (nextQuestion.currentQuestionIdx >= questionCnt - 1) {
-        //         navigate('/dailymealcheckstart')
-        //     }
-        // } else if (type == 2) {
-        //     //nextQuestion.nextQuestionMeal();
-        //     nextQuestion.nextQuestion();
-        //     if (nextQuestion.mealCurrentQuestionIdx >= questionCnt - 1) {
-        //         navigate('/dailysleepcheckstart')
-        //     }
-        // } else {
-        //     nextQuestion.nextQuestionSleep();
-        //     if (nextQuestion.sleepCurrentQuestionIdx >= questionCnt - 1) {
-        //         navigate('/dailysymptomcheckstart')
-        //     }
-        // }
-
     }
 
     function NextButtonActive() {
@@ -134,6 +115,11 @@ const Survey = ({ questions, candidates, type, multipleAble, limit }: Props) => 
     }
 
 
+    const { progressPercent } = useGlobalStoreSurvey((state) => ({
+        progressPercent: state.progressPercent
+    }));
+
+    console.log("progressPercent: " + progressPercent);
 
 
     useEffect(() => { console.log("useeffect_Survey"); }, [btnActive]);
@@ -153,7 +139,7 @@ const Survey = ({ questions, candidates, type, multipleAble, limit }: Props) => 
             <div className={styles.backButton} onClick={goBack}>
                 <img style={{ width: `8.89px`, height: `16px` }} src={leftBracket} />
             </div>
-            <ProgressBar></ProgressBar>
+            <ProgressBar percent={progressPercent}></ProgressBar>
             <div className={styles.surveyWrap}>
                 <div className={styles.survey}>
                     <div className={styles.question}>

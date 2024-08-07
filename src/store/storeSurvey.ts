@@ -89,31 +89,5 @@ export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
 
     }),
 
-    // nextQuestionMeal: () => set((state) => {
-    //     console.log("nextQuestionMeal");
-    //     const newProgressPercent = state.progressPercent + 5.88
-    //     if (state.currentQuestionIdx < surveysMeal.length - 1) {
-    //         return { currentQuestionIdx: state.currentQuestionIdx + 1, progressPercent: newProgressPercent };
-    //     } else {
-    //         console.log("식사패턴 다함");
-    //         return { progressPercent: newProgressPercent };
-    //     }
-    //     // if (state.mealCurrentQuestionIdx < surveysMeal.length - 1) {
-    //     //     return { mealCurrentQuestionIdx: state.mealCurrentQuestionIdx + 1, progressPercent: newProgressPercent };
-    //     // } else {
-    //     //     console.log("식사패턴 다함");
-    //     //     return { progressPercent: newProgressPercent };
-    //     // }
-    // }),
-    // nextQuestionSleep: () => set((state) => {
-    //     console.log("nextQuestionMeal");
-    //     const newProgressPercent = state.progressPercent + 5.88
-    //     if (state.sleepCurrentQuestionIdx < surveysSleep.length - 1) {
-    //         return { sleepCurrentQuestionIdx: state.sleepCurrentQuestionIdx + 1, progressPercent: newProgressPercent };
-    //     } else {
-    //         console.log("수면패턴 다함");
-    //         return { progressPercent: newProgressPercent };
-    //     }
-    // }),
 }));
 
