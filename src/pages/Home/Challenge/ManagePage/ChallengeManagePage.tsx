@@ -57,6 +57,7 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
   ? Omit<pillInfo, 'id' | 'notificationTime'>
   : Omit<habitInfo, 'id' | 'notificationTime'>;
 
+
   let initChallenge;
   if(challengeType == 'pill'){
     initChallenge = initPill;
@@ -64,6 +65,9 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
     initChallenge = initHabit
   }
   const [newChallenge, setNewChallenge] = useState<initChallengeInfo<T>>(initChallenge as unknown as initChallengeInfo<T>);
+
+  type pillChallengeSetter = React.Dispatch<React.SetStateAction<Omit<pillInfo, "id" | "notificationTime">>>;
+  type habitChallengeSetter = React.Dispatch<React.SetStateAction<Omit<habitInfo, "id" | "notificationTime">>>;
 
   //새로 추가하는 화면인지, 편집하는 화면인지를 구분함.
   let isAddingNewChallenge: boolean;
@@ -111,21 +115,11 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
   return (
     <>
       <div className={s.wrap}>
-        <ChallengeManageHeader />
-        <div className={s.statusBar}></div>
-        <div className={s.header}>
-          <div className={s.titleBar}>
-            <button onClick={() => navigate(-1)}>
-              <img src={leftBracket} alt="" />
-            </button>
-            <div className={s.title}>
-              {isAddingNewChallenge ? "알약 챌린지 추가" : "알약 정보 편집"}
-            </div>
-          </div>
-        </div>
+        <ChallengeManageHeader challengeType={challengeType} isAddingNewChallenge={isAddingNewChallenge}/>
+        
         <div className={s.contentWrap}>
           <NameInputSection
-            placeHolderMessage={"알약 이름을 입력해주세요"}
+            isAddingNewChallenge={isAddingNewChallenge}
             handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
               handleChallengeName<initChallengeInfo<T>>(
                 e.target,
@@ -134,7 +128,7 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
               );
             }}
             defaultValue={newChallenge.name}
-            challengeType={"pill"}
+            challengeType={challengeType}
           />
 
           {isPillChallenge(challengeType) && (
@@ -143,22 +137,14 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
                 handleButtonFunc={(idx: number) =>
                   handleBeforeOrAfterMeal<pillInfo>(
                     idx,
-                    setNewChallenge as unknown as React.Dispatch<
-                      React.SetStateAction<
-                        Omit<pillInfo, "id" | "notificationTime">
-                      >
-                    >,
+                    setNewChallenge as pillChallengeSetter,
                     newChallenge as pillInfo
                   )
                 }
                 handleMinuteFunc={(e: ChangeEvent<HTMLInputElement>) => {
                   handleMealMinute(
                     e.target,
-                    setNewChallenge as unknown as React.Dispatch<
-                      React.SetStateAction<
-                        Omit<pillInfo, "id" | "notificationTime">
-                      >
-                    >,
+                    setNewChallenge as pillChallengeSetter,
                     newChallenge as pillInfo
                   );
                 }}
@@ -173,11 +159,7 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
                   handleEatingTiming(
                     e,
                     mealInfo,
-                    setNewChallenge as unknown as React.Dispatch<
-                      React.SetStateAction<
-                        Omit<pillInfo, "id" | "notificationTime">
-                      >
-                    >,
+                    setNewChallenge as pillChallengeSetter,
                     newChallenge as pillInfo
                   )
                 }
@@ -199,9 +181,8 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
               );
             }}
             defaultChecked={
-              isPillChallenge(challengeType)
-                ? (newChallenge as pillInfo).weeklyIntakeFrequency
-                : (newChallenge as habitInfo).weeklyExecutionFrequency
+              isPillChallenge(challengeType) ? 
+              (newChallenge as pillInfo).weeklyIntakeFrequency : (newChallenge as habitInfo).weeklyExecutionFrequency
             }
           />
 
