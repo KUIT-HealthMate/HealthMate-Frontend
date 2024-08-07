@@ -1,7 +1,7 @@
 import habitInfo from "../../../../../store/habitInfo";
 import pillInfo from "../../../../../store/pillInfo";
 
-export const initPill = (): Omit<Omit<pillInfo, "id">, "notificationTime"> => {
+export const initPill = (): Omit<pillInfo, "id" | "notificationTime"> => {
     return {
       name: "", // 알약 이름
       intakeTime: { beforeOrAfterMeal: 0, minutes: 0 }, // 섭취 시간 (식전 1 식후 2, 분 number로)

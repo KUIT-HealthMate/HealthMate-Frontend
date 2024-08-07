@@ -26,6 +26,7 @@ import CompleteChangeButton from "./components/CompleteChangeButton";
 import handleAlarmTime from "./utils/Alarm/handleAlarmTime";
 import editAlarmTime from "./utils/Alarm/editAlarmTime";
 import deleteAlarmTime from "./utils/Alarm/deleteAlarmTime";
+import { AlarmTime } from "./utils/Alarm/AlarmTime";
 
 
 const HabitEditingPage = () => {
@@ -42,10 +43,10 @@ const HabitEditingPage = () => {
 
   const navigate = useNavigate();
 
-  const { HabitInfo, setHabitInfo, getHabitCopy, setHabit } = useHabitInfoStore();
+  const { getHabitCopy } = useHabitInfoStore();
 
   //notificationTime은 화면에 계속 렌더링되어야 하므로 분리하여 state로 관리
-  const [newHabit, setNewHabit] = useState<Omit<Omit<habitInfo, "id">, "notificationTime">>(initHabit);
+  const [newHabit, setNewHabit] = useState<Omit<habitInfo, "id" | "notificationTime">>(initHabit);
 
   //새로 추가하는 화면인지, 편집하는 화면인지를 구분함.
   let isAddingNewHabit: boolean;
@@ -55,9 +56,7 @@ const HabitEditingPage = () => {
   const [editingHabitId, setEditingHabitId] = useState<string>(alreadyExistingHabitId);
 
   // 분리된 notificationTime
-  const [alarmTime, setAlarmTime] = useState<
-    { hour: number; minutes: number }[]
-  >([]);
+  const [alarmTime, setAlarmTime] = useState<AlarmTime[]>([]);
 
   // 알림톡 시간을 위한 모달창. true 시 모달창이 표시됨.
   const [modal, setModal] = useState(false);

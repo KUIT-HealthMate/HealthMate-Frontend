@@ -22,6 +22,12 @@ import HabitManagePage from "./pages/Home/Challenge/ManagePage/HabitManagePage";
 import LoginPage from "./pages/login/LoginPage";
 import EmailCheckPage from "./pages/login/EmailCheckPage";
 import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
+import ChallengeManagePage from "./pages/Home/Challenge/ManagePage/ChallengeManagePage";
+
+enum challengeType {
+  Pill = 'pill',
+  Habit = 'habit'
+}
 
 const Router = () => {
   return (
@@ -40,8 +46,8 @@ const Router = () => {
           path="/ChallengeEdit"
           element={<ChallengeEditingPage />}
         />
-        <Route path="/pillAddingPage" element={<PillManagePage />} />
-        <Route path="/pillEditingPage/:id" element={<PillManagePage />} />
+        <Route path="/pillAddingPage" element={<ChallengeManagePage challengeType={challengeType.Pill}/>} />
+        <Route path="/pillEditingPage/:id" element={<ChallengeManagePage challengeType={challengeType.Pill}/>} />
         <Route path="/habitAddingPage" element={<HabitManagePage />} />
         <Route path="/habitEditingPage/:id" element={<HabitManagePage />} />
 

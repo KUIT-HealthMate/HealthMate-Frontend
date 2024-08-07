@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import habitInfo from "./habitInfo";
+import { initHabit } from "../pages/Home/Challenge/ManagePage/utils/initChallenge";
 
 interface HabitInfoState {
     HabitInfo: habitInfo[];
@@ -140,31 +141,35 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
       ],
     })),
 
-  getHabitCopy: (habitId: string) => {
-    //Id에 해당하는 habit의 참조를 얻는다
-    const targetHabit: habitInfo = get().HabitInfo.find(
-      (habit) => habit.id == habitId
-    ) as habitInfo;
+  getHabitCopy: (habitId: string | undefined) => {
+    if(habitId == undefined) {
+      return {...initHabit(), notificationTime: []}
+    } else {
+        //Id에 해당하는 habit의 참조를 얻는다
+        const targetHabit: habitInfo = get().HabitInfo.find(
+          (habit) => habit.id == habitId
+        ) as habitInfo;
 
-    //얕은 복사한 복사본을 생성
-    const duplicatedHabit: Omit<habitInfo, "id"> = {
-      name: targetHabit.name,
-      executionRecord: targetHabit.executionRecord,
-      weeklyExecutionFrequency: {
-        monday: targetHabit.weeklyExecutionFrequency.monday,
-        tuesday: targetHabit.weeklyExecutionFrequency.tuesday,
-        wednesday: targetHabit.weeklyExecutionFrequency.wednesday,
-        thursday: targetHabit.weeklyExecutionFrequency.thursday,
-        friday: targetHabit.weeklyExecutionFrequency.friday,
-        saturday: targetHabit.weeklyExecutionFrequency.saturday,
-        sunday: targetHabit.weeklyExecutionFrequency.sunday,
-      },
-      notificationTime: targetHabit.notificationTime.map((time) => ({
-        ...time,
-      })),
-    };
+        //얕은 복사한 복사본을 생성
+        const duplicatedHabit: Omit<habitInfo, "id"> = {
+          name: targetHabit.name,
+          executionRecord: targetHabit.executionRecord,
+          weeklyExecutionFrequency: {
+            monday: targetHabit.weeklyExecutionFrequency.monday,
+            tuesday: targetHabit.weeklyExecutionFrequency.tuesday,
+            wednesday: targetHabit.weeklyExecutionFrequency.wednesday,
+            thursday: targetHabit.weeklyExecutionFrequency.thursday,
+            friday: targetHabit.weeklyExecutionFrequency.friday,
+            saturday: targetHabit.weeklyExecutionFrequency.saturday,
+            sunday: targetHabit.weeklyExecutionFrequency.sunday,
+          },
+          notificationTime: targetHabit.notificationTime.map((time) => ({
+            ...time,
+          })),
+        };
 
-    return duplicatedHabit;
+        return duplicatedHabit;
+    }
   },
 
   setHabit: (
