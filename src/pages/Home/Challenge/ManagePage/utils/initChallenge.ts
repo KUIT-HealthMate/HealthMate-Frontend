@@ -36,3 +36,11 @@ export const initHabit = (): Omit<Omit<habitInfo, "id">, "notificationTime"> => 
       //notificationTime: [{ hour: 0, minutes: 0 }], // 팝업 알림 시간 (19:30 이면 19, 30)
     };
 };
+
+export const initChallenge = (challengeType: string) => {
+    if(challengeType == 'pill'){
+        return initPill();
+      } else {
+        return initHabit();
+      }
+}

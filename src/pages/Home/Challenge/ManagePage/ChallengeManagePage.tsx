@@ -1,19 +1,15 @@
-import React, { ChangeEvent } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useParams } from "react-router-dom";
 import s from "./ManagePage.module.scss";
 import { usePillInfoStore } from "../../../../store/usePillInfoStore";
 
 
 import pillInfo from "../../../../store/pillInfo";
-import uuid from "react-uuid";
 import { useState } from "react";
 import { useGlobalStore } from "../../../../store/store";
 import { useEffect } from "react";
 
-import leftBracket from "../../../../assets/leftBraket.svg";
 
-
-import InputClearButtonImg from "../../../assets/InputClearButton.svg";
 import AlarmTimeInputModal from "./components/AlarmTimeInputModal";
 import NameInputSection from "./components/NameInputSection";
 import IntakeTimeSection from "./components/IntakeTimeSection";
@@ -21,15 +17,9 @@ import IntakePeriodSection from "./components/IntakePeriodSection";
 import ChallengeDaySection from "./components/ChallengeDaySection";
 import AlarmTimeSection from "./components/AlarmTimeSection";
 
-import handleChallengeName from "./utils/handleChallengeName";
-import handleChallengeDay from "./utils/handleChallengeDay";
-import { initHabit, initPill } from "./utils/initChallenge";
+import { initChallenge } from "./utils/initChallenge";
 import CompleteChangeButton from "./components/CompleteChangeButton";
 import { AlarmTime } from "./utils/Alarm/AlarmTime";
-import editAlarmTime from "./utils/Alarm/editAlarmTime";
-import deleteAlarmTime from "./utils/Alarm/deleteAlarmTime";
-import handleAlarmTime from "./utils/Alarm/handleAlarmTime";
-import { handleBeforeOrAfterMeal, handleEatingTiming, handleMealMinute } from "./utils/handlePillOnlyValues";
 import { isHabitChallenge, isPillChallenge } from "./utils/determineChallenge";
 import useHabitInfoStore from "../../../../store/useHabitInfoStore";
 import habitInfo from "../../../../store/habitInfo";
@@ -39,7 +29,7 @@ import { SelectedAlarmTimeFormat } from "./utils/Alarm/SelectedAlarmTimeFormat";
 
 const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
 
-  //하단 바 안보이게
+  //하단 바 숨김
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
     console.log("마운트됨");
@@ -49,50 +39,40 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
     };
   }, [setShowBottomBar]);
 
-  const navigate = useNavigate();
   const { getPillCopy } = usePillInfoStore();
   const { getHabitCopy } = useHabitInfoStore();
 
-  //notificationTime은 화면에 계속 렌더링되어야 하므로 분리하여 state로 관리
+  // 알약 챌린지인지, 생활 습관 챌린지인지의 정보
   type initChallengeInfo<T> = T extends pillInfo 
   ? Omit<pillInfo, 'id' | 'notificationTime'>
   : Omit<habitInfo, 'id' | 'notificationTime'>;
 
-
-  let initChallenge;
-  if(challengeType == 'pill'){
-    initChallenge = initPill;
-  } else {
-    initChallenge = initHabit
-  }
-  const [newChallenge, setNewChallenge] = useState<initChallengeInfo<T>>(initChallenge as unknown as initChallengeInfo<T>);
-
+  // 얄약, 습관 챌린지의 set함수의 타입
   type pillChallengeSetter = React.Dispatch<React.SetStateAction<Omit<pillInfo, "id" | "notificationTime">>>;
   type habitChallengeSetter = React.Dispatch<React.SetStateAction<Omit<habitInfo, "id" | "notificationTime">>>;
 
-  //새로 추가하는 화면인지, 편집하는 화면인지를 구분함.
+
+  // 이 화면에 담고 있는 챌린지
+  const [newChallenge, setNewChallenge] = useState<initChallengeInfo<T>>(initChallenge(challengeType) as unknown as initChallengeInfo<T>);
+
+  //새로 추가하는 화면인지, 편집하는 화면인지의 정보
   let isAddingNewChallenge: boolean;
 
-  //편집하는 화면이라면, 어떤 id의 pill을 편집하는지에 대한 정보.
+  // useParams를 통해 챌린지의 id 저장
   const alreadyExistingChallengeId: string = useParams().id as string;
-  const [editingChallengeId, setEditingChallengeId] = useState<string>(alreadyExistingChallengeId);
-
-  // 분리된 notificationTime
-  const [alarmTime, setAlarmTime] = useState<AlarmTime[]>([]);
-
-  // 알림톡 시간을 위한 모달창. true 시 모달창이 표시됨.
-  const [modal, setModal] = useState(false);
 
   if (alreadyExistingChallengeId == undefined) {
     isAddingNewChallenge = true;
   } else {
     isAddingNewChallenge = false;
   }
+  const [editingChallengeId, setEditingChallengeId] = useState<string>(alreadyExistingChallengeId);
 
+  // 챌린지에서 notificationTime을 분리하여 관리
+  const [alarmTime, setAlarmTime] = useState<AlarmTime[]>([]);
 
   useEffect(() => {
     if(!isAddingNewChallenge){
-      // notificationTime 속성을 분리한다.
       if(isPillChallenge(challengeType)){
         let { notificationTime, ...rest } = getPillCopy(editingChallengeId);
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
@@ -103,16 +83,13 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);
       }
-      // 기존 존재하는 챌린지 편집일 경우 notificationTime도 초기화
     }
   }, [editingChallengeId]);
-  
-  const [amOrPm, setAmOrPm] = useState(0);
-  const [hour, setHour] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [editIndex, setEditIndex] = useState(0);
 
+  // 알림톡 시간을 위한 모달창, true 시 모달창 표시
+  const [modal, setModal] = useState(false);
+
+  // 알림톡 시간 추가 / 수정 / 삭제를 위한 state 값
   const [selectedAlarmTime, setSelectedAlarmTime] = useState<SelectedAlarmTimeFormat>(
     { amOrPm: 0, hour: 0, minutes: 0, isEditMode: false, editIndex: 0 }
   );
