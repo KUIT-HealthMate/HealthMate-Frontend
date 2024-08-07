@@ -2,28 +2,43 @@ import React, { useRef, useState } from 'react';
 import s from "./AlarmTimeInputModal.module.scss";
 import blackX from "../../../../../assets/blackX.svg";
 import WheelPicker from "./WheelPicker";
+import { SelectedAlarmTimeFormat } from '../utils/Alarm/SelectedAlarmTimeFormat';
+import handleAlarmTime from '../utils/Alarm/handleAlarmTime';
+import { AlarmTime } from '../utils/Alarm/AlarmTime';
 
 interface Props {
+    alarmTime: AlarmTime[];
+    setAlarmTime: React.Dispatch<React.SetStateAction<AlarmTime[]>>
+    selectedAlarmTime: SelectedAlarmTimeFormat;
+    setSelectedAlarmTime: React.Dispatch<React.SetStateAction<SelectedAlarmTimeFormat>>;
     modal: boolean;
     setModal: React.Dispatch<React.SetStateAction<boolean>>;
-    amOrPm: number;
-    setAmOrPm: React.Dispatch<React.SetStateAction<number>>;
-    hour: number;
-    setHour: React.Dispatch<React.SetStateAction<number>>;
-    minutes: number;
-    setMinutes: React.Dispatch<React.SetStateAction<number>>;
-    handleAlarmTime: () => void;
 }
 
-const AlarmTimeInputModal:React.FC<Props> = ({modal, setModal, amOrPm, setAmOrPm, hour, setHour, minutes, setMinutes, handleAlarmTime}) => {
+const AlarmTimeInputModal:React.FC<Props> = ({alarmTime, setAlarmTime, selectedAlarmTime,setSelectedAlarmTime, modal, setModal }) => {
   const modalBackground = useRef();
 
   
 
   const handleTimeSet = () => {
     setModal(false);
-    handleAlarmTime();
+    handleAlarmTime(alarmTime, setAlarmTime, selectedAlarmTime, setSelectedAlarmTime);
   }
+
+  const setAmOrPm = (amOrPm: number) => {
+    setSelectedAlarmTime({...selectedAlarmTime,amOrPm: amOrPm});
+  }
+
+  const setHour = (hour: number) => {
+    setSelectedAlarmTime({...selectedAlarmTime, hour: hour})
+  }
+
+  const setMinutes = (minutes: number) => {
+    setSelectedAlarmTime({...selectedAlarmTime, minutes : minutes})
+  }
+
+  console.log("???");
+  console.log(selectedAlarmTime);
 
   return (
     <div className={s.AlarmTimeInputWrapper} ref={modalBackground as any} onClick={e => {
@@ -37,10 +52,10 @@ const AlarmTimeInputModal:React.FC<Props> = ({modal, setModal, amOrPm, setAmOrPm
             <button type="button" onClick={() => setModal(false)}><img className={s.modalXButton}src={blackX} alt="" /></button>
           </div>
           <div className={s.wheelPickerWrap}>
-            <WheelPicker list={["오전","오후"]} pickerStyle={{borderRadius:'10px 0 0 10px'}}initialIndex={amOrPm} onSelectedChange={(selected) => { selected == "오전" ? setAmOrPm(0) : setAmOrPm(1); console.log(selected); console.log(amOrPm)}} > </ WheelPicker>
-            <WheelPicker list={["12","01","02","03","04","05","06","07","08","09","10","11"]} initialIndex={hour} onSelectedChange={(selected) => { setHour(selected as unknown as number); console.log(hour)}} > </ WheelPicker>
+            <WheelPicker list={["오전","오후"]} pickerStyle={{borderRadius:'10px 0 0 10px'}} initialIndex={selectedAlarmTime.amOrPm} onSelectedChange={(selected) => { selected == "오전" ? setAmOrPm(0) : setAmOrPm(1)}} > </ WheelPicker>
+            <WheelPicker list={["12","01","02","03","04","05","06","07","08","09","10","11"]} initialIndex={selectedAlarmTime.hour} onSelectedChange={(selected) => { setHour(selected as number)}} > </ WheelPicker>
             <WheelPicker list={[":"]} onSelectedChange={() => {}} initialIndex={0}> </ WheelPicker>
-            <WheelPicker list={["00","05","10","15","20","25","30","35","40","45","50","55"]} pickerStyle={{borderRadius:'0 10px 10px 0'}} initialIndex={minutes == 0 ? minutes : minutes/5} onSelectedChange={(selected) => { setMinutes(selected as unknown as number); console.log(minutes)}} > </ WheelPicker>
+            <WheelPicker list={["00","05","10","15","20","25","30","35","40","45","50","55"]} pickerStyle={{borderRadius:'0 10px 10px 0'}} initialIndex={selectedAlarmTime.minutes == 0 ? selectedAlarmTime.minutes : selectedAlarmTime.minutes/5} onSelectedChange={(selected) => { setMinutes(selected as number)}} > </ WheelPicker>
           </div>
           <button type="button" className={s.AlarmTimeInputCompleteButton} onClick={() => handleTimeSet()}>완료</button>
         </div>

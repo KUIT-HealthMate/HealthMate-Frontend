@@ -3,20 +3,21 @@ import s from "../ManagePage.module.scss";
 
 import InputClearButton from "./InputClearButton";
 import { isPillChallenge } from "../utils/determineChallenge";
+import handleChallengeName from "../utils/handleChallengeName";
 
-interface Props {
-  isAddingNewChallenge: boolean;
-  handleChangeFunc: (e: ChangeEvent<HTMLInputElement>) => void;
+interface Props<T> {
+  setNewChallenge: React.Dispatch<React.SetStateAction<T>>
+  newChallenge: Omit<T, "id" | "notificationTime">
   defaultValue: string;
   challengeType: string;
 }
 
-const NameInputSection: React.FC<Props> = ({
-  isAddingNewChallenge,
-  handleChangeFunc,
+const NameInputSection = <T,>({
+  setNewChallenge,
+  newChallenge,
   defaultValue,
   challengeType
-}) => {
+}: Props<T>) => {
 
   let placeHolderMessage: string = isPillChallenge(challengeType) ? "알약" : "운동";
   placeHolderMessage += " 이름을 입력해주세요";
@@ -31,7 +32,7 @@ const NameInputSection: React.FC<Props> = ({
           type="text"
           placeholder={placeHolderMessage}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            handleChangeFunc(e);
+            handleChallengeName(e.target,setNewChallenge,newChallenge);
           }}
           defaultValue={defaultValue}
         />

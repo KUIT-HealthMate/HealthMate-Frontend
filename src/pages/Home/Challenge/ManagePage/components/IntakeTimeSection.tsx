@@ -1,14 +1,16 @@
 import React, { ChangeEvent } from 'react'
 import s from "../ManagePage.module.scss"
 import InputClearButton from './InputClearButton';
+import pillInfo from '../../../../../store/pillInfo';
+import { handleBeforeOrAfterMeal, handleMealMinute } from '../utils/handlePillOnlyValues';
 
 interface Props {
-    handleButtonFunc: (idx: number) => void;
-    handleMinuteFunc: (e: ChangeEvent<HTMLInputElement>) => void
+    setNewChallenge: React.Dispatch<React.SetStateAction<Omit<pillInfo, "id" | "notificationTime">>>
+    newChallenge: Omit<pillInfo, "id" | "notificationTime">
     defaultValues: { beforeOrAfterMeal: number; minutes: number; }; //number;
 }
 
-const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, handleMinuteFunc, defaultValues}) => {
+const IntakeTimeSection:React.FC<Props> = ({setNewChallenge, newChallenge, defaultValues}) => {
   
   return (
     <div className={s.detailDiv}>
@@ -18,7 +20,7 @@ const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, handleMinuteFunc, 
                 type="radio"
                 name="beforeOrAfterMeal"
                 id="before"
-                onChange={() => handleButtonFunc(1)}
+                onChange={() => handleBeforeOrAfterMeal(1,setNewChallenge,newChallenge)}
                 checked={defaultValues.beforeOrAfterMeal == 1}
               />
               <label htmlFor="before" className={s.smallButton}>
@@ -28,7 +30,7 @@ const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, handleMinuteFunc, 
                 type="radio"
                 name="beforeOrAfterMeal"
                 id="after"
-                onChange={() => handleButtonFunc(2)}
+                onChange={() => handleBeforeOrAfterMeal(2,setNewChallenge,newChallenge)}
                 checked={defaultValues.beforeOrAfterMeal == 2}
               />
               <label htmlFor="after" className={s.smallButton}>
@@ -39,7 +41,7 @@ const IntakeTimeSection:React.FC<Props> = ({handleButtonFunc, handleMinuteFunc, 
                   className={s.minuteInput}
                   type="text"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    handleMinuteFunc(e);
+                    handleMealMinute(e.target,setNewChallenge,newChallenge)
                   }}
                   value={defaultValues.minutes}
                 />

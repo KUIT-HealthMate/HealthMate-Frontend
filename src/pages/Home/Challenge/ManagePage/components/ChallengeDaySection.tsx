@@ -1,8 +1,10 @@
 import React, { ChangeEvent } from 'react'
 import s from "../ManagePage.module.scss";
+import handleChallengeDay from '../utils/handleChallengeDay';
 
-interface Props {
-    handlePeriodFunc: (e: ChangeEvent<HTMLInputElement>, dayInfo: string) => void
+interface Props<T> {
+    setNewChallenge: React.Dispatch<React.SetStateAction<T>>
+    newChallenge: Omit<T, "id" | "notificationTime">
     defaultChecked: {
         monday: boolean;
         tuesday: boolean;
@@ -14,7 +16,7 @@ interface Props {
     }
 }
 
-const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked}) => {
+const ChallengeDaySection = <T,>({setNewChallenge, newChallenge, defaultChecked}: Props<T>) => {
   return (
     <div className={s.detailDiv}>
             <span className={s.detailTitle}>주 섭취 횟수</span>
@@ -23,7 +25,7 @@ const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 type="checkbox"
                 id="mon"
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handlePeriodFunc(e, "monday")
+                  handleChallengeDay(e, setNewChallenge, newChallenge, "monday")
                 }
                 checked={defaultChecked.monday}
               />
@@ -34,7 +36,7 @@ const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 type="checkbox"
                 id="tue"
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handlePeriodFunc(e, "tuesday")
+                  handleChallengeDay(e, setNewChallenge, newChallenge, "tuesday")
                 }
                 checked={defaultChecked.tuesday}
               />
@@ -45,7 +47,7 @@ const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 type="checkbox"
                 id="wed"
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handlePeriodFunc(e, "wednesday")
+                  handleChallengeDay(e, setNewChallenge, newChallenge, "wednesday")
                 }
                 checked={defaultChecked.wednesday}
               />
@@ -56,7 +58,7 @@ const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 type="checkbox"
                 id="thu"
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handlePeriodFunc(e, "thursday")
+                  handleChallengeDay(e, setNewChallenge, newChallenge, "thursday")
                 }
                 checked={defaultChecked.thursday}
               />
@@ -67,7 +69,7 @@ const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 type="checkbox"
                 id="fri"
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handlePeriodFunc(e, "friday")
+                  handleChallengeDay(e, setNewChallenge, newChallenge, "friday")
                 }
                 checked={defaultChecked.friday}
               />
@@ -78,7 +80,7 @@ const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 type="checkbox"
                 id="sat"
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handlePeriodFunc(e, "saturday")
+                  handleChallengeDay(e, setNewChallenge, newChallenge, "saturday")
                 }
                 checked={defaultChecked.saturday}
               />
@@ -89,7 +91,7 @@ const ChallengeDaySection:React.FC<Props> = ({handlePeriodFunc, defaultChecked})
                 type="checkbox"
                 id="sun"
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  handlePeriodFunc(e, "sunday")
+                  handleChallengeDay(e, setNewChallenge, newChallenge, "sunday")
                 }
                 checked={defaultChecked.sunday}
               />
