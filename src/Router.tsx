@@ -26,15 +26,15 @@ import ChallengeManagePage from "./pages/Home/Challenge/ManagePage/ChallengeMana
 import pillInfo from "./store/pillInfo";
 import habitInfo from "./store/habitInfo";
 
-enum challengeType {
-  Pill = 'pill',
-  Habit = 'habit'
-}
-
 import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoarding";
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
 import { Welcome } from "./pages/OnBoarding/OnBoarding";
 import { FindKeyword } from "./pages/OnBoarding/findKeyword";
+
+enum challengeType {
+  Pill = 'pill',
+  Habit = 'habit'
+}
 
 const Router = () => {
   return (
