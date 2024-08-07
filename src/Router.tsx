@@ -7,7 +7,7 @@ import ChallengeStatistics from "./pages/Home/ChallengeStatistics/ChallengeStati
 
 import ChallengeEditingPage from "./pages/Home/Challenge/ChallengeEditingPage";
 
-import PillManagePage from "./pages/Home/Challenge/ManagePage/PillManagePage";
+
 import DailyCheckStart from "./pages/DailyCheck/DailyCheckStart";
 import DailyMealCheckStart from "./pages/DailyCheck/DailyMealCheckStart";
 import DailySleepCheckStart from "./pages/DailyCheck/DailySleepCheckStart";
@@ -17,12 +17,14 @@ import DailyCheck from "./pages/DailyCheck/DailyCheck";
 import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
 import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
-import HabitManagePage from "./pages/Home/Challenge/ManagePage/HabitManagePage";
+
 
 import LoginPage from "./pages/login/LoginPage";
 import EmailCheckPage from "./pages/login/EmailCheckPage";
 import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
 import ChallengeManagePage from "./pages/Home/Challenge/ManagePage/ChallengeManagePage";
+import pillInfo from "./store/pillInfo";
+import habitInfo from "./store/habitInfo";
 
 enum challengeType {
   Pill = 'pill',
@@ -46,10 +48,10 @@ const Router = () => {
           path="/ChallengeEdit"
           element={<ChallengeEditingPage />}
         />
-        <Route path="/pillAddingPage" element={<ChallengeManagePage challengeType={challengeType.Pill}/>} />
-        <Route path="/pillEditingPage/:id" element={<ChallengeManagePage challengeType={challengeType.Pill}/>} />
-        <Route path="/habitAddingPage" element={<HabitManagePage />} />
-        <Route path="/habitEditingPage/:id" element={<HabitManagePage />} />
+        <Route path="/pillAddingPage" element={<ChallengeManagePage<pillInfo> challengeType={challengeType.Pill}/>} />
+        <Route path="/pillEditingPage/:id" element={<ChallengeManagePage<pillInfo> challengeType={challengeType.Pill}/>} />
+        <Route path="/habitAddingPage" element={<ChallengeManagePage<habitInfo> challengeType={challengeType.Habit}/>} />
+        <Route path="/habitEditingPage/:id" element={<ChallengeManagePage<habitInfo> challengeType={challengeType.Habit}/>} />
 
         <Route path="/dailycheckstart" element={<DailyCheckStart />} />
         <Route path="/dailymealcheckstart" element={<DailyMealCheckStart />} />

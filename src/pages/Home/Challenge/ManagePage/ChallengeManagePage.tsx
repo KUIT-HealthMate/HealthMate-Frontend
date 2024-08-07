@@ -32,8 +32,8 @@ import handleAlarmTime from "./utils/Alarm/handleAlarmTime";
 import { handleBeforeOrAfterMeal, handleEatingTiming, handleMealMinute } from "./utils/handlePillOnlyValues";
 import { isHabitChallenge, isPillChallenge } from "./utils/determineChallenge";
 import useHabitInfoStore from "../../../../store/useHabitInfoStore";
-import { getChallengeCopy } from "./utils/getChallengeCopy";
 import habitInfo from "../../../../store/habitInfo";
+import ChallengeManageHeader from "./components/ChallengeManageHeader";
 
 
 const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
@@ -49,6 +49,8 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
   }, [setShowBottomBar]);
 
   const navigate = useNavigate();
+  const { getPillCopy } = usePillInfoStore();
+  const { getHabitCopy } = useHabitInfoStore();
 
   //notificationTime은 화면에 계속 렌더링되어야 하므로 분리하여 state로 관리
   type initChallengeInfo<T> = T extends pillInfo 
@@ -62,15 +64,6 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
     initChallenge = initHabit
   }
   const [newChallenge, setNewChallenge] = useState<initChallengeInfo<T>>(initChallenge as unknown as initChallengeInfo<T>);
- 
-  // useEffect(() => {
-  //   if (isPillChallenge(challengeType)) {
-  //     setNewChallenge(initPill as unknown as initChallengeInfo<T>);
-  //   } 
-  //   if (isHabitChallenge(challengeType)){
-  //     setNewChallenge(initHabit as unknown as initChallengeInfo<T>);
-  //   }
-  // }, [challengeType]);
 
   //새로 추가하는 화면인지, 편집하는 화면인지를 구분함.
   let isAddingNewChallenge: boolean;
@@ -96,12 +89,12 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
     if(!isAddingNewChallenge){
       // notificationTime 속성을 분리한다.
       if(isPillChallenge(challengeType)){
-        let { notificationTime, ...rest } = getChallengeCopy<pillInfo>(challengeType, editingChallengeId);
+        let { notificationTime, ...rest } = getPillCopy(editingChallengeId);
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);
       }
       if(isHabitChallenge(challengeType)){
-        let { notificationTime, ...rest } = getChallengeCopy<habitInfo>(challengeType,editingChallengeId);
+        let { notificationTime, ...rest } = getHabitCopy(editingChallengeId);
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);
       }
@@ -118,6 +111,7 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
   return (
     <>
       <div className={s.wrap}>
+        <ChallengeManageHeader />
         <div className={s.statusBar}></div>
         <div className={s.header}>
           <div className={s.titleBar}>
@@ -130,29 +124,113 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
           </div>
         </div>
         <div className={s.contentWrap}>
-          <NameInputSection placeHolderMessage = {"알약 이름을 입력해주세요"} handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
-                  handleChallengeName<initChallengeInfo<T>>(e.target,setNewChallenge,newChallenge);
-          }} defaultValue={newChallenge.name} challengeType={"pill"}/>
-          
-          <IntakeTimeSection 
-          handleButtonFunc={(idx:number) => 
-            handleBeforeOrAfterMeal<pillInfo>(idx,setNewChallenge,newChallenge)} 
-          handleMinuteFunc={(e: ChangeEvent<HTMLInputElement>) => {
-            handleMealMinute(e.target,setNewChallenge,newChallenge);
-          }} 
-          defaultValues={newChallenge.intakeTime}/>
-          
-          <IntakePeriodSection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, mealInfo:string) =>
-                  handleEatingTiming(e, mealInfo,setNewChallenge,newChallenge)} 
-                  defaultChecked={newChallenge.dailyIntakePeriod} />
-          
-          <ChallengeDaySection handlePeriodFunc={(e: ChangeEvent<HTMLInputElement>, dayInfo:string) => {
-                  handleChallengeDay<initChallengeInfo<T>>(e,setNewChallenge,newChallenge,dayInfo)
-          }} defaultChecked={newChallenge.weeklyIntakeFrequency} /> 
-          
-          <AlarmTimeSection alarmTime={alarmTime} plusButtonOnClick={() => setModal(true)} editButtonOnClick={(index: number) => editAlarmTime(index, setHour, setMinutes, alarmTime, setAmOrPm, setEditIndex, setModal, setIsEditMode)} deleteButtonOnClick={(index: number) => deleteAlarmTime(index,setAlarmTime,alarmTime)}/>
-            
-          <CompleteChangeButton<pillInfo> isAddingNewChallenge={isAddingNewChallenge} newChallenge={newChallenge} alarmTime={alarmTime} editingChallengeId={editingChallengeId} />
+          <NameInputSection
+            placeHolderMessage={"알약 이름을 입력해주세요"}
+            handleChangeFunc={(e: ChangeEvent<HTMLInputElement>) => {
+              handleChallengeName<initChallengeInfo<T>>(
+                e.target,
+                setNewChallenge,
+                newChallenge
+              );
+            }}
+            defaultValue={newChallenge.name}
+            challengeType={"pill"}
+          />
+
+          {isPillChallenge(challengeType) && (
+            <>
+              <IntakeTimeSection
+                handleButtonFunc={(idx: number) =>
+                  handleBeforeOrAfterMeal<pillInfo>(
+                    idx,
+                    setNewChallenge as unknown as React.Dispatch<
+                      React.SetStateAction<
+                        Omit<pillInfo, "id" | "notificationTime">
+                      >
+                    >,
+                    newChallenge as pillInfo
+                  )
+                }
+                handleMinuteFunc={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleMealMinute(
+                    e.target,
+                    setNewChallenge as unknown as React.Dispatch<
+                      React.SetStateAction<
+                        Omit<pillInfo, "id" | "notificationTime">
+                      >
+                    >,
+                    newChallenge as pillInfo
+                  );
+                }}
+                defaultValues={(newChallenge as pillInfo).intakeTime}
+              />
+
+              <IntakePeriodSection
+                handlePeriodFunc={(
+                  e: ChangeEvent<HTMLInputElement>,
+                  mealInfo: string
+                ) =>
+                  handleEatingTiming(
+                    e,
+                    mealInfo,
+                    setNewChallenge as unknown as React.Dispatch<
+                      React.SetStateAction<
+                        Omit<pillInfo, "id" | "notificationTime">
+                      >
+                    >,
+                    newChallenge as pillInfo
+                  )
+                }
+                defaultChecked={(newChallenge as pillInfo).dailyIntakePeriod}
+              />
+            </>
+          )}
+
+          <ChallengeDaySection
+            handlePeriodFunc={(
+              e: ChangeEvent<HTMLInputElement>,
+              dayInfo: string
+            ) => {
+              handleChallengeDay<initChallengeInfo<T>>(
+                e,
+                setNewChallenge,
+                newChallenge,
+                dayInfo
+              );
+            }}
+            defaultChecked={
+              isPillChallenge(challengeType)
+                ? (newChallenge as pillInfo).weeklyIntakeFrequency
+                : (newChallenge as habitInfo).weeklyExecutionFrequency
+            }
+          />
+
+          <AlarmTimeSection
+            alarmTime={alarmTime}
+            plusButtonOnClick={() => setModal(true)}
+            editButtonOnClick={(index: number) =>
+              editAlarmTime(
+                index,
+                setHour,
+                setMinutes,
+                alarmTime,
+                setAmOrPm,
+                setEditIndex,
+                setModal,
+                setIsEditMode
+              )
+            }
+            deleteButtonOnClick={(index: number) =>
+              deleteAlarmTime(index, setAlarmTime, alarmTime)
+            }
+          />
+
+          <CompleteChangeButton<initChallengeInfo<T>>
+            isAddingNewChallenge={isAddingNewChallenge}
+            newChallenge={newChallenge}
+            alarmTime={alarmTime}
+            editingChallengeId={editingChallengeId}
+          />
 
           <div className={s.bottomBarCover}></div>
 
@@ -163,7 +241,7 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
 
         <div className={s.bottomBarCover}></div>
       </div>
-      
+
       {modal === true ? (
         <AlarmTimeInputModal
           modal={modal}
@@ -174,10 +252,23 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
           setHour={setHour}
           minutes={minutes}
           setMinutes={setMinutes}
-          handleAlarmTime={() => handleAlarmTime(amOrPm,hour,minutes,isEditMode,setAlarmTime,alarmTime,editIndex,setAmOrPm,setHour,setMinutes,setIsEditMode)}
+          handleAlarmTime={() =>
+            handleAlarmTime(
+              amOrPm,
+              hour,
+              minutes,
+              isEditMode,
+              setAlarmTime,
+              alarmTime,
+              editIndex,
+              setAmOrPm,
+              setHour,
+              setMinutes,
+              setIsEditMode
+            )
+          }
         />
       ) : null}
-      
     </>
   );
 };
