@@ -12,3 +12,4 @@ const handleChallengeName = <T>(
   };
 
 export default handleChallengeName;
+

@@ -136,7 +136,7 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
           
           <IntakeTimeSection 
           handleButtonFunc={(idx:number) => 
-            handleBeforeOrAfterMeal(idx,setNewChallenge,newChallenge)} 
+            handleBeforeOrAfterMeal<pillInfo>(idx,setNewChallenge,newChallenge)} 
           handleMinuteFunc={(e: ChangeEvent<HTMLInputElement>) => {
             handleMealMinute(e.target,setNewChallenge,newChallenge);
           }} 
