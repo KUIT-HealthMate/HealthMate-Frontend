@@ -1,248 +1,232 @@
 .backButton {
-    margin: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    padding-left: 23px;
-
+  margin: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 23px;
 }
 
 .surveyWrap {
+  display: flex;
+  height: calc(100vh - 84px - 81px);
+  justify-content: center;
+
+  .survey {
+    // padding-top: auto;
+    // padding-bottom: auto;
     display: flex;
-    height: calc(100vh - 84px - 81px);
+    flex-direction: column;
     justify-content: center;
+    width: 100%;
+    // margin-top: 50%;
 
-    .survey {
+    .question {
+      margin-left: 8.8%;
+      margin-right: 8.8%;
 
-        // padding-top: auto;
-        // padding-bottom: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        // margin-top: 50%;
-
-
-        .question {
-            margin-left: 8.8%;
-
-            .questionText {
-                font-family: 'Pretendard';
-                font-style: normal;
-                font-weight: 800;
-                font-size: 20px;
-                line-height: 24px;
-
-                color: #000000;
-            }
-        }
-
-        .candidate {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin-top: 34px;
-            gap: 8px;
-
-            .candidateBox {
-                width: 84%;
-                height: 54px;
-                padding-top: auto;
-
-                display: flex;
-                align-items: center;
-
-                // background: #FFFFFF;
-
-                box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
-                border-radius: 15px;
-
-                .candidateText {
-                    font-family: 'Pretendard';
-                    font-style: normal;
-                    font-weight: 700;
-                    font-size: 16px;
-                    line-height: 19px;
-                    letter-spacing: -0.165px;
-
-                    margin-left: 17px;
-
-                    // color: #8F8F8F;
-                }
-            }
-        }
-
-        .NextButton {
-            background: #05697F;
-            border-radius: 15px;
-            width: 88%;
-            margin-left: 6%;
-            height: 48px;
-            border: #05697F;
-
-            position: absolute;
-            bottom: 33px;
-            // margin-left: 5.6%;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #FFFFFF;
-
-            .NextButtonText {
-                font-family: 'Pretendard';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 20px;
-                line-height: 24px;
-
-
-            }
-        }
-
-    }
-
-}
-
-.symptom {
-    //   padding-top: 75px;
-
-    .symptomTitle {
-        margin-left: 8.8%;
-
-        font-family: 'Pretendard';
+      .questionText {
+        font-family: "Pretendard";
         font-style: normal;
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 29px;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 24px;
 
         color: #000000;
-
+      }
     }
 
-    .symptomInfo {
-        // margin-left: 7.2%;
-        width: 91%;
-        margin-left: 4.5%;
+    .candidate {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 34px;
+      gap: 8px;
 
-        .symptomCategory {
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 800;
-            font-size: 16px;
-            line-height: 19px;
+      .candidateBox {
+        width: 84%;
+        height: 54px;
+        padding-top: auto;
 
-            color: #8F8F8F;
-        }
-
-        .symptomNames {
-            display: flex;
-            flex-direction: row;
-
-            margin-top: 12px;
-
-
-            .symptomNameWrap {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-right: 2%;
-
-                // width: 100%;
-                height: 29px;
-
-
-                background: #F5F6F8;
-                border: 1px solid #DEDEDE;
-                border-radius: 100px;
-                padding-left: 4%;
-                padding-right: 4%;
-
-                .symptomName {
-                    font-family: 'Inter';
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 12px;
-                    line-height: 15px;
-
-
-                    // padding-left: 14px;
-                    // padding-right: 14px;
-                    color: #818181;
-
-                }
-            }
-
-
-        }
-
-        .divider {
-
-            margin-top: 24px;
-            margin-bottom: 27px;
-        }
-    }
-
-    .findKeyword {
-
-        width: 100%;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: center;
 
-        .findKeywordText {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
+        // background: #FFFFFF;
 
-            margin-top: 132px;
+        box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 15px;
 
-            align-items: center;
-            justify-content: center;
+        .candidateText {
+          font-family: "Pretendard";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 19px;
+          letter-spacing: -0.165px;
 
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 14px;
+          margin-left: 17px;
 
-            color: #939393;
+          // color: #8F8F8F;
         }
-
-        .underLine {
-            width: 13%; //임의
-            border: 2px solid #DEDEDE;
-        }
+      }
     }
 
     .NextButton {
-        background: #05697F;
-        border-radius: 15px;
-        width: 88%;
-        margin-left: 6%;
-        margin-top: 38px;
-        margin-bottom: 30px;
-        height: 48px;
-        border: #05697F;
+      background: #05697f;
+      border-radius: 15px;
+      width: 88%;
+      margin-left: 6%;
+      height: 48px;
+      border: #05697f;
 
+      position: absolute;
+      bottom: 33px;
+      // margin-left: 5.6%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+
+      .NextButtonText {
+        font-family: "Pretendard";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+      }
+    }
+  }
+}
+
+.symptom {
+  //   padding-top: 75px;
+
+  .symptomTitle {
+    margin-left: 8.8%;
+
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #000000;
+  }
+
+  .symptomInfo {
+    // margin-left: 7.2%;
+    width: 91%;
+    margin-left: 4.5%;
+
+    .symptomCategory {
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 19px;
+
+      color: #8f8f8f;
+    }
+
+    .symptomNames {
+      display: flex;
+      flex-direction: row;
+
+      margin-top: 12px;
+
+      .symptomNameWrap {
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
+        margin-right: 2%;
 
-        .NextButtonText {
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 20px;
-            line-height: 24px;
+        // width: 100%;
+        height: 29px;
 
-            color: #FFFFFF;
+        background: #f5f6f8;
+        border: 1px solid #dedede;
+        border-radius: 100px;
+        padding-left: 4%;
+        padding-right: 4%;
+
+        .symptomName {
+          font-family: "Inter";
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 15px;
+
+          // padding-left: 14px;
+          // padding-right: 14px;
+          color: #818181;
         }
+      }
     }
 
-    .whiteSpace {
-        height: 166px;
+    .divider {
+      margin-top: 24px;
+      margin-bottom: 27px;
+    }
+  }
+
+  .findKeyword {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .findKeywordText {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+
+      margin-top: 132px;
+
+      align-items: center;
+      justify-content: center;
+
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+
+      color: #939393;
     }
 
+    .underLine {
+      width: 13%; //임의
+      border: 2px solid #dedede;
+    }
+  }
+
+  .NextButton {
+    background: #05697f;
+    border-radius: 15px;
+    width: 88%;
+    margin-left: 6%;
+    margin-top: 38px;
+    margin-bottom: 30px;
+    height: 48px;
+    border: #05697f;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .NextButtonText {
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+
+      color: #ffffff;
+    }
+  }
+
+  .whiteSpace {
+    height: 166px;
+  }
 }

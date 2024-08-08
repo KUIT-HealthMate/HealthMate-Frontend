@@ -1,4 +1,3 @@
-import React from "react";
 import LinearChartSetting from "./LinearChartSetting";
 import s from "./LinearChart.module.scss";
 import changeChartButton from "../../../assets/changChartButton.svg";

@@ -1,6 +1,5 @@
 import s from "./MyPageTopBar.module.scss";
 import emptyProfile from "../../assets/emptyProfile.svg";
-import editProfile from "../../assets/editProfile.svg";
 import editNickName from "../../assets/rightGreyArrow.svg";
 
 interface MyPageTopBarProps {

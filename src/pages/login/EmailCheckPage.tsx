@@ -1,12 +1,11 @@
-import React from 'react'
-import { useGlobalStore } from '../../store/store';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useGlobalStore } from "../../store/store";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-import TermsPage from './TermsCheckPage/TermsPage';
+import TermsPage from "./TermsCheckPage/TermsPage";
 
-import s from "./styles/EmailCheckPage.module.scss"
+import s from "./styles/EmailCheckPage.module.scss";
 
 import kakaoTalkIconWithBackground from "../../assets/loginPage/kakakTalkIconWithBackground.svg";
 import leftBraket from "../../assets/leftBraket.svg";
@@ -20,17 +19,17 @@ const EmailCheckPage = () => {
     return () => {
       setShowBottomBar();
     };
-  },[])
+  }, [setShowBottomBar]);
 
   // 서버에서 이메일 받아서 설정
-  const handleEmailName = () => {
-    const span = document.getElementsByClassName(s.emailText)[0] as HTMLSpanElement;
-    span.innerText = "";
-  }
+  // const handleEmailName = () => {
+  //   const span = document.getElementsByClassName(s.emailText)[0] as HTMLSpanElement;
+  //   span.innerText = "";
+  // }
 
   const handleBackbutton = () => {
     navigate(-1);
-  }
+  };
 
   // 약관 모달창 state값. true 시 모달창이 표시됨.
   const [modal, setModal] = useState(false);
@@ -47,12 +46,16 @@ const EmailCheckPage = () => {
           <span className={s.emailText}>user@example.com</span>
         </div>
       </div>
-      <button className={s.emailNextButton} type="button" onClick={() => setModal(true)}>
+      <button
+        className={s.emailNextButton}
+        type="button"
+        onClick={() => setModal(true)}
+      >
         다음
       </button>
-      {modal === true ? <TermsPage modal={modal} setModal={setModal}/> : null}
+      {modal === true ? <TermsPage modal={modal} setModal={setModal} /> : null}
     </div>
   );
-}
+};
 
-export default EmailCheckPage
+export default EmailCheckPage;

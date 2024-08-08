@@ -3,12 +3,10 @@ import { useParams } from "react-router-dom";
 import s from "./ManagePage.module.scss";
 import { usePillInfoStore } from "../../../../store/usePillInfoStore";
 
-
 import pillInfo from "../../../../store/pillInfo";
 import { useState } from "react";
 import { useGlobalStore } from "../../../../store/store";
 import { useEffect } from "react";
-
 
 import AlarmTimeInputModal from "./components/AlarmTimeInputModal";
 import NameInputSection from "./components/NameInputSection";
@@ -26,9 +24,11 @@ import habitInfo from "../../../../store/habitInfo";
 import ChallengeManageHeader from "./components/ChallengeManageHeader";
 import { SelectedAlarmTimeFormat } from "./utils/Alarm/SelectedAlarmTimeFormat";
 
-
-const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
-
+const ChallengeManagePage = <T,>({
+  challengeType,
+}: {
+  challengeType: string;
+}) => {
   //하단 바 숨김
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
@@ -43,17 +43,20 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
   const { getHabitCopy } = useHabitInfoStore();
 
   // 알약 챌린지인지, 생활 습관 챌린지인지의 정보
-  type initChallengeInfo<T> = T extends pillInfo 
-  ? Omit<pillInfo, 'id' | 'notificationTime'>
-  : Omit<habitInfo, 'id' | 'notificationTime'>;
+  type initChallengeInfo<T> = T extends pillInfo
+    ? Omit<pillInfo, "id" | "notificationTime">
+    : Omit<habitInfo, "id" | "notificationTime">;
 
   // 얄약, 습관 챌린지의 set함수의 타입
-  type pillChallengeSetter = React.Dispatch<React.SetStateAction<Omit<pillInfo, "id" | "notificationTime">>>;
-  type habitChallengeSetter = React.Dispatch<React.SetStateAction<Omit<habitInfo, "id" | "notificationTime">>>;
-
+  type pillChallengeSetter = React.Dispatch<
+    React.SetStateAction<Omit<pillInfo, "id" | "notificationTime">>
+  >;
+  //type habitChallengeSetter = React.Dispatch<React.SetStateAction<Omit<habitInfo, "id" | "notificationTime">>>;
 
   // 이 화면에 담고 있는 챌린지
-  const [newChallenge, setNewChallenge] = useState<initChallengeInfo<T>>(initChallenge(challengeType) as unknown as initChallengeInfo<T>);
+  const [newChallenge, setNewChallenge] = useState<initChallengeInfo<T>>(
+    initChallenge(challengeType) as unknown as initChallengeInfo<T>
+  );
 
   //새로 추가하는 화면인지, 편집하는 화면인지의 정보
   let isAddingNewChallenge: boolean;
@@ -61,46 +64,59 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
   // useParams를 통해 챌린지의 id 저장
   const alreadyExistingChallengeId: string = useParams().id as string;
 
-  if (alreadyExistingChallengeId == undefined) {
+  if (alreadyExistingChallengeId === undefined) {
     isAddingNewChallenge = true;
   } else {
     isAddingNewChallenge = false;
   }
-  const [editingChallengeId, setEditingChallengeId] = useState<string>(alreadyExistingChallengeId);
+  const [editingChallengeId] = useState<string>(alreadyExistingChallengeId);
 
   // 챌린지에서 notificationTime을 분리하여 관리
   const [alarmTime, setAlarmTime] = useState<AlarmTime[]>([]);
 
   useEffect(() => {
-    if(!isAddingNewChallenge){
-      if(isPillChallenge(challengeType)){
+    if (!isAddingNewChallenge) {
+      if (isPillChallenge(challengeType)) {
         let { notificationTime, ...rest } = getPillCopy(editingChallengeId);
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);
       }
-      if(isHabitChallenge(challengeType)){
+      if (isHabitChallenge(challengeType)) {
         let { notificationTime, ...rest } = getHabitCopy(editingChallengeId);
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);
       }
     }
-  }, [editingChallengeId]);
+  }, [
+    challengeType,
+    editingChallengeId,
+    getHabitCopy,
+    getPillCopy,
+    isAddingNewChallenge,
+  ]);
 
   // 알림톡 시간을 위한 모달창, true 시 모달창 표시
   const [modal, setModal] = useState(false);
 
   // 알림톡 시간 추가 / 수정 / 삭제를 위한 state 값
-  const [selectedAlarmTime, setSelectedAlarmTime] = useState<SelectedAlarmTimeFormat>(
-    { amOrPm: 0, hour: 0, minutes: 0, isEditMode: false, editIndex: 0 }
-  );
+  const [selectedAlarmTime, setSelectedAlarmTime] =
+    useState<SelectedAlarmTimeFormat>({
+      amOrPm: 0,
+      hour: 0,
+      minutes: 0,
+      isEditMode: false,
+      editIndex: 0,
+    });
 
   return (
     <>
       <div className={s.wrap}>
-        <ChallengeManageHeader challengeType={challengeType} isAddingNewChallenge={isAddingNewChallenge}/>
-        
-        <div className={s.contentWrap}>
+        <ChallengeManageHeader
+          challengeType={challengeType}
+          isAddingNewChallenge={isAddingNewChallenge}
+        />
 
+        <div className={s.contentWrap}>
           <NameInputSection<initChallengeInfo<T>>
             newChallenge={newChallenge}
             setNewChallenge={setNewChallenge}
@@ -128,8 +144,9 @@ const ChallengeManagePage = <T,>({challengeType} : {challengeType: string}) => {
             newChallenge={newChallenge}
             setNewChallenge={setNewChallenge}
             defaultChecked={
-              isPillChallenge(challengeType) ? 
-              (newChallenge as pillInfo).weeklyIntakeFrequency : (newChallenge as habitInfo).weeklyExecutionFrequency
+              isPillChallenge(challengeType)
+                ? (newChallenge as pillInfo).weeklyIntakeFrequency
+                : (newChallenge as habitInfo).weeklyExecutionFrequency
             }
           />
 

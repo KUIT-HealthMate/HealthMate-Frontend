@@ -1,15 +1,3 @@
-import React from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Label,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 import styles from "./Chart.module.scss";
 import BarGarph from "./BarGraph";
 import changeChartButton from "../../../assets/changChartButton.svg";

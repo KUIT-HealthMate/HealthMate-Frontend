@@ -1,100 +1,106 @@
-import React from 'react'
-import s from "./SuppplementChallengeEditingPage.module.scss"
-import { Link } from 'react-router-dom'
+import React from "react";
+import s from "./SuppplementChallengeEditingPage.module.scss";
+import { Link } from "react-router-dom";
 
 import plusIconImg from "../../../assets/plusIcon.svg";
 import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
-import pillInfo from '../../../store/pillInfo';
-import habitInfo from '../../../store/habitInfo';
+import pillInfo from "../../../store/pillInfo";
+import habitInfo from "../../../store/habitInfo";
 
 interface Props {
-    item: (pillInfo | habitInfo)[],
-    getIntakeTime: any,
-    deleteFunc: (Id: string) => void,
-    challengeType: string,
-    displayInfo: string
+  item: (pillInfo | habitInfo)[];
+  getIntakeTime: any;
+  deleteFunc: (Id: string) => void;
+  challengeType: string;
+  displayInfo: string;
 }
 
-const ChallengeDisplay:React.FC<Props> = ({item, getIntakeTime, deleteFunc, challengeType, displayInfo}) => {
-    const changeStyleToEditMode = () => {
-        const plusBtn = document.getElementsByClassName(
-          s.addPills
-        ) as HTMLCollectionOf<Element>;
-        const editActivateBtn = document.getElementsByClassName(
-          s.editPills
-        ) as HTMLCollectionOf<Element>;
-        const confirmBtn = document.getElementsByClassName(
-          s.completeButton
-        ) as HTMLCollectionOf<Element>;
-        const editAndDeleteBtn = document.getElementsByClassName(
-          "editAndDeleteBtn"
-        ) as HTMLCollectionOf<Element>;
-    
-        for (var i = 0; i < plusBtn.length; i++) {
-          var div = plusBtn[i] as HTMLElement;
-          div.style.display = "block";
-        }
-        for (var i = 0; i < editActivateBtn.length; i++) {
-          var div = editActivateBtn[i] as HTMLElement;
-          div.style.display = "none";
-        }
-        for (var i = 0; i < confirmBtn.length; i++) {
-          var div = confirmBtn[i] as HTMLElement;
-          div.style.display = "block";
-        }
-        for (var i = 0; i < editAndDeleteBtn.length; i++) {
-          var div = editAndDeleteBtn[i] as HTMLElement;
-          div.style.display = "flex";
-          div.style.gap = "5px";
-          div.style.alignItems = "center";
-        }
-      };
-    
-      const changeStyleToNormalMode = () => {
-        const plusBtn = document.getElementsByClassName(
-          s.addPills
-        ) as HTMLCollectionOf<Element>;
-        const editActivateBtn = document.getElementsByClassName(
-          s.editPills
-        ) as HTMLCollectionOf<Element>;
-        const confirmBtn = document.getElementsByClassName(
-          s.completeButton
-        ) as HTMLCollectionOf<Element>;
-        const editAndDeleteBtn = document.getElementsByClassName(
-          "editAndDeleteBtn"
-        ) as HTMLCollectionOf<Element>;
-    
-        for (var i = 0; i < plusBtn.length; i++) {
-          var div = plusBtn[i] as HTMLElement;
-          div.style.display = "none";
-        }
-        for (var i = 0; i < editActivateBtn.length; i++) {
-          var div = editActivateBtn[i] as HTMLElement;
-          div.style.display = "block";
-        }
-        for (var i = 0; i < confirmBtn.length; i++) {
-          var div = confirmBtn[i] as HTMLElement;
-          div.style.display = "none";
-        }
-        for (var i = 0; i < editAndDeleteBtn.length; i++) {
-          var div = editAndDeleteBtn[i] as HTMLElement;
-          div.style.display = "none";
-        }
-      };
+const ChallengeDisplay: React.FC<Props> = ({
+  item,
+  getIntakeTime,
+  deleteFunc,
+  challengeType,
+  displayInfo,
+}) => {
+  const changeStyleToEditMode = () => {
+    const plusBtn = document.getElementsByClassName(
+      s.addPills
+    ) as HTMLCollectionOf<Element>;
+    const editActivateBtn = document.getElementsByClassName(
+      s.editPills
+    ) as HTMLCollectionOf<Element>;
+    const confirmBtn = document.getElementsByClassName(
+      s.completeButton
+    ) as HTMLCollectionOf<Element>;
+    const editAndDeleteBtn = document.getElementsByClassName(
+      "editAndDeleteBtn"
+    ) as HTMLCollectionOf<Element>;
 
-      const hello = (item:pillInfo | habitInfo) => {
-        console.log(item) 
-        return item.name;
-      }
+    for (let i = 0; i < plusBtn.length; i++) {
+      let div = plusBtn[i] as HTMLElement;
+      div.style.display = "block";
+    }
+    for (let i = 0; i < editActivateBtn.length; i++) {
+      let div = editActivateBtn[i] as HTMLElement;
+      div.style.display = "none";
+    }
+    for (let i = 0; i < confirmBtn.length; i++) {
+      let div = confirmBtn[i] as HTMLElement;
+      div.style.display = "block";
+    }
+    for (let i = 0; i < editAndDeleteBtn.length; i++) {
+      let div = editAndDeleteBtn[i] as HTMLElement;
+      div.style.display = "flex";
+      div.style.gap = "5px";
+      div.style.alignItems = "center";
+    }
+  };
+
+  const changeStyleToNormalMode = () => {
+    const plusBtn = document.getElementsByClassName(
+      s.addPills
+    ) as HTMLCollectionOf<Element>;
+    const editActivateBtn = document.getElementsByClassName(
+      s.editPills
+    ) as HTMLCollectionOf<Element>;
+    const confirmBtn = document.getElementsByClassName(
+      s.completeButton
+    ) as HTMLCollectionOf<Element>;
+    const editAndDeleteBtn = document.getElementsByClassName(
+      "editAndDeleteBtn"
+    ) as HTMLCollectionOf<Element>;
+
+    for (let i = 0; i < plusBtn.length; i++) {
+      let div = plusBtn[i] as HTMLElement;
+      div.style.display = "none";
+    }
+    for (let i = 0; i < editActivateBtn.length; i++) {
+      let div = editActivateBtn[i] as HTMLElement;
+      div.style.display = "block";
+    }
+    for (let i = 0; i < confirmBtn.length; i++) {
+      let div = confirmBtn[i] as HTMLElement;
+      div.style.display = "none";
+    }
+    for (let i = 0; i < editAndDeleteBtn.length; i++) {
+      let div = editAndDeleteBtn[i] as HTMLElement;
+      div.style.display = "none";
+    }
+  };
+
+  const hello = (item: pillInfo | habitInfo) => {
+    console.log(item);
+    return item.name;
+  };
 
   return (
     <>
-      {displayInfo == challengeType && (
+      {displayInfo === challengeType && (
         <div className={s.body}>
           <div className={s.supplementTitle}>
             <span>
-              {challengeType == "pill"
+              {challengeType === "pill"
                 ? "복용할 알약"
                 : "수행할 생활습관 챌린지"}
             </span>
@@ -110,7 +116,7 @@ const ChallengeDisplay:React.FC<Props> = ({item, getIntakeTime, deleteFunc, chal
               return (
                 <div className={s.supplementWrap}>
                   <span>{hello(item)}</span>
-                  {challengeType == "pill" && (
+                  {challengeType === "pill" && (
                     <span>
                       {"주 " +
                         Object.values(
@@ -153,6 +159,6 @@ const ChallengeDisplay:React.FC<Props> = ({item, getIntakeTime, deleteFunc, chal
       )}
     </>
   );
-}
+};
 
-export default ChallengeDisplay
+export default ChallengeDisplay;
