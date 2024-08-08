@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 // export const dummyDataInCalander = {
 //   //오늘 날짜 클릭하면 세부수행여부 확인가능
 //   date: dayjs(),

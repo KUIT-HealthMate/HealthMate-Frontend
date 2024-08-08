@@ -1,5 +1,5 @@
 import styles from "./Home.module.scss";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useGlobalStore } from "../../store/store";
 import goodIcon from "../../assets/good.svg";
@@ -14,7 +14,7 @@ export default function TodaysChallenge() {
   //통신으로 percent값 가져오기
   useEffect(() => {
     setPercent(40);
-  });
+  }, []);
 
   const halfPercent = percent / 2;
 
