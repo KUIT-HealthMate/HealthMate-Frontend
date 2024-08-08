@@ -47,7 +47,7 @@ export default function SupplementChallenge() {
       <div className={styles.PillChallengeTitle}>
         <img src={pillIcon} className={styles.PillImg}></img>
         <h1 className={styles.PillText}>영양제 챌린지</h1>
-        <Link to="/supplementChallengeEdit" className={styles.PillEdit}>
+        <Link to="/ChallengeEdit" className={styles.PillEdit}>
           편집하기<img src={clampR} className={styles.clampR}></img>
         </Link>
       </div>

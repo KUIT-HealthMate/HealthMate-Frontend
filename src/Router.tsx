@@ -5,9 +5,9 @@ import Community from "./pages/Community/Community";
 import HealthChart from "./pages/HealthChart/HealthChart";
 import ChallengeStatistics from "./pages/Home/ChallengeStatistics/ChallengeStatistics";
 
-import SupplementChallengeEditingPage from "./pages/Home/PillChallenge/SupplementChallengeEditingPage";
+import ChallengeEditingPage from "./pages/Home/Challenge/ChallengeEditingPage";
 
-import PillManagePage from "./pages/Home/PillChallenge/PillManagePage";
+
 import DailyCheckStart from "./pages/DailyCheck/DailyCheckStart";
 import DailyMealCheckStart from "./pages/DailyCheck/DailyMealCheckStart";
 import DailySleepCheckStart from "./pages/DailyCheck/DailySleepCheckStart";
@@ -17,16 +17,24 @@ import DailyCheck from "./pages/DailyCheck/DailyCheck";
 import DailySymptomCheckStart from "./pages/DailyCheck/DailySymptomCheckStart";
 import DailySymptomCheck from "./pages/DailyCheck/DailySymptomCheck";
 import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
-import HabitManagePage from "./pages/Home/PillChallenge/HabitManagePage";
+
 
 import LoginPage from "./pages/login/LoginPage";
 import EmailCheckPage from "./pages/login/EmailCheckPage";
 import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
+import ChallengeManagePage from "./pages/Home/Challenge/ManagePage/ChallengeManagePage";
+import pillInfo from "./store/pillInfo";
+import habitInfo from "./store/habitInfo";
 
 import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoarding";
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
 import { Welcome } from "./pages/OnBoarding/OnBoarding";
 import { FindKeyword } from "./pages/OnBoarding/findKeyword";
+
+enum challengeType {
+  Pill = 'pill',
+  Habit = 'habit'
+}
 
 const Router = () => {
   return (
@@ -41,12 +49,16 @@ const Router = () => {
         <Route path="/mypage" element={<MyPage />} />
 
         <Route path="/statistics" element={<ChallengeStatistics />} />
-        <Route path="/supplementChallengeEdit" element={<SupplementChallengeEditingPage />} />
 
-        <Route path="/pillAddingPage" element={<PillManagePage />} />
-        <Route path="/pillEditingPage/:id" element={<PillManagePage />} />
-        <Route path="/habitAddingPage" element={<HabitManagePage />} />
-        <Route path="/habitEditingPage/:id" element={<HabitManagePage />} />
+        <Route
+          path="/ChallengeEdit"
+          element={<ChallengeEditingPage />}
+        />
+        <Route path="/pillAddingPage" element={<ChallengeManagePage<pillInfo> challengeType={challengeType.Pill}/>} />
+        <Route path="/pillEditingPage/:id" element={<ChallengeManagePage<pillInfo> challengeType={challengeType.Pill}/>} />
+        <Route path="/habitAddingPage" element={<ChallengeManagePage<habitInfo> challengeType={challengeType.Habit}/>} />
+        <Route path="/habitEditingPage/:id" element={<ChallengeManagePage<habitInfo> challengeType={challengeType.Habit}/>} />
+
 
         <Route path="/dailycheckstart" element={<DailyCheckStart />} />
         <Route path="/dailymealcheckstart" element={<DailyMealCheckStart />} />
