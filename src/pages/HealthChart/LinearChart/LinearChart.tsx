@@ -12,7 +12,7 @@ export interface ChartProps {
   data: ChartDataType;
   barOrLine: () => void;
 }
-
+//차트입니다 차트
 export default function LinearChart({ data, barOrLine }: ChartProps) {
   return (
     <div className={s.componentContainer}>
