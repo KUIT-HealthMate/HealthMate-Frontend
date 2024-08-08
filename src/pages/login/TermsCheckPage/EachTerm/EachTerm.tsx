@@ -1,13 +1,13 @@
 import React from "react";
 
-import s from "./TermsPage.module.scss";
-import Terms from "./assets/Terms";
-import setMatchingModals from "./setMatchingModal";
-import TermsCheck from "./assets/TermsCheck";
+import s from "../../styles/TermsPage.module.scss";
+import Terms from "../assets/Terms";
+import setMatchingModals from "../utils/setMatchingModal";
+import TermsCheck from "../assets/TermsCheck";
 
-import uncheckedCheckBox from "../../../assets/loginPage/uncheckedCheckbox.svg";
-import checkedCheckBox from "../../../assets/loginPage/checkedCheckbox.svg";
-import rightBraket from "../../../assets/loginPage/rightBraket.svg";
+import uncheckedCheckBox from "../../../../assets/loginPage/uncheckedCheckbox.svg";
+import checkedCheckBox from "../../../../assets/loginPage/checkedCheckbox.svg";
+import rightBraket from "../../../../assets/loginPage/rightBraket.svg";
 
 interface Props {
   termData: Terms;

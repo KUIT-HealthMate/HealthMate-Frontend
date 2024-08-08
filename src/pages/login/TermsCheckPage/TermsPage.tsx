@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import s from "./TermsPage.module.scss";
+import s from "../styles/TermsPage.module.scss";
 import TermsData from "./assets/TermsData";
 import TermsCheck from "./assets/TermsCheck";
 
 import uncheckedCheckBox from "../../../assets/loginPage/uncheckedCheckbox.svg";
 import checkedCheckBox from "../../../assets/loginPage/checkedCheckbox.svg";
 import rightBraket from "../../../assets/loginPage/rightBraket.svg";
-import EachTerm from "./EachTerm";
-import TermsDetailPage from "./TermsDetailPage";
+import EachTerm from "./EachTerm/EachTerm";
+import TermsDetailPage from "./EachTerm/ContentInEachTermPage";
 import Terms from "./assets/Terms";
 
 interface Props {
@@ -37,22 +37,13 @@ const TermsPage: React.FC<Props> = ({ modal, setModal }) => {
   );
 
   const isAllEssentialChecksTrue = ():boolean => {
-    let isTrue:boolean = true;
-    checks.map((value, index) => {
-      if(value.isEssential == true){
-        if(value.isChecked == false){
-          isTrue = false;
-        }
-      }
-    });
-
-    return isTrue;
+    return checks.every(check => !check.isEssential || check.isChecked);
   }
 
-  const agreeAllTerms = (value: boolean) => {
+  const agreeAllTerms = useCallback((value: boolean) => {
     setAllAgreeCheck(value);
     setChecks(checks.map(checks => ({ ...checks, isChecked: value })));
-  };
+  }, [checks]);
 
   // 완료 누르면 동의정보 서버로 전송 (선택항목에 동의여부 정보 전송 필요)
   return (
