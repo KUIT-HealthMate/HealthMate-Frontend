@@ -1,5 +1,5 @@
-import habitInfo from "../store/habitInfo";
-import pillInfo from "../store/pillInfo";
+import habitInfo from "../../store/habitInfo";
+import pillInfo from "../../store/pillInfo";
 
 export const getRequestBodyFromChallenge = <T extends pillInfo | habitInfo>(
   challengeToRegister: T

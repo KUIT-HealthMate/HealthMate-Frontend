@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import uuid from "react-uuid";
 import pillInfo from "../../../../../store/pillInfo";
 import habitInfo from "../../../../../store/habitInfo";
-import { registerPill } from "../../../../../APIs/registerPill";
+import { registerPill } from "../../../../../APIs/ManageChallenge/registerPill";
 
 interface Props<T> {
   isAddingNewChallenge: boolean;
