@@ -15,9 +15,9 @@ const EmailCheckPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setShowBottomBar();
+    setShowBottomBar(false);
     return () => {
-      setShowBottomBar();
+      setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
 

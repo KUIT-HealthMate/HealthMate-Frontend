@@ -1,15 +1,12 @@
 import PageTopBar from "../../../components/organs/Bars/PageTopBar";
-import { useGlobalStore } from "../../../store/store";
 import CoinRecord from "./CoinRecord";
 
 export default function CoinDepositAndUsage() {
-  const bottomBarState = useGlobalStore((state) => state.setShowBottomBar);
-
   return (
     <div>
       <PageTopBar
         barName="코인 적립 / 사용 내역"
-        setBottomBarState={bottomBarState}
+        bottomBarState={true}
         link="/mypage"
       />
       <CoinRecord
