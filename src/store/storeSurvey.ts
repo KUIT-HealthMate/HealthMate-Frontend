@@ -151,8 +151,6 @@ export const surveys: Survey[] = [
 
 interface StoreState {
   currentQuestionIdx: number;
-  // mealCurrentQuestionIdx: number;
-  // sleepCurrentQuestionIdx: number;
   progressPercent: number;
   nextQuestion: () => void;
   previousQuestion: () => void;

@@ -6,13 +6,12 @@ import { useNavigate } from "react-router-dom";
 import leftBracket from "../../../assets/leftBraket.svg";
 
 interface Props {
-  // questionCnt: number, // 질문 갯수
   questions: string[];
   candidates: string[];
   type: number; // 1: 생활습관 2: 식사습관 3: 수면습관
   multipleAble: boolean; // 복수선택 가능 여부
   limit: number;
-  //  progressPercent: number // 진행률
+
 }
 
 const Survey = ({
@@ -24,8 +23,6 @@ const Survey = ({
 }: Props) => {
   const nextQuestion = useGlobalStoreSurvey((state) => ({
     currentQuestionIdx: state.currentQuestionIdx,
-    // mealCurrentQuestionIdx: state.mealCurrentQuestionIdx,
-    // sleepCurrentQuestionIdx: state.sleepCurrentQuestionIdx,
     nextQuestion: state.nextQuestion,
   }));
   const previousQuestion = useGlobalStoreSurvey((state) => ({
@@ -179,10 +176,10 @@ const Survey = ({
                   style={
                     btnActive[idx]
                       ? {
-                          background: `rgba(14, 148, 148, 0.1)`,
-                          color: `#0E9494`,
-                          border: `1px solid #0E9494`,
-                        }
+                        background: `rgba(14, 148, 148, 0.1)`,
+                        color: `#0E9494`,
+                        border: `1px solid #0E9494`,
+                      }
                       : { background: `#FFFFFF`, color: `#8F8F8F` }
                   }
                 >

@@ -30,6 +30,7 @@ import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoardin
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
 import { Welcome } from "./pages/OnBoarding/OnBoarding";
 import { FindKeyword } from "./pages/OnBoarding/findKeyword";
+import { OnBoardingSurvey } from "./pages/OnBoarding/OnBoardingSurvey/OnBoardingSurvey";
 
 enum challengeType {
   Pill = 'pill',
@@ -54,10 +55,10 @@ const Router = () => {
           path="/ChallengeEdit"
           element={<ChallengeEditingPage />}
         />
-        <Route path="/pillAddingPage" element={<ChallengeManagePage<pillInfo> challengeType={challengeType.Pill}/>} />
-        <Route path="/pillEditingPage/:id" element={<ChallengeManagePage<pillInfo> challengeType={challengeType.Pill}/>} />
-        <Route path="/habitAddingPage" element={<ChallengeManagePage<habitInfo> challengeType={challengeType.Habit}/>} />
-        <Route path="/habitEditingPage/:id" element={<ChallengeManagePage<habitInfo> challengeType={challengeType.Habit}/>} />
+        <Route path="/pillAddingPage" element={<ChallengeManagePage<pillInfo> challengeType={challengeType.Pill} />} />
+        <Route path="/pillEditingPage/:id" element={<ChallengeManagePage<pillInfo> challengeType={challengeType.Pill} />} />
+        <Route path="/habitAddingPage" element={<ChallengeManagePage<habitInfo> challengeType={challengeType.Habit} />} />
+        <Route path="/habitEditingPage/:id" element={<ChallengeManagePage<habitInfo> challengeType={challengeType.Habit} />} />
 
 
         <Route path="/dailycheckstart" element={<DailyCheckStart />} />
@@ -73,6 +74,7 @@ const Router = () => {
         <Route path="/dailycheckdone" element={<DailyCheckDone />} />
 
         <Route path="/onboarding" element={<OnBoarding />} />
+        <Route path="/onboarding_survey" element={<OnBoardingSurvey />} />
         <Route path="/onboarding_checksymptom" element={<OnBoardingCheckSymptom />} />
         <Route path="/onboarding_checkpurpose" element={<OnBoardingCheckPurpose />} />
         <Route path="/welcome" element={<Welcome />} />
