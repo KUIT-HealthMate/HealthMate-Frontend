@@ -7,6 +7,8 @@ import TopBar from "../../components/organs/Bars/TopBar";
 
 import { useNavigate } from "react-router-dom";
 
+import home from "../../apis/home";
+
 const Home = () => {
   const navigate = useNavigate();
 
