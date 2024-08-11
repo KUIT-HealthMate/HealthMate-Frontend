@@ -2,10 +2,10 @@ import { create } from "zustand";
 
 interface GlobalState {
   showBottomBar: boolean;
-  setShowBottomBar: () => void;
+  setShowBottomBar: (showOrNot: boolean) => void;
 }
 
 export const useGlobalStore = create<GlobalState>((set, get) => ({
   showBottomBar: true,
-  setShowBottomBar: () => set({ showBottomBar: !get().showBottomBar }),
+  setShowBottomBar: (showOrNot: boolean) => set({ showBottomBar: showOrNot }),
 }));

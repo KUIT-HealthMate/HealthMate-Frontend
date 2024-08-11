@@ -33,9 +33,9 @@ const ChallengeManagePage = <T,>({
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
     console.log("마운트됨");
-    setShowBottomBar();
+    setShowBottomBar(false);
     return () => {
-      setShowBottomBar();
+      setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
 
