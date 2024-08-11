@@ -94,7 +94,7 @@ export default function TodaysChallenge() {
         <Link
           to="/statistics"
           className={styles.StatisticsButton}
-          onClick={disableBottomBar}
+          onClick={() => disableBottomBar(false)}
         >
           <p className={styles.StatisticsButtonText}>전체 챌린지 통계 보기</p>
         </Link>

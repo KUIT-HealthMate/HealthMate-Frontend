@@ -1,7 +1,6 @@
 import { useState } from "react";
 import dayjs from "dayjs";
 import PageTopBar from "../../../components/organs/Bars/PageTopBar";
-import { useGlobalStore } from "../../../store/store";
 import forward from "../../../assets/forward.svg";
 import backward from "../../../assets/backward.svg";
 import s from "./ChallengeStatistics.module.scss";
@@ -11,7 +10,6 @@ import { julyMock } from "../../../test/mock/mockup";
 //데이터 로드(월간/주간달력선택, 기간변경 시 마다)
 
 export default function ChallengeStatistics() {
-  const enableBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   const [period, setPeriod] = useState<dayjs.Dayjs>(dayjs());
 
   const reduceMonth = () => {
@@ -48,11 +46,7 @@ export default function ChallengeStatistics() {
 
   return (
     <>
-      <PageTopBar
-        barName="챌린지 통계"
-        setBottomBarState={enableBottomBar}
-        link="/"
-      />
+      <PageTopBar barName="챌린지 통계" bottomBarState={true} link="/" />
       <div className={s.selectorContainer}>
         <div className={s.dateSelector}>
           <img

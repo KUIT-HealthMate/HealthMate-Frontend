@@ -1,21 +1,23 @@
 import { Link } from "react-router-dom";
 import s from "./PageTopBar.module.scss";
 import backButton from "../../../assets/backButton.svg";
+import { useGlobalStore } from "../../../store/store";
 
 interface PageTopBarProps {
   barName: string;
-  setBottomBarState: () => void | null;
+  bottomBarState: boolean;
   link: string;
 }
 
 export default function PageTopBar({
   barName,
-  setBottomBarState,
+  bottomBarState,
   link,
 }: PageTopBarProps) {
+  const setBottomBarState = useGlobalStore((state) => state.setShowBottomBar);
   return (
     <div className={s.pageTopBarContainer}>
-      <Link to={link} onClick={setBottomBarState}>
+      <Link to={link} onClick={() => setBottomBarState(bottomBarState)}>
         <img src={backButton} alt="goBack" className={s.backButton} />
       </Link>
 

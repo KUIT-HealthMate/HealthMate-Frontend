@@ -21,7 +21,7 @@ export default function CoinBlock({ deposit }: coinProps) {
           <div className={s.deposit}>{deposit}</div>
           <div className={s.unit}>개</div>
         </div>
-        <Link to={"/usage"} onClick={bottomBarState}>
+        <Link to={"/usage"} onClick={() => bottomBarState(false)}>
           <div className={s.noticeContainer}>
             <div className={s.notice}>적립/사용 내역</div>
             <img

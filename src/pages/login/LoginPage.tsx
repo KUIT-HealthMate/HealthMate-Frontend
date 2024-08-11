@@ -12,9 +12,9 @@ const LogInPage = () => {
   const { setShowBottomBar } = useGlobalStore();
 
   useEffect(() => {
-    setShowBottomBar();
+    setShowBottomBar(false);
     return () => {
-      setShowBottomBar();
+      setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
 
