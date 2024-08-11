@@ -18,9 +18,9 @@ const stringifyObjects = (inputObj: object): string => {
 
   arrayOfKeysAndValues.map(([key, value], index) => {
 
-    result += `\"${key}\": `;
+    result += `"${key}": `;
     result += handleStringByValueTypes(value,index,arrayOfKeysAndValues);
-
+    return [key,value];
   });
 
   return result;
@@ -34,7 +34,7 @@ const stringifyArrays = (inputArr: object): string => {
   arrayOfKeysAndValues.map(([key, value], index) => {
 
     result += handleStringByValueTypes(value,index,arrayOfKeysAndValues);
-
+    return [key,value];
   });
 
   return result;
@@ -52,7 +52,7 @@ const handleStringByValueTypes = (value: any, index: number, obj: any) => {
 
       } else {
 
-        return `\"${value}\"` + `${isLastElement(obj, index) ? "" : ","}\n  `
+        return `"${value}"${isLastElement(obj, index) ? "" : ","}\n  `
 
       }
 }
