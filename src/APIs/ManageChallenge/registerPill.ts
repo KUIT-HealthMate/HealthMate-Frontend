@@ -1,19 +1,18 @@
 import pillInfo from "../../store/pillInfo";
-import { getRequestBodyFromChallenge } from "./getRequestBodyFromChallenge";
 import {getRequestOptions} from "./requestOptions";
+import { serverURL } from "./serverURL";
 
-
-
-
-export const registerPill = (pillToRegister : pillInfo) => {
-
-  let requestBody = getRequestBodyFromChallenge<pillInfo>(pillToRegister);
-
+export const registerPill = (pillToRegister : Omit<pillInfo,"id"|"dailyIntakeRecord">):string => {
+ 
+  let res:string = "";
   // 서버에 요청을 보낸다.
-  fetch("localhost:9000/supplements/register", getRequestOptions('POST', requestBody))
+  fetch(serverURL + "/supplements/register", getRequestOptions('POST', JSON.stringify(pillToRegister)))
   .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('registerPill Error', error));
+  .then(result => {res = result; console.log(result);})
+  .catch(error => {res = error; console.log('registerPill Error', error)});
+
+  return res;
+
 }
 
 

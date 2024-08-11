@@ -39,7 +39,6 @@ const CompleteChangeButton = <T,>({
         });
         registerPill({
           ...(newChallenge as unknown as pillInfo),
-          id: uuid(),
           notificationTime: alarmTime,
         });
       } else {

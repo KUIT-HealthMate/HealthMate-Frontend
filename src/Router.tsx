@@ -30,6 +30,7 @@ import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoardin
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
 import { Welcome } from "./pages/OnBoarding/OnBoarding";
 import { FindKeyword } from "./pages/OnBoarding/findKeyword";
+import ManageChallengeAPITest from "./APIs/ManageChallenge/ManageChallengeAPITest";
 
 enum challengeType {
   Pill = 'pill',
@@ -80,6 +81,7 @@ const Router = () => {
 
         <Route path="/usage" element={<CoinDepositAndUsage />} />
 
+        <Route path="/APITest" element={<ManageChallengeAPITest />} />
       </Routes>
     </div>
   );

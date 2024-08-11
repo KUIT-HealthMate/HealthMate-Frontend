@@ -1,0 +1,1 @@
+export const serverURL: string = "http://3.39.60.18:9000";
