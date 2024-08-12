@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import uuid from "react-uuid";
 import pillInfo from "../../../../../store/pillInfo";
 import habitInfo from "../../../../../store/habitInfo";
-import { registerPill } from "../../../../../APIs/ManageChallenge/registerPill";
+import {serverRequest} from "../../../../../APIs/ManageChallenge/serverRequest";
 
 interface Props<T> {
   isAddingNewChallenge: boolean;
@@ -37,10 +37,10 @@ const CompleteChangeButton = <T,>({
           id: uuid(),
           notificationTime: alarmTime,
         });
-        registerPill({
+        serverRequest.registerChallenge({
           ...(newChallenge as unknown as pillInfo),
           notificationTime: alarmTime,
-        });
+        },"supplements");
       } else {
         setPill(
           editingChallengeId,

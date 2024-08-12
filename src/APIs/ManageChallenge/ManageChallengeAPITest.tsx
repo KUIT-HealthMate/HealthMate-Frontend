@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
-import { registerPill } from './registerPill'
+import { registerChallenge } from './registerChallenge'
 import { usePillInfoStore } from '../../store/usePillInfoStore'
-import pillInfo from '../../store/pillInfo'
 
 const ManageChallengeAPITest = () => {
 
     const {PillInfo} = usePillInfoStore()
     let {id,dailyIntakeRecord, ...rest} = PillInfo[0];
 
-    useEffect(() => {document.getElementsByClassName("testResult")[0].textContent = registerPill(rest)}, [rest]);
+    useEffect(() => {document.getElementsByClassName("testResult")[0].textContent = registerChallenge(rest,"supplements")}, [rest]);
     
 
   return (
