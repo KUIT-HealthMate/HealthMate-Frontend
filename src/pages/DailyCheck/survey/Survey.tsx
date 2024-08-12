@@ -28,6 +28,9 @@ const Survey = ({
   const previousQuestion = useGlobalStoreSurvey((state) => ({
     previousQuestion: state.previousQuestion,
   }));
+  const currentQuestionIdx = useGlobalStoreSurvey((state) => ({
+    currentQuestionIdx: state.currentQuestionIdx,
+  }));
 
   const [btnActive, setBtnActive] = useState(
     candidates.map((candidate) => false)
@@ -119,8 +122,18 @@ const Survey = ({
 
   function goBack() {
     console.log("goback");
+    if (currentQuestionIdx.currentQuestionIdx === 0) {
+      navigate('/dailycheckstart')
+      return;
+    } else if (currentQuestionIdx.currentQuestionIdx === 5) {
+      navigate('/dailymealcheckstart')
+    } else if (currentQuestionIdx.currentQuestionIdx === 12) {
+      navigate('/dailysleepcheckstart')
+    } else {
+      previousQuestion.previousQuestion();
+    }
 
-    previousQuestion.previousQuestion();
+
   }
 
   console.log("현재 문제 번호: " + nextQuestion.currentQuestionIdx);
@@ -138,13 +151,14 @@ const Survey = ({
         <div className={styles.survey}>
           <div className={styles.question}>
             <div className={styles.questionText}>
-              {surveys[nextQuestion.currentQuestionIdx].question}
+              {/* {surveys[nextQuestion.currentQuestionIdx].question} */}
+
             </div>
-            {/* {
-                            questions.map((question, idx) => {
-                                return (<div className={styles.questionText}>{question}</div>)
-                            })
-                        } */}
+            {
+              questions.map((question, idx) => {
+                return (<div className={styles.questionText}>{question}</div>)
+              })
+            }
           </div>
           {multipleAble ? (
             <div
