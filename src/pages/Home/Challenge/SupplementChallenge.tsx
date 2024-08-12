@@ -32,6 +32,10 @@ export default function SupplementChallenge() {
     setNewPillInfos(chunks);
   }, [PillInfo]);
 
+  // 영양제 체크/언체크
+
+
+
   return (
     <div className={styles.PillChallenge}>
       <div className={styles.PillChallengeTitle}>

@@ -14,6 +14,9 @@ import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 import habitInfo from "../../../store/habitInfo";
 
+//api 관련
+import { putHabitCheck } from "../../../APIs/home/homeApi";
+
 SwiperCore.use([Pagination, Navigation]);
 
 export default function HabitChallenge() {
@@ -39,6 +42,13 @@ export default function HabitChallenge() {
     console.log(getExecutionRecord(habitid));
     return getExecutionRecord(habitid) ? checkmark : uncheckmark;
   };
+
+
+  function HabitCheck(habitId: string) {
+    setExecutionRecord(habitId);
+    // 체크하면 서버 전송
+    putHabitCheck("2024-08-10");
+  }
 
   return (
     <div className={styles.HabitChallenge}>
@@ -67,7 +77,8 @@ export default function HabitChallenge() {
                     <img
                       className={styles.HabitCheckmark}
                       onClick={() => {
-                        setExecutionRecord(habit.id);
+                        HabitCheck(habit.id);
+                        // setExecutionRecord(habit.id);
                         console.log(habit.id + habit.executionRecord);
                       }}
                       src={hello(habit.id)}

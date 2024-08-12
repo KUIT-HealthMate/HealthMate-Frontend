@@ -1,6 +1,0 @@
-interface homeRequestDTO {
-    percent: number;
-
-
-
-}

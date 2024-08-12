@@ -2,6 +2,9 @@ import styles from "./SupplementComponent.module.scss";
 import { usePillInfoStore } from "../../../../store/usePillInfoStore";
 import pillInfo from "../../../../store/pillInfo";
 
+import { useMutation } from 'react-query';
+
+
 function changeIdxToString(idx: number): string {
   if (idx === 1) {
     return "breakfast";
@@ -23,6 +26,13 @@ const SupplementComponent = (props: PillInfo) => {
   const { setIntakeRecord, getIntakeRecord, getIntakeTime, getMealTime } =
     usePillInfoStore();
 
+  function clickPillCheck(id: string, idx: number) {
+    setIntakeRecord(id, changeIdxToString(idx));
+
+    //클릭시 서버로 전송
+
+  }
+
   return (
     <div className={styles.PillInfo}>
       <div className={styles.PillInfoHeader}>
@@ -39,21 +49,23 @@ const SupplementComponent = (props: PillInfo) => {
                     <div
                       key={idx}
                       className={styles.PillInfoTimeButton}
-                      onClick={() =>
-                        setIntakeRecord(props.pill.id, changeIdxToString(idx))
+                      onClick={() => {
+                        clickPillCheck(props.pill.id, idx)
+                      }
+
                       }
                       style={
                         getIntakeRecord(props.pill.id, changeIdxToString(idx))
                           ? {
-                              background: `rgba(14, 148, 148, 0.1)`,
-                              border: `1px solid #0E9494`,
-                              color: `#0B7575`,
-                            }
+                            background: `rgba(14, 148, 148, 0.1)`,
+                            border: `1px solid #0E9494`,
+                            color: `#0B7575`,
+                          }
                           : {
-                              background: `#F5F6F8`,
-                              border: `1px solid #B3B3B3`,
-                              color: `#B3B3B3`,
-                            }
+                            background: `#F5F6F8`,
+                            border: `1px solid #B3B3B3`,
+                            color: `#B3B3B3`,
+                          }
                       }
                     >
                       {getMealTime(idx)}
@@ -64,7 +76,7 @@ const SupplementComponent = (props: PillInfo) => {
             )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
