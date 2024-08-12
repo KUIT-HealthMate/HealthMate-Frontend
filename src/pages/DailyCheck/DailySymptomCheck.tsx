@@ -15,6 +15,8 @@ interface symptomProps {
   buttonNavigate: string;
 
   findKeywordNavigate: string;
+
+  progressPercent: number;
 }
 
 const DailySymptomCheck = (props: symptomProps) => {
@@ -81,19 +83,19 @@ const DailySymptomCheck = (props: symptomProps) => {
       return newState;
     });
   }
-  useEffect(() => {}, [symptomBtnActive]);
+  useEffect(() => { }, [symptomBtnActive]);
   const navigate = useNavigate();
 
-  const { progressPercent } = useGlobalStoreSurvey((state) => ({
-    progressPercent: state.progressPercent,
-  }));
+  // const { progressPercent } = useGlobalStoreSurvey((state) => ({
+  //   progressPercent: state.progressPercent,
+  // }));
 
-  console.log("progressPercent: " + progressPercent);
+  //console.log("progressPercent: " + progressPercent);
 
   return (
     <>
       <TopBarWithCancel></TopBarWithCancel>
-      <ProgressBar percent={progressPercent}></ProgressBar>
+      <ProgressBar percent={props.progressPercent}></ProgressBar>
       <div className={styles.symptom}>
         <div className={styles.symptomTitle} style={{ marginTop: `75px` }}>
           {props.title1}
@@ -127,9 +129,9 @@ const DailySymptomCheck = (props: symptomProps) => {
                       style={
                         symptomBtnActive[symptomCategoryIdx][symptomIdx]
                           ? {
-                              background: `rgba(14, 148, 148, 0.1)`,
-                              border: `1px solid #0E9494`,
-                            }
+                            background: `rgba(14, 148, 148, 0.1)`,
+                            border: `1px solid #0E9494`,
+                          }
                           : {}
                       }
                     >
