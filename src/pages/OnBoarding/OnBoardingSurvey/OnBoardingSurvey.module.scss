@@ -1,0 +1,67 @@
+.onBoardingSurvey {
+    padding-left: 7%;
+    padding-right: 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100vh - 117px);
+
+    .TitleWrap {
+        display: flex;
+        flex-direction: column;
+
+        .TitleText {
+            padding-top: 24px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            color: #000000;
+
+        }
+
+        .TitleSubText {
+            padding-top: 28px;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+
+            color: #9E9FA4;
+
+        }
+    }
+
+    .CandidateWrap {
+        display: flex;
+        flex-direction: column;
+        padding-top: 18px;
+
+        .CandidateBox {
+            display: flex;
+            height: 54px;
+            width: 88%;
+            margin-top: 10px;
+            align-items: center;
+            padding-left: 17px;
+            background: #FFFFFF;
+            box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            color: #8F8F8F;
+
+            .Candidate {
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 19px;
+                letter-spacing: -0.165px;
+
+            }
+        }
+
+    }
+}

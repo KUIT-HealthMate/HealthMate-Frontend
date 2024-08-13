@@ -1,4 +1,7 @@
 import create from "zustand";
+import React from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 interface Survey {
   id: number;
@@ -151,11 +154,20 @@ export const surveys: Survey[] = [
 
 interface StoreState {
   currentQuestionIdx: number;
-  // mealCurrentQuestionIdx: number;
-  // sleepCurrentQuestionIdx: number;
   progressPercent: number;
   nextQuestion: () => void;
   previousQuestion: () => void;
+}
+
+
+function NavigateTo() {
+  console.log("NavigateTo드ㄹ어옴")
+  const navigate = useNavigate();
+
+  navigate('/');
+
+  return null;
+
 }
 
 export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
@@ -178,31 +190,12 @@ export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
 
   previousQuestion: () =>
     set((state) => {
+      // const navigate = useNavigate();
+
       console.log("previousQuestion" + state.currentQuestionIdx);
 
       const newProgressPercent = state.progressPercent - 5.88;
       if (state.currentQuestionIdx > -1) {
-        if (state.currentQuestionIdx === 0) {
-          console.log("dailycheckstart로 navigate");
-          return {
-            currentQuestionIdx: state.currentQuestionIdx - 1,
-            progressPercent: newProgressPercent,
-          };
-        } else if (state.currentQuestionIdx === 6) {
-          console.log("dailymealcheckstart로 navigate");
-          //  GoTo('/dailymealcheckstart');
-          return {
-            currentQuestionIdx: state.currentQuestionIdx - 1,
-            progressPercent: newProgressPercent,
-          };
-        } else if (state.currentQuestionIdx === 12) {
-          console.log("dailysleepcheckstart로 navigate");
-          //    GoTo('/dailysleepcheckstart');
-          return {
-            currentQuestionIdx: state.currentQuestionIdx - 1,
-            progressPercent: newProgressPercent,
-          };
-        }
         return {
           currentQuestionIdx: state.currentQuestionIdx - 1,
           progressPercent: newProgressPercent,
