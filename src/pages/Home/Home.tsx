@@ -17,38 +17,71 @@ const Home = () => {
   const navigate = useNavigate();
   const queryClient = new QueryClient();
 
-  //const [habits, setHabits] = useState<habitDto[]>([]);
-  // const [supplements, setSupplements] = useState<supplementDto[]>([]);
+  const [habits, setHabits] = useState<habitDto[]>([{ challengeName: "test1", achievementStatus: false }, { challengeName: "test2", achievementStatus: true }]);
+  const [supplements, setSupplements] = useState<supplementDto[]>([
+    {
+      challengeName: "test1",
+      breakfastSuccess: true,
+      lunchSuccess: true,
+      dinnerSuccess: true,
+      breakfastRequired: false,
+      lunchRequired: true,
+      dinnerRequired: false,
+      success: true
+    },
+    {
+      challengeName: "test2",
+      breakfastSuccess: true,
+      lunchSuccess: true,
+      dinnerSuccess: true,
+      breakfastRequired: true,
+      lunchRequired: true,
+      dinnerRequired: true,
+      success: true
+    }]);
   const [achievementRate, setAchievementRate] = useState<number>(0);
 
+  //zustand안쓰고 클릭마다 통신
 
 
   const gethomeInfoMutation = useMutation(gethomeInfo, {
-    onSuccess: (data) => {
-      console.log('다른사용자 게시물 리스트 성공:', data);
-      setAchievementRate(data.status)
-      //setHabits(data);
+    onSuccess: (response) => {
+      console.log('홈 정보 가져오기 성공:', response.result);
+      console.log('홈 정보 습관:', response.result.habit);
+      console.log('홈 정보 퍼센트:', response.result.achievementRate);
+
+      //가져온 값들로 set
+      //setHabits(response.result.habit); //일단 값 없으니까 주석처리
+      // 영양제도 마찬가지로 주석처리
+      setAchievementRate(response.result.achievementRate);
     },
     onError: (error) => {
-      console.error('다른사용자 게시물 실패:', error);
+      console.error('홈정보 가져오기 실패:', error);
     },
   })
 
   useEffect(() => {
+    // 컴포넌트가 마운트될 때 데이터 가져오기
     gethomeInfoMutation.mutate();
   }, []);
+
+  // gethomeInfoMutation.mutate();
+
+  // useEffect(() => {
+  //   gethomeInfoMutation.mutate();
+  //   console.log("set다시")
+  // }, [achievementRate]);
 
 
   return (
     <div>
       <TopBar></TopBar>
       <div className={styles.Header}></div>
-
       <TodaysChallenge achievementRate={achievementRate}></TodaysChallenge>
 
-      <SupplementChallenge></SupplementChallenge>
+      <SupplementChallenge supplements={supplements}></SupplementChallenge>
       <div className={styles.gap}></div>
-      <HabitChallenge></HabitChallenge>
+      <HabitChallenge habits={habits}></HabitChallenge>
       <button
         className={styles.dailyCheckButton}
         onClick={() => {

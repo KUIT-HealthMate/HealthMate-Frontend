@@ -12,18 +12,24 @@ import useHabitInfoStore from "../../../store/useHabitInfoStore";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
-import habitInfo from "../../../store/habitInfo";
+// import habitInfo from "../../../store/habitInfo";
 
 //api 관련
 import { putHabitCheck } from "../../../APIs/home/homeApi";
+import { habitDto } from "../../../dtos/home/homeDto";
 
 SwiperCore.use([Pagination, Navigation]);
 
-export default function HabitChallenge() {
+interface HabitChallengeProps {
+  habits: habitDto[];
+}
+
+export default function HabitChallenge(props: HabitChallengeProps) {
+  console.log("HabitChallenge: ", props.habits);
   const { HabitInfo, setExecutionRecord, getExecutionRecord } =
     useHabitInfoStore();
 
-  const splitHabits = (array: habitInfo[]) => {
+  const splitHabits = (array: habitDto[]) => {
     const result = [];
     for (let i = 0; i < array.length; i += 4) {
       result.push(array.slice(i, i + 4));
@@ -31,11 +37,12 @@ export default function HabitChallenge() {
     return result;
   };
 
-  const [newHabits, setNewHabits] = useState<habitInfo[][]>([]);
+  const [newHabits, setNewHabits] = useState<habitDto[][]>([props.habits]);
 
   useEffect(() => {
-    const chunks = splitHabits(HabitInfo);
+    const chunks = splitHabits(props.habits);
     setNewHabits(chunks);
+    //setNewHabits(props.habits)
   }, [HabitInfo]);
 
   const hello = (habitid: string) => {
@@ -44,8 +51,9 @@ export default function HabitChallenge() {
   };
 
 
-  function HabitCheck(habitId: string) {
-    setExecutionRecord(habitId);
+  function HabitCheck(habitId: number) {
+    // setExecutionRecord(habitId);
+
     // 체크하면 서버 전송
     putHabitCheck("2024-08-10");
   }
@@ -68,21 +76,24 @@ export default function HabitChallenge() {
         pagination={{ clickable: true }}
       >
         {newHabits.map((chunk, chunkIndex) => {
+          console.log("chunk:", chunk)
           return (
             <SwiperSlide>
+
               {chunk.map((habit, habitIndex) => {
                 return (
                   <div className={styles.HabitInfo}>
-                    <p className={styles.HabitName}>{habit.name}</p>
+                    <p className={styles.HabitName}>{habit.challengeName}</p>
                     <img
                       className={styles.HabitCheckmark}
                       onClick={() => {
-                        HabitCheck(habit.id);
+                        HabitCheck(habitIndex);
                         // setExecutionRecord(habit.id);
-                        console.log(habit.id + habit.executionRecord);
+                        // console.log(habit.id + habit.executionRecord);
                       }}
-                      src={hello(habit.id)}
-                      alt="hello"
+                      //src={hello(habitIndex)}
+                      src={habit.achievementStatus === true ? checkmark : uncheckmark}
+                      alt="check_uncheck"
                     ></img>
                   </div>
                 );

@@ -2,16 +2,6 @@ import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_BACK_URL;
 
-// axios.get('http://3.39.60.18:9000/challenges/today/1').then((Response) => {
-//     console.log(Response.data);
-// }).catch((Error) => {
-//     console.log(Error);
-// })
-
-// export const apiClient = axios.create({
-//     baseURL: BASE_URL, // API의 기본 URL
-//     withCredentials: true, // 쿠키를 포함한 요청을 보낼 때 필요
-// });
 
 //axios객체 생성
 export const client = axios.create({
@@ -31,7 +21,7 @@ export const gethomeInfo = async () => {
     try {
         const response = await client.get('/challenges/today');
         console.log(response.data)
-        return response;
+        return response.data;
     } catch (error) {
         console.error('홈정보 불러오기 실패:', error);
         throw error;

@@ -12,17 +12,19 @@ interface TodaysChallengeProps {
 }
 
 export default function TodaysChallenge(props: TodaysChallengeProps) {
-  const [percent, setPercent] = useState(0);
+  console.log("TodaysChallenge에서 퍼세느: ", props.achievementRate);
+
+  const [percent, setPercent] = useState(props.achievementRate);
   const disableBottomBar = useGlobalStore((state) => state.setShowBottomBar);
 
   //통신으로 percent값 가져오기
   useEffect(() => {
-    setPercent(40);
-  }, []);
+    console.log("TodaysChallenge 다시")
+    setPercent(props.achievementRate);
+  }, [props.achievementRate]);
 
   const halfPercent = percent / 2;
 
-  console.log(percent);
   return (
     <div className={styles.TodaysChallenge}>
       <h2 className={styles.HomeHeader}>오늘의 챌린지</h2>
