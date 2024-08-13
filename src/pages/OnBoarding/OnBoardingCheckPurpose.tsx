@@ -10,6 +10,18 @@ import { useGlobalStore } from "../../store/store";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
+import { OnBoardingResult } from "../../store/storeOnBoardingSurvey";
+
+import { postOnBoarding } from "../../APIs/onBoarding/onBoardingApi";
+import { useMutation } from 'react-query';
+
+interface onBoardingRequestDto {
+  gender: number,
+  ageGroup: number,
+  symptoms: string[],
+  purpose: 1
+}
+
 
 const purposeButtons = [
   { icon: purpose1, text: "루틴" },
@@ -21,6 +33,7 @@ const purposeButtons = [
 ];
 
 const OnBoardingCheckPurpose = () => {
+  const { gender, ageGroup, symptoms, purposes, setPurposes } = OnBoardingResult();
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
     console.log("마운트됨");
@@ -29,6 +42,17 @@ const OnBoardingCheckPurpose = () => {
       setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
+
+  const postOnBoardingMutation = useMutation(postOnBoarding, {
+    onSuccess: (response) => {
+      console.log('온보딩 정보 보내기 성공:', response);
+    },
+    onError: (error) => {
+      console.error('온보딩 정보 보내기 실패:', error);
+    },
+  })
+
+
 
   const [purposeCheck, setPurposeCheck] = useState(
     purposeButtons.map((purposeButton) => false)
@@ -56,6 +80,37 @@ const OnBoardingCheckPurpose = () => {
     }
     changeBtnColor(idx);
   }
+
+  //'다음으로' 누르면 store 저장 & 서버 전송
+  function setPurposeStore() {
+    const checkedPurposeId = [];
+
+    for (let i = 0; i < purposeCheck.length; i++) {
+      if (purposeCheck[i] === true) {
+        checkedPurposeId.push(i)
+      }
+    }
+    console.log("purposeCheck: ", checkedPurposeId)
+    console.log(OnBoardingResult)
+    setPurposes(checkedPurposeId);
+
+    const requestData = {
+      gender: gender,
+      ageGroup: ageGroup,
+      symptoms: symptoms,
+      purpose: 1,
+    }
+
+
+
+
+    //서버 전송
+
+    postOnBoardingMutation.mutate(requestData);
+
+
+  }
+
 
   const navigate = useNavigate();
   return (
@@ -110,7 +165,10 @@ const OnBoardingCheckPurpose = () => {
         disabled={
           purposeCheck.filter((element) => element).length > 0 ? false : true
         }
-        onClick={() => navigate("/welcome")}
+        onClick={() => {
+          navigate("/welcome");
+          setPurposeStore();
+        }}
         style={
           purposeCheck.filter((element) => element).length > 0
             ? { position: `fixed`, bottom: `33px` }

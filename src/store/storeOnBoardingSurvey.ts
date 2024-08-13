@@ -12,10 +12,11 @@ interface OnBoardingResult {
     gender: number;
     ageGroup: number;
     symptoms: string[];
-    purpose: number[];
+    purposes: number[];
     setGender: (answer: number) => void;
     setAgeGroup: (answer: number) => void;
-
+    setSymptoms: (answers: string[]) => void;
+    setPurposes: (answers: number[]) => void;
 }
 
 
@@ -50,12 +51,14 @@ export const OnBoardingResult = create<OnBoardingResult>((set) => ({
     gender: -1,
     ageGroup: -1,
     symptoms: [],
-    purpose: [],
+    purposes: [],
     setGender: (answer: number) => {
-        console.log("ㄱㄷ녀ㅣㅅㅁ;ㅇ널")
         set({ gender: answer });
     },
     setAgeGroup: (answer: number) => set({ ageGroup: answer }),
+    setSymptoms: (answers: string[]) => set({ symptoms: answers }),
+    setPurposes: (answers: number[]) => set({ purposes: answers }),
+
 }));
 
 

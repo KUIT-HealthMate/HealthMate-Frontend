@@ -62,7 +62,7 @@ export const OnBoardingSurvey = () => {
     function handleNextBtnClick(questionIdx: number) {
         console.log("다음으로")
 
-        //선택지
+        //선택지 store 반영
         const resultIdx = selectBtnActive.findIndex(element => element === true)
         console.log("resultIdx: ", resultIdx);
         if (questionIdx == 0) {
