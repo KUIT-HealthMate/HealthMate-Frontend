@@ -73,6 +73,9 @@ const ChallengeManagePage = <T,>({
 
   // 이름 부분 input의 style
   const [nameInputStyle, setNameInputStyle] = useState<React.CSSProperties>({});
+  // input값이 잘못되었을경우 오류 텍스트
+  const [errorMessage,setErrorMessage] = useState<string>("");
+
   // 챌린지에서 notificationTime을 분리하여 관리
   const [alarmTime, setAlarmTime] = useState<AlarmTime[]>([]);
 
@@ -125,6 +128,9 @@ const ChallengeManagePage = <T,>({
             defaultValue={newChallenge.name}
             challengeType={challengeType}
             nameInputStyle={nameInputStyle}
+            setNameInputStyle={setNameInputStyle}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
           />
 
           {isPillChallenge(challengeType) && (
@@ -167,6 +173,7 @@ const ChallengeManagePage = <T,>({
             alarmTime={alarmTime}
             editingChallengeId={editingChallengeId}
             setNameInputStyle={setNameInputStyle}
+            setErrorMessage={setErrorMessage}
           />
 
           <div className={s.bottomBarCover}></div>

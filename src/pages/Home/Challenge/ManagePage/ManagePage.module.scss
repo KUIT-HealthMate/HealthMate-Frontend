@@ -245,3 +245,22 @@ input {
     display:flex;
     gap:6px;
 }
+
+.errorMessageDiv {
+
+    position:absolute;
+    top:43px;
+    
+    display:flex;
+    gap:3px;
+
+    img {
+        width: 13px;
+    }
+
+    span {
+        color:red;
+        font-size: 13px;
+    }
+
+}
