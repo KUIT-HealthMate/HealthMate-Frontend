@@ -15,7 +15,7 @@ export const registerChallenge = (challengeToRegister : typeOfChallengeToManage,
       getRequestOptions('POST', JSON.stringify(challengeToRegister))
   )
   .then(response => response.json())
-  .then(result => {res = result.result})
+  .then(result => {res = result.result; console.log(result)})
   .catch(error => {res = error; console.log('registerPill Error', error)});
 
   return res;

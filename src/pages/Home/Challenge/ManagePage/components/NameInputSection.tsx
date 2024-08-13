@@ -10,6 +10,7 @@ interface Props<T> {
   newChallenge: Omit<T, "id" | "notificationTime">;
   defaultValue: string;
   challengeType: string;
+  nameInputStyle:  React.CSSProperties;
 }
 
 const NameInputSection = <T,>({
@@ -17,6 +18,7 @@ const NameInputSection = <T,>({
   newChallenge,
   defaultValue,
   challengeType,
+    nameInputStyle
 }: Props<T>) => {
   let placeHolderMessage: string = isPillChallenge(challengeType)
     ? "알약"
@@ -37,6 +39,7 @@ const NameInputSection = <T,>({
             handleChallengeName(e.target, setNewChallenge, newChallenge);
           }}
           defaultValue={defaultValue}
+          style={nameInputStyle}
         />
         <InputClearButton />
       </div>

@@ -71,6 +71,8 @@ const ChallengeManagePage = <T,>({
   }
   const [editingChallengeId] = useState<string>(alreadyExistingChallengeId);
 
+  // 이름 부분 input의 style
+  const [nameInputStyle, setNameInputStyle] = useState<React.CSSProperties>({});
   // 챌린지에서 notificationTime을 분리하여 관리
   const [alarmTime, setAlarmTime] = useState<AlarmTime[]>([]);
 
@@ -122,6 +124,7 @@ const ChallengeManagePage = <T,>({
             setNewChallenge={setNewChallenge}
             defaultValue={newChallenge.name}
             challengeType={challengeType}
+            nameInputStyle={nameInputStyle}
           />
 
           {isPillChallenge(challengeType) && (
@@ -163,6 +166,7 @@ const ChallengeManagePage = <T,>({
             newChallenge={newChallenge}
             alarmTime={alarmTime}
             editingChallengeId={editingChallengeId}
+            setNameInputStyle={setNameInputStyle}
           />
 
           <div className={s.bottomBarCover}></div>
