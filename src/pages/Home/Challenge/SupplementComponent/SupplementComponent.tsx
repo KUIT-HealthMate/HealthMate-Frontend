@@ -3,7 +3,8 @@ import { usePillInfoStore } from "../../../../store/usePillInfoStore";
 import pillInfo from "../../../../store/pillInfo";
 
 import { useMutation } from 'react-query';
-
+import { putSupplementCheck } from "../../../../APIs/home/homeApi";
+import { time } from "console";
 
 function changeIdxToString(idx: number): string {
   if (idx === 1) {
@@ -28,8 +29,19 @@ const SupplementComponent = (props: PillInfo) => {
 
   function clickPillCheck(id: string, idx: number) {
     setIntakeRecord(id, changeIdxToString(idx));
-
+    console.log('id', id, '   idx: ', idx)
     //클릭시 서버로 전송
+    var timeSlot = "";
+    if (idx === 0) {
+      timeSlot = "BREAKFAST";
+    } else if (idx === 1) {
+      timeSlot = "LUNCH";
+    } else if (idx === 2) {
+      timeSlot = "DINNER";
+    }
+
+
+    putSupplementCheck(timeSlot, id);
 
   }
 

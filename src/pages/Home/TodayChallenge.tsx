@@ -7,7 +7,11 @@ import badIcon from "../../assets/bad.svg";
 import bubleGreen from "../../assets/bubleG.svg";
 import bubleOrange from "../../assets/bubleO.svg";
 
-export default function TodaysChallenge() {
+interface TodaysChallengeProps {
+  achievementRate: number;
+}
+
+export default function TodaysChallenge(props: TodaysChallengeProps) {
   const [percent, setPercent] = useState(0);
   const disableBottomBar = useGlobalStore((state) => state.setShowBottomBar);
 
@@ -37,11 +41,11 @@ export default function TodaysChallenge() {
             style={
               percent >= 50
                 ? {
-                    background: `conic-gradient(#7ADCC5 0%, #0E9494 ${halfPercent}%, #05697F ${percent}%, #D9D9D9 ${percent}% 100%)`,
-                  }
+                  background: `conic-gradient(#7ADCC5 0%, #0E9494 ${halfPercent}%, #05697F ${percent}%, #D9D9D9 ${percent}% 100%)`,
+                }
                 : {
-                    background: `conic-gradient(#F5BE9D 0%, #F7A682 ${halfPercent}%, #F97F59 ${percent}%, #D9D9D9 ${percent}% 100%)`,
-                  }
+                  background: `conic-gradient(#F5BE9D 0%, #F7A682 ${halfPercent}%, #F97F59 ${percent}%, #D9D9D9 ${percent}% 100%)`,
+                }
             }
           >
             <div className={styles.ChartCenter}>
@@ -64,9 +68,9 @@ export default function TodaysChallenge() {
             percent >= 50
               ? { background: "rgba(122, 220, 197, 0.25)" }
               : {
-                  background:
-                    percent > 0 ? "rgba(249, 129, 91, 0.2)" : "#EBEBEB",
-                }
+                background:
+                  percent > 0 ? "rgba(249, 129, 91, 0.2)" : "#EBEBEB",
+              }
           }
         >
           <p
@@ -80,8 +84,8 @@ export default function TodaysChallenge() {
             {percent >= 50
               ? "거의 다 진행하셨네요!"
               : percent > 0
-              ? "조금만 더 힘을 내볼까요?"
-              : "건강 챌린지를 추가해보세요!"}
+                ? "조금만 더 힘을 내볼까요?"
+                : "건강 챌린지를 추가해보세요!"}
             <img
               src={percent >= 50 ? goodIcon : percent > 0 ? badIcon : ""}
               alt="Icon"

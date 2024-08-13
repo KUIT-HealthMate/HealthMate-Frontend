@@ -25,21 +25,40 @@ export const client = axios.create({
 });
 
 
+//홈정보
+export const gethomeInfo = async () => {
 
-export const home = async (): Promise<String> => {
     try {
-        const response = await client.get(`/challenges/today/1`, {
-            headers: {
-                'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8',
-            },
-        });
-        return response.data;
+        const response = await client.get('/challenges/today');
+        console.log(response.data)
+        return response;
     } catch (error) {
-        console.error('home error');
+        console.error('홈정보 불러오기 실패:', error);
         throw error;
     }
+
+
+    // client.get("/challenges/today")
+    //     .then((response) => {
+    //         console.log(response);
+    //         return response.data
+    //     })
+    //     .catch((err) => { console.log(err) })
 };
 
+//영양제 체크
+export const putSupplementCheck = async (timeSlot: string, pillId: string) => {
+    console.log(timeSlot)
+    client.put(`/supplements/check-status/${pillId}`, {
+        "timeSlot": timeSlot
+    })
+        .then((res) => { console.log(res) })
+        .catch((err) => { console.log(err) })
+};
+
+
+
+//습관 체크
 export const putHabitCheck = async (date: string) => {
     console.log(date)
     client.put("/habits/check-status/1", {
@@ -48,4 +67,6 @@ export const putHabitCheck = async (date: string) => {
         .then((res) => { console.log(res) })
         .catch((err) => { console.log(err) })
 };
+
+
 
