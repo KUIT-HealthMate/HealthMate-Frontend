@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import PageTopBar from "../../../components/organs/Bars/PageTopBar";
 import forward from "../../../assets/forward.svg";
@@ -11,6 +11,8 @@ import { julyMock } from "../../../test/mock/mockup";
 
 export default function ChallengeStatistics() {
   const [period, setPeriod] = useState<dayjs.Dayjs>(dayjs());
+
+  useEffect(() => {}, [period]);
 
   const reduceMonth = () => {
     const reducedDay = dayjs(period).subtract(1, "month");
@@ -37,6 +39,7 @@ export default function ChallengeStatistics() {
   };
 
   const [calanderSelect, setCalanderSelect] = useState(true);
+  //true는 주간, false는 월간
   const selectWeeklyCalander = () => {
     setCalanderSelect(true);
   };
