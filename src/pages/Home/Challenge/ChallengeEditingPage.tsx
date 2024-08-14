@@ -12,6 +12,7 @@ import dummbellImg from "../../../assets/dumbbell.png";
 import s from "./SuppplementChallengeEditingPage.module.scss";
 
 import ChallengeDisplay from "./ChallengeDisplay";
+import { serverRequest } from "../../../APIs/ManageChallenge/serverRequest";
 
 const SupplementChallengeEditingPage = () => {
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
@@ -38,6 +39,22 @@ const SupplementChallengeEditingPage = () => {
     } else {
       (buttons[1] as HTMLElement).style.borderBottom = "3px solid #0E9494";
       (buttons[0] as HTMLElement).style.borderBottom = "3px solid #FFFFFF";
+    }
+  };
+
+  const handleDeleteFunc = (challengeType: string, challengeId: string) => {
+    if(challengeType === "pill") {
+
+      deletePill(challengeId);
+
+      serverRequest.deleteChallenge(challengeId,"supplements");
+      
+    } else {
+
+      deleteHabit(challengeId);
+
+      serverRequest.deleteChallenge(challengeId,"habits");
+
     }
   };
 
@@ -71,14 +88,14 @@ const SupplementChallengeEditingPage = () => {
       <ChallengeDisplay
         item={PillInfo}
         getIntakeTime={(pill: pillInfo) => getIntakeTime(pill)}
-        deleteFunc={deletePill}
+        deleteFunc={(challengeId: string) => handleDeleteFunc("pill", challengeId)}
         challengeType={"pill"}
         displayInfo={challengeDisplayInfo}
       />
       <ChallengeDisplay
         item={HabitInfo}
         getIntakeTime={() => {}}
-        deleteFunc={deleteHabit}
+        deleteFunc={(challengeId: string) => handleDeleteFunc("habit", challengeId)}
         challengeType={"habit"}
         displayInfo={challengeDisplayInfo}
       />

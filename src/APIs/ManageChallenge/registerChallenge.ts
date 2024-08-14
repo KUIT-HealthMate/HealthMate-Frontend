@@ -4,21 +4,19 @@ import { serverURL } from "../utils/serverURL";
 import {typeOfChallengeToManage} from "../types/typeOfChallengeToManage";
 
 
-export const registerChallenge = (challengeToRegister : typeOfChallengeToManage,challengeType: string):string => {
+export const registerChallenge = (challengeToRegister : typeOfChallengeToManage,challengeType: string):Promise<string> => {
 
   const endpoint:string = `/${challengeType}/register`;
   let res:string = "";
 
   // 서버에 요청을 보낸다.
-  fetch(
+  return fetch(
         serverURL + endpoint,
       getRequestOptions('POST', JSON.stringify(challengeToRegister))
   )
   .then(response => response.json())
-  .then(result => {res = result.result; console.log(result)})
-  .catch(error => {res = error; console.log('registerPill Error', error)});
-
-  return res;
+  .then(result => {res = result.result; console.log("id given by server is:" + res); return res;})
+  .catch(error => {res = error; console.log('registerPill Error', error); throw error;});
 
 }
 

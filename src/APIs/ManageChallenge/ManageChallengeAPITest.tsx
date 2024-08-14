@@ -10,7 +10,7 @@ const ManageChallengeAPITest = () => {
     console.log("rerendered")
 
     const handleDelete = () => {
-        PillInfo.forEach((item)  => deleteChallenge(item))
+        // PillInfo.forEach((item)  => deleteChallenge(item))
     }
 
   return (

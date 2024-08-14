@@ -55,7 +55,7 @@ const CompleteChangeButton = <T,>({
     return {isValid: true, message: ""};
   }
 
-  const handleChanges = (): void => {
+  const handleChanges = async (): Promise<void> => {
 
     // @ts-ignore
     console.log(newChallenge.name === '')
@@ -72,21 +72,33 @@ const CompleteChangeButton = <T,>({
       (newChallenge as unknown as pillInfo).weeklyIntakeFrequency !== undefined
     ) {
       if (isAddingNewChallenge) {
-        setPillInfo({
-          ...(newChallenge as unknown as pillInfo),
-          id: uuid(),
-          notificationTime: alarmTime,
-        });
-        serverRequest.registerChallenge({
+
+        let idGivenByServer: string = await serverRequest.registerChallenge({
           ...(newChallenge as unknown as pillInfo),
           notificationTime: alarmTime,
         },"supplements");
+
+        console.log("idGivenByServer: " + idGivenByServer);
+
+        setPillInfo({
+          ...(newChallenge as unknown as pillInfo),
+          id: idGivenByServer,
+          notificationTime: alarmTime,
+        });
+
       } else {
+
+        serverRequest.editChallenge({
+          ...(newChallenge as unknown as pillInfo),
+          notificationTime: alarmTime,
+        },"supplements");
+
         setPill(
           editingChallengeId,
           newChallenge as unknown as pillInfo,
           alarmTime
         );
+
       }
     }
 
@@ -95,17 +107,31 @@ const CompleteChangeButton = <T,>({
       undefined
     ) {
       if (isAddingNewChallenge) {
+        let idGivenByServer: string = await serverRequest.registerChallenge({
+          ...(newChallenge as unknown as habitInfo),
+          notificationTime: alarmTime,
+        },"habits");
+
+        console.log("idGivenByServer: " + idGivenByServer);
+
         setHabitInfo({
           ...(newChallenge as unknown as habitInfo),
-          id: uuid(),
+          id: idGivenByServer,
           notificationTime: alarmTime,
         });
       } else {
+
+        serverRequest.editChallenge({
+          ...(newChallenge as unknown as habitInfo),
+          notificationTime: alarmTime,
+        },"habits");
+
         setHabit(
           editingChallengeId,
           newChallenge as unknown as habitInfo,
           alarmTime
         );
+
       }
     }
 
