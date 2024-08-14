@@ -65,13 +65,6 @@ const Home = () => {
     gethomeInfoMutation.mutate();
   }, []);
 
-  // gethomeInfoMutation.mutate();
-
-  // useEffect(() => {
-  //   gethomeInfoMutation.mutate();
-  //   console.log("set다시")
-  // }, [achievementRate]);
-
 
   return (
     <div>

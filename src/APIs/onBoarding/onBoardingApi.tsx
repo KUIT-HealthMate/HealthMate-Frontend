@@ -32,3 +32,4 @@ export const postOnBoarding = async (request: onBoardingRequestDto) => {
         throw error;
     }
 };
+

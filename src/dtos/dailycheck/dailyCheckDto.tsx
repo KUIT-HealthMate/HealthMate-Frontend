@@ -1,4 +1,4 @@
-interface lifeStyleDto {
+export interface lifeStyleDto {
     environmentScore: number,
     focusTimeScore: number,
     coffeeConsumptionScore: number,
@@ -7,7 +7,7 @@ interface lifeStyleDto {
 }
 
 
-interface mealPatternDto {
+export interface mealPatternDto {
     mealTimeScore: number,
     foodType: number,
     regularMealTimeScore: number,
@@ -18,11 +18,10 @@ interface mealPatternDto {
 }
 
 
-interface sleepPatternDto {
+export interface sleepPatternDto {
     sleepDurationScore: number,
     morningFatigueScore: number,
     peakConditionTimeScore: number,
     sleepRemarkScore: number,
 }
 
-export { }

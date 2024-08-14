@@ -101,9 +101,6 @@ const OnBoardingCheckPurpose = () => {
       purpose: 1,
     }
 
-
-
-
     //서버 전송
 
     postOnBoardingMutation.mutate(requestData);

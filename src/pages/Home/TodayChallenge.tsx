@@ -88,10 +88,10 @@ export default function TodaysChallenge(props: TodaysChallengeProps) {
               : percent > 0
                 ? "조금만 더 힘을 내볼까요?"
                 : "건강 챌린지를 추가해보세요!"}
-            <img
-              src={percent >= 50 ? goodIcon : percent > 0 ? badIcon : ""}
+            {percent > 0 && (<img
+              src={percent >= 50 ? goodIcon : badIcon}
               alt="Icon"
-            ></img>
+            ></img>)}
           </p>
         </div>
         <p className={styles.CoinNoticeText}>

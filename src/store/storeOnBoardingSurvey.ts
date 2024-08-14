@@ -21,7 +21,6 @@ interface OnBoardingResult {
 
 
 export const onBoardingSurveys: OnBoardingSurvey[] = [
-
     {
         id: 0,
         title: "성별을 입력해주세요.",
@@ -34,7 +33,6 @@ export const onBoardingSurveys: OnBoardingSurvey[] = [
         subtitle: "",
         candidates: ["40대 이하", "50대", "60대", "70대 이상"],
     }
-
 ]
 
 interface OnBoardingState {
