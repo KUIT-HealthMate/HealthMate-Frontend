@@ -27,7 +27,6 @@ export const handleEatingTiming = <T extends pillInfo>(
     setter: (value: React.SetStateAction<Omit<T, "id" | "notificationTime">>) => void, 
     newPill: Omit<T, "id" | "notificationTime">
   ): void => {
-
     setter({...newPill as T, dailyIntakePeriod: {
       ...newPill.dailyIntakePeriod,
       [value]: !(newPill.dailyIntakePeriod as any)[value],
