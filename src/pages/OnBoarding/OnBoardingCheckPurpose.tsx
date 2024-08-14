@@ -64,7 +64,7 @@ const OnBoardingCheckPurpose = () => {
       {/* <div className={styles.backButton} onClick={() => navigate(-1)}>
                 <img style={{ width: `8.89px`, height: `16px` }} src={leftBracket} />
             </div> */}
-      <ProgressBar percent={50}></ProgressBar>
+      <ProgressBar percent={75}></ProgressBar>
       <div className={styles.purposeTop}>
         <div className={styles.purposeTitle}>어떤 목적으로</div>
         <div className={styles.purposeTitle}>헬스메이트를 찾아주셨나요?</div>
@@ -86,10 +86,10 @@ const OnBoardingCheckPurpose = () => {
                 style={
                   purposeCheck[idx] === true
                     ? {
-                        background: `rgba(14, 148, 148, 0.1)`,
-                        color: `#0E9494`,
-                        border: `1px solid #0E9494`,
-                      }
+                      background: `rgba(14, 148, 148, 0.1)`,
+                      color: `#0E9494`,
+                      border: `1px solid #0E9494`,
+                    }
                     : {}
                 }
               >
@@ -115,11 +115,11 @@ const OnBoardingCheckPurpose = () => {
           purposeCheck.filter((element) => element).length > 0
             ? { position: `fixed`, bottom: `33px` }
             : {
-                position: `fixed`,
-                bottom: `33px`,
-                background: `#F5F6F8`,
-                color: `#8F8F8F`,
-              }
+              position: `fixed`,
+              bottom: `33px`,
+              background: `#F5F6F8`,
+              color: `#8F8F8F`,
+            }
         }
       >
         <p className={styles.NextButtonText}>다음으로</p>
