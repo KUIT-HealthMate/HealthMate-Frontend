@@ -30,25 +30,39 @@ export default function HabitChallenge(props: HabitChallengeProps) {
     useHabitInfoStore();
 
   const splitHabits = (array: habitDto[]) => {
+    console.log("splitHabits: ", array)
     const result = [];
     for (let i = 0; i < array.length; i += 4) {
       result.push(array.slice(i, i + 4));
     }
+    console.log("habit result: ", result)
     return result;
   };
 
   const [newHabits, setNewHabits] = useState<habitDto[][]>([props.habits]);
 
   useEffect(() => {
+    console.log("habit useEffect")
     const chunks = splitHabits(props.habits);
     setNewHabits(chunks);
+
     // eslint-disable-next-line
   }, [HabitInfo]);
 
 
+
+
+  const today = new Date();
+  const todayDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+
   function HabitCheck(habitId: number) {
+
+    console.log("HabitCheck한 id: " + habitId);
+    // setExecutionRecord(habitId);
+
     // 체크하면 서버 전송
-    putHabitCheck("2024-08-10");
+    console.log("오늘 날짜: ", todayDate)
+    putHabitCheck(todayDate, habitId);
   }
 
   return (
@@ -80,7 +94,7 @@ export default function HabitChallenge(props: HabitChallengeProps) {
                     <img
                       className={styles.HabitCheckmark}
                       onClick={() => {
-                        HabitCheck(habitIndex);
+                        HabitCheck(habit.challengeId);
                         // setExecutionRecord(habit.id);
                         // console.log(habit.id + habit.executionRecord);
                       }}

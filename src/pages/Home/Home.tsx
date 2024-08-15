@@ -15,8 +15,9 @@ import { habitDto, supplementDto } from "../../dtos/home/homeDto";
 const Home = () => {
   const navigate = useNavigate();
 
-  const [habits] = useState<habitDto[]>([{ challengeName: "test1", achievementStatus: false }, { challengeName: "test2", achievementStatus: true }]);
-  const [supplements] = useState<supplementDto[]>([
+  const [habits, setHabits] = useState<habitDto[]>([]);
+  const [supplements, setSupplements] = useState<supplementDto[]>([
+
     {
       challengeName: "test1",
       breakfastSuccess: true,
@@ -39,9 +40,6 @@ const Home = () => {
     }]);
   const [achievementRate, setAchievementRate] = useState<number>(0);
 
-  //zustand안쓰고 클릭마다 통신
-
-
   const gethomeInfoMutation = useMutation(gethomeInfo, {
     onSuccess: (response) => {
       console.log('홈 정보 가져오기 성공:', response.result);
@@ -52,6 +50,8 @@ const Home = () => {
       //setHabits(response.result.habit); //일단 값 없으니까 주석처리
       // 영양제도 마찬가지로 주석처리
       setAchievementRate(response.result.achievementRate);
+      setHabits(
+        response.result.habit);
     },
     onError: (error) => {
       console.error('홈정보 가져오기 실패:', error);

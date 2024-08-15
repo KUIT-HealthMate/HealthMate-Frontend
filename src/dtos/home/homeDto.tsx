@@ -1,5 +1,6 @@
 
 export interface habitDto {
+    challengeId: number,
     challengeName: string,
     achievementStatus: boolean,
 }

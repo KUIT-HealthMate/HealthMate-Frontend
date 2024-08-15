@@ -49,9 +49,9 @@ export const putSupplementCheck = async (timeSlot: string, pillId: string) => {
 
 
 //습관 체크
-export const putHabitCheck = async (date: string) => {
-    console.log(date)
-    client.put("/habits/check-status/1", {
+export const putHabitCheck = async (date: string, habitId: number) => {
+    console.log(date, habitId)
+    client.put(`/habits/check-status/${habitId}`, {   // path param 있으면 백틱사용
         "date": date
     })
         .then((res) => { console.log(res) })
