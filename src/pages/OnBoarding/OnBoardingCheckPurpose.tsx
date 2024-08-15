@@ -19,9 +19,8 @@ interface onBoardingRequestDto {
   gender: number,
   ageGroup: number,
   symptoms: string[],
-  purpose: 1
+  purpose: number[],
 }
-
 
 const purposeButtons = [
   { icon: purpose1, text: "루틴" },
@@ -98,7 +97,7 @@ const OnBoardingCheckPurpose = () => {
       gender: gender,
       ageGroup: ageGroup,
       symptoms: symptoms,
-      purpose: 1,
+      purpose: checkedPurposeId,
     }
 
     //서버 전송

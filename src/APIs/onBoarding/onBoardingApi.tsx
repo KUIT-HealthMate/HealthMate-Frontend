@@ -18,7 +18,7 @@ interface onBoardingRequestDto {
     gender: number,
     ageGroup: number,
     symptoms: string[],
-    purpose: number;
+    purpose: number[];
 }
 
 //온보딩 정보 전송

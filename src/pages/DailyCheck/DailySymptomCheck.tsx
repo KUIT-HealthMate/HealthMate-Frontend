@@ -184,10 +184,12 @@ const DailySymptomCheck = (props: symptomProps) => {
           <div className={styles.findKeywordText}>
             <img src={exclamationMark} alt="exclaim"></img>
             <div
-              onClick={() =>
+              onClick={() => {
+                setSymtomsStore();
                 navigate("/findkeyword", {
                   state: { value: props.findKeywordNavigate },
                 })
+              }
               }
             >
               찾는 키워드가 없나요?
