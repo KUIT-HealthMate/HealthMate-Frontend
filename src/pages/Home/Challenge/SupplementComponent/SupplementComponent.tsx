@@ -20,7 +20,7 @@ interface PillInfo {
 }
 
 const SupplementComponent = (props: PillInfo) => {
-  const { setIntakeRecord, getIntakeRecord, getIntakeTime, getMealTime } =
+  const { /*setIntakeRecord, getIntakeRecord,*/ getIntakeTime, getMealTime } =
     usePillInfoStore();
 
   return (
@@ -40,10 +40,10 @@ const SupplementComponent = (props: PillInfo) => {
                       key={idx}
                       className={styles.PillInfoTimeButton}
                       onClick={() =>
-                        setIntakeRecord(props.pill.id, changeIdxToString(idx))
+                        {} // setIntakeRecord(props.pill.id, changeIdxToString(idx))
                       }
                       style={
-                        getIntakeRecord(props.pill.id, changeIdxToString(idx))
+                        (true)// getIntakeRecord(props.pill.id, changeIdxToString(idx))
                           ? {
                               background: `rgba(14, 148, 148, 0.1)`,
                               border: `1px solid #0E9494`,

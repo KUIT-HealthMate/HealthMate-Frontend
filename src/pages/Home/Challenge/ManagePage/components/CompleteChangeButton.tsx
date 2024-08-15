@@ -91,13 +91,17 @@ const CompleteChangeButton = <T,>({
         serverRequest.editChallenge({
           ...(newChallenge as unknown as pillInfo),
           notificationTime: alarmTime,
+          id: editingChallengeId
         },"supplements");
-
+        console.log("edit complete, challenge is: ");
+        console.log(newChallenge);
+        console.log(editingChallengeId);
         setPill(
           editingChallengeId,
           newChallenge as unknown as pillInfo,
           alarmTime
         );
+        console.log(PillInfo);
 
       }
     }
@@ -124,8 +128,9 @@ const CompleteChangeButton = <T,>({
         serverRequest.editChallenge({
           ...(newChallenge as unknown as habitInfo),
           notificationTime: alarmTime,
+          id: editingChallengeId
         },"habits");
-
+        
         setHabit(
           editingChallengeId,
           newChallenge as unknown as habitInfo,

@@ -6,7 +6,7 @@ import {typeOfChallengeToManage} from "../types/typeOfChallengeToManage";
 
 export const registerChallenge = (challengeToRegister : typeOfChallengeToManage,challengeType: string):Promise<string> => {
 
-  const endpoint:string = `/${challengeType}/register`;
+  const endpoint:string = `/${challengeType}${challengeType === "supplements" ? "/register": ""}`;
   let res:string = "";
 
   // 서버에 요청을 보낸다.

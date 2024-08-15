@@ -17,7 +17,7 @@ import habitInfo from "../../../store/habitInfo";
 SwiperCore.use([Pagination, Navigation]);
 
 export default function HabitChallenge() {
-  const { HabitInfo, setExecutionRecord, getExecutionRecord } =
+  const { HabitInfo /*, setExecutionRecord, getExecutionRecord */} =
     useHabitInfoStore();
 
   const splitHabits = (array: habitInfo[]) => {
@@ -35,10 +35,10 @@ export default function HabitChallenge() {
     setNewHabits(chunks);
   }, [HabitInfo]);
 
-  const hello = (habitid: string) => {
-    console.log(getExecutionRecord(habitid));
-    return getExecutionRecord(habitid) ? checkmark : uncheckmark;
-  };
+  // const hello = (habitid: string) => {
+  //   console.log(getExecutionRecord(habitid));
+  //   return getExecutionRecord(habitid) ? checkmark : uncheckmark;
+  // };
 
   return (
     <div className={styles.HabitChallenge}>
@@ -67,10 +67,10 @@ export default function HabitChallenge() {
                     <img
                       className={styles.HabitCheckmark}
                       onClick={() => {
-                        setExecutionRecord(habit.id);
-                        console.log(habit.id + habit.executionRecord);
+                        // setExecutionRecord(habit.id);
+                        console.log(habit.id /* + habit.executionRecord */);
                       }}
-                      src={hello(habit.id)}
+                      src={/*hello(habit.id)*/ checkmark}
                       alt="hello"
                     ></img>
                   </div>

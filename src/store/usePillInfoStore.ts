@@ -9,8 +9,8 @@ interface PillInfoState {
   setIntakePeriod: (pillId: string, whichMeal: string) => void;
   getIntakePeriod: (pillId: string, whichMeal: string) => boolean;
 
-  setIntakeRecord: (pillId: string, whichMeal: string) => void;
-  getIntakeRecord: (pillId: string, whichMeal: string) => boolean | undefined;
+  // setIntakeRecord: (pillId: string, whichMeal: string) => void;
+  // getIntakeRecord: (pillId: string, whichMeal: string) => boolean | undefined;
 
   setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => void;
   getWeeklyIntakeFrequency: (pillId: string, whichDay: string) => boolean;
@@ -64,7 +64,7 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
       name: "베아제",
       intakeTime: { beforeOrAfterMeal: 2, minutes: 30 },
       dailyIntakePeriod: { breakfast: true, lunch: true, dinner: true },
-      dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
+      // dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
       weeklyIntakeFrequency: {
         monday: true,
         tuesday: true,
@@ -106,7 +106,7 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
       name: "루테인",
       intakeTime: { beforeOrAfterMeal: 2, minutes: 30 },
       dailyIntakePeriod: { breakfast: true, lunch: false, dinner: true },
-      dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
+      // dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
       weeklyIntakeFrequency: {
         monday: true,
         tuesday: false,
@@ -152,26 +152,26 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
 
   // 아침, 점심, 저녁에 영양제 먹었다고 버튼 클릭 -> IntakeRecord에서 수정하는 함수
 
-  setIntakeRecord: (pillId: string, whichMeal: string) => {
-    set((state) => ({
-      PillInfo: state.PillInfo.map((pill) =>
-        pill.id === pillId
-          ? {
-              ...pill,
-              dailyIntakeRecord: {
-                ...pill.dailyIntakeRecord,
-                [whichMeal]: !(pill.dailyIntakeRecord as any)[whichMeal],
-              },
-            }
-          : pill
-      ),
-    }));
-  },
+  // setIntakeRecord: (pillId: string, whichMeal: string) => {
+  //   set((state) => ({
+  //     PillInfo: state.PillInfo.map((pill) =>
+  //       pill.id === pillId
+  //         ? {
+  //             ...pill,
+  //             dailyIntakeRecord: {
+  //               ...pill.dailyIntakeRecord,
+  //               [whichMeal]: !(pill.dailyIntakeRecord as any)[whichMeal],
+  //             },
+  //           }
+  //         : pill
+  //     ),
+  //   }));
+  // },
 
-  getIntakeRecord: (pillId: string, whichMeal: string) => {
-    const pill = get().PillInfo.find((pill) => pill.id === pillId);
-    return pill ? (pill.dailyIntakeRecord as any)[whichMeal] : undefined;
-  },
+  // getIntakeRecord: (pillId: string, whichMeal: string) => {
+  //   const pill = get().PillInfo.find((pill) => pill.id === pillId);
+  //   return pill ? (pill.dailyIntakeRecord as any)[whichMeal] : undefined;
+  // },
 
   setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
     set((state) => ({
@@ -234,7 +234,8 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
     } else {
       //Id에 해당하는 pill의 참조를 얻는다
       const targetPill: pillInfo = get().PillInfo.find(
-        (pill) => pill.id === pillId
+        // eslint-disable-next-line eqeqeq
+        (pill) => pill.id == pillId
       ) as pillInfo;
 
       //얕은 복사한 복사본을 생성
@@ -249,11 +250,11 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
           lunch: targetPill.dailyIntakePeriod.lunch,
           dinner: targetPill.dailyIntakePeriod.dinner,
         },
-        dailyIntakeRecord: {
-          breakfast: targetPill.dailyIntakeRecord.breakfast,
-          lunch: targetPill.dailyIntakeRecord.lunch,
-          dinner: targetPill.dailyIntakeRecord.dinner,
-        },
+        // dailyIntakeRecord: {
+        //   breakfast: targetPill.dailyIntakeRecord.breakfast,
+        //   lunch: targetPill.dailyIntakeRecord.lunch,
+        //   dinner: targetPill.dailyIntakeRecord.dinner,
+        // },
         weeklyIntakeFrequency: {
           monday: targetPill.weeklyIntakeFrequency.monday,
           tuesday: targetPill.weeklyIntakeFrequency.tuesday,
@@ -279,7 +280,8 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
   ) => {
     set((state) => ({
       PillInfo: state.PillInfo.map((targetPill) =>
-        targetPill.id === pillId
+        // eslint-disable-next-line eqeqeq
+        targetPill.id == pillId
           ? {
               ...targetPill,
               name: inputPill.name,
@@ -292,11 +294,11 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
                 lunch: inputPill.dailyIntakePeriod.lunch,
                 dinner: inputPill.dailyIntakePeriod.dinner,
               },
-              dailyIntakeRecord: {
-                breakfast: inputPill.dailyIntakeRecord.breakfast,
-                lunch: inputPill.dailyIntakeRecord.lunch,
-                dinner: inputPill.dailyIntakeRecord.dinner,
-              },
+              // dailyIntakeRecord: {
+              //   breakfast: inputPill.dailyIntakeRecord.breakfast,
+              //   lunch: inputPill.dailyIntakeRecord.lunch,
+              //   dinner: inputPill.dailyIntakeRecord.dinner,
+              // },
               weeklyIntakeFrequency: {
                 monday: inputPill.weeklyIntakeFrequency.monday,
                 tuesday: inputPill.weeklyIntakeFrequency.tuesday,

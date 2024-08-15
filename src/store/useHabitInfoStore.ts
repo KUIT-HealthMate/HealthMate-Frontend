@@ -6,8 +6,8 @@ interface HabitInfoState {
   HabitInfo: habitInfo[];
   setHabitInfo: (habit: habitInfo) => void;
 
-  getExecutionRecord: (habitId: string) => boolean | undefined;
-  setExecutionRecord: (habitId: string) => void;
+  // getExecutionRecord: (habitId: string) => boolean | undefined;
+  // setExecutionRecord: (habitId: string) => void;
 
   setWeeklyExecutionFrequency: (habitId: string, whichDay: string) => void;
   getWeeklyExecutionFrequency: (habitId: string, whichDay: string) => boolean;
@@ -37,7 +37,7 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
     {
       id: "0",
       name: "베아제",
-      executionRecord: true,
+      // executionRecord: true,
       weeklyExecutionFrequency: {
         monday: true,
         tuesday: true,
@@ -56,7 +56,7 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
     {
       id: "1",
       name: "비타민",
-      executionRecord: false,
+      // executionRecord: false,
       weeklyExecutionFrequency: {
         monday: true,
         tuesday: false,
@@ -75,7 +75,7 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
     {
       id: "2",
       name: "루테인",
-      executionRecord: true,
+      // executionRecord: true,
       weeklyExecutionFrequency: {
         monday: true,
         tuesday: false,
@@ -98,20 +98,20 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
       HabitInfo: [...state.HabitInfo, habit],
     })),
 
-  getExecutionRecord: (habitId: string) => {
-    const habit = get().HabitInfo.find((habit) => habit.id === habitId);
-    return habit ? habit.executionRecord : undefined;
-  },
+  // getExecutionRecord: (habitId: string) => {
+  //   const habit = get().HabitInfo.find((habit) => habit.id === habitId);
+  //   return habit ? habit.executionRecord : undefined;
+  // },
 
-  setExecutionRecord: (habitId: string) => {
-    set((state) => ({
-      HabitInfo: state.HabitInfo.map((habit) =>
-        habit.id === habitId
-          ? { ...habit, executionRecord: !habit.executionRecord }
-          : habit
-      ),
-    }));
-  },
+  // setExecutionRecord: (habitId: string) => {
+  //   set((state) => ({
+  //     HabitInfo: state.HabitInfo.map((habit) =>
+  //       habit.id === habitId
+  //         ? { ...habit, executionRecord: !habit.executionRecord }
+  //         : habit
+  //     ),
+  //   }));
+  // },
 
   setWeeklyExecutionFrequency: (habitId: string, whichDay: string) => {
     set((state) => ({
@@ -161,7 +161,7 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
       //얕은 복사한 복사본을 생성
       const duplicatedHabit: Omit<habitInfo, "id"> = {
         name: targetHabit.name,
-        executionRecord: targetHabit.executionRecord,
+        // executionRecord: targetHabit.executionRecord,
         weeklyExecutionFrequency: {
           monday: targetHabit.weeklyExecutionFrequency.monday,
           tuesday: targetHabit.weeklyExecutionFrequency.tuesday,

@@ -1,7 +1,7 @@
 export interface habitInfo {
     id: string;
     name: string; // 알약 이름
-    executionRecord: boolean;
+    // executionRecord: boolean;
     weeklyExecutionFrequency: {
       monday: boolean,
       tuesday: boolean,
