@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import s from "./MonthlyCalander.module.scss";
 import DailyDetails from "../DailyDetails";
 import { CalanderDataType } from "./WeeklyCalander";
-import { CalanderDataInterface } from "../../../../test/mock/mockup";
+//import { CalanderDataInterface } from "../../../../test/mock/mockup";
+import { challanegesType } from "../dataTypes";
 
 interface CalanderProps {
   periodSelect: dayjs.Dayjs;
-  data: CalanderDataInterface;
+  data: challanegesType[];
 }
 
 export default function MonthlyCalander({ periodSelect, data }: CalanderProps) {
@@ -30,8 +31,10 @@ export default function MonthlyCalander({ periodSelect, data }: CalanderProps) {
     setSelectedDay(null);
   }, [periodSelect]);
 
-  const selectColor = (percent: number) => {
-    if (percent <= 30) {
+  const selectColor = (percent: number | undefined) => {
+    if (percent === undefined) {
+      return "";
+    } else if (percent <= 30) {
       return s.under30;
     } else if (percent <= 50) {
       return s.under50;
@@ -128,12 +131,20 @@ export default function MonthlyCalander({ periodSelect, data }: CalanderProps) {
                   <div
                     className={`${s.acheivement} ${
                       date !== null
-                        ? selectColor(data[date?.date()].dailyAccomplishment)
+                        ? selectColor(
+                            data.find(
+                              (item) => date.format("YYYY-MM-DD") === item.date
+                            )?.achievementRate
+                          )
                         : ""
                     }`}
                   >
                     {date !== null
-                      ? `${data[date?.date()].dailyAccomplishment}%`
+                      ? `${
+                          data.find(
+                            (item) => date.format("YYYY-MM-DD") === item.date
+                          )?.achievementRate
+                        }%`
                       : ""}
                   </div>
                 </div>

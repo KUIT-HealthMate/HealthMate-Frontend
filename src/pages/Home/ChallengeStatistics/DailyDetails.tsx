@@ -1,16 +1,41 @@
 import dayjs from "dayjs";
 import s from "./DailyDetails.module.scss";
-import { CalanderDataInterface } from "../../../test/mock/mockup";
+import { challanegesType, supplementType } from "./dataTypes";
 
 interface DateProps {
   date: null | dayjs.Dayjs;
-  data: CalanderDataInterface;
+  data: challanegesType[];
 }
 
 export default function DailyDetails({ date, data }: DateProps) {
   //date에 맞는 정보들을 렌더링.
-  const pillList = date ? data[date.date()].supplementChallenges : null;
-  const habbitList = date ? data[date.date()].habitChallenges : null;
+  const pillList = date
+    ? data.find((item) => date.format("YYYY-MM-DD") === item.date)?.supplement
+    : null;
+  const habbitList = date
+    ? data.find((item) => date.format("YYYY-MM-DD") === item.date)?.habit
+    : null;
+
+  function checkAchievement(supplement: supplementType): number {
+    const achievementList = [
+      supplement.breakfastSuccess,
+      supplement.lunchSuccess,
+      supplement.dinnerSuccess,
+    ];
+    return achievementList.filter((value) => {
+      return value === true;
+    }).length;
+  }
+  function checkRequirement(supplement: supplementType): number {
+    const achievementList = [
+      supplement.breakfastRequired,
+      supplement.lunchRequired,
+      supplement.dinnerRequired,
+    ];
+    return achievementList.filter((value) => {
+      return value === true;
+    }).length;
+  }
 
   return (
     <div className={s.dailyChallengeContainer}>
@@ -29,31 +54,22 @@ export default function DailyDetails({ date, data }: DateProps) {
                   <div className={s.itemContainer}>
                     <div
                       className={`${s.challengeName} ${
-                        Object.values(sItem.dailyIntakePeriod).filter(
-                          (v) => v === true
-                        ).length < Object.values(sItem.dailyIntakePeriod).length
-                          ? s.failed
-                          : ""
+                        sItem.success ? "" : s.failed
                       }`}
                     >
-                      {`영양제 챌린지 - ${sItem.pill}`}
+                      {`영양제 챌린지 - ${sItem.challengeName}`}
                     </div>
-                    {Object.keys(sItem.dailyIntakePeriod).length ===
-                    Object.values(sItem.dailyIntakePeriod).filter(
-                      (v) => v === true
-                    ).length ? (
+                    {sItem.success ? (
                       <div className={s.success}>
-                        {`성공 (${
-                          Object.keys(sItem.dailyIntakePeriod).length
-                        }/${Object.keys(sItem.dailyIntakePeriod).length})`}
+                        {`성공 (${checkAchievement(sItem)}/${checkRequirement(
+                          sItem
+                        )})`}
                       </div>
                     ) : (
                       <div className={s.fail}>
-                        {`실패 (${
-                          Object.values(sItem.dailyIntakePeriod).filter(
-                            (v) => v === true
-                          ).length
-                        }/${Object.keys(sItem.dailyIntakePeriod).length})`}
+                        {`실패 (${checkAchievement(sItem)}/${checkRequirement(
+                          sItem
+                        )})`}
                       </div>
                     )}
                   </div>
@@ -62,12 +78,12 @@ export default function DailyDetails({ date, data }: DateProps) {
                   <div className={s.itemContainer}>
                     <div
                       className={`${s.challengeName} ${
-                        hItem.accomplished ? "" : s.failed
+                        hItem.achievementStatus ? "" : s.failed
                       }`}
                     >
-                      {`습관 챌린지 - ${hItem.habbit}`}
+                      {`습관 챌린지 - ${hItem.challengeName}`}
                     </div>
-                    {hItem.accomplished ? (
+                    {hItem.achievementStatus ? (
                       <div className={s.success}>{`성공 (1/1)`}</div>
                     ) : (
                       <div className={s.fail}>{`실패 (0/1)`}</div>
