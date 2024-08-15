@@ -65,9 +65,9 @@ export const OnBoardingSurvey = () => {
         //선택지
         const resultIdx = selectBtnActive.findIndex(element => element === true)
         console.log("resultIdx: ", resultIdx);
-        if (questionIdx == 0) {
+        if (questionIdx === 0) {
             setGender(resultIdx);
-        } else if (questionIdx == 1) {
+        } else if (questionIdx === 1) {
             setAgeGroup(resultIdx);
         }
 

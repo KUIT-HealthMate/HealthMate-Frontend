@@ -8,7 +8,7 @@ interface OnBoardingSurvey {
 
 }
 
-interface OnBoardingResult {
+interface OnBoardingResultDto {
     gender: number;
     ageGroup: number;
     symptoms: string[];
@@ -46,7 +46,7 @@ export const useOnBoardingSurveyStore = create<OnBoardingState>((set) => ({
     nextQuestion: () => set((state) => ({ currentQuestionIdx: state.currentQuestionIdx + 1 })),
 }));
 
-export const OnBoardingResult = create<OnBoardingResult>((set) => ({
+export const OnBoardingResult = create<OnBoardingResultDto>((set) => ({
     gender: -1,
     ageGroup: -1,
     symptoms: [],

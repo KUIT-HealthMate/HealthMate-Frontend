@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Survey.module.scss";
 import ProgressBar from "./ProgressBar";
-import { surveys, useGlobalStoreSurvey } from "../../../store/storeSurvey";
+import { useGlobalStoreSurvey } from "../../../store/storeSurvey";
 import { useNavigate } from "react-router-dom";
 import leftBracket from "../../../assets/leftBraket.svg";
 
@@ -151,7 +151,6 @@ const Survey = ({
         <div className={styles.survey}>
           <div className={styles.question}>
             <div className={styles.questionText}>
-              {/* {surveys[nextQuestion.currentQuestionIdx].question} */}
 
             </div>
             {

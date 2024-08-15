@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styles from "./survey/Survey.module.scss";
 import { useGlobalStore } from "../../store/store";
 import exclamationMark from "../../assets/exclamationMark.svg";
-import { useGlobalStoreSurvey } from "../../store/storeSurvey";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "./survey/ProgressBar";
 import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
@@ -85,12 +84,6 @@ const DailySymptomCheck = (props: symptomProps) => {
   }
   useEffect(() => { }, [symptomBtnActive]);
   const navigate = useNavigate();
-
-  // const { progressPercent } = useGlobalStoreSurvey((state) => ({
-  //   progressPercent: state.progressPercent,
-  // }));
-
-  //console.log("progressPercent: " + progressPercent);
 
   return (
     <>
