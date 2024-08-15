@@ -70,7 +70,6 @@ const Home = () => {
       <TopBar></TopBar>
       <div className={styles.Header}></div>
       <TodaysChallenge achievementRate={achievementRate}></TodaysChallenge>
-
       <SupplementChallenge supplements={supplements}></SupplementChallenge>
       <div className={styles.gap}></div>
       <HabitChallenge habits={habits}></HabitChallenge>

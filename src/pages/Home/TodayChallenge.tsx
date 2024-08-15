@@ -12,7 +12,7 @@ interface TodaysChallengeProps {
 }
 
 export default function TodaysChallenge(props: TodaysChallengeProps) {
-  console.log("TodaysChallenge에서 퍼세느: ", props.achievementRate);
+  console.log("TodaysChallenge에서 퍼센트: ", props.achievementRate);
 
   const [percent, setPercent] = useState(props.achievementRate);
   const disableBottomBar = useGlobalStore((state) => state.setShowBottomBar);

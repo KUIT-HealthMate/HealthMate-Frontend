@@ -29,6 +29,13 @@ export default function HabitChallenge(props: HabitChallengeProps) {
   const { HabitInfo } =
     useHabitInfoStore();
 
+  const [habitStatus, setHabitStatus] = useState<boolean[]>([]);
+  //useState(props.habits.map(habit => habit.achievementStatus));
+
+
+  console.log("habitStatus: ", habitStatus);
+
+
   const splitHabits = (array: habitDto[]) => {
     console.log("splitHabits: ", array)
     const result = [];
@@ -41,28 +48,41 @@ export default function HabitChallenge(props: HabitChallengeProps) {
 
   const [newHabits, setNewHabits] = useState<habitDto[][]>([props.habits]);
 
-  useEffect(() => {
+  useEffect(() => { //처음 페이지 진입시
     console.log("habit useEffect")
     const chunks = splitHabits(props.habits);
     setNewHabits(chunks);
+    setHabitStatus(props.habits.map(habit => habit.achievementStatus));
+  }, [props.habits]);
 
-    // eslint-disable-next-line
-  }, [HabitInfo]);
+  useEffect(() => {
+    console.log("색 바꿔: ", newHabits)
 
+  }, [newHabits])
 
 
 
   const today = new Date();
-  const todayDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const date = (today.getDate() + 1).toString().padStart(2, '0');
+  const todayDate = `${today.getFullYear()}-${month}-${date}`;
 
-  function HabitCheck(habitId: number) {
+  function HabitCheck(habitId: number, habitIndex: number, chunkIndex: number) {
 
-    console.log("HabitCheck한 id: " + habitId);
-    // setExecutionRecord(habitId);
+    console.log("HabitCheck한 id: ", habitId);
+    console.log("habitIndex: ", habitIndex)
+    console.log("chunkIndex: ", chunkIndex);
 
-    // 체크하면 서버 전송
+    // 체크하면 서버 전송 & 로컬에서 변경
     console.log("오늘 날짜: ", todayDate)
     putHabitCheck(todayDate, habitId);
+    // const newHabitStatus = [...habitStatus];
+    // newHabitStatus[habitIndex] = !newHabitStatus[habitIndex];
+
+    const newNewHabits = JSON.parse(JSON.stringify(newHabits));
+    newNewHabits[chunkIndex][habitIndex].achievementStatus = !newHabits[chunkIndex][habitIndex].achievementStatus
+    setNewHabits(newNewHabits);
+
   }
 
   return (
@@ -94,9 +114,8 @@ export default function HabitChallenge(props: HabitChallengeProps) {
                     <img
                       className={styles.HabitCheckmark}
                       onClick={() => {
-                        HabitCheck(habit.challengeId);
-                        // setExecutionRecord(habit.id);
-                        // console.log(habit.id + habit.executionRecord);
+                        HabitCheck(habit.challengeId, habitIndex, chunkIndex);
+
                       }}
                       //src={hello(habitIndex)}
                       src={habit.achievementStatus === true ? checkmark : uncheckmark}

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_BACK_URL;
 
-
+console.log("BASE_URL :", BASE_URL)
 //axios객체 생성
 export const client = axios.create({
     baseURL: BASE_URL,
@@ -49,11 +49,14 @@ export const putSupplementCheck = async (timeSlot: string, pillId: string) => {
 
 
 //습관 체크
-export const putHabitCheck = async (date: string, habitId: number) => {
-    console.log(date, habitId)
-    client.put(`/habits/check-status/${habitId}`, {   // path param 있으면 백틱사용
-        "date": date
-    })
+export const putHabitCheck = async (todayDate: string, habitId: number) => {
+    console.log("putHabitCheck: ", { todayDate }, habitId)
+    // path param 있으면 백틱사용
+    const data = {
+        "date": todayDate
+    }
+    console.log(data)
+    client.put(`/habits/check-status/${habitId}`, data)
         .then((res) => { console.log(res) })
         .catch((err) => { console.log(err) })
 };
