@@ -6,8 +6,11 @@ import exclamationMark from "../../assets/exclamationMark.svg";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "./survey/ProgressBar";
 import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
-import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
 
+import { useOnBoardingSurveyStore, onBoardingSurveys, OnBoardingResult } from "../../store/storeOnBoardingSurvey"
+import { surveyAnswer, dailycheckSymptomsResult } from "../../store/storeSurvey";
+import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../../dtos/dailycheck/dailyCheckDto";
+// import { symptomInfoDto, symptomDto } from "../../dtos/dailycheck/dailyCheckDto";
 
 interface symptomProps {
   title1: string;
@@ -26,7 +29,7 @@ interface symptomProps {
 
 const DailySymptomCheck = (props: symptomProps) => {
 
-  const { setSymptoms } = OnBoardingResult();
+  const { symptoms, setSymptoms } = OnBoardingResult();
 
   console.log("findKeywordNavigate: ", props.findKeywordNavigate);
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
@@ -67,30 +70,56 @@ const DailySymptomCheck = (props: symptomProps) => {
     // { id: 13, title: "기타 상태 ", symptoms: ["증상없음"] }
   ];
 
+
+  //문제 idx로 requestName
+  const lifeStyleKeys: (keyof lifeStyleDto)[] = ["environmentScore", "focusTimeScore", "exerciseTimeScore", "postureDiscomfortScore"];
+  const mealPatternKeys: (keyof mealPatternDto)[] = ["mealTimeScore", "foodType", "regularMealTimeScore", "mealDurationScore", "seasoningConsumptionScore", "screenUsage", "mealRemark"];
+  const sleepPatternKeys: (keyof sleepPatternDto)[] = ["sleepDurationScore", "morningFatigueScore", "peakConditionTimeScore", "sleepRemarkScore"];
+
   const [symptomBtnActive, setSymptomBtnActive] = useState<boolean[][]>(
     symptomInfo.map((symptomDetail) =>
       Array(symptomDetail.symptoms.length).fill(false)
     )
   );
 
+
+  //서버에 요청
+  const requestServer = () => {
+
+  }
+
   // '다음으로' 클릭시 true인것들 store에 증상 반영
   function setSymtomsStore() {
     const checkedSymptomName = [];
+    const checkedSymptomInfos: { symptomName: string }[] = [];
 
     for (let i = 0; i < symptomBtnActive.length; i++) {
       for (let j = 0; j < symptomBtnActive[i].length; j++) {
         if (symptomBtnActive[i][j] === true) {
           checkedSymptomName.push(symptomInfo[i].symptoms[j]);
+          checkedSymptomInfos.push({
+            symptomName: symptomInfo[i].symptoms[j],
+          });
         }
       }
     }
     console.log("checkedSymptomName: ", checkedSymptomName)
+    console.log("checkedSymptomInfos: ", checkedSymptomInfos)
     if (props.type === 0) { //온보딩이면
       setSymptoms(checkedSymptomName);
+    } else if (props.type === 1) { // 일일건강진단이면
+      // request형식으로 symptoms 변경
+      //  setSymptomInfos(checkedSymptomInfos);
+      setSurveyAsForm();
     }
 
   }
 
+
+  // 일일진단 설문 request 형식으로 변경
+  function setSurveyAsForm() {
+
+  }
 
   function checkSymptom(symptom: number, symptomIdx: number) {
     const checkCnt = symptomBtnActive
@@ -107,11 +136,10 @@ const DailySymptomCheck = (props: symptomProps) => {
       const newState = prevState.map((arr) => [...arr]);
       newState[symptom][symptomIdx] = !newState[symptom][symptomIdx];
       console.log(symptomInfo[symptom].symptoms[symptomIdx]);
-      //  const symptomName = symptomInfo[symptom].symptoms[symptomIdx];
-      // symptoms.push(symptomName);
+
       return newState;
     });
-    // console.log("symptoms: ", symptoms);
+
   }
   useEffect(() => { }, [symptomBtnActive]);
   const navigate = useNavigate();
@@ -184,7 +212,11 @@ const DailySymptomCheck = (props: symptomProps) => {
             <img src={exclamationMark} alt="exclaim"></img>
             <div
               onClick={() => {
-                setSymtomsStore();
+
+                if (props.type === 1) {
+                  setSurveyAsForm()
+                }
+
                 navigate("/findkeyword", {
                   state: { value: props.findKeywordNavigate },
                 })

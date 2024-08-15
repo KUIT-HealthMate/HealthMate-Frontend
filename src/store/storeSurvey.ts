@@ -1,4 +1,5 @@
 import create from "zustand";
+import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../dtos/dailycheck/dailyCheckDto";
 
 
 interface Survey {
@@ -8,6 +9,63 @@ interface Survey {
   multipleAble: boolean;
   limit: number;
   type: number; //1:습관 2:식사 3:수면
+}
+
+
+//request
+interface RequestResult {
+  lifeStyle: lifeStyleDto;
+  mealPattern: mealPatternDto;
+  sleepPattern: sleepPatternDto;
+  ////  symptoms: [];
+  setLifeStyle: (key: keyof lifeStyleDto, value: number) => void;
+  setMealPattern: (key: keyof mealPatternDto, value: number) => void;
+  setSleepPattern: (key: keyof sleepPatternDto, value: number) => void;
+  //setSymptomsDto: (answers: []) => void;
+}
+
+export const RequestResult = create<RequestResult>((set) => ({
+  lifeStyle: {
+    "environmentScore": -1,
+    "focusTimeScore": -1,
+    "coffeeConsumptionScore": -1,
+    "exerciseTimeScore": -1,
+    "postureDiscomfortScore": -1
+  },
+  mealPattern: {
+    "mealTimeScore": 1,
+    "foodType": 2,
+    "regularMealTimeScore": 2,
+    "mealDurationScore": 1,
+    "seasoningConsumptionScore": 2,
+    "screenUsage": 1,
+    "mealRemark": 4
+  },
+  sleepPattern: {
+    "sleepDurationScore": 2,
+    "morningFatigueScore": 2,
+    "peakConditionTimeScore": 2,
+    "sleepRemarkScore": 2
+  },
+  setLifeStyle: (key, value) =>
+    set((state) => ({
+      lifeStyle: { ...state.lifeStyle, [key]: value },
+    })),
+
+  setMealPattern: (key, value) =>
+    set((state) => ({
+      mealPattern: { ...state.mealPattern, [key]: value },
+    })),
+
+  setSleepPattern: (key, value) =>
+    set((state) => ({
+      sleepPattern: { ...state.sleepPattern, [key]: value },
+    }))
+}));
+
+interface symptomSurveyAnswer {
+  symptomInfo: string;
+  setSymptomInfo: (answer: string) => void;
 }
 
 //건강진단 배열로만 쭉 받아옴
@@ -26,6 +84,16 @@ export const surveyAnswer = create<surveyAnswerDto>((set) => ({
 
 }));
 
+
+interface dailycheckSymptomsResult {
+  symptomInfos: { symptomName: string }[];
+  setSymptomInfos: (answers: { symptomName: string }[]) => void;
+}
+
+export const dailycheckSymptomsResult = create<dailycheckSymptomsResult>((set) => ({
+  symptomInfos: [],
+  setSymptomInfos: (answers: { symptomName: string }[]) => set({ symptomInfos: answers }),
+}))
 
 export const surveys: Survey[] = [
   {
@@ -174,6 +242,7 @@ interface StoreState {
   nextQuestion: () => void;
   previousQuestion: () => void;
 }
+
 
 
 export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({

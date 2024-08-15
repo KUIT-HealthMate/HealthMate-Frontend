@@ -25,3 +25,11 @@ export interface sleepPatternDto {
     sleepRemarkScore: number,
 }
 
+// export interface symptomInfoDto {
+//     symptomName: string,
+// }
+
+export interface symptomDto {
+    symptomInfos: [];
+}
+
