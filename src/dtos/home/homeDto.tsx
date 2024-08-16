@@ -7,6 +7,8 @@ export interface habitDto {
 
 export interface supplementDto {
     challengeName: string,
+    challengeId: number,
+    afterMeal: number,
     breakfastSuccess: boolean,
     lunchSuccess: boolean,
     dinnerSuccess: boolean,

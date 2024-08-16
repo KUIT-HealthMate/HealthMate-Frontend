@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_BACK_URL;
 
-console.log("BASE_URL :", BASE_URL)
 //axios객체 생성
 export const client = axios.create({
     baseURL: BASE_URL,
@@ -37,7 +36,7 @@ export const gethomeInfo = async () => {
 };
 
 //영양제 체크
-export const putSupplementCheck = async (timeSlot: string, pillId: string) => {
+export const putSupplementCheck = async (timeSlot: string, pillId: number) => {
     console.log(timeSlot)
     client.put(`/supplements/check-status/${pillId}`, {
         "timeSlot": timeSlot

@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_BACK_URL;
 
-
 //axios객체 생성
 export const client = axios.create({
     baseURL: BASE_URL,

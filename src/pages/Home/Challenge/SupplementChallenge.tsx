@@ -11,7 +11,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 
+<<<<<<< HEAD
 //api 관련
+=======
+
+// //api 관련
+// import { putSupplementCheck } from "../../../APIs/home/homeApi";
+>>>>>>> 2004c00 (Feat(#48): 영양제 체크)
 import { supplementDto } from "../../../dtos/home/homeDto";
 
 SwiperCore.use([Pagination, Navigation]);
@@ -21,7 +27,8 @@ interface SupplementChallengeProps {
 }
 
 export default function SupplementChallenge(props: SupplementChallengeProps) {
-  const { PillInfo } = usePillInfoStore();
+  console.log("SupplementChallenge: ", props.supplements)
+  // const { PillInfo } = usePillInfoStore();
 
   const splitPillInfo = (array: supplementDto[]) => {
     const result = [];
@@ -34,11 +41,20 @@ export default function SupplementChallenge(props: SupplementChallengeProps) {
   const [newPillInfos, setNewPillInfos] = useState<supplementDto[][]>([props.supplements]);
 
   useEffect(() => {
+    console.log("SupplementChallenge/props: ", props.supplements);
     const chunks = splitPillInfo(props.supplements);
     setNewPillInfos(chunks);
+<<<<<<< HEAD
     // eslint-disable-next-line
   }, [PillInfo]);
 
+=======
+  }, [props.supplements]);
+
+
+
+
+>>>>>>> 2004c00 (Feat(#48): 영양제 체크)
   return (
     <div className={styles.PillChallenge}>
       <div className={styles.PillChallengeTitle}>
@@ -61,10 +77,9 @@ export default function SupplementChallenge(props: SupplementChallengeProps) {
             return (
               <SwiperSlide>
                 {chunk.map((pill, pillIndex) => {
+                  console.log("pillChunk: ", pill);
                   return (
-                    <SupplementComponent
-                      pill={pill}
-                    ></SupplementComponent>
+                    <SupplementComponent pill={pill}></SupplementComponent>
                   );
                 })}
               </SwiperSlide>

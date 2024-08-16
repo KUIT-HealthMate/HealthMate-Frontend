@@ -1,7 +1,16 @@
 import styles from "./SupplementComponent.module.scss";
+
+// import { usePillInfoStore } from "../../../../store/usePillInfoStore";
+import pillInfo from "../../../../store/pillInfo";
+
+import { useMutation } from 'react-query';
+import { putSupplementCheck } from "../../../../APIs/home/homeApi";
+import { time } from "console";
+import { useEffect, useState } from "react";
+
 import { supplementDto } from "../../../../dtos/home/homeDto";
 
-interface PillInfo {
+interface PillInfoDto {
   pill: supplementDto;
 }
 
@@ -9,6 +18,7 @@ interface PillTimeInfo {
   pillTime: string,
   isChecked: boolean,
 }
+
 
 const pillIntakeTime = (props: supplementDto, timeIdx: number) => {
   if (timeIdx === 0 && props.breakfastRequired) {
@@ -22,29 +32,106 @@ const pillIntakeTime = (props: supplementDto, timeIdx: number) => {
     return PillTime;
   } else {
     return null;
+    // const PillTime: PillTimeInfo = { pillTime: "아침", isChecked: props.breakfastSuccess }
+    // return PillTime;
   }
-
 
 }
 
-const SupplementComponent = (props: PillInfo) => {
+
+export default function SupplementComponent(props: PillInfoDto) {
+  console.log("SupplementComponent: ", props)
+
+  const [newSupplements, setNewSupplements] = useState<supplementDto>(props.pill);
+
+  useEffect(() => { //처음 페이지 진입시
+    console.log("supplement useEffect")
+    setNewSupplements(props.pill);
+    // setHabitStatus(props.habits.map(habit => habit.achievementStatus));
+  }, [props.pill]);
+
+  useEffect(() => {
+    console.log("newSupplements바뀜")
+
+  }, [newSupplements]);
+
+
+  function changeBtnStatus(supplementId: number, idx: number) {
+    const newNewSupplements = { ...newSupplements };
+    if (idx === 0) {
+      newNewSupplements.breakfastSuccess = !newNewSupplements.breakfastSuccess;
+    } else if (idx === 1) {
+      newNewSupplements.lunchSuccess = !newNewSupplements.lunchSuccess;
+    } else if (idx === 2) {
+      newNewSupplements.dinnerSuccess = newNewSupplements.dinnerSuccess;
+    }
+
+    setNewSupplements(newNewSupplements);
+    console.log("newNewSupplements: ", newNewSupplements)
+  }
+
+
+  function clickPillCheck(supplementId: number, idx: number) {
+    // setIntakeRecord(supplementId, changeIdxToString(idx));
+    console.log('id', supplementId, '   idx: ', idx)
+    //클릭시 서버로 전송
+    var timeSlot = "";
+    if (idx === 0) {
+      timeSlot = "BREAKFAST";
+    } else if (idx === 1) {
+      timeSlot = "LUNCH";
+    } else if (idx === 2) {
+      timeSlot = "DINNER";
+    }
+
+    putSupplementCheck(timeSlot, supplementId);
+  }
+
+
+
+  const mealTime = () => {
+    var mealTimeText = "";
+    if (props.pill.afterMeal < 0) {
+      mealTimeText += "식전 ";
+      mealTimeText += (-props.pill.afterMeal);
+      mealTimeText += "분 이내"
+
+    } else {
+      mealTimeText += "식후"
+      mealTimeText += (props.pill.afterMeal);
+      mealTimeText += "분 이내"
+    }
+    return (
+      <><h5 className={styles.PillInfoInfo}>{mealTimeText}</h5></>
+    )
+  }
 
   return (
     <div className={styles.PillInfo}>
       <div className={styles.PillInfoHeader}>
         <h1 className={styles.PillInfoName}>{props.pill.challengeName}</h1>{" "}
-        <h5 className={styles.PillInfoInfo}>영양제 정보 받아서 들어가야됨</h5>
+        {mealTime()}
       </div>
       <div>
         <div className={styles.PillInfoTimes}>
           {
-            // eslint-disable-next-line
-            [0, 1, 2].map((timeId) => {
-              const pillIntakeInfo = pillIntakeTime(props.pill, timeId)
+
+            [0, 1, 2].map((timeId, idx) => {
+              const pillIntakeInfo = pillIntakeTime(newSupplements, timeId)
+              console.log("pillIntakeInfo: ", pillIntakeInfo);
+
               if (pillIntakeInfo != null) {
                 return (
                   <div
                     className={styles.PillInfoTimeButton}
+
+                    onClick={() => {
+                      clickPillCheck(props.pill.challengeId, idx);
+                      changeBtnStatus(props.pill.challengeId, idx)
+                    }
+
+                    }
+
                     style={
                       pillIntakeInfo.isChecked
                         ? {
@@ -59,6 +146,7 @@ const SupplementComponent = (props: PillInfo) => {
                         }
                     }
                   >
+
                     {pillIntakeInfo.pillTime}
                   </div>
                 )
@@ -71,4 +159,3 @@ const SupplementComponent = (props: PillInfo) => {
   );
 };
 
-export default SupplementComponent;

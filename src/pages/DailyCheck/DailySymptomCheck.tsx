@@ -64,7 +64,6 @@ const DailySymptomCheck = (props: symptomProps) => {
     { id: 10, title: "이비인후과 관련 증상", symptoms: ["목통증", "청력저하"] },
     { id: 11, title: "비뇨의학과 관련 증상", symptoms: ["비뇨 관련 문제"] },
     { id: 12, title: "치과 관련 증상", symptoms: ["치과", "잇몸출혈"] },
-    // { id: 13, title: "기타 상태 ", symptoms: ["증상없음"] }
   ];
 
   const [symptomBtnActive, setSymptomBtnActive] = useState<boolean[][]>(
@@ -107,11 +106,10 @@ const DailySymptomCheck = (props: symptomProps) => {
       const newState = prevState.map((arr) => [...arr]);
       newState[symptom][symptomIdx] = !newState[symptom][symptomIdx];
       console.log(symptomInfo[symptom].symptoms[symptomIdx]);
-      //  const symptomName = symptomInfo[symptom].symptoms[symptomIdx];
-      // symptoms.push(symptomName);
+
       return newState;
     });
-    // console.log("symptoms: ", symptoms);
+
   }
   useEffect(() => { }, [symptomBtnActive]);
   const navigate = useNavigate();

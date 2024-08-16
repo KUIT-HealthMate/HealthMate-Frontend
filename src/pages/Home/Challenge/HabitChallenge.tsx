@@ -7,7 +7,7 @@ import uncheckmark from "../../../assets/uncheckmark.svg";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useHabitInfoStore from "../../../store/useHabitInfoStore";
+// import useHabitInfoStore from "../../../store/useHabitInfoStore";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
@@ -26,14 +26,13 @@ interface HabitChallengeProps {
 
 export default function HabitChallenge(props: HabitChallengeProps) {
   console.log("HabitChallenge: ", props.habits);
-  const { HabitInfo } =
-    useHabitInfoStore();
 
-  const [habitStatus, setHabitStatus] = useState<boolean[]>([]);
+
+  // const [habitStatus, setHabitStatus] = useState<boolean[]>([]);
   //useState(props.habits.map(habit => habit.achievementStatus));
 
 
-  console.log("habitStatus: ", habitStatus);
+  // console.log("habitStatus: ", habitStatus);
 
 
   const splitHabits = (array: habitDto[]) => {
@@ -52,14 +51,13 @@ export default function HabitChallenge(props: HabitChallengeProps) {
     console.log("habit useEffect")
     const chunks = splitHabits(props.habits);
     setNewHabits(chunks);
-    setHabitStatus(props.habits.map(habit => habit.achievementStatus));
+    // setHabitStatus(props.habits.map(habit => habit.achievementStatus));
   }, [props.habits]);
 
   useEffect(() => {
     console.log("색 바꿔: ", newHabits)
 
   }, [newHabits])
-
 
 
   const today = new Date();
@@ -106,7 +104,6 @@ export default function HabitChallenge(props: HabitChallengeProps) {
           console.log("chunk:", chunk)
           return (
             <SwiperSlide>
-
               {chunk.map((habit, habitIndex) => {
                 return (
                   <div className={styles.HabitInfo}>
@@ -115,9 +112,7 @@ export default function HabitChallenge(props: HabitChallengeProps) {
                       className={styles.HabitCheckmark}
                       onClick={() => {
                         HabitCheck(habit.challengeId, habitIndex, chunkIndex);
-
                       }}
-                      //src={hello(habitIndex)}
                       src={habit.achievementStatus === true ? checkmark : uncheckmark}
                       alt="check_uncheck"
                     ></img>
