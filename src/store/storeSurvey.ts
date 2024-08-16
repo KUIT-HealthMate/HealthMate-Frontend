@@ -1,5 +1,6 @@
 import create from "zustand";
 import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../dtos/dailycheck/dailyCheckDto";
+import { stat } from "fs";
 
 
 interface Survey {
@@ -14,17 +15,17 @@ interface Survey {
 
 //request
 interface RequestResult {
+  userName: string;
   lifeStyle: lifeStyleDto;
   mealPattern: mealPatternDto;
   sleepPattern: sleepPatternDto;
-  ////  symptoms: [];
   setLifeStyle: (key: keyof lifeStyleDto, value: number) => void;
   setMealPattern: (key: keyof mealPatternDto, value: number) => void;
   setSleepPattern: (key: keyof sleepPatternDto, value: number) => void;
-  //setSymptomsDto: (answers: []) => void;
 }
 
 export const RequestResult = create<RequestResult>((set) => ({
+  userName: "쿠잇",
   lifeStyle: {
     "environmentScore": -1,
     "focusTimeScore": -1,
@@ -33,24 +34,28 @@ export const RequestResult = create<RequestResult>((set) => ({
     "postureDiscomfortScore": -1
   },
   mealPattern: {
-    "mealTimeScore": 1,
-    "foodType": 2,
-    "regularMealTimeScore": 2,
-    "mealDurationScore": 1,
-    "seasoningConsumptionScore": 2,
-    "screenUsage": 1,
-    "mealRemark": 4
+    "mealTimeScore": -1,
+    "foodType": -1,
+    "regularMealTimeScore": -1,
+    "mealDurationScore": -1,
+    "seasoningConsumptionScore": -1,
+    "screenUsage": -1,
+    "mealRemark": -1
   },
   sleepPattern: {
-    "sleepDurationScore": 2,
-    "morningFatigueScore": 2,
-    "peakConditionTimeScore": 2,
-    "sleepRemarkScore": 2
+    "sleepDurationScore": -1,
+    "morningFatigueScore": -1,
+    "peakConditionTimeScore": -1,
+    "sleepRemarkScore": -1
   },
-  setLifeStyle: (key, value) =>
+  symptomInfos: [
+    { "symptomName": "" }
+  ],
+  setLifeStyle: (key: keyof lifeStyleDto, value: number) =>
     set((state) => ({
       lifeStyle: { ...state.lifeStyle, [key]: value },
-    })),
+    }
+    )),
 
   setMealPattern: (key, value) =>
     set((state) => ({
@@ -60,13 +65,11 @@ export const RequestResult = create<RequestResult>((set) => ({
   setSleepPattern: (key, value) =>
     set((state) => ({
       sleepPattern: { ...state.sleepPattern, [key]: value },
-    }))
+    })),
+
 }));
 
-interface symptomSurveyAnswer {
-  symptomInfo: string;
-  setSymptomInfo: (answer: string) => void;
-}
+
 
 //건강진단 배열로만 쭉 받아옴
 interface surveyAnswerDto {
@@ -84,16 +87,6 @@ export const surveyAnswer = create<surveyAnswerDto>((set) => ({
 
 }));
 
-
-interface dailycheckSymptomsResult {
-  symptomInfos: { symptomName: string }[];
-  setSymptomInfos: (answers: { symptomName: string }[]) => void;
-}
-
-export const dailycheckSymptomsResult = create<dailycheckSymptomsResult>((set) => ({
-  symptomInfos: [],
-  setSymptomInfos: (answers: { symptomName: string }[]) => set({ symptomInfos: answers }),
-}))
 
 export const surveys: Survey[] = [
   {
