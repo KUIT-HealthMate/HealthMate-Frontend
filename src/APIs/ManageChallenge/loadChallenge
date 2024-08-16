@@ -1,0 +1,9 @@
+// 서버에서 해당 유저의 활성화 상태의 챌린지를 가져옵니다.
+export const loadChallenge = <T>() => {
+
+    let challengeList:T[] = [];
+
+
+
+    return challengeList as T;   
+}
