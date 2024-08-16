@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../dtos/dailycheck/dailyCheckDto";
 
+
 interface Survey {
   id: number;
   question: string[];
@@ -188,17 +189,6 @@ interface StoreState {
   previousQuestion: () => void;
 }
 
-
-function NavigateTo() {
-  console.log("NavigateTo드ㄹ어옴")
-  const navigate = useNavigate();
-
-  navigate('/');
-
-  return null;
-
-}
-
 export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
   currentQuestionIdx: 0,
   progressPercent: 0,
@@ -219,7 +209,6 @@ export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
 
   previousQuestion: () =>
     set((state) => {
-      // const navigate = useNavigate();
 
       console.log("previousQuestion" + state.currentQuestionIdx);
 

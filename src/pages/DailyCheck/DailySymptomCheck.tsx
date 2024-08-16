@@ -116,7 +116,6 @@ const DailySymptomCheck = (props: symptomProps) => {
   useEffect(() => { }, [symptomBtnActive]);
   const navigate = useNavigate();
 
-
   return (
     <>
       <TopBarWithCancel></TopBarWithCancel>

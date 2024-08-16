@@ -28,32 +28,29 @@ export default function DailyDetails({ date, data }: DateProps) {
                 {pillList.map((sItem) => (
                   <div className={s.itemContainer}>
                     <div
-                      className={`${s.challengeName} ${
-                        Object.values(sItem.dailyIntakePeriod).filter(
-                          (v) => v === true
-                        ).length < Object.values(sItem.dailyIntakePeriod).length
+                      className={`${s.challengeName} ${Object.values(sItem.dailyIntakePeriod).filter(
+                        (v) => v === true
+                      ).length < Object.values(sItem.dailyIntakePeriod).length
                           ? s.failed
                           : ""
-                      }`}
+                        }`}
                     >
                       {`영양제 챌린지 - ${sItem.pill}`}
                     </div>
                     {Object.keys(sItem.dailyIntakePeriod).length ===
-                    Object.values(sItem.dailyIntakePeriod).filter(
-                      (v) => v === true
-                    ).length ? (
+                      Object.values(sItem.dailyIntakePeriod).filter(
+                        (v) => v === true
+                      ).length ? (
                       <div className={s.success}>
-                        {`성공 (${
-                          Object.keys(sItem.dailyIntakePeriod).length
-                        }/${Object.keys(sItem.dailyIntakePeriod).length})`}
+                        {`성공 (${Object.keys(sItem.dailyIntakePeriod).length
+                          }/${Object.keys(sItem.dailyIntakePeriod).length})`}
                       </div>
                     ) : (
                       <div className={s.fail}>
-                        {`실패 (${
-                          Object.values(sItem.dailyIntakePeriod).filter(
-                            (v) => v === true
-                          ).length
-                        }/${Object.keys(sItem.dailyIntakePeriod).length})`}
+                        {`실패 (${Object.values(sItem.dailyIntakePeriod).filter(
+                          (v) => v === true
+                        ).length
+                          }/${Object.keys(sItem.dailyIntakePeriod).length})`}
                       </div>
                     )}
                   </div>
@@ -61,9 +58,8 @@ export default function DailyDetails({ date, data }: DateProps) {
                 {habbitList?.map((hItem) => (
                   <div className={s.itemContainer}>
                     <div
-                      className={`${s.challengeName} ${
-                        hItem.accomplished ? "" : s.failed
-                      }`}
+                      className={`${s.challengeName} ${hItem.accomplished ? "" : s.failed
+                        }`}
                     >
                       {`습관 챌린지 - ${hItem.habbit}`}
                     </div>
