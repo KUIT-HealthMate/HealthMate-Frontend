@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import habitInfo from "./habitInfo";
 import { initHabit } from "../pages/Home/Challenge/ManagePage/utils/initChallenge";
+import { serverRequest } from "../APIs/ManageChallenge/serverRequest";
 
 interface HabitInfoState {
   HabitInfo: habitInfo[];
@@ -32,66 +33,20 @@ interface HabitInfoState {
   ) => void;
 }
 
-const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
-  HabitInfo: [
-    {
-      id: "0",
-      name: "베아제",
-      // executionRecord: true,
-      weeklyExecutionFrequency: {
-        monday: true,
-        tuesday: true,
-        wednesday: true,
-        thursday: true,
-        friday: true,
-        saturday: true,
-        sunday: true,
-      },
-      notificationTime: [
-        { hour: 7, minute: 30 },
-        { hour: 12, minute: 0 },
-        { hour: 18, minute: 0 },
-      ],
-    },
-    {
-      id: "1",
-      name: "비타민",
-      // executionRecord: false,
-      weeklyExecutionFrequency: {
-        monday: true,
-        tuesday: false,
-        wednesday: true,
-        thursday: false,
-        friday: true,
-        saturday: false,
-        sunday: false,
-      },
-      notificationTime: [
-        { hour: 7, minute: 35 },
-        { hour: 12, minute: 5 },
-        { hour: 18, minute: 5 },
-      ],
-    },
-    {
-      id: "2",
-      name: "루테인",
-      // executionRecord: true,
-      weeklyExecutionFrequency: {
-        monday: true,
-        tuesday: false,
-        wednesday: true,
-        thursday: true,
-        friday: false,
-        saturday: true,
-        sunday: true,
-      },
-      notificationTime: [
-        { hour: 7, minute: 40 },
-        { hour: 12, minute: 10 },
-        { hour: 18, minute: 10 },
-      ],
-    },
-  ],
+const useHabitInfoStore = create<HabitInfoState>((set, get) => {
+  const initializeHabits = async () => {
+    try {
+      const habitArray:habitInfo[] = await serverRequest.loadChallenge<habitInfo>("habits");
+      set({HabitInfo: habitArray});
+    } catch (error) {
+      console.error("Error initializing habits:", error);
+    }
+  }
+
+  initializeHabits();
+
+  return {
+  HabitInfo: [],
 
   setHabitInfo: (habit: habitInfo) =>
     set((state) => ({
@@ -203,9 +158,10 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
               notificationTime: alarmTime.map((time) => ({ ...time })),
             }
           : targetHabit
-      ),
-    }));
-  },
-}));
+        ),
+      }));
+    },
+  };
+});
 
 export default useHabitInfoStore;

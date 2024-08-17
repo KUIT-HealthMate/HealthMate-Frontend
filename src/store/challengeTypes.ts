@@ -1,6 +1,13 @@
+
 interface challengeBaseInfo {
+
+    // 챌린지 ID 
     id: string;
-    name: string; // 알약 이름
+
+    // 챌린지 이름
+    name: string; 
+
+    // 월요일 ~ 일요일 중 챌린지를 수행하는 요일
     weeklyIntakeFrequency: {
       monday: boolean,
       tuesday: boolean,
@@ -9,17 +16,26 @@ interface challengeBaseInfo {
       friday: boolean,
       saturday: boolean,
       sunday: boolean
-    }; // 주 섭취 횟수 (월 ~ 일)
-    notificationTime: {hour:number, minute:number}[]; // 팝업 알림 시간 (19:30 이면 19, 30)
+    }; 
+
+    // 유저가 등록한 알림톡 시간
+    notificationTime: {hour:number, minute:number}[];
 }
 
 export interface pillInfo extends challengeBaseInfo {
-    intakeTime: { beforeOrAfterMeal:number, minutes:number}; // 섭취 시간 (식전 1 식후 2, 분 number로)
-    dailyIntakePeriod: { breakfast: boolean, lunch: boolean, dinner: boolean  }; // 일 섭취 시기 (아침, 점심, 저녁)
+
+    // 알약 섭취 시간
+    intakeTime: { beforeOrAfterMeal:number, minutes:number}; 
+
+    // 아침, 점심, 저녁 중 알약을 섭취하는 끼니
+    dailyIntakePeriod: { breakfast: boolean, lunch: boolean, dinner: boolean  };
+
 }
 
 export interface habitInfo extends challengeBaseInfo {
+
     // 다른 필드 없음
+    
 }
 
 

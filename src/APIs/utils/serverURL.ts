@@ -1,1 +1,1 @@
-export const serverURL: string = "http://3.39.60.18:9000";
+export const serverURL: string = process.env.REACT_APP_BACK_URL as string;
