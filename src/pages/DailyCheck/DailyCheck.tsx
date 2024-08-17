@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styles from "./DailyCheck.module.scss";
 import { useGlobalStore } from "../../store/store";
 import Survey from "../DailyCheck/survey/Survey";
-import { useGlobalStoreSurvey, surveys, surveyAnswer } from "../../store/storeSurvey";
+import { useGlobalStoreSurvey, surveys } from "../../store/storeSurvey";
 
 const DailyCheck = () => {
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);

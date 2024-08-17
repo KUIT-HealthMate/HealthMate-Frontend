@@ -26,7 +26,7 @@ interface HabitChallengeProps {
 
 export default function HabitChallenge(props: HabitChallengeProps) {
   console.log("HabitChallenge: ", props.habits);
-  const { HabitInfo, setExecutionRecord, getExecutionRecord } =
+  const { HabitInfo, getExecutionRecord } =
     useHabitInfoStore();
 
   const splitHabits = (array: habitDto[]) => {
@@ -42,18 +42,10 @@ export default function HabitChallenge(props: HabitChallengeProps) {
   useEffect(() => {
     const chunks = splitHabits(props.habits);
     setNewHabits(chunks);
-    //setNewHabits(props.habits)
   }, [HabitInfo]);
-
-  const hello = (habitid: string) => {
-    console.log(getExecutionRecord(habitid));
-    return getExecutionRecord(habitid) ? checkmark : uncheckmark;
-  };
 
 
   function HabitCheck(habitId: number) {
-    // setExecutionRecord(habitId);
-
     // 체크하면 서버 전송
     putHabitCheck("2024-08-10");
   }

@@ -7,7 +7,6 @@ import TopBar from "../../components/organs/Bars/TopBar";
 
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { gethomeInfo } from "../../APIs/home/homeApi";
 import { useMutation } from 'react-query';
@@ -15,10 +14,9 @@ import { habitDto, supplementDto } from "../../dtos/home/homeDto";
 
 const Home = () => {
   const navigate = useNavigate();
-  const queryClient = new QueryClient();
 
-  const [habits, setHabits] = useState<habitDto[]>([{ challengeName: "test1", achievementStatus: false }, { challengeName: "test2", achievementStatus: true }]);
-  const [supplements, setSupplements] = useState<supplementDto[]>([
+  const [habits] = useState<habitDto[]>([{ challengeName: "test1", achievementStatus: false }, { challengeName: "test2", achievementStatus: true }]);
+  const [supplements] = useState<supplementDto[]>([
     {
       challengeName: "test1",
       breakfastSuccess: true,
@@ -63,6 +61,7 @@ const Home = () => {
   useEffect(() => {
     // 컴포넌트가 마운트될 때 데이터 가져오기
     gethomeInfoMutation.mutate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
