@@ -28,6 +28,7 @@ interface symptomProps {
 
 
 const DailySymptomCheck = (props: symptomProps) => {
+  console.log("props: ", props)
 
   const { setSymptoms } = OnBoardingResult();
 
@@ -149,6 +150,8 @@ const DailySymptomCheck = (props: symptomProps) => {
     }
     if (props.type === 0) { //온보딩이면
       setSymptoms(checkedSymptomName);
+      navigate(props.buttonNavigatePass)
+
 
     } else if (props.type === 1) { // 일일건강진단이면
       // 서버 요청
