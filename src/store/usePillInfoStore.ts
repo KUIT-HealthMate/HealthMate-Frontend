@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import pillInfo from "./pillInfo";
+import { pillInfo } from "./challengeTypes";
 import { initPill } from "../pages/Home/Challenge/ManagePage/utils/initChallenge";
 import { serverRequest } from "../APIs/ManageChallenge/serverRequest";
 
@@ -72,71 +72,7 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => {
 
   return {
     PillInfo: [],
-    /*[
-    {
-      id: "0",
-      name: "베아제",
-      intakeTime: { beforeOrAfterMeal: 2, minutes: 30 },
-      dailyIntakePeriod: { breakfast: true, lunch: true, dinner: true },
-      // dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
-      weeklyIntakeFrequency: {
-        monday: true,
-        tuesday: true,
-        wednesday: true,
-        thursday: true,
-        friday: true,
-        saturday: true,
-        sunday: true,
-      },
-      notificationTime: [
-        { hour: 7, minutes: 30 },
-        { hour: 12, minutes: 0 },
-        { hour: 18, minutes: 0 },
-      ],
-    },
-    {
-      id: "1",
-      name: "비타민",
-      intakeTime: { beforeOrAfterMeal: 2, minutes: 30 },
-      dailyIntakePeriod: { breakfast: true, lunch: true, dinner: true },
-      dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
-      weeklyIntakeFrequency: {
-        monday: true,
-        tuesday: false,
-        wednesday: true,
-        thursday: false,
-        friday: true,
-        saturday: false,
-        sunday: false,
-      },
-      notificationTime: [
-        { hour: 7, minutes: 35 },
-        { hour: 12, minutes: 5 },
-        { hour: 18, minutes: 5 },
-      ],
-    },
-    {
-      id: "2",
-      name: "루테인",
-      intakeTime: { beforeOrAfterMeal: 2, minutes: 30 },
-      dailyIntakePeriod: { breakfast: true, lunch: false, dinner: true },
-      // dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
-      weeklyIntakeFrequency: {
-        monday: true,
-        tuesday: false,
-        wednesday: true,
-        thursday: true,
-        friday: false,
-        saturday: true,
-        sunday: true,
-      },
-      notificationTime: [
-        { hour: 7, minutes: 40 },
-        { hour: 12, minutes: 10 },
-        { hour: 18, minutes: 10 },
-      ],
-    },
-  ]*/
+
     setPillInfo: (pill: pillInfo) =>
       set((state) => ({
         PillInfo: [...state.PillInfo, pill],
