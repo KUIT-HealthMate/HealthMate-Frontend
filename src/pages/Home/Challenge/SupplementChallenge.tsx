@@ -10,10 +10,8 @@ import { usePillInfoStore } from "../../../store/usePillInfoStore";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
-import pillInfo from "../../../store/pillInfo";
 
 //api 관련
-import { putSupplementCheck } from "../../../APIs/home/homeApi";
 import { supplementDto } from "../../../dtos/home/homeDto";
 
 SwiperCore.use([Pagination, Navigation]);
@@ -38,15 +36,8 @@ export default function SupplementChallenge(props: SupplementChallengeProps) {
   useEffect(() => {
     const chunks = splitPillInfo(props.supplements);
     setNewPillInfos(chunks);
+    // eslint-disable-next-line
   }, [PillInfo]);
-
-  // 영양제 체크/언체크
-  function SupplementCheck() {
-    // setExecutionRecord(habitId);
-
-    // 체크하면 서버 전송
-    // putSupplementCheck();
-  }
 
   return (
     <div className={styles.PillChallenge}>

@@ -61,7 +61,7 @@ const Home = () => {
   useEffect(() => {
     // 컴포넌트가 마운트될 때 데이터 가져오기
     gethomeInfoMutation.mutate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line 
   }, []);
 
 

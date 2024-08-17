@@ -5,7 +5,7 @@ const BASE_URL = process.env.REACT_APP_BACK_URL;
 
 //axios객체 생성
 export const client = axios.create({
-    baseURL: "http://3.39.60.18:9000",
+    baseURL: BASE_URL,
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

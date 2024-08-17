@@ -1,29 +1,5 @@
 import styles from "./SupplementComponent.module.scss";
-import { usePillInfoStore } from "../../../../store/usePillInfoStore";
-import pillInfo from "../../../../store/pillInfo";
-
-import { useMutation } from 'react-query';
-import { putSupplementCheck } from "../../../../APIs/home/homeApi";
-import { time } from "console";
-
 import { supplementDto } from "../../../../dtos/home/homeDto";
-
-function changeIdxToString(idx: number): string {
-  if (idx === 1) {
-    return "breakfast";
-  } else if (idx === 2) {
-    return "lunch";
-  } else if (idx === 3) {
-    return "dinner";
-  } else {
-    return "";
-  }
-}
-
-// interface PillInfo {
-//   pill: pillInfo;
-//   index: number;
-// }
 
 interface PillInfo {
   pill: supplementDto;
@@ -52,26 +28,6 @@ const pillIntakeTime = (props: supplementDto, timeIdx: number) => {
 }
 
 const SupplementComponent = (props: PillInfo) => {
-  const { setIntakeRecord, getIntakeRecord, getIntakeTime, getMealTime } =
-    usePillInfoStore();
-
-  function clickPillCheck(id: string, idx: number) {
-    setIntakeRecord(id, changeIdxToString(idx));
-    console.log('id', id, '   idx: ', idx)
-    //클릭시 서버로 전송
-    var timeSlot = "";
-    if (idx === 0) {
-      timeSlot = "BREAKFAST";
-    } else if (idx === 1) {
-      timeSlot = "LUNCH";
-    } else if (idx === 2) {
-      timeSlot = "DINNER";
-    }
-
-
-    putSupplementCheck(timeSlot, id);
-
-  }
 
   return (
     <div className={styles.PillInfo}>
@@ -82,17 +38,13 @@ const SupplementComponent = (props: PillInfo) => {
       <div>
         <div className={styles.PillInfoTimes}>
           {
+            // eslint-disable-next-line
             [0, 1, 2].map((timeId) => {
               const pillIntakeInfo = pillIntakeTime(props.pill, timeId)
               if (pillIntakeInfo != null) {
                 return (
                   <div
                     className={styles.PillInfoTimeButton}
-                    onClick={() => {
-                      // clickPillCheck(props.pill., idx)
-                    }
-
-                    }
                     style={
                       pillIntakeInfo.isChecked
                         ? {
