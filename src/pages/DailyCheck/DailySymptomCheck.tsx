@@ -9,7 +9,7 @@ import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
 
 import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
 import { surveyAnswer, RequestResult } from "../../store/storeSurvey";
-import { lifeStyleDto, mealPatternDto, sleepPatternDto, symptomDto, diagnosisRequestDto } from "../../dtos/dailycheck/dailyCheckDto";
+import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../../dtos/dailycheck/dailyCheckDto";
 import { useMutation } from 'react-query';
 import { postDiagnosis } from "../../APIs/dailyCheck/dailCheckApi";
 
@@ -82,6 +82,7 @@ const DailySymptomCheck = (props: symptomProps) => {
     if (props.type === 1) {
       setSurveyAsForm();
     }
+    // eslint-disable-next-line
   }, [])
 
 
