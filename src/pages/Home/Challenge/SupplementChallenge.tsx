@@ -5,19 +5,24 @@ import SupplementComponent from "./SupplementComponent/SupplementComponent";
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import { usePillInfoStore } from "../../../store/usePillInfoStore";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
-import pillInfo from "../../../store/pillInfo";
+
+import { supplementDto } from "../../../dtos/home/homeDto";
 
 SwiperCore.use([Pagination, Navigation]);
 
-export default function SupplementChallenge() {
-  const { PillInfo } = usePillInfoStore();
+interface SupplementChallengeProps {
+  supplements: supplementDto[];
+}
 
-  const splitPillInfo = (array: pillInfo[]) => {
+export default function SupplementChallenge(props: SupplementChallengeProps) {
+  console.log("SupplementChallenge: ", props.supplements)
+  // const { PillInfo } = usePillInfoStore();
+
+  const splitPillInfo = (array: supplementDto[]) => {
     const result = [];
     for (let i = 0; i < array.length; i += 3) {
       result.push(array.slice(i, i + 3));
@@ -25,12 +30,14 @@ export default function SupplementChallenge() {
     return result;
   };
 
-  const [newPillInfos, setNewPillInfos] = useState<pillInfo[][]>([]);
+  const [newPillInfos, setNewPillInfos] = useState<supplementDto[][]>([props.supplements]);
 
   useEffect(() => {
-    const chunks = splitPillInfo(PillInfo);
+    console.log("SupplementChallenge/props: ", props.supplements);
+    const chunks = splitPillInfo(props.supplements);
     setNewPillInfos(chunks);
-  }, [PillInfo]);
+  }, [props.supplements]);
+
 
   return (
     <div className={styles.PillChallenge}>
@@ -54,11 +61,9 @@ export default function SupplementChallenge() {
             return (
               <SwiperSlide>
                 {chunk.map((pill, pillIndex) => {
+                  console.log("pillChunk: ", pill);
                   return (
-                    <SupplementComponent
-                      pill={pill}
-                      index={pillIndex}
-                    ></SupplementComponent>
+                    <SupplementComponent pill={pill}></SupplementComponent>
                   );
                 })}
               </SwiperSlide>
