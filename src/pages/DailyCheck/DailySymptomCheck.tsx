@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import styles from "./survey/Survey.module.scss";
 import { useGlobalStore } from "../../store/store";
 import exclamationMark from "../../assets/exclamationMark.svg";
+
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "./survey/ProgressBar";
 import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
+import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
+
 
 interface symptomProps {
   title1: string;
@@ -16,9 +19,15 @@ interface symptomProps {
   findKeywordNavigate: string;
 
   progressPercent: number;
+  type: number; //0이면 온보딩, 1이면 건강진단
 }
 
+
+
 const DailySymptomCheck = (props: symptomProps) => {
+
+  const { setSymptoms } = OnBoardingResult();
+
   console.log("findKeywordNavigate: ", props.findKeywordNavigate);
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
@@ -64,6 +73,25 @@ const DailySymptomCheck = (props: symptomProps) => {
     )
   );
 
+  // '다음으로' 클릭시 true인것들 store에 증상 반영
+  function setSymtomsStore() {
+    const checkedSymptomName = [];
+
+    for (let i = 0; i < symptomBtnActive.length; i++) {
+      for (let j = 0; j < symptomBtnActive[i].length; j++) {
+        if (symptomBtnActive[i][j] === true) {
+          checkedSymptomName.push(symptomInfo[i].symptoms[j]);
+        }
+      }
+    }
+    console.log("checkedSymptomName: ", checkedSymptomName)
+    if (props.type === 0) { //온보딩이면
+      setSymptoms(checkedSymptomName);
+    }
+
+  }
+
+
   function checkSymptom(symptom: number, symptomIdx: number) {
     const checkCnt = symptomBtnActive
       .flat()
@@ -78,9 +106,12 @@ const DailySymptomCheck = (props: symptomProps) => {
     setSymptomBtnActive((prevState) => {
       const newState = prevState.map((arr) => [...arr]);
       newState[symptom][symptomIdx] = !newState[symptom][symptomIdx];
-      console.log(newState);
+      console.log(symptomInfo[symptom].symptoms[symptomIdx]);
+      //  const symptomName = symptomInfo[symptom].symptoms[symptomIdx];
+      // symptoms.push(symptomName);
       return newState;
     });
+    // console.log("symptoms: ", symptoms);
   }
   useEffect(() => { }, [symptomBtnActive]);
   const navigate = useNavigate();
@@ -152,10 +183,12 @@ const DailySymptomCheck = (props: symptomProps) => {
           <div className={styles.findKeywordText}>
             <img src={exclamationMark} alt="exclaim"></img>
             <div
-              onClick={() =>
+              onClick={() => {
+                setSymtomsStore();
                 navigate("/findkeyword", {
                   state: { value: props.findKeywordNavigate },
                 })
+              }
               }
             >
               찾는 키워드가 없나요?
@@ -181,7 +214,10 @@ const DailySymptomCheck = (props: symptomProps) => {
         <button
           className={styles.NextButton}
           style={{ position: `fixed`, bottom: `33px` }}
-          onClick={() => navigate(props.buttonNavigate)}
+          onClick={() => {
+            navigate(props.buttonNavigate);
+            setSymtomsStore();
+          }}
         >
           <p className={styles.NextButtonText}>다음으로</p>
         </button>

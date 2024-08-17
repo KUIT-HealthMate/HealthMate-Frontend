@@ -12,12 +12,20 @@ import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 import pillInfo from "../../../store/pillInfo";
 
+//api 관련
+import { putSupplementCheck } from "../../../APIs/home/homeApi";
+import { supplementDto } from "../../../dtos/home/homeDto";
+
 SwiperCore.use([Pagination, Navigation]);
 
-export default function SupplementChallenge() {
+interface SupplementChallengeProps {
+  supplements: supplementDto[];
+}
+
+export default function SupplementChallenge(props: SupplementChallengeProps) {
   const { PillInfo } = usePillInfoStore();
 
-  const splitPillInfo = (array: pillInfo[]) => {
+  const splitPillInfo = (array: supplementDto[]) => {
     const result = [];
     for (let i = 0; i < array.length; i += 3) {
       result.push(array.slice(i, i + 3));
@@ -25,12 +33,20 @@ export default function SupplementChallenge() {
     return result;
   };
 
-  const [newPillInfos, setNewPillInfos] = useState<pillInfo[][]>([]);
+  const [newPillInfos, setNewPillInfos] = useState<supplementDto[][]>([props.supplements]);
 
   useEffect(() => {
-    const chunks = splitPillInfo(PillInfo);
+    const chunks = splitPillInfo(props.supplements);
     setNewPillInfos(chunks);
   }, [PillInfo]);
+
+  // 영양제 체크/언체크
+  function SupplementCheck() {
+    // setExecutionRecord(habitId);
+
+    // 체크하면 서버 전송
+    // putSupplementCheck();
+  }
 
   return (
     <div className={styles.PillChallenge}>
@@ -57,7 +73,6 @@ export default function SupplementChallenge() {
                   return (
                     <SupplementComponent
                       pill={pill}
-                      index={pillIndex}
                     ></SupplementComponent>
                   );
                 })}

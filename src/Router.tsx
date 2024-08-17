@@ -68,7 +68,7 @@ const Router = () => {
           element={<DailySleepCheckStart />}
         />
         <Route path="/dailysymptomcheckstart" element={<DailySymptomCheckStart title1="마지막이에요" text1="마지막으로 쿠잇님의" greentext="오늘 느낀 이상증상" text2="을 알아보고 싶어요." buttonText="이상증상 체크하기" buttonNavigate="/dailysymptomcheck" iconName="dailyCheckStartIcon" />} />
-        <Route path="/dailysymptomcheck" element={<DailySymptomCheck title1="오늘 느껴진 이상 증세가" title2="있으신가요?" buttonNavigatePass="/dailycheckdone" buttonNavigate="/dailycheckdone" findKeywordNavigate="/dailycheckdone" progressPercent={94.08} />} />
+        <Route path="/dailysymptomcheck" element={<DailySymptomCheck title1="오늘 느껴진 이상 증세가" title2="있으신가요?" buttonNavigatePass="/dailycheckdone" buttonNavigate="/dailycheckdone" findKeywordNavigate="/dailycheckdone" progressPercent={94.08} type={1} />} />
 
         <Route path="/dailycheck" element={<DailyCheck />} />
         <Route path="/dailycheckdone" element={<DailyCheckDone />} />

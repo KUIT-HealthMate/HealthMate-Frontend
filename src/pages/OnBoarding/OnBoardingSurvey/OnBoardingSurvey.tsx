@@ -28,7 +28,7 @@ export const OnBoardingSurvey = () => {
         question.candidates.map((candidate) => false)
     );
 
-    // = OnBoardingResult((state) => state.setGender);
+    
     const { gender, setGender, ageGroup, setAgeGroup } = OnBoardingResult();
 
     // 선지 선택시 렌더링
@@ -62,7 +62,7 @@ export const OnBoardingSurvey = () => {
     function handleNextBtnClick(questionIdx: number) {
         console.log("다음으로")
 
-        //선택지
+        //선택지 store 반영
         const resultIdx = selectBtnActive.findIndex(element => element === true)
         console.log("resultIdx: ", resultIdx);
         if (questionIdx === 0) {
