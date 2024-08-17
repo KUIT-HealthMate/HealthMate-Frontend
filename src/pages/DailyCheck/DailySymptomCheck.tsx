@@ -29,14 +29,18 @@ interface symptomProps {
 
 const DailySymptomCheck = (props: symptomProps) => {
 
-  const { symptoms, setSymptoms } = OnBoardingResult();
+  const { setSymptoms } = OnBoardingResult();
 
   const { surveyAnswerList } = surveyAnswer();
   const { lifeStyle, mealPattern, sleepPattern, setLifeStyle, setMealPattern, setSleepPattern } = RequestResult();
 
   const postDiagnosisMutation = useMutation(postDiagnosis, {
+    onMutate: () => { // 요청이 시작되면 '/loading' 띄움
+      navigate('/loading');
+    },
     onSuccess: (response) => {
       console.log('건강진단 정보 보내기 성공:', response);
+      navigate(props.buttonNavigate);
     },
     onError: (error) => {
       console.error('건강진단 정보 보내기 실패:', error);
@@ -60,6 +64,8 @@ const DailySymptomCheck = (props: symptomProps) => {
     }
 
     postDiagnosisMutation.mutate(requestData);
+
+    //  navigate(props.buttonNavigate);
 
   }
 
@@ -143,6 +149,7 @@ const DailySymptomCheck = (props: symptomProps) => {
     }
     if (props.type === 0) { //온보딩이면
       setSymptoms(checkedSymptomName);
+
     } else if (props.type === 1) { // 일일건강진단이면
       // 서버 요청
       requestServer(newSymptomsInfos);
@@ -314,7 +321,7 @@ const DailySymptomCheck = (props: symptomProps) => {
           style={{ position: `fixed`, bottom: `33px` }}
           onClick={() => {
             setSymtomsStore();
-            navigate(props.buttonNavigate);
+            // navigate(props.buttonNavigate);
 
           }}
         >
