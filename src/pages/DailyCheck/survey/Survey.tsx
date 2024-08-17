@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./Survey.module.scss";
 import ProgressBar from "./ProgressBar";
-<<<<<<< HEAD
-
-import { surveys, useGlobalStoreSurvey, surveyAnswer } from "../../../store/storeSurvey";
-
-=======
 import { useGlobalStoreSurvey, surveyAnswer } from "../../../store/storeSurvey";
->>>>>>> 72295ff (Fix(#55): eslint 오류 해결)
+
 import { useNavigate } from "react-router-dom";
 import leftBracket from "../../../assets/leftBraket.svg";
 
