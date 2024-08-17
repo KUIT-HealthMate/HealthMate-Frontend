@@ -1,6 +1,5 @@
 import create from "zustand";
 import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../dtos/dailycheck/dailyCheckDto";
-import { stat } from "fs";
 
 interface Survey {
   id: number;
@@ -13,7 +12,7 @@ interface Survey {
 
 
 //request
-interface RequestResult {
+interface RequestResultDto {
   userName: string;
   lifeStyle: lifeStyleDto;
   mealPattern: mealPatternDto;
@@ -23,7 +22,7 @@ interface RequestResult {
   setSleepPattern: (key: keyof sleepPatternDto, value: number) => void;
 }
 
-export const RequestResult = create<RequestResult>((set) => ({
+export const RequestResult = create<RequestResultDto>((set) => ({
   userName: "쿠잇",
   lifeStyle: {
     "environmentScore": -1,
