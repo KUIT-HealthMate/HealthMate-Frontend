@@ -31,6 +31,7 @@ import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
 import { Welcome } from "./pages/OnBoarding/OnBoarding";
 import { FindKeyword } from "./pages/OnBoarding/findKeyword";
 import { OnBoardingSurvey } from "./pages/OnBoarding/OnBoardingSurvey/OnBoardingSurvey";
+import Loading from "./pages/DailyCheck/loading/Loading";
 
 enum challengeType {
   Pill = 'pill',
@@ -72,6 +73,7 @@ const Router = () => {
 
         <Route path="/dailycheck" element={<DailyCheck />} />
         <Route path="/dailycheckdone" element={<DailyCheckDone />} />
+        <Route path="/loading" element={<Loading />} />
 
         <Route path="/onboarding" element={<OnBoarding />} />
         <Route path="/onboarding_survey" element={<OnBoardingSurvey />} />

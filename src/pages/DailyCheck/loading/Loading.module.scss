@@ -1,0 +1,38 @@
+.loadingPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .textWrap {
+        height: 50px;
+
+        .title {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            text-align: center;
+
+            color: #000000;
+
+        }
+
+        .subTitle {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 132.5%;
+            /* or 27px */
+            text-align: center;
+
+            color: #8F8F8F;
+        }
+    }
+
+    .loadingImg {
+        height: 100px;
+    }
+}

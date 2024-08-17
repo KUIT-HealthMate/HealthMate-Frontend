@@ -25,3 +25,18 @@ export interface sleepPatternDto {
     sleepRemarkScore: number,
 }
 
+
+export interface symptomDto {
+    symptomInfos: { symptomName: string }[];
+}
+
+
+export interface diagnosisRequestDto {
+    userName: string,
+    lifeStyleDto: lifeStyleDto,
+    mealPatternDto: mealPatternDto,
+    sleepPatternDto: sleepPatternDto,
+    symptomInfos: { symptomName: string }[],
+    date: string
+}
+

@@ -1,4 +1,6 @@
 import create from "zustand";
+import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../dtos/dailycheck/dailyCheckDto";
+import { stat } from "fs";
 
 
 interface Survey {
@@ -9,6 +11,65 @@ interface Survey {
   limit: number;
   type: number; //1:습관 2:식사 3:수면
 }
+
+
+//request
+interface RequestResult {
+  userName: string;
+  lifeStyle: lifeStyleDto;
+  mealPattern: mealPatternDto;
+  sleepPattern: sleepPatternDto;
+  setLifeStyle: (key: keyof lifeStyleDto, value: number) => void;
+  setMealPattern: (key: keyof mealPatternDto, value: number) => void;
+  setSleepPattern: (key: keyof sleepPatternDto, value: number) => void;
+}
+
+export const RequestResult = create<RequestResult>((set) => ({
+  userName: "쿠잇",
+  lifeStyle: {
+    "environmentScore": -1,
+    "focusTimeScore": -1,
+    "coffeeConsumptionScore": -1,
+    "exerciseTimeScore": -1,
+    "postureDiscomfortScore": -1
+  },
+  mealPattern: {
+    "mealTimeScore": -1,
+    "foodType": -1,
+    "regularMealTimeScore": -1,
+    "mealDurationScore": -1,
+    "seasoningConsumptionScore": -1,
+    "screenUsage": -1,
+    "mealRemark": -1
+  },
+  sleepPattern: {
+    "sleepDurationScore": -1,
+    "morningFatigueScore": -1,
+    "peakConditionTimeScore": -1,
+    "sleepRemarkScore": -1
+  },
+  symptomInfos: [
+    { "symptomName": "" }
+  ],
+  setLifeStyle: (key: keyof lifeStyleDto, value: number) =>
+    set((state) => ({
+      lifeStyle: { ...state.lifeStyle, [key]: value },
+    }
+    )),
+
+  setMealPattern: (key, value) =>
+    set((state) => ({
+      mealPattern: { ...state.mealPattern, [key]: value },
+    })),
+
+  setSleepPattern: (key, value) =>
+    set((state) => ({
+      sleepPattern: { ...state.sleepPattern, [key]: value },
+    })),
+
+}));
+
+
 
 //건강진단 배열로만 쭉 받아옴
 interface surveyAnswerDto {
@@ -174,6 +235,7 @@ interface StoreState {
   nextQuestion: () => void;
   previousQuestion: () => void;
 }
+
 
 
 export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
