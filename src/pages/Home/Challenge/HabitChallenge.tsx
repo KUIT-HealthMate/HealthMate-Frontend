@@ -45,7 +45,7 @@ export default function HabitChallenge() {
       <div className={styles.HabitChallengeTitle}>
         <img src={habitIcon} className={styles.HabitImg} alt="habit"></img>
         <h1 className={styles.HabitText}>습관 챌린지</h1>
-        <Link to="/ChallengeEdit" className={styles.HabitEdit}>
+        <Link to="/ChallengeEdit" state={{data:"habit"}} className={styles.HabitEdit}>
           편집하기<img src={clampR} className={styles.clampR} alt="clamp"></img>
         </Link>
       </div>

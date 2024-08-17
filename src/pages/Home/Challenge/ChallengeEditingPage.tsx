@@ -4,6 +4,7 @@ import { usePillInfoStore } from "../../../store/usePillInfoStore";
 import { useEffect } from "react";
 import { useGlobalStore } from "../../../store/store";
 import useHabitInfoStore from "../../../store/useHabitInfoStore";
+import { useLocation } from 'react-router-dom';
 import pillInfo from "../../../store/pillInfo";
 
 import leftBracket from "../../../assets/leftBraket.svg";
@@ -28,7 +29,14 @@ const SupplementChallengeEditingPage = () => {
 
   const { HabitInfo, deleteHabit } = useHabitInfoStore();
 
-  const [challengeDisplayInfo, setChallengeDisplayInfo] = useState("pill");
+  const location = useLocation();
+
+  const [challengeDisplayInfo, setChallengeDisplayInfo] = useState<string>("pill");
+  useEffect(() => {
+    changeEditType(location.state.data);
+  },[location])
+
+  console.log(challengeDisplayInfo);
 
   const changeEditType = (type: string) => {
     setChallengeDisplayInfo(type);
