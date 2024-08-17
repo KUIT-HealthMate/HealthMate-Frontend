@@ -1,8 +1,4 @@
 import create from "zustand";
-import React from 'react';
-import { useNavigate } from "react-router-dom";
-
-import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../dtos/dailycheck/dailyCheckDto";
 
 
 interface Survey {
@@ -14,23 +10,13 @@ interface Survey {
   type: number; //1:습관 2:식사 3:수면
 }
 
-//request
-interface RequestStore {
-  lifeStyle: lifeStyleDto;
-  mealPattern: mealPatternDto;
-  sleepPattern: sleepPatternDto;
-  setLifeStyleScore: (key: keyof lifeStyleDto, value: number) => void;
-  setMealPatternScore: (key: keyof lifeStyleDto, value: number) => void;
-  setSleepPatternScore: (key: keyof lifeStyleDto, value: number) => void;
-}
-
 //건강진단 배열로만 쭉 받아옴
-interface surveyAnswer {
+interface surveyAnswerDto {
   surveyAnswerList: number[];
   setSurveyAnswerList: (id: number, score: number) => void;
 }
 
-export const surveyAnswer = create<surveyAnswer>((set) => ({
+export const surveyAnswer = create<surveyAnswerDto>((set) => ({
   surveyAnswerList: Array(16).fill(-1),
   setSurveyAnswerList: (id: number, score: number) => set((state) => {
     const newSurveyAnswerList = [...state.surveyAnswerList];
@@ -189,6 +175,7 @@ interface StoreState {
   previousQuestion: () => void;
 }
 
+
 export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
   currentQuestionIdx: 0,
   progressPercent: 0,
@@ -209,7 +196,6 @@ export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
 
   previousQuestion: () =>
     set((state) => {
-
       console.log("previousQuestion" + state.currentQuestionIdx);
 
       const newProgressPercent = state.progressPercent - 5.88;

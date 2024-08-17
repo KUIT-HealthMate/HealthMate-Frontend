@@ -6,7 +6,7 @@ import exclamationMark from "../../assets/exclamationMark.svg";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "./survey/ProgressBar";
 import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
-import { useOnBoardingSurveyStore, onBoardingSurveys, OnBoardingResult } from "../../store/storeOnBoardingSurvey"
+import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
 
 
 interface symptomProps {
@@ -26,7 +26,7 @@ interface symptomProps {
 
 const DailySymptomCheck = (props: symptomProps) => {
 
-  const { symptoms, setSymptoms } = OnBoardingResult();
+  const { setSymptoms } = OnBoardingResult();
 
   console.log("findKeywordNavigate: ", props.findKeywordNavigate);
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);

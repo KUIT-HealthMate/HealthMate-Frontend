@@ -15,13 +15,6 @@ import { OnBoardingResult } from "../../store/storeOnBoardingSurvey";
 import { postOnBoarding } from "../../APIs/onBoarding/onBoardingApi";
 import { useMutation } from 'react-query';
 
-interface onBoardingRequestDto {
-  gender: number,
-  ageGroup: number,
-  symptoms: string[],
-  purpose: number[],
-}
-
 const purposeButtons = [
   { icon: purpose1, text: "루틴" },
   { icon: purpose2, text: "질환 예방" },
@@ -32,7 +25,7 @@ const purposeButtons = [
 ];
 
 const OnBoardingCheckPurpose = () => {
-  const { gender, ageGroup, symptoms, purposes, setPurposes } = OnBoardingResult();
+  const { gender, ageGroup, symptoms, setPurposes } = OnBoardingResult();
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
     console.log("마운트됨");

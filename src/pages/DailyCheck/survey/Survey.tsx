@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "./Survey.module.scss";
 import ProgressBar from "./ProgressBar";
+<<<<<<< HEAD
 
 import { surveys, useGlobalStoreSurvey, surveyAnswer } from "../../../store/storeSurvey";
 
+=======
+import { useGlobalStoreSurvey, surveyAnswer } from "../../../store/storeSurvey";
+>>>>>>> 72295ff (Fix(#55): eslint 오류 해결)
 import { useNavigate } from "react-router-dom";
 import leftBracket from "../../../assets/leftBraket.svg";
 
@@ -74,7 +78,7 @@ const Survey = ({
   }
 
 
-  const { surveyAnswerList, setSurveyAnswerList } = surveyAnswer();
+  const { setSurveyAnswerList } = surveyAnswer();
   const handleAnswer = (id: number, score: number) => {
     setSurveyAnswerList(id, score);
   };
@@ -135,7 +139,7 @@ const Survey = ({
 
 
     //'다음으로' 누르면 정답점수or타입 저장
-    if (currentQuestionIdx.currentQuestionIdx == 6 || currentQuestionIdx.currentQuestionIdx === 10 || currentQuestionIdx.currentQuestionIdx === 11) {
+    if (currentQuestionIdx.currentQuestionIdx === 6 || currentQuestionIdx.currentQuestionIdx === 10 || currentQuestionIdx.currentQuestionIdx === 11) {
       //score아님, type 찾기
       const type = findType(currentQuestionIdx.currentQuestionIdx);
       handleAnswer(currentQuestionIdx.currentQuestionIdx, type);

@@ -6,8 +6,6 @@ import React, { useEffect, useState } from "react";
 import TopBarWithBackBtn from "../../components/organs/Bars/TopBarWithBackBtn";
 
 import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
-import { eventNames } from "process";
-
 
 export const FindKeyword = () => {
   const location = useLocation();
