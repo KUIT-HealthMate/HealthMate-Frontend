@@ -28,7 +28,7 @@ export const OnBoardingSurvey = () => {
         question.candidates.map((candidate) => false)
     );
 
-    
+
     const { gender, setGender, ageGroup, setAgeGroup } = OnBoardingResult();
 
     // 선지 선택시 렌더링

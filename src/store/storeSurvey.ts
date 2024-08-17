@@ -2,7 +2,6 @@ import create from "zustand";
 import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../dtos/dailycheck/dailyCheckDto";
 import { stat } from "fs";
 
-
 interface Survey {
   id: number;
   question: string[];
@@ -235,7 +234,6 @@ interface StoreState {
   nextQuestion: () => void;
   previousQuestion: () => void;
 }
-
 
 
 export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({

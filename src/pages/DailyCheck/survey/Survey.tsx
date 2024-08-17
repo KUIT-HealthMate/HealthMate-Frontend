@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styles from "./Survey.module.scss";
 import ProgressBar from "./ProgressBar";
 import { useGlobalStoreSurvey, surveyAnswer } from "../../../store/storeSurvey";
-
 import { useNavigate } from "react-router-dom";
 import leftBracket from "../../../assets/leftBraket.svg";
 

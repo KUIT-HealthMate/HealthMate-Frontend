@@ -7,7 +7,7 @@ import uncheckmark from "../../../assets/uncheckmark.svg";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useHabitInfoStore from "../../../store/useHabitInfoStore";
+// import useHabitInfoStore from "../../../store/useHabitInfoStore";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
@@ -26,29 +26,54 @@ interface HabitChallengeProps {
 
 export default function HabitChallenge(props: HabitChallengeProps) {
   console.log("HabitChallenge: ", props.habits);
-  const { HabitInfo } =
-    useHabitInfoStore();
+
+
+  // const [habitStatus, setHabitStatus] = useState<boolean[]>([]);
+  //useState(props.habits.map(habit => habit.achievementStatus));
+
+
+  // console.log("habitStatus: ", habitStatus);
+
 
   const splitHabits = (array: habitDto[]) => {
+    console.log("splitHabits: ", array)
     const result = [];
     for (let i = 0; i < array.length; i += 4) {
       result.push(array.slice(i, i + 4));
     }
+    console.log("habit result: ", result)
     return result;
   };
 
   const [newHabits, setNewHabits] = useState<habitDto[][]>([props.habits]);
 
-  useEffect(() => {
+  useEffect(() => { //처음 페이지 진입시
+    console.log("habit useEffect")
     const chunks = splitHabits(props.habits);
     setNewHabits(chunks);
-    // eslint-disable-next-line
-  }, [HabitInfo]);
+    // setHabitStatus(props.habits.map(habit => habit.achievementStatus));
+  }, [props.habits]);
+
+  useEffect(() => {
+    console.log("색 바꿔: ", newHabits)
+
+  }, [newHabits])
 
 
-  function HabitCheck(habitId: number) {
-    // 체크하면 서버 전송
-    putHabitCheck("2024-08-10");
+  const today = new Date();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const date = (today.getDate()).toString().padStart(2, '0');
+  const todayDate = `${today.getFullYear()}-${month}-${date}`;
+
+  function HabitCheck(habitId: number, habitIndex: number, chunkIndex: number) {
+
+    // 체크하면 서버 전송 & 로컬에서 변경
+    putHabitCheck(todayDate, habitId);
+
+    const newNewHabits = JSON.parse(JSON.stringify(newHabits));
+    newNewHabits[chunkIndex][habitIndex].achievementStatus = !newHabits[chunkIndex][habitIndex].achievementStatus
+    setNewHabits(newNewHabits);
+
   }
 
   return (
@@ -72,7 +97,6 @@ export default function HabitChallenge(props: HabitChallengeProps) {
           console.log("chunk:", chunk)
           return (
             <SwiperSlide>
-
               {chunk.map((habit, habitIndex) => {
                 return (
                   <div className={styles.HabitInfo}>
@@ -80,11 +104,8 @@ export default function HabitChallenge(props: HabitChallengeProps) {
                     <img
                       className={styles.HabitCheckmark}
                       onClick={() => {
-                        HabitCheck(habitIndex);
-                        // setExecutionRecord(habit.id);
-                        // console.log(habit.id + habit.executionRecord);
+                        HabitCheck(habit.challengeId, habitIndex, chunkIndex);
                       }}
-                      //src={hello(habitIndex)}
                       src={habit.achievementStatus === true ? checkmark : uncheckmark}
                       alt="check_uncheck"
                     ></img>

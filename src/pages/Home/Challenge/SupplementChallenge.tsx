@@ -5,13 +5,11 @@ import SupplementComponent from "./SupplementComponent/SupplementComponent";
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import { usePillInfoStore } from "../../../store/usePillInfoStore";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 
-//api 관련
 import { supplementDto } from "../../../dtos/home/homeDto";
 
 SwiperCore.use([Pagination, Navigation]);
@@ -21,7 +19,8 @@ interface SupplementChallengeProps {
 }
 
 export default function SupplementChallenge(props: SupplementChallengeProps) {
-  const { PillInfo } = usePillInfoStore();
+  console.log("SupplementChallenge: ", props.supplements)
+  // const { PillInfo } = usePillInfoStore();
 
   const splitPillInfo = (array: supplementDto[]) => {
     const result = [];
@@ -34,10 +33,11 @@ export default function SupplementChallenge(props: SupplementChallengeProps) {
   const [newPillInfos, setNewPillInfos] = useState<supplementDto[][]>([props.supplements]);
 
   useEffect(() => {
+    console.log("SupplementChallenge/props: ", props.supplements);
     const chunks = splitPillInfo(props.supplements);
     setNewPillInfos(chunks);
-    // eslint-disable-next-line
-  }, [PillInfo]);
+  }, [props.supplements]);
+
 
   return (
     <div className={styles.PillChallenge}>
@@ -61,10 +61,9 @@ export default function SupplementChallenge(props: SupplementChallengeProps) {
             return (
               <SwiperSlide>
                 {chunk.map((pill, pillIndex) => {
+                  console.log("pillChunk: ", pill);
                   return (
-                    <SupplementComponent
-                      pill={pill}
-                    ></SupplementComponent>
+                    <SupplementComponent pill={pill}></SupplementComponent>
                   );
                 })}
               </SwiperSlide>
