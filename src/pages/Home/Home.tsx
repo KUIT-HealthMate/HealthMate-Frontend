@@ -23,13 +23,7 @@ const Home = () => {
   const gethomeInfoMutation = useMutation(gethomeInfo, {
     onSuccess: (response) => {
       console.log('홈 정보 가져오기 성공:', response.result);
-      console.log('홈 정보 습관:', response.result.habit);
-      console.log('홈 정보 알약:', response.result.supplement);
-      console.log('홈 정보 퍼센트:', response.result.achievementRate);
 
-      //가져온 값들로 set
-      //setHabits(response.result.habit); //일단 값 없으니까 주석처리
-      // 영양제도 마찬가지로 주석처리
       setAchievementRate(response.result.achievementRate);
       setSupplements(response.result.supplement);
       setHabits(response.result.habit);
@@ -40,9 +34,16 @@ const Home = () => {
   })
 
   useEffect(() => {
+    //local 스토리지에 token 넣어주기 (로그인에서 진행되어야할 부분임)
+    localStorage.setItem("jwtToken", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8");
+
     // 컴포넌트가 마운트될 때 데이터 가져오기
     gethomeInfoMutation.mutate();
+<<<<<<< HEAD
     // eslint-disable-next-line 
+=======
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+>>>>>>> f43970c (Feat: localStorage에서 token 가져오기)
   }, []);
 
 

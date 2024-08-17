@@ -1,6 +1,5 @@
 import create from "zustand";
 
-
 interface Survey {
   id: number;
   question: string[];
@@ -174,7 +173,6 @@ interface StoreState {
   nextQuestion: () => void;
   previousQuestion: () => void;
 }
-
 
 export const useGlobalStoreSurvey = create<StoreState>((set, get) => ({
   currentQuestionIdx: 0,
