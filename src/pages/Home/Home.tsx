@@ -39,11 +39,7 @@ const Home = () => {
 
     // 컴포넌트가 마운트될 때 데이터 가져오기
     gethomeInfoMutation.mutate();
-<<<<<<< HEAD
-    // eslint-disable-next-line 
-=======
-    // eslint-disable-next-line react-hooks/exhaustive-deps
->>>>>>> f43970c (Feat: localStorage에서 token 가져오기)
+    // eslint-disable-next-line
   }, []);
 
 

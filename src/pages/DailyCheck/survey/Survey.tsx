@@ -2,10 +2,6 @@ import { useEffect, useState } from "react";
 import styles from "./Survey.module.scss";
 import ProgressBar from "./ProgressBar";
 import { useGlobalStoreSurvey, surveyAnswer } from "../../../store/storeSurvey";
-<<<<<<< HEAD
-
-=======
->>>>>>> 2004c00 (Feat(#48): 영양제 체크)
 import { useNavigate } from "react-router-dom";
 import leftBracket from "../../../assets/leftBraket.svg";
 
