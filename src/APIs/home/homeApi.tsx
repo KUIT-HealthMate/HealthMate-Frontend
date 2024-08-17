@@ -26,13 +26,6 @@ export const gethomeInfo = async () => {
         throw error;
     }
 
-
-    // client.get("/challenges/today")
-    //     .then((response) => {
-    //         console.log(response);
-    //         return response.data
-    //     })
-    //     .catch((err) => { console.log(err) })
 };
 
 //영양제 체크
@@ -54,7 +47,7 @@ export const putHabitCheck = async (todayDate: string, habitId: number) => {
     const data = {
         "date": todayDate
     }
-    console.log(data)
+    console.log("data: ", data)
     client.put(`/habits/check-status/${habitId}`, data)
         .then((res) => { console.log(res) })
         .catch((err) => { console.log(err) })

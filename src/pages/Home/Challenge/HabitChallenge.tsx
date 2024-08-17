@@ -62,20 +62,13 @@ export default function HabitChallenge(props: HabitChallengeProps) {
 
   const today = new Date();
   const month = (today.getMonth() + 1).toString().padStart(2, '0');
-  const date = (today.getDate() + 1).toString().padStart(2, '0');
+  const date = (today.getDate()).toString().padStart(2, '0');
   const todayDate = `${today.getFullYear()}-${month}-${date}`;
 
   function HabitCheck(habitId: number, habitIndex: number, chunkIndex: number) {
 
-    console.log("HabitCheck한 id: ", habitId);
-    console.log("habitIndex: ", habitIndex)
-    console.log("chunkIndex: ", chunkIndex);
-
     // 체크하면 서버 전송 & 로컬에서 변경
-    console.log("오늘 날짜: ", todayDate)
     putHabitCheck(todayDate, habitId);
-    // const newHabitStatus = [...habitStatus];
-    // newHabitStatus[habitIndex] = !newHabitStatus[habitIndex];
 
     const newNewHabits = JSON.parse(JSON.stringify(newHabits));
     newNewHabits[chunkIndex][habitIndex].achievementStatus = !newHabits[chunkIndex][habitIndex].achievementStatus

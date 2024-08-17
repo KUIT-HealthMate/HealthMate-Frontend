@@ -5,19 +5,11 @@ import SupplementComponent from "./SupplementComponent/SupplementComponent";
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import { usePillInfoStore } from "../../../store/usePillInfoStore";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 
-<<<<<<< HEAD
-//api 관련
-=======
-
-// //api 관련
-// import { putSupplementCheck } from "../../../APIs/home/homeApi";
->>>>>>> 2004c00 (Feat(#48): 영양제 체크)
 import { supplementDto } from "../../../dtos/home/homeDto";
 
 SwiperCore.use([Pagination, Navigation]);
@@ -44,17 +36,9 @@ export default function SupplementChallenge(props: SupplementChallengeProps) {
     console.log("SupplementChallenge/props: ", props.supplements);
     const chunks = splitPillInfo(props.supplements);
     setNewPillInfos(chunks);
-<<<<<<< HEAD
-    // eslint-disable-next-line
-  }, [PillInfo]);
-
-=======
   }, [props.supplements]);
 
 
-
-
->>>>>>> 2004c00 (Feat(#48): 영양제 체크)
   return (
     <div className={styles.PillChallenge}>
       <div className={styles.PillChallengeTitle}>

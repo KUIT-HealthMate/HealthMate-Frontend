@@ -1,11 +1,5 @@
 import styles from "./SupplementComponent.module.scss";
-
-// import { usePillInfoStore } from "../../../../store/usePillInfoStore";
-import pillInfo from "../../../../store/pillInfo";
-
-import { useMutation } from 'react-query';
 import { putSupplementCheck } from "../../../../APIs/home/homeApi";
-import { time } from "console";
 import { useEffect, useState } from "react";
 
 import { supplementDto } from "../../../../dtos/home/homeDto";
@@ -32,7 +26,7 @@ const pillIntakeTime = (props: supplementDto, timeIdx: number) => {
     return PillTime;
   } else {
     return null;
-    // const PillTime: PillTimeInfo = { pillTime: "아침", isChecked: props.breakfastSuccess }
+    // const PillTime: PillTimeInfo = { pillTime: "일단", isChecked: props.breakfastSuccess }
     // return PillTime;
   }
 
@@ -63,7 +57,7 @@ export default function SupplementComponent(props: PillInfoDto) {
     } else if (idx === 1) {
       newNewSupplements.lunchSuccess = !newNewSupplements.lunchSuccess;
     } else if (idx === 2) {
-      newNewSupplements.dinnerSuccess = newNewSupplements.dinnerSuccess;
+      newNewSupplements.dinnerSuccess = !newNewSupplements.dinnerSuccess;
     }
 
     setNewSupplements(newNewSupplements);
@@ -150,6 +144,8 @@ export default function SupplementComponent(props: PillInfoDto) {
                     {pillIntakeInfo.pillTime}
                   </div>
                 )
+              } else {
+                return (<></>)
               }
             })
           }
