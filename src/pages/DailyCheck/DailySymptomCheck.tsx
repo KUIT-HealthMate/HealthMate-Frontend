@@ -6,19 +6,12 @@ import exclamationMark from "../../assets/exclamationMark.svg";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "./survey/ProgressBar";
 import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
-<<<<<<< HEAD
 
-import { useOnBoardingSurveyStore, onBoardingSurveys, OnBoardingResult } from "../../store/storeOnBoardingSurvey"
-import { surveyAnswer, dailycheckSymptomsResult } from "../../store/storeSurvey";
-import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../../dtos/dailycheck/dailyCheckDto";
-// import { symptomInfoDto, symptomDto } from "../../dtos/dailycheck/dailyCheckDto";
-=======
 import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
 import { surveyAnswer, RequestResult } from "../../store/storeSurvey";
 import { lifeStyleDto, mealPatternDto, sleepPatternDto, symptomDto, diagnosisRequestDto } from "../../dtos/dailycheck/dailyCheckDto";
 import { useMutation } from 'react-query';
 import { postDiagnosis } from "../../APIs/dailyCheck/dailCheckApi";
->>>>>>> c4f3d3e (Feat(#56): 건강진단 설문 결과 전송 API 연동)
 
 interface symptomProps {
   title1: string;
@@ -37,11 +30,9 @@ interface symptomProps {
 const DailySymptomCheck = (props: symptomProps) => {
 
   const { symptoms, setSymptoms } = OnBoardingResult();
-<<<<<<< HEAD
-=======
+
   const { surveyAnswerList } = surveyAnswer();
   const { lifeStyle, mealPattern, sleepPattern, setLifeStyle, setMealPattern, setSleepPattern } = RequestResult();
->>>>>>> c4f3d3e (Feat(#56): 건강진단 설문 결과 전송 API 연동)
 
   const postDiagnosisMutation = useMutation(postDiagnosis, {
     onSuccess: (response) => {
@@ -153,14 +144,9 @@ const DailySymptomCheck = (props: symptomProps) => {
     if (props.type === 0) { //온보딩이면
       setSymptoms(checkedSymptomName);
     } else if (props.type === 1) { // 일일건강진단이면
-<<<<<<< HEAD
-      // request형식으로 symptoms 변경
-      //  setSymptomInfos(checkedSymptomInfos);
-      setSurveyAsForm();
-=======
       // 서버 요청
       requestServer(newSymptomsInfos);
->>>>>>> c4f3d3e (Feat(#56): 건강진단 설문 결과 전송 API 연동)
+
     }
   }
 
@@ -169,8 +155,7 @@ const DailySymptomCheck = (props: symptomProps) => {
   function setSurveyAsForm() {
     console.log("setSurveyAsForm")
 
-<<<<<<< HEAD
-=======
+
     // 설문 answer도 변경
     console.log("마지막! 이전 survey 결과: ", surveyAnswerList)
 
@@ -188,7 +173,6 @@ const DailySymptomCheck = (props: symptomProps) => {
       setSleepPattern(keyName, surveyAnswerList[i]);
     }
 
->>>>>>> c4f3d3e (Feat(#56): 건강진단 설문 결과 전송 API 연동)
   }
 
 
@@ -216,8 +200,7 @@ const DailySymptomCheck = (props: symptomProps) => {
 
   const navigate = useNavigate();
 
-<<<<<<< HEAD
-=======
+
   useEffect(() => {
     console.log("Updated LifeStyle: ", lifeStyle);
   }, [lifeStyle]);
@@ -226,7 +209,7 @@ const DailySymptomCheck = (props: symptomProps) => {
   //   console.log("symptomInfos 변경: ");
   // }, [symptomInfos]);
 
->>>>>>> c4f3d3e (Feat(#56): 건강진단 설문 결과 전송 API 연동)
+
   return (
     <>
       <TopBarWithCancel></TopBarWithCancel>
