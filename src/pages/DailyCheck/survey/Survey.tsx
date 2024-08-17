@@ -83,16 +83,17 @@ const Survey = ({
     for (let i = 0; i < candidates.length; i++) {
       if (btnActive[i] === true) {
 
-        if (questionIdx <= 4 || questionIdx === 7 || questionIdx === 14) {
+        if (questionIdx <= 2 || questionIdx === 7 || questionIdx === 14) {
           // 오름차순
           score += candidates.length - i;
-        } else if (questionIdx === 8 || questionIdx === 9 || questionIdx === 12 || questionIdx === 13) {
+        } else if (questionIdx <= 4 || questionIdx === 8 || questionIdx === 9 || questionIdx === 12 || questionIdx === 13) {
           //내림차순
           score += i + 1;
         } else if (questionIdx === 5) {
           //동일
-          score += i
+          score += 1
         } else if (questionIdx === 15) {
+          //다 다다름
           if (i < 4) {
             score += 1
           } else {
@@ -101,9 +102,6 @@ const Survey = ({
         }
 
 
-
-
-        //다 다다름
 
       }
     }

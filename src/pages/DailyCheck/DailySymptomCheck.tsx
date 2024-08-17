@@ -6,8 +6,12 @@ import exclamationMark from "../../assets/exclamationMark.svg";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "./survey/ProgressBar";
 import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
-import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
 
+import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
+import { surveyAnswer, RequestResult } from "../../store/storeSurvey";
+import { lifeStyleDto, mealPatternDto, sleepPatternDto } from "../../dtos/dailycheck/dailyCheckDto";
+import { useMutation } from 'react-query';
+import { postDiagnosis } from "../../APIs/dailyCheck/dailCheckApi";
 
 interface symptomProps {
   title1: string;
@@ -23,12 +27,48 @@ interface symptomProps {
 }
 
 
-
 const DailySymptomCheck = (props: symptomProps) => {
 
   const { setSymptoms } = OnBoardingResult();
 
-  console.log("findKeywordNavigate: ", props.findKeywordNavigate);
+  const { surveyAnswerList } = surveyAnswer();
+  const { lifeStyle, mealPattern, sleepPattern, setLifeStyle, setMealPattern, setSleepPattern } = RequestResult();
+
+  const postDiagnosisMutation = useMutation(postDiagnosis, {
+    onMutate: () => { // 요청이 시작되면 '/loading' 띄움
+      navigate('/loading');
+    },
+    onSuccess: (response) => {
+      console.log('건강진단 정보 보내기 성공:', response);
+      navigate(props.buttonNavigate);
+    },
+    onError: (error) => {
+      console.error('건강진단 정보 보내기 실패:', error);
+    },
+  })
+  //서버에 요청
+  const requestServer = (symptomsInfosList: { symptomName: string }[]) => {
+
+    const YEAR = new Date().getFullYear();
+    const MONTH = String(new Date().getMonth() + 1).padStart(2, '0');
+    const DAY = String(new Date().getDate()).padStart(2, '0');
+
+
+    const requestData = {
+      userName: "쿠잇",
+      lifeStyleDto: lifeStyle,
+      mealPatternDto: mealPattern,
+      sleepPatternDto: sleepPattern,
+      symptomInfos: symptomsInfosList,
+      date: `${YEAR}-${MONTH}-${DAY}`
+    }
+
+    postDiagnosisMutation.mutate(requestData);
+
+    //  navigate(props.buttonNavigate);
+
+  }
+
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
     console.log("마운트됨");
@@ -37,6 +77,17 @@ const DailySymptomCheck = (props: symptomProps) => {
       setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
+
+  useEffect(() => {
+    if (props.type === 1) {
+      setSurveyAsForm();
+    }
+    // eslint-disable-next-line
+  }, [])
+
+
+
+
   const limit = 3;
   const symptomInfo = [
     {
@@ -66,29 +117,71 @@ const DailySymptomCheck = (props: symptomProps) => {
     { id: 12, title: "치과 관련 증상", symptoms: ["치과", "잇몸출혈"] },
   ];
 
+
+  //문제 idx로 requestName
+  const lifeStyleKeys: (keyof lifeStyleDto)[] = ["environmentScore", "focusTimeScore", "coffeeConsumptionScore", "exerciseTimeScore", "postureDiscomfortScore"];
+  const mealPatternKeys: (keyof mealPatternDto)[] = ["mealTimeScore", "foodType", "regularMealTimeScore", "mealDurationScore", "seasoningConsumptionScore", "screenUsage", "mealRemark"];
+  const sleepPatternKeys: (keyof sleepPatternDto)[] = ["sleepDurationScore", "morningFatigueScore", "peakConditionTimeScore", "sleepRemarkScore"];
+
   const [symptomBtnActive, setSymptomBtnActive] = useState<boolean[][]>(
     symptomInfo.map((symptomDetail) =>
       Array(symptomDetail.symptoms.length).fill(false)
     )
   );
 
+
+
+
   // '다음으로' 클릭시 true인것들 store에 증상 반영
   function setSymtomsStore() {
     const checkedSymptomName = [];
+    const newSymptomsInfos = [];
+
+    // const checkedSymptomInfos: { symptomName: string }[] = [];
 
     for (let i = 0; i < symptomBtnActive.length; i++) {
       for (let j = 0; j < symptomBtnActive[i].length; j++) {
         if (symptomBtnActive[i][j] === true) {
           checkedSymptomName.push(symptomInfo[i].symptoms[j]);
+          newSymptomsInfos.push({ "symptomName": symptomInfo[i].symptoms[j] })
         }
       }
     }
-    console.log("checkedSymptomName: ", checkedSymptomName)
     if (props.type === 0) { //온보딩이면
       setSymptoms(checkedSymptomName);
+
+    } else if (props.type === 1) { // 일일건강진단이면
+      // 서버 요청
+      requestServer(newSymptomsInfos);
+
+    }
+  }
+
+
+  // 일일진단 설문 request 형식으로 변경
+  function setSurveyAsForm() {
+    console.log("setSurveyAsForm")
+
+
+    // 설문 answer도 변경
+    console.log("마지막! 이전 survey 결과: ", surveyAnswerList)
+
+    for (let i = 0; i <= 4; i++) {
+      const keyName = lifeStyleKeys[i];
+      console.log("ketname: ", keyName, surveyAnswerList[i])
+      setLifeStyle(keyName, surveyAnswerList[i]);
+    }
+    for (let i = 5; i <= 11; i++) {
+      const keyName = mealPatternKeys[i - 5]
+      setMealPattern(keyName, surveyAnswerList[i]);
+    }
+    for (let i = 12; i <= 15; i++) {
+      const keyName = sleepPatternKeys[i - 12];
+      setSleepPattern(keyName, surveyAnswerList[i]);
     }
 
   }
+
 
 
   function checkSymptom(symptom: number, symptomIdx: number) {
@@ -111,8 +204,18 @@ const DailySymptomCheck = (props: symptomProps) => {
     });
 
   }
-  useEffect(() => { }, [symptomBtnActive]);
+
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    console.log("Updated LifeStyle: ", lifeStyle);
+  }, [lifeStyle]);
+
+  // useEffect(() => {
+  //   console.log("symptomInfos 변경: ");
+  // }, [symptomInfos]);
+
 
   return (
     <>
@@ -182,7 +285,11 @@ const DailySymptomCheck = (props: symptomProps) => {
             <img src={exclamationMark} alt="exclaim"></img>
             <div
               onClick={() => {
-                setSymtomsStore();
+
+                if (props.type === 1) {
+                  setSurveyAsForm()
+                }
+
                 navigate("/findkeyword", {
                   state: { value: props.findKeywordNavigate },
                 })
@@ -213,8 +320,9 @@ const DailySymptomCheck = (props: symptomProps) => {
           className={styles.NextButton}
           style={{ position: `fixed`, bottom: `33px` }}
           onClick={() => {
-            navigate(props.buttonNavigate);
             setSymtomsStore();
+            // navigate(props.buttonNavigate);
+
           }}
         >
           <p className={styles.NextButtonText}>다음으로</p>
