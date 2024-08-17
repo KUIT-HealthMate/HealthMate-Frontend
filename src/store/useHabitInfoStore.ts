@@ -12,11 +12,11 @@ interface HabitInfoState {
   setWeeklyExecutionFrequency: (habitId: string, whichDay: string) => void;
   getWeeklyExecutionFrequency: (habitId: string, whichDay: string) => boolean;
 
-  setNotificationTime: (habitId: string, hour: number, minutes: number) => void;
+  setNotificationTime: (habitId: string, hour: number, minute: number) => void;
   getNotificationTime: (
     habitId: string,
     index: number
-  ) => { hour: number; minutes: number };
+  ) => { hour: number; minute: number };
 
   // 주어진 id의 habit을 삭제합니다.
   deleteHabit: (habitId: string) => void;
@@ -28,7 +28,7 @@ interface HabitInfoState {
   setHabit: (
     habitId: string,
     inputHabit: Omit<Omit<habitInfo, "id">, "notificationTime">,
-    alarmTime: { hour: number; minutes: number }[]
+    alarmTime: { hour: number; minute: number }[]
   ) => void;
 }
 
@@ -48,9 +48,9 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
         sunday: true,
       },
       notificationTime: [
-        { hour: 7, minutes: 30 },
-        { hour: 12, minutes: 0 },
-        { hour: 18, minutes: 0 },
+        { hour: 7, minute: 30 },
+        { hour: 12, minute: 0 },
+        { hour: 18, minute: 0 },
       ],
     },
     {
@@ -67,9 +67,9 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
         sunday: false,
       },
       notificationTime: [
-        { hour: 7, minutes: 35 },
-        { hour: 12, minutes: 5 },
-        { hour: 18, minutes: 5 },
+        { hour: 7, minute: 35 },
+        { hour: 12, minute: 5 },
+        { hour: 18, minute: 5 },
       ],
     },
     {
@@ -86,9 +86,9 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
         sunday: true,
       },
       notificationTime: [
-        { hour: 7, minutes: 40 },
-        { hour: 12, minutes: 10 },
-        { hour: 18, minutes: 10 },
+        { hour: 7, minute: 40 },
+        { hour: 12, minute: 10 },
+        { hour: 18, minute: 10 },
       ],
     },
   ],
@@ -136,10 +136,10 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
       : undefined;
   },
 
-  setNotificationTime: (habitId: string, hour: number, minutes: number) => {},
+  setNotificationTime: (habitId: string, hour: number, minute: number) => {},
 
   getNotificationTime: (habitId: string, index: number) => {
-    return { hour: 0, minutes: 0 };
+    return { hour: 0, minute: 0 };
   },
 
   deleteHabit: (deletingHabitId: string) =>
@@ -183,7 +183,7 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
   setHabit: (
     habitId: string,
     inputHabit: Omit<Omit<habitInfo, "id">, "notificationTime">,
-    alarmTime: { hour: number; minutes: number }[]
+    alarmTime: { hour: number; minute: number }[]
   ) => {
     set((state) => ({
       HabitInfo: state.HabitInfo.map((targetHabit) =>

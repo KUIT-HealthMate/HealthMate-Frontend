@@ -108,7 +108,7 @@ const ChallengeManagePage = <T,>({
     useState<SelectedAlarmTimeFormat>({
       amOrPm: 0,
       hour: 0,
-      minutes: 0,
+      minute: 0,
       isEditMode: false,
       editIndex: 0,
     });

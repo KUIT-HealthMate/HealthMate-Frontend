@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import pillInfo from "./pillInfo";
 import { initPill } from "../pages/Home/Challenge/ManagePage/utils/initChallenge";
+import { serverRequest } from "../APIs/ManageChallenge/serverRequest";
 
 interface PillInfoState {
   PillInfo: pillInfo[];
@@ -15,11 +16,11 @@ interface PillInfoState {
   setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => void;
   getWeeklyIntakeFrequency: (pillId: string, whichDay: string) => boolean;
 
-  setNotificationTime: (pillId: string, hour: number, minutes: number) => void;
+  setNotificationTime: (pillId: string, hour: number, minute: number) => void;
   getNotificationTime: (
     pillId: string,
     index: number
-  ) => { hour: number; minutes: number };
+  ) => { hour: number; minute: number };
 
   getIntakeTime: (pill: pillInfo) => string;
   getMealTime: (idx: number) => string;
@@ -34,7 +35,7 @@ interface PillInfoState {
   setPill: (
     pillId: string,
     inputPill: Omit<Omit<pillInfo, "id">, "notificationTime">,
-    alarmTime: { hour: number; minutes: number }[]
+    alarmTime: { hour: number; minute: number }[]
   ) => void;
 }
 
@@ -57,8 +58,21 @@ export const pillPage = create<pillPageNumState>((set, get) => ({
     }),
 }));
 
-export const usePillInfoStore = create<PillInfoState>((set, get) => ({
-  PillInfo: [
+export const usePillInfoStore = create<PillInfoState>((set, get) => {
+  const initializePills = async () => {
+    try {
+      const pillArray:pillInfo[] = await serverRequest.loadChallenge<pillInfo>("supplements");
+      set({PillInfo: pillArray});
+    } catch (error) {
+      console.error("Error initializing pills:", error);
+    }
+  }
+
+  initializePills();
+
+  return {
+    PillInfo: [],
+    /*[
     {
       id: "0",
       name: "베아제",
@@ -122,199 +136,199 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => ({
         { hour: 18, minutes: 10 },
       ],
     },
-  ],
+  ]*/
+    setPillInfo: (pill: pillInfo) =>
+      set((state) => ({
+        PillInfo: [...state.PillInfo, pill],
+      })),
 
-  setPillInfo: (pill: pillInfo) =>
-    set((state) => ({
-      PillInfo: [...state.PillInfo, pill],
-    })),
+    setIntakePeriod: (pillId: string, whichMeal: string) => {
+      set((state) => ({
+        PillInfo: state.PillInfo.map((pill) =>
+          pill.id === pillId
+            ? {
+                ...pill,
+                dailyIntakePeriod: {
+                  ...pill.dailyIntakePeriod,
+                  [whichMeal]: !(pill.dailyIntakePeriod as any)[whichMeal],
+                },
+              }
+            : pill
+        ),
+      }));
+    },
 
-  setIntakePeriod: (pillId: string, whichMeal: string) => {
-    set((state) => ({
-      PillInfo: state.PillInfo.map((pill) =>
-        pill.id === pillId
-          ? {
-              ...pill,
-              dailyIntakePeriod: {
-                ...pill.dailyIntakePeriod,
-                [whichMeal]: !(pill.dailyIntakePeriod as any)[whichMeal],
-              },
-            }
-          : pill
-      ),
-    }));
-  },
+    getIntakePeriod: (pillId: string, whichMeal: string) => {
+      const pill = get().PillInfo.find((pill) => pill.id === pillId);
+      return pill ? (pill.dailyIntakePeriod as any)[whichMeal] : undefined;
+    },
 
-  getIntakePeriod: (pillId: string, whichMeal: string) => {
-    const pill = get().PillInfo.find((pill) => pill.id === pillId);
-    return pill ? (pill.dailyIntakePeriod as any)[whichMeal] : undefined;
-  },
+    // 아침, 점심, 저녁에 영양제 먹었다고 버튼 클릭 -> IntakeRecord에서 수정하는 함수
 
-  // 아침, 점심, 저녁에 영양제 먹었다고 버튼 클릭 -> IntakeRecord에서 수정하는 함수
+    // setIntakeRecord: (pillId: string, whichMeal: string) => {
+    //   set((state) => ({
+    //     PillInfo: state.PillInfo.map((pill) =>
+    //       pill.id === pillId
+    //         ? {
+    //             ...pill,
+    //             dailyIntakeRecord: {
+    //               ...pill.dailyIntakeRecord,
+    //               [whichMeal]: !(pill.dailyIntakeRecord as any)[whichMeal],
+    //             },
+    //           }
+    //         : pill
+    //     ),
+    //   }));
+    // },
 
-  // setIntakeRecord: (pillId: string, whichMeal: string) => {
-  //   set((state) => ({
-  //     PillInfo: state.PillInfo.map((pill) =>
-  //       pill.id === pillId
-  //         ? {
-  //             ...pill,
-  //             dailyIntakeRecord: {
-  //               ...pill.dailyIntakeRecord,
-  //               [whichMeal]: !(pill.dailyIntakeRecord as any)[whichMeal],
-  //             },
-  //           }
-  //         : pill
-  //     ),
-  //   }));
-  // },
+    // getIntakeRecord: (pillId: string, whichMeal: string) => {
+    //   const pill = get().PillInfo.find((pill) => pill.id === pillId);
+    //   return pill ? (pill.dailyIntakeRecord as any)[whichMeal] : undefined;
+    // },
 
-  // getIntakeRecord: (pillId: string, whichMeal: string) => {
-  //   const pill = get().PillInfo.find((pill) => pill.id === pillId);
-  //   return pill ? (pill.dailyIntakeRecord as any)[whichMeal] : undefined;
-  // },
+    setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
+      set((state) => ({
+        PillInfo: state.PillInfo.map((pill) =>
+          pill.id === pillId
+            ? {
+                ...pill,
+                weeklyIntakeFrequency: {
+                  ...pill.weeklyIntakeFrequency,
+                  [whichDay]: !(pill.weeklyIntakeFrequency as any)[whichDay],
+                },
+              }
+            : pill
+        ),
+      }));
+    },
 
-  setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
-    set((state) => ({
-      PillInfo: state.PillInfo.map((pill) =>
-        pill.id === pillId
-          ? {
-              ...pill,
-              weeklyIntakeFrequency: {
-                ...pill.weeklyIntakeFrequency,
-                [whichDay]: !(pill.weeklyIntakeFrequency as any)[whichDay],
-              },
-            }
-          : pill
-      ),
-    }));
-  },
+    getWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
+      const pill = get().PillInfo.find((pill) => pill.id === pillId);
+      return pill ? (pill.weeklyIntakeFrequency as any)[whichDay] : undefined;
+    },
 
-  getWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
-    const pill = get().PillInfo.find((pill) => pill.id === pillId);
-    return pill ? (pill.weeklyIntakeFrequency as any)[whichDay] : undefined;
-  },
+    setNotificationTime: (pillId: string, hour: number, minute: number) => {},
 
-  setNotificationTime: (pillId: string, hour: number, minutes: number) => {},
+    getNotificationTime: (pillId: string, index: number) => {
+      return { hour: 0, minute: 0 };
+    },
 
-  getNotificationTime: (pillId: string, index: number) => {
-    return { hour: 0, minutes: 0 };
-  },
+    getIntakeTime: (pill: pillInfo) => {
+      const isBeforeOrAfterMeal: string =
+        pill.intakeTime.beforeOrAfterMeal === 1 ? "식전 " : "식후 ";
+      const howMuchMinutes: string = pill.intakeTime.minutes + "분 이내";
 
-  getIntakeTime: (pill: pillInfo) => {
-    const isBeforeOrAfterMeal: string =
-      pill.intakeTime.beforeOrAfterMeal === 1 ? "식전 " : "식후 ";
-    const howMuchMinutes: string = pill.intakeTime.minutes + "분 이내";
+      return isBeforeOrAfterMeal + howMuchMinutes;
+    },
 
-    return isBeforeOrAfterMeal + howMuchMinutes;
-  },
+    getMealTime: (idx: number) => {
+      switch (idx) {
+        case 0:
+          return "아침";
+        case 1:
+          return "점심";
+        case 2:
+          return "저녁";
+        default:
+          return "";
+      }
+    },
 
-  getMealTime: (idx: number) => {
-    switch (idx) {
-      case 0:
-        return "아침";
-      case 1:
-        return "점심";
-      case 2:
-        return "저녁";
-      default:
-        return "";
-    }
-  },
+    deletePill: (deletingPillId: string) =>
+      set((state) => ({
+        PillInfo: [
+          ...state.PillInfo.filter((pill) => pill.id !== deletingPillId),
+        ],
+      })),
 
-  deletePill: (deletingPillId: string) =>
-    set((state) => ({
-      PillInfo: [
-        ...state.PillInfo.filter((pill) => pill.id !== deletingPillId),
-      ],
-    })),
+    getPillCopy: (pillId: string | undefined) => {
+      if (pillId === undefined) {
+        return { ...initPill(), notificationTime: [] };
+      } else {
+        //Id에 해당하는 pill의 참조를 얻는다
+        const targetPill: pillInfo = get().PillInfo.find(
+          // eslint-disable-next-line eqeqeq
+          (pill) => pill.id == pillId
+        ) as pillInfo;
 
-  getPillCopy: (pillId: string | undefined) => {
-    if (pillId === undefined) {
-      return { ...initPill(), notificationTime: [] };
-    } else {
-      //Id에 해당하는 pill의 참조를 얻는다
-      const targetPill: pillInfo = get().PillInfo.find(
-        // eslint-disable-next-line eqeqeq
-        (pill) => pill.id == pillId
-      ) as pillInfo;
+        //얕은 복사한 복사본을 생성
+        const duplicatedPill: Omit<pillInfo, "id"> = {
+          name: targetPill.name,
+          intakeTime: {
+            beforeOrAfterMeal: targetPill.intakeTime.beforeOrAfterMeal,
+            minutes: targetPill.intakeTime.minutes,
+          },
+          dailyIntakePeriod: {
+            breakfast: targetPill.dailyIntakePeriod.breakfast,
+            lunch: targetPill.dailyIntakePeriod.lunch,
+            dinner: targetPill.dailyIntakePeriod.dinner,
+          },
+          // dailyIntakeRecord: {
+          //   breakfast: targetPill.dailyIntakeRecord.breakfast,
+          //   lunch: targetPill.dailyIntakeRecord.lunch,
+          //   dinner: targetPill.dailyIntakeRecord.dinner,
+          // },
+          weeklyIntakeFrequency: {
+            monday: targetPill.weeklyIntakeFrequency.monday,
+            tuesday: targetPill.weeklyIntakeFrequency.tuesday,
+            wednesday: targetPill.weeklyIntakeFrequency.wednesday,
+            thursday: targetPill.weeklyIntakeFrequency.thursday,
+            friday: targetPill.weeklyIntakeFrequency.friday,
+            saturday: targetPill.weeklyIntakeFrequency.saturday,
+            sunday: targetPill.weeklyIntakeFrequency.sunday,
+          },
+          notificationTime: targetPill.notificationTime.map((time) => ({
+            ...time,
+          })),
+        };
 
-      //얕은 복사한 복사본을 생성
-      const duplicatedPill: Omit<pillInfo, "id"> = {
-        name: targetPill.name,
-        intakeTime: {
-          beforeOrAfterMeal: targetPill.intakeTime.beforeOrAfterMeal,
-          minutes: targetPill.intakeTime.minutes,
-        },
-        dailyIntakePeriod: {
-          breakfast: targetPill.dailyIntakePeriod.breakfast,
-          lunch: targetPill.dailyIntakePeriod.lunch,
-          dinner: targetPill.dailyIntakePeriod.dinner,
-        },
-        // dailyIntakeRecord: {
-        //   breakfast: targetPill.dailyIntakeRecord.breakfast,
-        //   lunch: targetPill.dailyIntakeRecord.lunch,
-        //   dinner: targetPill.dailyIntakeRecord.dinner,
-        // },
-        weeklyIntakeFrequency: {
-          monday: targetPill.weeklyIntakeFrequency.monday,
-          tuesday: targetPill.weeklyIntakeFrequency.tuesday,
-          wednesday: targetPill.weeklyIntakeFrequency.wednesday,
-          thursday: targetPill.weeklyIntakeFrequency.thursday,
-          friday: targetPill.weeklyIntakeFrequency.friday,
-          saturday: targetPill.weeklyIntakeFrequency.saturday,
-          sunday: targetPill.weeklyIntakeFrequency.sunday,
-        },
-        notificationTime: targetPill.notificationTime.map((time) => ({
-          ...time,
-        })),
-      };
+        return duplicatedPill;
+      }
+    },
 
-      return duplicatedPill;
-    }
-  },
-
-  setPill: (
-    pillId: string,
-    inputPill: Omit<Omit<pillInfo, "id">, "notificationTime">,
-    alarmTime: { hour: number; minutes: number }[]
-  ) => {
-    set((state) => ({
-      PillInfo: state.PillInfo.map((targetPill) =>
-        // eslint-disable-next-line eqeqeq
-        targetPill.id == pillId
-          ? {
-              ...targetPill,
-              name: inputPill.name,
-              intakeTime: {
-                beforeOrAfterMeal: inputPill.intakeTime.beforeOrAfterMeal,
-                minutes: inputPill.intakeTime.minutes,
-              },
-              dailyIntakePeriod: {
-                breakfast: inputPill.dailyIntakePeriod.breakfast,
-                lunch: inputPill.dailyIntakePeriod.lunch,
-                dinner: inputPill.dailyIntakePeriod.dinner,
-              },
-              // dailyIntakeRecord: {
-              //   breakfast: inputPill.dailyIntakeRecord.breakfast,
-              //   lunch: inputPill.dailyIntakeRecord.lunch,
-              //   dinner: inputPill.dailyIntakeRecord.dinner,
-              // },
-              weeklyIntakeFrequency: {
-                monday: inputPill.weeklyIntakeFrequency.monday,
-                tuesday: inputPill.weeklyIntakeFrequency.tuesday,
-                wednesday: inputPill.weeklyIntakeFrequency.wednesday,
-                thursday: inputPill.weeklyIntakeFrequency.thursday,
-                friday: inputPill.weeklyIntakeFrequency.friday,
-                saturday: inputPill.weeklyIntakeFrequency.saturday,
-                sunday: inputPill.weeklyIntakeFrequency.sunday,
-              },
-              notificationTime: alarmTime.map((time) => ({ ...time })),
-            }
-          : targetPill
-      ),
-    }));
-  },
-}));
+    setPill: (
+      pillId: string,
+      inputPill: Omit<Omit<pillInfo, "id">, "notificationTime">,
+      alarmTime: { hour: number; minute: number }[]
+    ) => {
+      set((state) => ({
+        PillInfo: state.PillInfo.map((targetPill) =>
+          // eslint-disable-next-line eqeqeq
+          targetPill.id == pillId
+            ? {
+                ...targetPill,
+                name: inputPill.name,
+                intakeTime: {
+                  beforeOrAfterMeal: inputPill.intakeTime.beforeOrAfterMeal,
+                  minutes: inputPill.intakeTime.minutes,
+                },
+                dailyIntakePeriod: {
+                  breakfast: inputPill.dailyIntakePeriod.breakfast,
+                  lunch: inputPill.dailyIntakePeriod.lunch,
+                  dinner: inputPill.dailyIntakePeriod.dinner,
+                },
+                // dailyIntakeRecord: {
+                //   breakfast: inputPill.dailyIntakeRecord.breakfast,
+                //   lunch: inputPill.dailyIntakeRecord.lunch,
+                //   dinner: inputPill.dailyIntakeRecord.dinner,
+                // },
+                weeklyIntakeFrequency: {
+                  monday: inputPill.weeklyIntakeFrequency.monday,
+                  tuesday: inputPill.weeklyIntakeFrequency.tuesday,
+                  wednesday: inputPill.weeklyIntakeFrequency.wednesday,
+                  thursday: inputPill.weeklyIntakeFrequency.thursday,
+                  friday: inputPill.weeklyIntakeFrequency.friday,
+                  saturday: inputPill.weeklyIntakeFrequency.saturday,
+                  sunday: inputPill.weeklyIntakeFrequency.sunday,
+                },
+                notificationTime: alarmTime.map((time) => ({ ...time })),
+              }
+            : targetPill
+        ),
+      }));
+    },
+  };
+});
 
 // export default usePillInfoStore;
 // export default pillPageNum;

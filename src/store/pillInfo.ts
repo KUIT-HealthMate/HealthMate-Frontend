@@ -13,7 +13,7 @@ export interface pillInfo {
       saturday: boolean,
       sunday: boolean
     }; // 주 섭취 횟수 (월 ~ 일)
-    notificationTime: {hour:number, minutes:number}[]; // 팝업 알림 시간 (19:30 이면 19, 30)
+    notificationTime: {hour:number, minute:number}[]; // 팝업 알림 시간 (19:30 이면 19, 30)
 }
 
 

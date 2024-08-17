@@ -8,14 +8,12 @@ import habitInfo from "../../../../../store/habitInfo";
 import {serverRequest} from "../../../../../APIs/ManageChallenge/serverRequest";
 import React from "react";
 import PillInfo from "../../../../../store/pillInfo";
+import { AlarmTime } from "../utils/Alarm/AlarmTime";
 
 interface Props<T> {
   isAddingNewChallenge: boolean;
   newChallenge: Omit<T, "id" | "notificationTime">;
-  alarmTime: {
-    hour: number;
-    minutes: number;
-  }[];
+  alarmTime: AlarmTime[];
   editingChallengeId: string;
   setNameInputStyle: React.Dispatch<React.SetStateAction<React.CSSProperties>>;
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
@@ -29,7 +27,7 @@ const CompleteChangeButton = <T,>({
   setNameInputStyle,
   setErrorMessage
 }: Props<T>) => {
-  const { PillInfo, setPillInfo, setPill } = usePillInfoStore();
+  const { PillInfo, setPillInfo, setPill, getPillCopy } = usePillInfoStore();
   const { HabitInfo, setHabitInfo, setHabit } = useHabitInfoStore();
   const navigate = useNavigate();
 
@@ -38,6 +36,12 @@ const CompleteChangeButton = <T,>({
     if(name === '') return {isValid: false, message: "챌린지 이름은 빈칸이 될 수 없어요"};
 
     let isOverlappedName:boolean = false;
+
+    // @ts-ignore
+    if(getPillCopy(editingChallengeId).name === newChallenge.name){
+      return {isValid: true, message: ""};
+    }
+
     // eslint-disable-next-line array-callback-return
     PillInfo.map((value,index) => {
       if(value.name === name) isOverlappedName = true;
@@ -45,7 +49,7 @@ const CompleteChangeButton = <T,>({
 
     // eslint-disable-next-line array-callback-return
     HabitInfo.map((value,index) => {
-      if(value.name === name) return isOverlappedName = true;
+      if(value.name === name) isOverlappedName = true;
     })
 
     if(isOverlappedName){
