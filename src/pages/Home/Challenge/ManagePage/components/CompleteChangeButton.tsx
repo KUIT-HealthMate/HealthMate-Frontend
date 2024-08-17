@@ -2,12 +2,10 @@ import s from "../ManagePage.module.scss";
 import { usePillInfoStore } from "../../../../../store/usePillInfoStore";
 import useHabitInfoStore from "../../../../../store/useHabitInfoStore";
 import { useNavigate } from "react-router-dom";
-import uuid from "react-uuid";
-import pillInfo from "../../../../../store/pillInfo";
-import habitInfo from "../../../../../store/habitInfo";
+import { pillInfo } from "../../../../../store/challengeTypes";
+import { habitInfo } from "../../../../../store/challengeTypes";
 import {serverRequest} from "../../../../../APIs/ManageChallenge/serverRequest";
 import React from "react";
-import PillInfo from "../../../../../store/pillInfo";
 import { AlarmTime } from "../utils/Alarm/AlarmTime";
 
 interface Props<T> {
@@ -28,7 +26,7 @@ const CompleteChangeButton = <T,>({
   setErrorMessage
 }: Props<T>) => {
   const { PillInfo, setPillInfo, setPill, getPillCopy } = usePillInfoStore();
-  const { HabitInfo, setHabitInfo, setHabit } = useHabitInfoStore();
+  const { HabitInfo, setHabitInfo, setHabit, getHabitCopy } = useHabitInfoStore();
   const navigate = useNavigate();
 
 
@@ -37,8 +35,12 @@ const CompleteChangeButton = <T,>({
 
     let isOverlappedName:boolean = false;
 
+    console.log(getPillCopy(editingChallengeId).name);
     // @ts-ignore
-    if(getPillCopy(editingChallengeId).name === newChallenge.name){
+    console.log(newChallenge.name);
+
+    // @ts-ignore
+    if(getPillCopy(editingChallengeId).name === newChallenge.name || getHabitCopy(editingChallengeId).name === newChallenge.name){
       return {isValid: true, message: ""};
     }
 
@@ -73,7 +75,7 @@ const CompleteChangeButton = <T,>({
     }
 
     if (
-      (newChallenge as unknown as pillInfo).weeklyIntakeFrequency !== undefined
+      (newChallenge as unknown as pillInfo).intakeTime !== undefined
     ) {
       if (isAddingNewChallenge) {
 
@@ -108,12 +110,7 @@ const CompleteChangeButton = <T,>({
         console.log(PillInfo);
 
       }
-    }
-
-    if (
-      (newChallenge as unknown as habitInfo).weeklyExecutionFrequency !==
-      undefined
-    ) {
+    } else  {
       if (isAddingNewChallenge) {
         let idGivenByServer: string = await serverRequest.registerChallenge({
           ...(newChallenge as unknown as habitInfo),

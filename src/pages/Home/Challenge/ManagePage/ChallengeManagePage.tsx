@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import s from "./ManagePage.module.scss";
 import { usePillInfoStore } from "../../../../store/usePillInfoStore";
 
-import pillInfo from "../../../../store/pillInfo";
+import { pillInfo } from "../../../../store/challengeTypes";
 import { useState } from "react";
 import { useGlobalStore } from "../../../../store/store";
 import { useEffect } from "react";
@@ -20,7 +20,7 @@ import CompleteChangeButton from "./components/CompleteChangeButton";
 import { AlarmTime } from "./utils/Alarm/AlarmTime";
 import { isHabitChallenge, isPillChallenge } from "./utils/determineChallenge";
 import useHabitInfoStore from "../../../../store/useHabitInfoStore";
-import habitInfo from "../../../../store/habitInfo";
+import { habitInfo } from "../../../../store/challengeTypes";
 import ChallengeManageHeader from "./components/ChallengeManageHeader";
 import { SelectedAlarmTimeFormat } from "./utils/Alarm/SelectedAlarmTimeFormat";
 
@@ -155,7 +155,7 @@ const ChallengeManagePage = <T,>({
             defaultChecked={
               isPillChallenge(challengeType)
                 ? (newChallenge as pillInfo).weeklyIntakeFrequency
-                : (newChallenge as habitInfo).weeklyExecutionFrequency
+                : (newChallenge as habitInfo).weeklyIntakeFrequency
             }
           />
 

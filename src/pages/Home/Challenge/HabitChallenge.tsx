@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
-// import habitInfo from "../../../store/habitInfo";
+// import { habitInfo } from "../../../store/challengeTypes";
 
 //api 관련
 import { putHabitCheck } from "../../../APIs/home/homeApi";

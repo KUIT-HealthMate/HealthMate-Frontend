@@ -1,5 +1,4 @@
-import habitInfo from "../../../../../store/habitInfo";
-import pillInfo from "../../../../../store/pillInfo";
+import { pillInfo, habitInfo } from "../../../../../store/challengeTypes";
 
 export const initPill = (): Omit<pillInfo, "id" | "notificationTime"> => {
   return {
@@ -26,8 +25,7 @@ export const initHabit = (): Omit<
 > => {
   return {
     name: "", // 알약 이름
-    // executionRecord: false,
-    weeklyExecutionFrequency: {
+    weeklyIntakeFrequency: {
       monday: false,
       tuesday: false,
       wednesday: false,

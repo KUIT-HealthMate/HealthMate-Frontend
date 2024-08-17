@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import plusIconImg from "../../../assets/plusIcon.svg";
 import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
-import pillInfo from "../../../store/pillInfo";
-import habitInfo from "../../../store/habitInfo";
+import { pillInfo } from "../../../store/challengeTypes";
+import { habitInfo } from "../../../store/challengeTypes";
 
 interface Props {
   item: (pillInfo | habitInfo)[];

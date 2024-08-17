@@ -1,6 +1,6 @@
-import pillInfo from "../../store/pillInfo";
-import habitInfo from "../../store/habitInfo";
+import { pillInfo } from "../../store/challengeTypes";
+import { habitInfo } from "../../store/challengeTypes";
 
-type typeOfPillToManage = Omit<pillInfo,"id"|"dailyIntakeRecord">;
-type typeOfHabitToManage = Omit<habitInfo,"id"|"executionRecord">;
+type typeOfPillToManage = Omit<pillInfo,"id">;
+type typeOfHabitToManage = Omit<habitInfo,"id">;
 export type typeOfChallengeToManage = typeOfPillToManage | typeOfHabitToManage;

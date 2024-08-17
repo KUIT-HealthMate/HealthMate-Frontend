@@ -99,28 +99,6 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => {
       return pill ? (pill.dailyIntakePeriod as any)[whichMeal] : undefined;
     },
 
-    // 아침, 점심, 저녁에 영양제 먹었다고 버튼 클릭 -> IntakeRecord에서 수정하는 함수
-
-    // setIntakeRecord: (pillId: string, whichMeal: string) => {
-    //   set((state) => ({
-    //     PillInfo: state.PillInfo.map((pill) =>
-    //       pill.id === pillId
-    //         ? {
-    //             ...pill,
-    //             dailyIntakeRecord: {
-    //               ...pill.dailyIntakeRecord,
-    //               [whichMeal]: !(pill.dailyIntakeRecord as any)[whichMeal],
-    //             },
-    //           }
-    //         : pill
-    //     ),
-    //   }));
-    // },
-
-    // getIntakeRecord: (pillId: string, whichMeal: string) => {
-    //   const pill = get().PillInfo.find((pill) => pill.id === pillId);
-    //   return pill ? (pill.dailyIntakeRecord as any)[whichMeal] : undefined;
-    // },
 
     setWeeklyIntakeFrequency: (pillId: string, whichDay: string) => {
       set((state) => ({
@@ -199,11 +177,6 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => {
             lunch: targetPill.dailyIntakePeriod.lunch,
             dinner: targetPill.dailyIntakePeriod.dinner,
           },
-          // dailyIntakeRecord: {
-          //   breakfast: targetPill.dailyIntakeRecord.breakfast,
-          //   lunch: targetPill.dailyIntakeRecord.lunch,
-          //   dinner: targetPill.dailyIntakeRecord.dinner,
-          // },
           weeklyIntakeFrequency: {
             monday: targetPill.weeklyIntakeFrequency.monday,
             tuesday: targetPill.weeklyIntakeFrequency.tuesday,
@@ -243,11 +216,6 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => {
                   lunch: inputPill.dailyIntakePeriod.lunch,
                   dinner: inputPill.dailyIntakePeriod.dinner,
                 },
-                // dailyIntakeRecord: {
-                //   breakfast: inputPill.dailyIntakeRecord.breakfast,
-                //   lunch: inputPill.dailyIntakeRecord.lunch,
-                //   dinner: inputPill.dailyIntakeRecord.dinner,
-                // },
                 weeklyIntakeFrequency: {
                   monday: inputPill.weeklyIntakeFrequency.monday,
                   tuesday: inputPill.weeklyIntakeFrequency.tuesday,

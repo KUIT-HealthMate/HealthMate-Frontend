@@ -23,8 +23,8 @@ import LoginPage from "./pages/login/LoginPage";
 import EmailCheckPage from "./pages/login/EmailCheckPage";
 import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
 import ChallengeManagePage from "./pages/Home/Challenge/ManagePage/ChallengeManagePage";
-import pillInfo from "./store/pillInfo";
-import habitInfo from "./store/habitInfo";
+import { pillInfo } from "./store/challengeTypes";
+import { habitInfo } from "./store/challengeTypes";
 
 import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoarding";
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";

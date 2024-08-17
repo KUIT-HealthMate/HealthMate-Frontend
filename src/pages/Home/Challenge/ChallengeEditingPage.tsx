@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useGlobalStore } from "../../../store/store";
 import useHabitInfoStore from "../../../store/useHabitInfoStore";
 import { useLocation } from 'react-router-dom';
-import pillInfo from "../../../store/pillInfo";
+import { pillInfo } from "../../../store/challengeTypes";
 
 import leftBracket from "../../../assets/leftBraket.svg";
 import pillImg from "../../../assets/pill.png";

@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import pillInfo from "../../../../../store/pillInfo";
+import { pillInfo } from "../../../../../store/challengeTypes";
 
 export const handleBeforeOrAfterMeal = <T extends pillInfo>(
   value: number, 

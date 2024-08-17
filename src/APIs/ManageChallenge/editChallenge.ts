@@ -1,8 +1,8 @@
 import { getRequestOptions } from "../utils/getRequestOptions";
 import {serverURL} from "../utils/serverURL";
 import {typeOfChallengeToManage} from "../types/typeOfChallengeToManage";
-import pillInfo from "../../store/pillInfo";
-import habitInfo from "../../store/habitInfo";
+import { pillInfo } from "../../store/challengeTypes";
+import { habitInfo } from "../../store/challengeTypes";
 
 
 
