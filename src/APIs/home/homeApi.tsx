@@ -21,6 +21,7 @@ export const gethomeInfo = async () => {
     console.log("JWT_TOKEN: ", JWT_TOKEN)
     try {
         const response = await client.get('/challenges/today');
+        console.log("gethomeInfo result is");
         console.log(response.data)
         return response.data;
     } catch (error) {
