@@ -1,0 +1,152 @@
+.communityHeader {
+    margin: 0 12px 0 13px;
+    padding: 17px 7px 22px 8px;
+    width: calc(100vw - 40px);
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #CBCBCB;
+
+    > span {
+        font-family: Pretendard;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 28.64px;
+        text-align: left;
+        color: #000000;
+    }
+
+    .communityMenu {
+        display:flex;
+        gap:11px;
+
+        .bulletinBoardType {
+            width: 99px;
+            height:26px;
+            border: 1px solid #BFBFBF;
+            border-radius: 7px;
+            background-color: #F5F6F8;
+            display:flex;
+            align-items: center;
+
+            > span {
+                font-family: Pretendard;
+                font-size: 11px;
+                font-weight: 700;
+                color: rgba(#000000,0.25);
+                margin-left: 8px;
+            }
+
+            > button {
+                margin-left: 18px;
+            }
+        }
+    }
+
+}
+
+.hotPostWrap {
+    padding: 21px;
+    display:flex;
+    flex-direction: column;
+
+    .hotPostSectionTitle {
+        margin-bottom: 11px;
+        display:flex;
+        gap:4px;
+
+        > span {
+            font-family: Pretendard;
+            font-size: 19px;
+            font-weight: 700;
+            color: #000000;
+        }
+    }
+
+    .hotPost {
+
+        border-radius: 15px;
+        background: rgba(#0E9494,0.1);
+        height:45px;
+        line-height: 45px;
+
+        margin-bottom: 7px;
+
+        > span {
+            margin-left: 10px;
+            font-family: Pretendard;
+            font-size: 13px;
+            font-weight: 700;
+            color: #05697F;
+        }
+    }
+}
+
+.postWrap {
+    display:flex;
+    flex-direction: column;
+    width: calc(100vw - 43px);
+
+    padding: 20px 22px 22px 21px;
+    border-bottom: 1px solid #DADADA;
+
+    border-top: 1px solid #DADADA;
+
+    .postType {
+        font-family: Pretendard;
+        font-size: 12px;
+        font-weight: 700;
+        color:#0E9494;
+
+        margin-bottom: 5px;
+    }
+
+    .postTitle {
+        font-family: Pretendard;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 17.9px;
+        text-align: left;
+        color: #000000;
+
+        margin-bottom: 5px;
+    }
+
+    .postContent {
+        font-family: Pretendard;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.71px;
+        text-align: left;
+        color: #000000;
+
+        margin-bottom: 9px;
+    }
+
+    .additionalInfo {
+        font-family: Pretendard;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 14.32px;
+        text-align: left;
+        color: #B3B3B3;
+    }
+}
+
+.newPostButton {
+    position:absolute;
+    right:19px;
+    bottom: 119px;
+
+    width: 60px;
+    height: 60px;
+    background-color: #F97F59;
+    border-radius: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    > img {
+
+    }
+}
