@@ -43,9 +43,6 @@ const Home = () => {
 
   useEffect(() => {
     console.log("home")
-    //local 스토리지에 token 넣어주기 (로그인에서 진행되어야할 부분임)
-    // localStorage.setItem("jwtToken", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8");
-
     // 컴포넌트가 마운트될 때 데이터 가져오기
     gethomeInfoMutation.mutate();
     // eslint-disable-next-line
