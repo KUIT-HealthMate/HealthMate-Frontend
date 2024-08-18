@@ -20,6 +20,7 @@ import DailyCheckDone from "./pages/DailyCheck/DailyCheckDone";
 
 
 import LoginPage from "./pages/login/LoginPage";
+import { LoginSuccess } from "./pages/login/loginSuccessPage";
 import EmailCheckPage from "./pages/login/EmailCheckPage";
 import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
 import ChallengeManagePage from "./pages/Home/Challenge/ManagePage/ChallengeManagePage";
@@ -45,6 +46,7 @@ const Router = () => {
     <div>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/logining" element={< LoginSuccess />} />
         <Route path="/emailCheck" element={<EmailCheckPage />} />
 
         <Route path="/" element={<Home />} />

@@ -26,12 +26,9 @@ const pillIntakeTime = (props: supplementDto, timeIdx: number) => {
     return PillTime;
   } else {
     return null;
-    // const PillTime: PillTimeInfo = { pillTime: "일단", isChecked: props.breakfastSuccess }
-    // return PillTime;
   }
 
 }
-
 
 export default function SupplementComponent(props: PillInfoDto) {
   console.log("SupplementComponent: ", props)
