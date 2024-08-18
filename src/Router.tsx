@@ -4,7 +4,6 @@ import MyPage from "./pages/MyPage/MyPage";
 import Community from "./pages/Community/Community";
 import HealthChart from "./pages/HealthChart/HealthChart";
 import ChallengeStatistics from "./pages/Home/ChallengeStatistics/ChallengeStatistics";
-
 import ChallengeEditingPage from "./pages/Home/Challenge/ChallengeEditingPage";
 
 
@@ -26,6 +25,7 @@ import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
 import ChallengeManagePage from "./pages/Home/Challenge/ManagePage/ChallengeManagePage";
 import { pillInfo } from "./store/challengeTypes";
 import { habitInfo } from "./store/challengeTypes";
+import Profile from "./pages/MyPage/Profile/Profile";
 
 import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoarding";
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
@@ -53,6 +53,7 @@ const Router = () => {
         <Route path="/chart" element={<HealthChart />} />
         <Route path="/community" element={<Community />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/profile" element={<Profile />} />
 
         <Route path="/statistics" element={<ChallengeStatistics />} />
 
@@ -88,7 +89,7 @@ const Router = () => {
 
         <Route path="/usage" element={<CoinDepositAndUsage />} />
 
-        
+
       </Routes>
     </div>
   );
