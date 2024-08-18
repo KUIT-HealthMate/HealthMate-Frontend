@@ -18,7 +18,7 @@ export const client = axios.create({
 
 //홈정보
 export const gethomeInfo = async () => {
-
+    console.log("JWT_TOKEN: ", JWT_TOKEN)
     try {
         const response = await client.get('/challenges/today');
         console.log(response.data)

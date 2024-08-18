@@ -17,8 +17,10 @@
     "chart.js": "^4.4.3",
     "chartjs-plugin-datalabels": "^2.2.0",
     "dayjs": "^1.11.12",
+    "query-string": "^9.1.0",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
+    "react-cookie": "^7.2.0",
     "react-dom": "^18.3.1",
     "react-emotion": "^10.0.0",
     "react-query": "^3.39.3",
@@ -61,5 +63,4 @@
       "last 1 safari version"
     ]
   }
-  
 }

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useGlobalStore } from "../../store/store";
 
 import s from "./styles/LoginPage.module.scss";
 
 import healthMateIcon from "../../assets/loginPage/healthMateIcon.svg";
 import healthMateTitleImg from "../../assets/loginPage/healthMateTitleImg.svg";
-import kakaoTalkIcon from "../../assets/loginPage/kakaoTalkIcon.svg";
+import kakaoBtn from "../../assets/kakaoBtn.svg";
+
 
 const LogInPage = () => {
   const { setShowBottomBar } = useGlobalStore();
@@ -17,6 +17,7 @@ const LogInPage = () => {
       setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
+
 
   return (
     <div className={s.pageWrap}>
@@ -33,14 +34,19 @@ const LogInPage = () => {
           alt="healthMateTitleText"
         />
       </div>
-      <Link to="/emailCheck" className={s.kakaoLoginBtn} type="button">
-        <img
-          className={s.kakaoTalkImg}
-          src={kakaoTalkIcon}
-          alt="kakaoTalkIcon"
-        />
-        <span>Kakao로 1초만에 시작하기</span>
-      </Link>
+      {/* <Link to="/emailCheck" className={s.kakaoLoginBtn} type="button"> */}
+      <div>
+
+        <a href="http://3.39.60.18:9000/login/kakao" className={s.kakaoWrap}>
+          <img
+            className={s.kakaoBtn}
+            src={kakaoBtn}
+            alt="kakaoTalkIcon"
+          // onClick={clickKakaoLogin}
+          />
+        </a>
+        {/* </Link> */}
+      </div>
     </div>
   );
 };
