@@ -21,7 +21,7 @@ const SupplementChallengeEditingPage = () => {
     console.log("마운트됨");
     setShowBottomBar(false);
     return () => {
-      setShowBottomBar(false);
+      setShowBottomBar(true);
     };
   }, [setShowBottomBar]);
   
@@ -71,7 +71,7 @@ const SupplementChallengeEditingPage = () => {
       <div className={s.statusBar}></div>
       <div className={s.header}>
         <div className={s.titleBar}>
-          <Link to="/" >
+          <Link to="/" onClick={() => setShowBottomBar(true)}>
             <img src={leftBracket} alt="뒤로가기" />
           </Link>
           <div className={s.title}>챌린지 편집</div>
