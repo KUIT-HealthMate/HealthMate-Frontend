@@ -31,18 +31,20 @@ button:hover {
   height: 60px;
   align-items: center;
   gap:12px;
+
+  a {
+    box-sizing: border-box;
+    margin-left: 21px;
+    border: none;
+    background: none;
+
+    img {
+      height: 21px;
+    }
+
+  }
 }
 
-.titleBar > button {
-  box-sizing: border-box;
-  padding: 0 0 0 21px;
-  border: none;
-  background: none;
-}
-
-.titleBar > button > img {
-  height: 17px;
-}
 
 .challengeNameWrap {
   display: flex;
@@ -129,47 +131,42 @@ button:hover {
 
   position: relative;
   margin: 10px 0 0 0;
-}
 
-.supplementWrap span:nth-child(1) {
-  position: absolute;
-  top: 17px;
-  left: 19px;
-  // margin: 0 0 0 19px;
-}
+  div:nth-child(1) {
+    display:flex;
+    position: absolute;
+    top: 17px;
+    left: 19px;
+    align-items: center;
+    gap:10px;
+    
+    span:nth-child(1) {
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 22.67px;
+      text-align: left;
+    }
+  
+    span:nth-child(2) {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 17.9px;
+      text-align: left;
+      color: #8f8f8f;
+    }
+  }
 
-.supplementWrap span:nth-child(2) {
-  position: absolute;
-  top: 19px;
-  left: 79px;
-  //margin: 0 23px 0 10px;
-}
+  div:nth-child(2) {
+    display: none;
+    position: absolute;
+    top: 17px;
+    right: 19px;
+  }
 
-.supplementWrap div {
-  display: none;
-  position: absolute;
-  top: 17px;
-  right: 19px;
-}
-
-.supplementWrap span:nth-child(1) {
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 22.67px;
-  text-align: left;
-}
-
-.supplementWrap span:nth-child(2) {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 17.9px;
-  text-align: left;
-  color: #8f8f8f;
-}
-
-.supplementWrap button {
-  width: 22px;
-  height: 22px;
+  button {
+    width: 22px;
+    height: 22px;
+  }
 }
 
 .completeButton {

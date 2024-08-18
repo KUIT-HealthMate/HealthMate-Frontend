@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import plusIconImg from "../../../assets/plusIcon.svg";
 import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
-import pillInfo from "../../../store/pillInfo";
-import habitInfo from "../../../store/habitInfo";
+import { pillInfo } from "../../../store/challengeTypes";
+import { habitInfo } from "../../../store/challengeTypes";
 
 interface Props {
   item: (pillInfo | habitInfo)[];
@@ -89,7 +89,7 @@ const ChallengeDisplay: React.FC<Props> = ({
     }
   };
 
-  const hello = (item: pillInfo | habitInfo) => {
+  const getChallengeName = (item: pillInfo | habitInfo) => {
     console.log(item);
     return item.name;
   };
@@ -115,22 +115,24 @@ const ChallengeDisplay: React.FC<Props> = ({
             {item.map((item, index) => {
               return (
                 <div className={s.supplementWrap}>
-                  <span>{hello(item)}</span>
-                  {challengeType === "pill" && (
-                    <span>
-                      {"주 " +
-                        Object.values(
-                          (item as pillInfo).weeklyIntakeFrequency
-                        ).filter((value) => value).length +
-                        "회, " +
-                        getIntakeTime(item) +
-                        ", " +
-                        Object.values(
-                          (item as pillInfo).dailyIntakePeriod
-                        ).filter((value) => value).length +
-                        "회"}
-                    </span>
-                  )}
+                  <div className={s.challengeInfo}>
+                    <span>{getChallengeName(item)}</span>
+                    {challengeType === "pill" && (
+                      <span>
+                        {"주 " +
+                          Object.values(
+                            (item as pillInfo).weeklyIntakeFrequency
+                          ).filter((value) => value).length +
+                          "회, " +
+                          getIntakeTime(item) +
+                          ", " +
+                          Object.values(
+                            (item as pillInfo).dailyIntakePeriod
+                          ).filter((value) => value).length +
+                          "회"}
+                      </span>
+                    )}
+                  </div>
                   <div className={"editAndDeleteBtn"}>
                     <Link
                       to={`/${challengeType}EditingPage/${item.id}`}

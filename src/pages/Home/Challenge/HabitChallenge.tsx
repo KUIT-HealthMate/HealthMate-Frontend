@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
-// import habitInfo from "../../../store/habitInfo";
+// import { habitInfo } from "../../../store/challengeTypes";
 
 //api 관련
 import { putHabitCheck } from "../../../APIs/home/homeApi";
@@ -23,6 +23,7 @@ SwiperCore.use([Pagination, Navigation]);
 interface HabitChallengeProps {
   habits: habitDto[];
 }
+
 
 export default function HabitChallenge(props: HabitChallengeProps) {
   console.log("HabitChallenge: ", props.habits);
@@ -81,7 +82,7 @@ export default function HabitChallenge(props: HabitChallengeProps) {
       <div className={styles.HabitChallengeTitle}>
         <img src={habitIcon} className={styles.HabitImg} alt="habit"></img>
         <h1 className={styles.HabitText}>습관 챌린지</h1>
-        <Link to="/ChallengeEdit" className={styles.HabitEdit}>
+        <Link to="/ChallengeEdit" state={{data:"habit"}} className={styles.HabitEdit}>
           편집하기<img src={clampR} className={styles.clampR} alt="clamp"></img>
         </Link>
       </div>

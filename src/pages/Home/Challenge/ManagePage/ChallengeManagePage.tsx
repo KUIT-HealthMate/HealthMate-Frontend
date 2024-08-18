@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import s from "./ManagePage.module.scss";
 import { usePillInfoStore } from "../../../../store/usePillInfoStore";
 
-import pillInfo from "../../../../store/pillInfo";
+import { pillInfo } from "../../../../store/challengeTypes";
 import { useState } from "react";
 import { useGlobalStore } from "../../../../store/store";
 import { useEffect } from "react";
@@ -20,7 +20,7 @@ import CompleteChangeButton from "./components/CompleteChangeButton";
 import { AlarmTime } from "./utils/Alarm/AlarmTime";
 import { isHabitChallenge, isPillChallenge } from "./utils/determineChallenge";
 import useHabitInfoStore from "../../../../store/useHabitInfoStore";
-import habitInfo from "../../../../store/habitInfo";
+import { habitInfo } from "../../../../store/challengeTypes";
 import ChallengeManageHeader from "./components/ChallengeManageHeader";
 import { SelectedAlarmTimeFormat } from "./utils/Alarm/SelectedAlarmTimeFormat";
 
@@ -71,6 +71,11 @@ const ChallengeManagePage = <T,>({
   }
   const [editingChallengeId] = useState<string>(alreadyExistingChallengeId);
 
+  // 이름 부분 input의 style
+  const [nameInputStyle, setNameInputStyle] = useState<React.CSSProperties>({});
+  // input값이 잘못되었을경우 오류 텍스트
+  const [errorMessage,setErrorMessage] = useState<string>("");
+
   // 챌린지에서 notificationTime을 분리하여 관리
   const [alarmTime, setAlarmTime] = useState<AlarmTime[]>([]);
 
@@ -103,7 +108,7 @@ const ChallengeManagePage = <T,>({
     useState<SelectedAlarmTimeFormat>({
       amOrPm: 0,
       hour: 0,
-      minutes: 0,
+      minute: 0,
       isEditMode: false,
       editIndex: 0,
     });
@@ -122,6 +127,10 @@ const ChallengeManagePage = <T,>({
             setNewChallenge={setNewChallenge}
             defaultValue={newChallenge.name}
             challengeType={challengeType}
+            nameInputStyle={nameInputStyle}
+            setNameInputStyle={setNameInputStyle}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
           />
 
           {isPillChallenge(challengeType) && (
@@ -146,7 +155,7 @@ const ChallengeManagePage = <T,>({
             defaultChecked={
               isPillChallenge(challengeType)
                 ? (newChallenge as pillInfo).weeklyIntakeFrequency
-                : (newChallenge as habitInfo).weeklyExecutionFrequency
+                : (newChallenge as habitInfo).weeklyIntakeFrequency
             }
           />
 
@@ -163,6 +172,8 @@ const ChallengeManagePage = <T,>({
             newChallenge={newChallenge}
             alarmTime={alarmTime}
             editingChallengeId={editingChallengeId}
+            setNameInputStyle={setNameInputStyle}
+            setErrorMessage={setErrorMessage}
           />
 
           <div className={s.bottomBarCover}></div>

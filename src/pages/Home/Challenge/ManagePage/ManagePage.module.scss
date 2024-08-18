@@ -23,6 +23,7 @@ input:checked + label {
     color : #0B7575;  
 }
 
+
 input[type="radio"] {
     display:none;
 }
@@ -52,7 +53,7 @@ button:hover {
 .title {
   font-weight: 700;
   font-size: 24px;
-  padding: 3px 0 12px 11.5px;
+  padding-left: 11.5px;
 }
 
 .titleBar {
@@ -62,9 +63,9 @@ button:hover {
   border-bottom: 1px solid #D9D9D9;
 }
 
-.titleBar > button {
+.titleBar > a {
   box-sizing: border-box;
-  padding: 10px 0 17px 21px; 
+  padding-left:  21px; 
   border: none; 
   background: none;
 }
@@ -132,6 +133,7 @@ input {
     padding:0;
     border: 1px solid var(--2, #DEDEDE);
     box-sizing: border-box;
+    font-size: 18px;
 }
 
 .nameInput {
@@ -243,4 +245,23 @@ input {
 .alarmTimeWrap > div {
     display:flex;
     gap:6px;
+}
+
+.errorMessageDiv {
+
+    position:absolute;
+    top:43px;
+    
+    display:flex;
+    gap:3px;
+
+    img {
+        width: 13px;
+    }
+
+    span {
+        color:red;
+        font-size: 13px;
+    }
+
 }

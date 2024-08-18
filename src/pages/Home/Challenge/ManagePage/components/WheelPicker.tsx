@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styled from "@emotion/styled";
 import { useRef, useEffect, useState } from "react";
 
@@ -46,7 +47,7 @@ const WheelPicker = ({
   initialIndex,
   pickerStyle,
 }: ScrollPickerProps) => {
-  const SCROLL_DEBOUNCE_TIME = 74;
+  const SCROLL_DEBOUNCE_TIME = 150;
 
   const newList = ["", ...list, ""];
   const ref = useRef<HTMLUListElement>(null);
@@ -58,22 +59,25 @@ const WheelPicker = ({
   const handleScroll = () => {
     if (ref.current) {
       clearTimeout(timerRef.current!);
+
       if (ref.current.scrollTop < ITEM_HEIGHT) {
-        ref.current.scrollTop = ITEM_HEIGHT;
+          ref.current.scrollTop = ITEM_HEIGHT;
       }
+
       timerRef.current = setTimeout(() => {
-        const index = Math.floor(
-          (ref.current!.scrollTop + ITEM_HEIGHT / 2) / ITEM_HEIGHT
-        );
-        if (list[index] !== "") {
-          setSelected(index);
-          itemRefs.current[index]?.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-          });
-          onSelectedChange && onSelectedChange(newList[index]);
-        }
-      }, SCROLL_DEBOUNCE_TIME);
+        requestAnimationFrame(() => {
+          const index = Math.floor(
+            (ref.current!.scrollTop + ITEM_HEIGHT / 2) / ITEM_HEIGHT
+          );
+          if (list[index] !== "") {
+            setSelected(index);
+            itemRefs.current[index]?.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+            onSelectedChange && onSelectedChange(newList[index]);
+          }
+        })} ,SCROLL_DEBOUNCE_TIME);
     }
   };
 
@@ -81,7 +85,8 @@ const WheelPicker = ({
     if (ref.current) {
       ref.current.scrollTop = (initialIndex + 1) * ITEM_HEIGHT;
     }
-  }, [initialIndex]);
+    console.log("k");
+  }, []);
 
   return (
     <List ref={ref} onScroll={handleScroll}>

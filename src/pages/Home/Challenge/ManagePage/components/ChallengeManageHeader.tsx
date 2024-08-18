@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import s from "../ManagePage.module.scss";
 
@@ -15,7 +15,6 @@ const ChallengeManageHeader: React.FC<Props> = ({
   challengeType,
   isAddingNewChallenge,
 }) => {
-  const navigate = useNavigate();
 
   let titleString: string;
   if (isPillChallenge(challengeType)) {
@@ -28,9 +27,9 @@ const ChallengeManageHeader: React.FC<Props> = ({
       <div className={s.statusBar}></div>
       <div className={s.header}>
         <div className={s.titleBar}>
-          <button onClick={() => navigate(-1)}>
+          <Link to="/ChallengeEdit" state={{data:challengeType}} >
             <img src={leftBraket} alt="뒤로가기" />
-          </button>
+          </Link>
           <div className={s.title}>{titleString}</div>
         </div>
       </div>

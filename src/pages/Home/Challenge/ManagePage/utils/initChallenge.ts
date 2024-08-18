@@ -1,12 +1,11 @@
-import habitInfo from "../../../../../store/habitInfo";
-import pillInfo from "../../../../../store/pillInfo";
+import { pillInfo, habitInfo } from "../../../../../store/challengeTypes";
 
 export const initPill = (): Omit<pillInfo, "id" | "notificationTime"> => {
   return {
     name: "", // 알약 이름
     intakeTime: { beforeOrAfterMeal: 0, minutes: 0 }, // 섭취 시간 (식전 1 식후 2, 분 number로)
     dailyIntakePeriod: { breakfast: false, lunch: false, dinner: false }, // 일 섭취 시기 (아침, 점심, 저녁)
-    dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
+    // dailyIntakeRecord: { breakfast: false, lunch: false, dinner: false },
     weeklyIntakeFrequency: {
       monday: false,
       tuesday: false,
@@ -26,8 +25,7 @@ export const initHabit = (): Omit<
 > => {
   return {
     name: "", // 알약 이름
-    executionRecord: false,
-    weeklyExecutionFrequency: {
+    weeklyIntakeFrequency: {
       monday: false,
       tuesday: false,
       wednesday: false,

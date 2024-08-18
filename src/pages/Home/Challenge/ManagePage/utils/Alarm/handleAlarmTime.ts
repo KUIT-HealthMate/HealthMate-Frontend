@@ -18,7 +18,7 @@ const handleAlarmTime = (
           return {
             ...item,
             hour: hourIn24,
-            minutes: selectedAlarmTime.minutes,
+            minute: selectedAlarmTime.minute,
           };
         }
         return item;
@@ -27,7 +27,7 @@ const handleAlarmTime = (
   } else {
     setAlarmTime([
       ...alarmTime,
-      { hour: hourIn24, minutes: selectedAlarmTime.minutes },
+      { hour: hourIn24, minute: selectedAlarmTime.minute },
     ]);
   }
 
@@ -35,7 +35,7 @@ const handleAlarmTime = (
     ...selectedAlarmTime,
     amOrPm: 0,
     hour: 0,
-    minutes: 0,
+    minute: 0,
     isEditMode: false,
   });
 };

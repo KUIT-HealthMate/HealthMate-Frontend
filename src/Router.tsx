@@ -23,15 +23,17 @@ import LoginPage from "./pages/login/LoginPage";
 import EmailCheckPage from "./pages/login/EmailCheckPage";
 import CoinDepositAndUsage from "./pages/MyPage/CoinPage/CoinDepositAndUsage";
 import ChallengeManagePage from "./pages/Home/Challenge/ManagePage/ChallengeManagePage";
-import pillInfo from "./store/pillInfo";
-import habitInfo from "./store/habitInfo";
+import { pillInfo } from "./store/challengeTypes";
+import { habitInfo } from "./store/challengeTypes";
 
 import { OnBoarding, OnBoardingCheckSymptom } from "./pages/OnBoarding/OnBoarding";
 import OnBoardingCheckPurpose from "./pages/OnBoarding/OnBoardingCheckPurpose";
 import { Welcome } from "./pages/OnBoarding/OnBoarding";
 import { FindKeyword } from "./pages/OnBoarding/findKeyword";
+
 import { OnBoardingSurvey } from "./pages/OnBoarding/OnBoardingSurvey/OnBoardingSurvey";
 import Loading from "./pages/DailyCheck/loading/Loading";
+
 
 enum challengeType {
   Pill = 'pill',
@@ -84,6 +86,7 @@ const Router = () => {
 
         <Route path="/usage" element={<CoinDepositAndUsage />} />
 
+        
       </Routes>
     </div>
   );

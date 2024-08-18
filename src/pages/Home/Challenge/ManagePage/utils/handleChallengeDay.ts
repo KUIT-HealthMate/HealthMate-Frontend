@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
-import pillInfo from "../../../../../store/pillInfo";
-import habitInfo from "../../../../../store/habitInfo";
+import { pillInfo } from "../../../../../store/challengeTypes";
+import { habitInfo } from "../../../../../store/challengeTypes";
 
 // 이벤트 핸들러: 주 섭취 횟수
 const handleChallengeDay = <T>(
@@ -30,15 +30,15 @@ const handleChallengeDay = <T>(
   }
 
   if (
-    (newChallenge as unknown as habitInfo).weeklyExecutionFrequency !==
+    (newChallenge as unknown as habitInfo).weeklyIntakeFrequency !==
     undefined
   ) {
     setter({
       ...newChallenge,
-      weeklyExecutionFrequency: {
-        ...(newChallenge as unknown as habitInfo).weeklyExecutionFrequency,
+      weeklyIntakeFrequency: {
+        ...(newChallenge as unknown as habitInfo).weeklyIntakeFrequency,
         [value]: !(
-          (newChallenge as unknown as habitInfo).weeklyExecutionFrequency as any
+          (newChallenge as unknown as habitInfo).weeklyIntakeFrequency as any
         )[value],
       },
     } as T);

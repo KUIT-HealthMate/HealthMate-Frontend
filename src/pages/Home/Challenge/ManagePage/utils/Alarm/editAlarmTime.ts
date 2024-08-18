@@ -16,7 +16,7 @@ const editAlarmTime = (
         ...selectedAlarmTime,
         amOrPm: item.hour - 12 > 0 ? 1 : 0,
         hour: item.hour % 12,
-        minutes: item.minutes,
+        minute: item.minute,
         editIndex: index,
         isEditMode: true,
       });
