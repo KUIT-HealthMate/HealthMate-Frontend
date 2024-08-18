@@ -88,7 +88,7 @@ const Router = () => {
 
         <Route path="/usage" element={<CoinDepositAndUsage />} />
 
-        
+        <Route path="/community" element={<Community />} />
       </Routes>
     </div>
   );
