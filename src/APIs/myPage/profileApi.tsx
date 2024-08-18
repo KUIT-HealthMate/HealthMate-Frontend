@@ -8,7 +8,16 @@ export const client = axios.create({
     headers: {
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*',
-        'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjY5MTc3ODA4IiwiaWF0IjoxNzIzOTg2MTg4LCJleHAiOjM2MTcyMzk4NjE4OCwidXNlcklkIjoyfQ.TPdvkoLhbV2jp3LyCjZEiCD3v4A74vEscWgLjyV8-u0',
+        'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8',
+    },
+});
+
+export const clientNickname = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8',
     },
 });
 
@@ -21,39 +30,29 @@ export const postProfile = async (selectedFile: File) => {
     console.log("selectedFile: ", selectedFile)
     console.log("postProfile들어옴: ", data)
     try {
-        const response = await client.patch('/users/edit/profile', data);
+        const response = await client.post('/users/edit/profile', data);
         console.log(response.data)
         return response.data;
     } catch (error) {
         console.error('프로필 수정 실패:', error);
         throw error;
     }
-    // client.patch("/users/edit/profile", data)
-    //     .then((res) => { console.log("응담: ", res) })
-    //     .catch((err) => { console.log("에러: ", err) })
+
 };
 
+//닉네임 수정
+export const postNickname = async (nickname: string) => {
+    console.log("nickname: ", nickname)
+    try {
+        const response = await clientNickname.patch('/users/edit/nickname', {
+            "nickname": nickname
+        });
+        console.log(response.data)
+        return response.data;
+    } catch (error) {
+        console.error('닉네임 수정 실패:', error);
+        throw error;
+    }
 
-// export const postProfile = async () => {
-//     console.log("JWT_TOKEN: ", JWT_TOKEN)
-//     try {
-//         const response = await client.get('/challenges/today');
-//         console.log(response.data)
-//         return response.data;
-//     } catch (error) {
-//         console.error('홈정보 불러오기 실패:', error);
-//         throw error;
-//     }
+};
 
-// };
-
-// export const postModifyUser = async (
-//     request: modifyUserRequestDTO
-// ): Promise<BaseResponse<string>> => {
-//     try {
-//         const response = await apiClient.post('/user/modify', request);
-//         return response.data;
-//     } catch (error) {
-//         throw error;
-//     }
-// };

@@ -1,0 +1,79 @@
+.profileWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    //  height: 100vh;
+    width: 100vw;
+
+    padding-right: 7.5%;
+    align-items: center;
+
+    .ProfileImgWrap {
+        position: relative;
+        height: 100px;
+        width: 100%;
+        display: flex;
+        padding-left: calc((100% - 100px));
+
+        padding-top: 30px;
+
+        .profileImg {
+            position: absolute;
+
+            .defaultImg {
+                width: 100px;
+                height: 100px;
+                border-radius: 60px;
+            }
+        }
+
+        .uploadWrapWrap {
+            position: relative;
+            left: 70px;
+            top: 70px;
+            height: 30px;
+
+            .uploadWrap {
+
+                position: relative;
+
+                .customUploadImage {
+                    position: absolute;
+                    height: 30px;
+                    cursor: pointer;
+                }
+
+                .uploadImg {
+                    position: absolute;
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+
+    .enterFiledWrap {
+        display: flex;
+        flex-direction: column;
+        padding-top: 35px;
+
+        .nicknameTitle {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 15px;
+            line-height: 18px;
+            color: #05697F;
+        }
+
+        .inputNickname {
+            margin-top: 7px;
+            padding-left: 14px;
+            background-color: #F2F2F2;
+            border: 0;
+        }
+    }
+
+
+}
