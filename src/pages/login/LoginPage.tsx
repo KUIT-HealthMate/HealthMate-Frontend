@@ -1,16 +1,11 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useGlobalStore } from "../../store/store";
 
 import s from "./styles/LoginPage.module.scss";
 
 import healthMateIcon from "../../assets/loginPage/healthMateIcon.svg";
 import healthMateTitleImg from "../../assets/loginPage/healthMateTitleImg.svg";
-import kakaoTalkIcon from "../../assets/loginPage/kakaoTalkIcon.svg";
-
-import { getKakaoLogin } from "../../APIs/login/loginApi";
-import { useMutation } from 'react-query';
-
+import kakaoBtn from "../../assets/kakaoBtn.svg";
 
 
 const LogInPage = () => {
@@ -22,23 +17,6 @@ const LogInPage = () => {
       setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
-
-
-  const getKakaoLoginAPI = useMutation(getKakaoLogin, {
-    onSuccess: (response) => {
-      console.log('로그인 성공:', response);
-    },
-    onError: (error) => {
-      console.error('로그인 실패:', error);
-    },
-  })
-
-  const clickKakaoLogin = () => {
-    console.log("clickKakaoLogin");
-    getKakaoLoginAPI.mutate();
-  }
-
-  console.log("로긍니ㅏㅓㅇ")
 
 
   return (
@@ -58,15 +36,15 @@ const LogInPage = () => {
       </div>
       {/* <Link to="/emailCheck" className={s.kakaoLoginBtn} type="button"> */}
       <div>
-        {/* <img
-          className={s.kakaoTalkImg}
-          src={kakaoTalkIcon}
-          alt="kakaoTalkIcon"
-          onClick={clickKakaoLogin}
-        /> */}
-        <a href="http://3.39.60.18:9000/login/kakao">
-          클릭</a>
-        <span>Kakao로 1초만에 시작하기</span>
+
+        <a href="http://3.39.60.18:9000/login/kakao" className={s.kakaoWrap}>
+          <img
+            className={s.kakaoBtn}
+            src={kakaoBtn}
+            alt="kakaoTalkIcon"
+          // onClick={clickKakaoLogin}
+          />
+        </a>
         {/* </Link> */}
       </div>
     </div>
