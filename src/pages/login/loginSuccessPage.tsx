@@ -21,6 +21,7 @@ export const LoginSuccess = () => {
         console.log("quertStrign: ", jwtToken)
         localStorage.setItem('jwtToken', jwtToken)
         finishLogin(isNewBoolean)
+        // eslint-disable-next-line
     }, []);
 
 
