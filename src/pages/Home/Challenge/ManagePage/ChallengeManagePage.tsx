@@ -82,11 +82,13 @@ const ChallengeManagePage = <T,>({
   useEffect(() => {
     if (!isAddingNewChallenge) {
       if (isPillChallenge(challengeType)) {
+        console.log(challengeType);
         let { notificationTime, ...rest } = getPillCopy(editingChallengeId);
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);
       }
       if (isHabitChallenge(challengeType)) {
+        console.log(challengeType);
         let { notificationTime, ...rest } = getHabitCopy(editingChallengeId);
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);

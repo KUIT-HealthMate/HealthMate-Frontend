@@ -17,7 +17,7 @@ interface Props<T> {
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const CompleteChangeButton = <T,>({
+const CompleteChangeButton = <T extends Omit<pillInfo, "id" | "notificationTime"> | Omit<habitInfo, "id" | "notificationTime">,>({
   isAddingNewChallenge,
   newChallenge,
   alarmTime,
@@ -40,8 +40,14 @@ const CompleteChangeButton = <T,>({
     console.log(newChallenge.name);
 
     // @ts-ignore
-    if(getPillCopy(editingChallengeId).name === newChallenge.name || getHabitCopy(editingChallengeId).name === newChallenge.name){
-      return {isValid: true, message: ""};
+    if(getPillCopy(editingChallengeId) !== undefined){
+      if(getPillCopy(editingChallengeId).name === newChallenge.name){
+        return {isValid: true, message: ""};
+      }
+    } else if (getHabitCopy(editingChallengeId) !== undefined){
+      if(getHabitCopy(editingChallengeId).name === newChallenge.name){
+        return {isValid: true, message: ""};
+      }
     }
 
     // eslint-disable-next-line array-callback-return
