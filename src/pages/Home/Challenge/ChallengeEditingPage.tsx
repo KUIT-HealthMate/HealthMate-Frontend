@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usePillInfoStore } from "../../../store/usePillInfoStore";
 import { useEffect } from "react";
 import { useGlobalStore } from "../../../store/store";
@@ -24,7 +24,7 @@ const SupplementChallengeEditingPage = () => {
       setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
-  const navigate = useNavigate();
+  
   const { PillInfo, getIntakeTime, deletePill } = usePillInfoStore();
 
   const { HabitInfo, deleteHabit } = useHabitInfoStore();
@@ -71,9 +71,9 @@ const SupplementChallengeEditingPage = () => {
       <div className={s.statusBar}></div>
       <div className={s.header}>
         <div className={s.titleBar}>
-          <button onClick={() => navigate(-1)}>
-            <img src={leftBracket} alt="" />
-          </button>
+          <Link to="/" >
+            <img src={leftBracket} alt="뒤로가기" />
+          </Link>
           <div className={s.title}>챌린지 편집</div>
         </div>
         <div className={s.challengeNameWrap}>

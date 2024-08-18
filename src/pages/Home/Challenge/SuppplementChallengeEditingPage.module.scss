@@ -31,18 +31,20 @@ button:hover {
   height: 60px;
   align-items: center;
   gap:12px;
+
+  a {
+    box-sizing: border-box;
+    margin-left: 21px;
+    border: none;
+    background: none;
+
+    img {
+      height: 21px;
+    }
+
+  }
 }
 
-.titleBar > button {
-  box-sizing: border-box;
-  padding: 0 0 0 21px;
-  border: none;
-  background: none;
-}
-
-.titleBar > button > img {
-  height: 17px;
-}
 
 .challengeNameWrap {
   display: flex;
