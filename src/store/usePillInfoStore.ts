@@ -29,7 +29,7 @@ interface PillInfoState {
   deletePill: (pillId: string) => void;
 
   // id를 제외한 요소들을 얕은 복사한 pill을 반환합니다.
-  getPillCopy: (pillId: string | undefined) => Omit<pillInfo, "id">;
+  getPillCopy: (pillId: string | undefined) => Omit<pillInfo, "id"> | undefined;
 
   // id와 일치하는 pill의 요소들을 주어진 pill로 설정합니다.
   setPill: (
@@ -160,10 +160,14 @@ export const usePillInfoStore = create<PillInfoState>((set, get) => {
         return { ...initPill(), notificationTime: [] };
       } else {
         //Id에 해당하는 pill의 참조를 얻는다
-        const targetPill: pillInfo = get().PillInfo.find(
+        const tempPill = get().PillInfo.find(
           // eslint-disable-next-line eqeqeq
           (pill) => pill.id == pillId
-        ) as pillInfo;
+        );
+        if(tempPill === undefined){
+          return undefined;
+        }
+        const targetPill: pillInfo = tempPill as pillInfo;
 
         //얕은 복사한 복사본을 생성
         const duplicatedPill: Omit<pillInfo, "id"> = {

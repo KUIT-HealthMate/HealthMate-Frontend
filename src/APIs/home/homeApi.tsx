@@ -35,6 +35,7 @@ export const gethomeInfo = async () => {
     console.log("JWT 가져옴: ", localStorage.getItem("jwtToken"))
     try {
         const response = await client.get('/challenges/today');
+        console.log("gethomeInfo result is");
         console.log(response.data)
         return response.data;
     } catch (error) {

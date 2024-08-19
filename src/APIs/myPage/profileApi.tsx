@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { profileInfoDto } from '../../dtos/profile/profileDto';
 
+
 const BASE_URL = process.env.REACT_APP_BACK_URL;
 //const JWT_TOKEN = localStorage.getItem("jwtToken");
+
 
 
 export const clientImg = axios.create({
@@ -75,18 +77,22 @@ export const getProfileInfo = async () => {
 };
 
 
+
 //프로필 수정
 export const postProfile = async (selectedFile: File) => {
     const data = new FormData();
+
     data.append('profileImage', selectedFile);
     try {
         const response = await clientImg.post('/users/edit/profile', data);
+
         console.log(response.data)
         return response.data;
     } catch (error) {
         console.error('프로필 수정 실패:', error);
         throw error;
     }
+
 
 };
 

@@ -35,17 +35,13 @@ const CompleteChangeButton = <T extends Omit<pillInfo, "id" | "notificationTime"
 
     let isOverlappedName:boolean = false;
 
-    console.log(getPillCopy(editingChallengeId).name);
-    // @ts-ignore
-    console.log(newChallenge.name);
-
     // @ts-ignore
     if(getPillCopy(editingChallengeId) !== undefined){
-      if(getPillCopy(editingChallengeId).name === newChallenge.name){
+      if((getPillCopy(editingChallengeId) as Omit<pillInfo, "id">).name === newChallenge.name){
         return {isValid: true, message: ""};
       }
     } else if (getHabitCopy(editingChallengeId) !== undefined){
-      if(getHabitCopy(editingChallengeId).name === newChallenge.name){
+      if((getHabitCopy(editingChallengeId) as Omit<habitInfo, "id">).name === newChallenge.name){
         return {isValid: true, message: ""};
       }
     }
@@ -124,6 +120,7 @@ const CompleteChangeButton = <T extends Omit<pillInfo, "id" | "notificationTime"
         },"habits");
 
         console.log("idGivenByServer: " + idGivenByServer);
+        console.log(idGivenByServer);
 
         setHabitInfo({
           ...(newChallenge as unknown as habitInfo),
