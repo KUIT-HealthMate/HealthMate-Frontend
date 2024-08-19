@@ -4,6 +4,7 @@ import { initPill } from "../pages/Home/Challenge/ManagePage/utils/initChallenge
 import { serverRequest } from "../APIs/ManageChallenge/serverRequest";
 
 interface PillInfoState {
+  initializePills: () => Promise<void>
   PillInfo: pillInfo[];
   setPillInfo: (pill: pillInfo) => void;
 
@@ -59,18 +60,27 @@ export const pillPage = create<pillPageNumState>((set, get) => ({
 }));
 
 export const usePillInfoStore = create<PillInfoState>((set, get) => {
-  const initializePills = async () => {
-    try {
-      const pillArray:pillInfo[] = await serverRequest.loadChallenge<pillInfo>("supplements");
-      set({PillInfo: pillArray});
-    } catch (error) {
-      console.error("Error initializing pills:", error);
-    }
-  }
+  // const initializePills = async () => {
+  //   try {
+  //     const pillArray:pillInfo[] = await serverRequest.loadChallenge<pillInfo>("supplements");
+  //     set({PillInfo: pillArray});
+  //   } catch (error) {
+  //     console.error("Error initializing pills:", error);
+  //   }
+  // }
 
-  initializePills();
+  // initializePills();
 
   return {
+    initializePills: async () => {
+      try {
+        const pillArray:pillInfo[] = await serverRequest.loadChallenge<pillInfo>("supplements");
+        set({PillInfo: pillArray});
+      } catch (error) {
+        console.error("Error initializing pills:", error);
+      }
+    },
+  
     PillInfo: [],
 
     setPillInfo: (pill: pillInfo) =>

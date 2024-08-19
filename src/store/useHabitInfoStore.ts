@@ -4,6 +4,7 @@ import { initHabit } from "../pages/Home/Challenge/ManagePage/utils/initChalleng
 import { serverRequest } from "../APIs/ManageChallenge/serverRequest";
 
 interface HabitInfoState {
+  initializeHabits: () => Promise<void>;
   HabitInfo: habitInfo[];
   setHabitInfo: (habit: habitInfo) => void;
 
@@ -27,18 +28,27 @@ interface HabitInfoState {
 }
 
 const useHabitInfoStore = create<HabitInfoState>((set, get) => {
-  const initializeHabits = async () => {
-    try {
-      const habitArray:habitInfo[] = await serverRequest.loadChallenge<habitInfo>("habits");
-      set({HabitInfo: habitArray});
-    } catch (error) {
-      console.error("Error initializing habits:", error);
-    }
-  }
+  // const initializeHabits = async () => {
+  //   try {
+  //     const habitArray:habitInfo[] = await serverRequest.loadChallenge<habitInfo>("habits");
+  //     set({HabitInfo: habitArray});
+  //   } catch (error) {
+  //     console.error("Error initializing habits:", error);
+  //   }
+  // }
 
-  initializeHabits();
+  // initializeHabits();
 
   return {
+    initializeHabits: async () => {
+      try {
+        const habitArray:habitInfo[] = await serverRequest.loadChallenge<habitInfo>("habits");
+        set({HabitInfo: habitArray});
+      } catch (error) {
+        console.error("Error initializing habits:", error);
+      }
+    },
+
   HabitInfo: [] as habitInfo[],
 
   setHabitInfo: (habit: habitInfo) =>

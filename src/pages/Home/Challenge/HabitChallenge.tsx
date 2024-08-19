@@ -17,6 +17,7 @@ import "swiper/swiper-bundle.min.css";
 //api 관련
 import { putHabitCheck } from "../../../APIs/home/homeApi";
 import { habitDto } from "../../../dtos/home/homeDto";
+import useViewingChallengeStore from "./viewingChallengeStore/useViewingChallengeStore";
 
 SwiperCore.use([Pagination, Navigation]);
 
@@ -27,6 +28,7 @@ interface HabitChallengeProps {
 
 export default function HabitChallenge(props: HabitChallengeProps) {
   console.log("HabitChallenge: ", props.habits);
+  const { setViewingChallenge} = useViewingChallengeStore();
 
 
   // const [habitStatus, setHabitStatus] = useState<boolean[]>([]);
@@ -82,7 +84,7 @@ export default function HabitChallenge(props: HabitChallengeProps) {
       <div className={styles.HabitChallengeTitle}>
         <img src={habitIcon} className={styles.HabitImg} alt="habit"></img>
         <h1 className={styles.HabitText}>습관 챌린지</h1>
-        <Link to="/ChallengeEdit" state={{data:"habit"}} className={styles.HabitEdit}>
+        <Link to="/ChallengeEdit" className={styles.HabitEdit} onClick={() => {setViewingChallenge("habit")}}>
           편집하기<img src={clampR} className={styles.clampR} alt="clamp"></img>
         </Link>
       </div>
