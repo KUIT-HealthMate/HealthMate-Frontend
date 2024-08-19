@@ -7,6 +7,7 @@ import profileEdit from "../../../assets/profileEdit.svg";
 import backBtn from "../../../assets/backward.svg"
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 const TopWrap = styled.div`
     display: flex;
@@ -60,15 +61,23 @@ const SubmitText = styled.div`
 
 export default function Profile() {
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log("location: ", location.state.image)
 
-    const [previewImg, setPreviewImg] = useState("");
+    const [previewImg, setPreviewImg] = useState(location.state.image);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [nickName, setNickName] = useState(""); //props로 가져오는 값
+
+    const [isSuccess, setIsSuccess] = useState([false, false]);
 
     const postProfileMutation = useMutation(postProfile, {
         onSuccess: (response) => {
             console.log('프로필 성공:', response.result);
+            const newIsSuccess = [...isSuccess]
+            newIsSuccess[0] = true
+            setIsSuccess(newIsSuccess)
 
+            checkEditSuccess()
         },
         onError: (error) => {
             console.error('프로필실패:', error);
@@ -77,12 +86,22 @@ export default function Profile() {
     const postNickNameMutation = useMutation(postNickname, {
         onSuccess: (response) => {
             console.log('닉네임 변경 성공:', response.result);
+            const newIsSuccess = [...isSuccess]
+            newIsSuccess[1] = true
+            setIsSuccess(newIsSuccess)
 
+            checkEditSuccess()
         },
         onError: (error) => {
             console.error('닉네임 변경 실패:', error);
         },
     })
+
+    const checkEditSuccess = () => {
+        if (isSuccess.some(element => !element)) {
+            navigate('/mypage')
+        }
+    }
 
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -99,12 +118,14 @@ export default function Profile() {
     const handleSubmit = async () => {
         //프로필 이미지
         if (!selectedFile) {
-            console.log("파일이 선택되지 않았습니다.");
-            return;
+            console.log("파일이 선택되지 않았습니다.: ", previewImg);
+            postProfileMutation.mutate(previewImg);
+            //  return;
         } else {
-            console.log("파일 선택: ", selectedFile)
+            console.log("파일 선택: ", selectedFile);
+            postProfileMutation.mutate(selectedFile);
         }
-        postProfileMutation.mutate(selectedFile);
+
 
         // 닉네임
         postNickNameMutation.mutate(nickName);
