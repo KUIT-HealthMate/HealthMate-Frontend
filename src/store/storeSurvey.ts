@@ -54,7 +54,6 @@ export const RequestResult = create<RequestResultDto>((set) => ({
       lifeStyle: { ...state.lifeStyle, [key]: value },
     }
     )),
-
   setMealPattern: (key, value) =>
     set((state) => ({
       mealPattern: { ...state.mealPattern, [key]: value },
@@ -210,7 +209,7 @@ export const surveys: Survey[] = [
       "오전8시~오전10시",
       "오전10시~오후5시",
       "오후5시~오후10시",
-      "오후10시~오전5",
+      "오후10시~오전5시",
     ],
     multipleAble: false,
     limit: 0,
@@ -225,6 +224,36 @@ export const surveys: Survey[] = [
     type: 3,
   },
 ];
+
+
+//이전으로 돌아갔을때 버튼색 유지 위함
+interface totalBtnActiveDto {
+  btnStatus: boolean[][];
+  setBtnStatus: (questionNum: number, candidateNum: number) => void;
+  setBtnStatusFalse: (questionNum: number) => void;
+}
+
+export const totalBtnActive = create<totalBtnActiveDto>((set) => ({
+  btnStatus: surveys.map(survey => Array(survey.candidates.length).fill(false)),
+  setBtnStatus: (questionNum, candidateNum) =>
+    set((state) => {
+      const newBtnStatus = state.btnStatus.map((row, rowIndex) =>
+        rowIndex === questionNum
+          ? row.map((status, colIndex) => (colIndex === candidateNum ? !status : status))
+          : row
+      );
+      return { btnStatus: newBtnStatus }
+    }),
+  setBtnStatusFalse: (questionNum) =>
+    set((state) => {
+      const newBtnStatus = state.btnStatus.map((row, rowIndx) =>
+        rowIndx === questionNum
+          ? Array(row.length).fill((false))
+          : row
+      );
+      return { btnStatus: newBtnStatus }
+    })
+}));
 
 
 interface StoreState {
