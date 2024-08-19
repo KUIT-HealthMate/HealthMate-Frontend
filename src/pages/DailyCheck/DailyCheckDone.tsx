@@ -45,7 +45,7 @@ const DailyCheckDone = () => {
       >
         홈으로
       </button>
-      <button className={styles.startButton}>내 건강 진단 결과 확인하기</button>
+      <button className={styles.startButton} onClick={() => { navigate('/chart') }}>내 건강 진단 결과 확인하기</button>
     </div>
   );
 };

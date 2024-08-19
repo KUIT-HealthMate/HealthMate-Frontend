@@ -50,7 +50,11 @@ export default function LinearChart({
       ) : (
         <>
           <div className={s.chartAndColumns}>
-            <div className={s.linearChartContainer}>
+            <div
+              className={`${s.linearChartContainer} ${
+                xAxisVal.length === 4 ? s.isMonthly : ""
+              }`}
+            >
               <LinearChartSetting
                 dates={labels}
                 myScores={myScore}

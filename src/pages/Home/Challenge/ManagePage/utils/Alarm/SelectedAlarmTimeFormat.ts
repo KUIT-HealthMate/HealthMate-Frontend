@@ -1,7 +1,7 @@
 export interface SelectedAlarmTimeFormat {
     amOrPm: number;
     hour: number;
-    minutes: number;
+    minute: number;
     isEditMode: boolean;
     editIndex: number;
 }

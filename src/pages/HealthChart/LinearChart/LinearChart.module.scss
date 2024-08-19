@@ -43,6 +43,10 @@
   margin-bottom: -2.5px;
   margin-left: 5px;
   margin-right: 5px;
+  &.isMonthly {
+    padding-left: 13.2%;
+    padding-right: 13.2%;
+  }
 }
 
 .linearChartContainer canvas {
@@ -95,8 +99,8 @@
   margin-left: 34px;
   margin-right: 34px;
   &.isMonthly {
-    margin-left: 43px;
-    margin-right: 43px;
+    margin-left: 12%;
+    margin-right: 12%;
   }
 }
 

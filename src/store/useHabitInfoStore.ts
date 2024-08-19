@@ -1,22 +1,16 @@
 import { create } from "zustand";
-import habitInfo from "./habitInfo";
+import { habitInfo } from "./challengeTypes";
 import { initHabit } from "../pages/Home/Challenge/ManagePage/utils/initChallenge";
+import { serverRequest } from "../APIs/ManageChallenge/serverRequest";
 
 interface HabitInfoState {
   HabitInfo: habitInfo[];
   setHabitInfo: (habit: habitInfo) => void;
 
-  getExecutionRecord: (habitId: string) => boolean | undefined;
-  setExecutionRecord: (habitId: string) => void;
 
-  setWeeklyExecutionFrequency: (habitId: string, whichDay: string) => void;
-  getWeeklyExecutionFrequency: (habitId: string, whichDay: string) => boolean;
+  setWeeklyIntakeFrequency: (habitId: string, whichDay: string) => void;
+  getWeeklyIntakeFrequency: (habitId: string, whichDay: string) => boolean;
 
-  setNotificationTime: (habitId: string, hour: number, minutes: number) => void;
-  getNotificationTime: (
-    habitId: string,
-    index: number
-  ) => { hour: number; minutes: number };
 
   // 주어진 id의 habit을 삭제합니다.
   deleteHabit: (habitId: string) => void;
@@ -28,100 +22,41 @@ interface HabitInfoState {
   setHabit: (
     habitId: string,
     inputHabit: Omit<Omit<habitInfo, "id">, "notificationTime">,
-    alarmTime: { hour: number; minutes: number }[]
+    alarmTime: { hour: number; minute: number }[]
   ) => void;
 }
 
-const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
-  HabitInfo: [
-    {
-      id: "0",
-      name: "베아제",
-      executionRecord: true,
-      weeklyExecutionFrequency: {
-        monday: true,
-        tuesday: true,
-        wednesday: true,
-        thursday: true,
-        friday: true,
-        saturday: true,
-        sunday: true,
-      },
-      notificationTime: [
-        { hour: 7, minutes: 30 },
-        { hour: 12, minutes: 0 },
-        { hour: 18, minutes: 0 },
-      ],
-    },
-    {
-      id: "1",
-      name: "비타민",
-      executionRecord: false,
-      weeklyExecutionFrequency: {
-        monday: true,
-        tuesday: false,
-        wednesday: true,
-        thursday: false,
-        friday: true,
-        saturday: false,
-        sunday: false,
-      },
-      notificationTime: [
-        { hour: 7, minutes: 35 },
-        { hour: 12, minutes: 5 },
-        { hour: 18, minutes: 5 },
-      ],
-    },
-    {
-      id: "2",
-      name: "루테인",
-      executionRecord: true,
-      weeklyExecutionFrequency: {
-        monday: true,
-        tuesday: false,
-        wednesday: true,
-        thursday: true,
-        friday: false,
-        saturday: true,
-        sunday: true,
-      },
-      notificationTime: [
-        { hour: 7, minutes: 40 },
-        { hour: 12, minutes: 10 },
-        { hour: 18, minutes: 10 },
-      ],
-    },
-  ],
+const useHabitInfoStore = create<HabitInfoState>((set, get) => {
+  const initializeHabits = async () => {
+    try {
+      const habitArray:habitInfo[] = await serverRequest.loadChallenge<habitInfo>("habits");
+      set({HabitInfo: habitArray});
+    } catch (error) {
+      console.error("Error initializing habits:", error);
+    }
+  }
+
+  initializeHabits();
+
+  return {
+  HabitInfo: [] as habitInfo[],
 
   setHabitInfo: (habit: habitInfo) =>
     set((state) => ({
       HabitInfo: [...state.HabitInfo, habit],
     })),
 
-  getExecutionRecord: (habitId: string) => {
-    const habit = get().HabitInfo.find((habit) => habit.id === habitId);
-    return habit ? habit.executionRecord : undefined;
-  },
 
-  setExecutionRecord: (habitId: string) => {
-    set((state) => ({
-      HabitInfo: state.HabitInfo.map((habit) =>
-        habit.id === habitId
-          ? { ...habit, executionRecord: !habit.executionRecord }
-          : habit
-      ),
-    }));
-  },
 
-  setWeeklyExecutionFrequency: (habitId: string, whichDay: string) => {
+  setWeeklyIntakeFrequency: (habitId: string, whichDay: string) => {
     set((state) => ({
       HabitInfo: state.HabitInfo.map((habit) =>
         habit.id === habitId
           ? {
               ...habit,
-              weeklyExecutionFrequency: {
-                ...habit.weeklyExecutionFrequency,
-                [whichDay]: !(habit.weeklyExecutionFrequency as any)[whichDay],
+              weeklyIntakeFrequency: {
+                ...habit.weeklyIntakeFrequency,
+                [whichDay]: !(habit.weeklyIntakeFrequency as any)[whichDay],
               },
             }
           : habit
@@ -129,17 +64,11 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
     }));
   },
 
-  getWeeklyExecutionFrequency: (habitId: string, whichDay: string) => {
+  getWeeklyIntakeFrequency: (habitId: string, whichDay: string) => {
     const habit = get().HabitInfo.find((habit) => habit.id === habitId);
     return habit
-      ? (habit.weeklyExecutionFrequency as any)[whichDay]
+      ? (habit.weeklyIntakeFrequency as any)[whichDay]
       : undefined;
-  },
-
-  setNotificationTime: (habitId: string, hour: number, minutes: number) => {},
-
-  getNotificationTime: (habitId: string, index: number) => {
-    return { hour: 0, minutes: 0 };
   },
 
   deleteHabit: (deletingHabitId: string) =>
@@ -155,21 +84,21 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
     } else {
       //Id에 해당하는 habit의 참조를 얻는다
       const targetHabit: habitInfo = get().HabitInfo.find(
-        (habit) => habit.id === habitId
+         // eslint-disable-next-line eqeqeq
+        (habit) => habit.id == habitId
       ) as habitInfo;
 
       //얕은 복사한 복사본을 생성
       const duplicatedHabit: Omit<habitInfo, "id"> = {
         name: targetHabit.name,
-        executionRecord: targetHabit.executionRecord,
-        weeklyExecutionFrequency: {
-          monday: targetHabit.weeklyExecutionFrequency.monday,
-          tuesday: targetHabit.weeklyExecutionFrequency.tuesday,
-          wednesday: targetHabit.weeklyExecutionFrequency.wednesday,
-          thursday: targetHabit.weeklyExecutionFrequency.thursday,
-          friday: targetHabit.weeklyExecutionFrequency.friday,
-          saturday: targetHabit.weeklyExecutionFrequency.saturday,
-          sunday: targetHabit.weeklyExecutionFrequency.sunday,
+        weeklyIntakeFrequency: {
+          monday: targetHabit.weeklyIntakeFrequency.monday,
+          tuesday: targetHabit.weeklyIntakeFrequency.tuesday,
+          wednesday: targetHabit.weeklyIntakeFrequency.wednesday,
+          thursday: targetHabit.weeklyIntakeFrequency.thursday,
+          friday: targetHabit.weeklyIntakeFrequency.friday,
+          saturday: targetHabit.weeklyIntakeFrequency.saturday,
+          sunday: targetHabit.weeklyIntakeFrequency.sunday,
         },
         notificationTime: targetHabit.notificationTime.map((time) => ({
           ...time,
@@ -183,7 +112,7 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
   setHabit: (
     habitId: string,
     inputHabit: Omit<Omit<habitInfo, "id">, "notificationTime">,
-    alarmTime: { hour: number; minutes: number }[]
+    alarmTime: { hour: number; minute: number }[]
   ) => {
     set((state) => ({
       HabitInfo: state.HabitInfo.map((targetHabit) =>
@@ -191,21 +120,22 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => ({
           ? {
               ...targetHabit,
               name: inputHabit.name,
-              weeklyExecutionFrequency: {
-                monday: inputHabit.weeklyExecutionFrequency.monday,
-                tuesday: inputHabit.weeklyExecutionFrequency.tuesday,
-                wednesday: inputHabit.weeklyExecutionFrequency.wednesday,
-                thursday: inputHabit.weeklyExecutionFrequency.thursday,
-                friday: inputHabit.weeklyExecutionFrequency.friday,
-                saturday: inputHabit.weeklyExecutionFrequency.saturday,
-                sunday: inputHabit.weeklyExecutionFrequency.sunday,
+              weeklyIntakeFrequency: {
+                monday: inputHabit.weeklyIntakeFrequency.monday,
+                tuesday: inputHabit.weeklyIntakeFrequency.tuesday,
+                wednesday: inputHabit.weeklyIntakeFrequency.wednesday,
+                thursday: inputHabit.weeklyIntakeFrequency.thursday,
+                friday: inputHabit.weeklyIntakeFrequency.friday,
+                saturday: inputHabit.weeklyIntakeFrequency.saturday,
+                sunday: inputHabit.weeklyIntakeFrequency.sunday,
               },
               notificationTime: alarmTime.map((time) => ({ ...time })),
             }
           : targetHabit
-      ),
-    }));
-  },
-}));
+        ),
+      }));
+    },
+  };
+});
 
 export default useHabitInfoStore;

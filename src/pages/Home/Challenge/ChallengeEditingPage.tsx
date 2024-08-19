@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { usePillInfoStore } from "../../../store/usePillInfoStore";
 import { useEffect } from "react";
 import { useGlobalStore } from "../../../store/store";
 import useHabitInfoStore from "../../../store/useHabitInfoStore";
-import pillInfo from "../../../store/pillInfo";
+import { useLocation } from 'react-router-dom';
+import { pillInfo } from "../../../store/challengeTypes";
 
 import leftBracket from "../../../assets/leftBraket.svg";
 import pillImg from "../../../assets/pill.png";
@@ -12,6 +13,7 @@ import dummbellImg from "../../../assets/dumbbell.png";
 import s from "./SuppplementChallengeEditingPage.module.scss";
 
 import ChallengeDisplay from "./ChallengeDisplay";
+import { serverRequest } from "../../../APIs/ManageChallenge/serverRequest";
 
 const SupplementChallengeEditingPage = () => {
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
@@ -19,15 +21,22 @@ const SupplementChallengeEditingPage = () => {
     console.log("마운트됨");
     setShowBottomBar(false);
     return () => {
-      setShowBottomBar(false);
+      setShowBottomBar(true);
     };
   }, [setShowBottomBar]);
-  const navigate = useNavigate();
+  
   const { PillInfo, getIntakeTime, deletePill } = usePillInfoStore();
 
   const { HabitInfo, deleteHabit } = useHabitInfoStore();
 
-  const [challengeDisplayInfo, setChallengeDisplayInfo] = useState("pill");
+  const location = useLocation();
+
+  const [challengeDisplayInfo, setChallengeDisplayInfo] = useState<string>("pill");
+  useEffect(() => {
+    changeEditType(location.state.data);
+  },[location])
+
+  console.log(challengeDisplayInfo);
 
   const changeEditType = (type: string) => {
     setChallengeDisplayInfo(type);
@@ -41,14 +50,30 @@ const SupplementChallengeEditingPage = () => {
     }
   };
 
+  const handleDeleteFunc = (challengeType: string, challengeId: string) => {
+    if(challengeType === "pill") {
+
+      deletePill(challengeId);
+
+      serverRequest.deleteChallenge(challengeId,"supplements");
+      
+    } else {
+
+      deleteHabit(challengeId);
+
+      serverRequest.deleteChallenge(challengeId,"habits");
+
+    }
+  };
+
   return (
     <div className={s.wrap}>
       <div className={s.statusBar}></div>
       <div className={s.header}>
         <div className={s.titleBar}>
-          <button onClick={() => navigate(-1)}>
-            <img src={leftBracket} alt="" />
-          </button>
+          <Link to="/" onClick={() => setShowBottomBar(true)}>
+            <img src={leftBracket} alt="뒤로가기" />
+          </Link>
           <div className={s.title}>챌린지 편집</div>
         </div>
         <div className={s.challengeNameWrap}>
@@ -71,14 +96,14 @@ const SupplementChallengeEditingPage = () => {
       <ChallengeDisplay
         item={PillInfo}
         getIntakeTime={(pill: pillInfo) => getIntakeTime(pill)}
-        deleteFunc={deletePill}
+        deleteFunc={(challengeId: string) => handleDeleteFunc("pill", challengeId)}
         challengeType={"pill"}
         displayInfo={challengeDisplayInfo}
       />
       <ChallengeDisplay
         item={HabitInfo}
         getIntakeTime={() => {}}
-        deleteFunc={deleteHabit}
+        deleteFunc={(challengeId: string) => handleDeleteFunc("habit", challengeId)}
         challengeType={"habit"}
         displayInfo={challengeDisplayInfo}
       />

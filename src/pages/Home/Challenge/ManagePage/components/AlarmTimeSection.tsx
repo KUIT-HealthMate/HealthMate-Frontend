@@ -48,7 +48,7 @@ const AlarmTimeSection: React.FC<Props> = ({
                   {(value.hour % 12 !== 0 ? value.hour % 12 : 12)
                     .toString()
                     .padStart(2, "0")}{" "}
-                  : {value.minutes.toString().padStart(2, "0")}
+                  : {value.minute.toString().padStart(2, "0")}
                 </span>
                 <div className={"editAndDeleteBtn"}>
                   <button

@@ -184,7 +184,8 @@ export default function HealthChart() {
           />
         ) : (
           <div className={s.noData}>
-            생활습관 점수를 확인할 수 있는 데이터가 없어요.
+            <div>생활습관 점수를 확인할 수 있는</div>
+            <div>데이터가 없어요.</div>
           </div>
         )}
 

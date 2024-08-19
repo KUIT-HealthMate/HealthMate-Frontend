@@ -2,12 +2,10 @@ import styles from "./findKeyword.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useGlobalStore } from "../../store/store";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TopBarWithBackBtn from "../../components/organs/Bars/TopBarWithBackBtn";
 
-// interface findKeywordProps {
-//     navigateText: string;
-// }
+import { OnBoardingResult } from "../../store/storeOnBoardingSurvey"
 
 export const FindKeyword = () => {
   const location = useLocation();
@@ -16,7 +14,6 @@ export const FindKeyword = () => {
   console.log(navigateText);
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
-    console.log("마운트됨");
     setShowBottomBar(false);
     return () => {
       setShowBottomBar(false);
@@ -24,6 +21,21 @@ export const FindKeyword = () => {
   }, [setShowBottomBar]);
 
   const navigate = useNavigate();
+
+  const { symptoms, setSymptoms } = OnBoardingResult();
+  const [symptomValue, setSymptomValue] = useState('');
+
+  function addSymptoms(symptomName: string) {
+    console.log("기존 체크한 증상: ", symptoms);
+    const newSymptoms = symptoms;
+    newSymptoms.push(symptomName);
+    setSymptoms(newSymptoms);
+  }
+
+  const saveSymptomName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("입력한거: ", e.target.value)
+    setSymptomValue(e.target.value);
+  }
 
   return (
     <div className={styles.findKeyword}>
@@ -34,11 +46,18 @@ export const FindKeyword = () => {
         <input
           className={styles.findKeywordInput}
           placeholder="증상을 입력해주세요."
+          type="text"
+          value={symptomValue}
+          onChange={saveSymptomName}
         ></input>
       </div>
       <button
         className={styles.NextButton}
-        onClick={() => navigate(navigateText)}
+        onClick={() => {
+          navigate(navigateText);
+          addSymptoms(symptomValue);
+
+        }}
       >
         <p className={styles.NextButtonText}>다음으로</p>
       </button>

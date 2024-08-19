@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import s from "../ManagePage.module.scss";
-import pillInfo from '../../../../../store/pillInfo';
+import { pillInfo } from '../../../../../store/challengeTypes';
 import { handleEatingTiming } from '../utils/handlePillOnlyValues';
 
 interface Props {

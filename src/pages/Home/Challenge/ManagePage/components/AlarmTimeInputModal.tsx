@@ -46,7 +46,7 @@ const AlarmTimeInputModal: React.FC<Props> = ({
   };
 
   const setMinutes = (minutes: number) => {
-    setSelectedAlarmTime({ ...selectedAlarmTime, minutes: minutes });
+    setSelectedAlarmTime({ ...selectedAlarmTime, minute: minutes });
   };
 
   console.log("???");
@@ -126,9 +126,9 @@ const AlarmTimeInputModal: React.FC<Props> = ({
             ]}
             pickerStyle={{ borderRadius: "0 10px 10px 0" }}
             initialIndex={
-              selectedAlarmTime.minutes === 0
-                ? selectedAlarmTime.minutes
-                : selectedAlarmTime.minutes / 5
+              selectedAlarmTime.minute === 0
+                ? selectedAlarmTime.minute
+                : selectedAlarmTime.minute / 5
             }
             onSelectedChange={(selected) => {
               setMinutes(selected as number);

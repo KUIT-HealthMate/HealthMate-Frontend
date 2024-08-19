@@ -7,45 +7,82 @@ import uncheckmark from "../../../assets/uncheckmark.svg";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useHabitInfoStore from "../../../store/useHabitInfoStore";
+// import useHabitInfoStore from "../../../store/useHabitInfoStore";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
-import habitInfo from "../../../store/habitInfo";
+// import { habitInfo } from "../../../store/challengeTypes";
+
+//api 관련
+import { putHabitCheck } from "../../../APIs/home/homeApi";
+import { habitDto } from "../../../dtos/home/homeDto";
 
 SwiperCore.use([Pagination, Navigation]);
 
-export default function HabitChallenge() {
-  const { HabitInfo, setExecutionRecord, getExecutionRecord } =
-    useHabitInfoStore();
+interface HabitChallengeProps {
+  habits: habitDto[];
+}
 
-  const splitHabits = (array: habitInfo[]) => {
+
+export default function HabitChallenge(props: HabitChallengeProps) {
+  console.log("HabitChallenge: ", props.habits);
+
+
+  // const [habitStatus, setHabitStatus] = useState<boolean[]>([]);
+  //useState(props.habits.map(habit => habit.achievementStatus));
+
+
+  // console.log("habitStatus: ", habitStatus);
+
+
+  const splitHabits = (array: habitDto[]) => {
+    console.log("splitHabits: ", array)
     const result = [];
     for (let i = 0; i < array.length; i += 4) {
       result.push(array.slice(i, i + 4));
     }
+    console.log("habit result: ", result)
     return result;
   };
 
-  const [newHabits, setNewHabits] = useState<habitInfo[][]>([]);
+  const [newHabits, setNewHabits] = useState<habitDto[][]>([props.habits]);
+
+  useEffect(() => { //처음 페이지 진입시
+    console.log("habit useEffect")
+    const chunks = splitHabits(props.habits);
+    setNewHabits(chunks);
+    // setHabitStatus(props.habits.map(habit => habit.achievementStatus));
+  }, [props.habits]);
 
   useEffect(() => {
-    const chunks = splitHabits(HabitInfo);
-    setNewHabits(chunks);
-  }, [HabitInfo]);
+    console.log("색 바꿔: ", newHabits)
 
-  const hello = (habitid: string) => {
-    console.log(getExecutionRecord(habitid));
-    return getExecutionRecord(habitid) ? checkmark : uncheckmark;
-  };
+  }, [newHabits])
+
+
+  const today = new Date();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const date = (today.getDate()).toString().padStart(2, '0');
+  const todayDate = `${today.getFullYear()}-${month}-${date}`;
+
+  function HabitCheck(habitId: number, habitIndex: number, chunkIndex: number) {
+
+    // 체크하면 서버 전송 & 로컬에서 변경
+    putHabitCheck(todayDate, habitId);
+
+    const newNewHabits = JSON.parse(JSON.stringify(newHabits));
+    newNewHabits[chunkIndex][habitIndex].achievementStatus = !newHabits[chunkIndex][habitIndex].achievementStatus
+    setNewHabits(newNewHabits);
+
+  }
 
   return (
     <div className={styles.HabitChallenge}>
       <div className={styles.HabitChallengeTitle}>
         <img src={habitIcon} className={styles.HabitImg} alt="habit"></img>
         <h1 className={styles.HabitText}>습관 챌린지</h1>
-        <Link to="/ChallengeEdit" className={styles.HabitEdit}>
+        <Link to="/ChallengeEdit" state={{data:"habit"}} className={styles.HabitEdit}>
           편집하기<img src={clampR} className={styles.clampR} alt="clamp"></img>
         </Link>
       </div>
@@ -58,20 +95,20 @@ export default function HabitChallenge() {
         pagination={{ clickable: true }}
       >
         {newHabits.map((chunk, chunkIndex) => {
+          console.log("chunk:", chunk)
           return (
             <SwiperSlide>
               {chunk.map((habit, habitIndex) => {
                 return (
                   <div className={styles.HabitInfo}>
-                    <p className={styles.HabitName}>{habit.name}</p>
+                    <p className={styles.HabitName}>{habit.challengeName}</p>
                     <img
                       className={styles.HabitCheckmark}
                       onClick={() => {
-                        setExecutionRecord(habit.id);
-                        console.log(habit.id + habit.executionRecord);
+                        HabitCheck(habit.challengeId, habitIndex, chunkIndex);
                       }}
-                      src={hello(habit.id)}
-                      alt="hello"
+                      src={habit.achievementStatus === true ? checkmark : uncheckmark}
+                      alt="check_uncheck"
                     ></img>
                   </div>
                 );

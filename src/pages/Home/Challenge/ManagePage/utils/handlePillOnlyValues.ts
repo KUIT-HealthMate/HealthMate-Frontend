@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import pillInfo from "../../../../../store/pillInfo";
+import { pillInfo } from "../../../../../store/challengeTypes";
 
 export const handleBeforeOrAfterMeal = <T extends pillInfo>(
   value: number, 
@@ -27,7 +27,6 @@ export const handleEatingTiming = <T extends pillInfo>(
     setter: (value: React.SetStateAction<Omit<T, "id" | "notificationTime">>) => void, 
     newPill: Omit<T, "id" | "notificationTime">
   ): void => {
-
     setter({...newPill as T, dailyIntakePeriod: {
       ...newPill.dailyIntakePeriod,
       [value]: !(newPill.dailyIntakePeriod as any)[value],

@@ -10,6 +10,10 @@ import { useGlobalStore } from "../../store/store";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopBarWithCancel from "../../components/organs/Bars/TopBarWithCancel";
+import { OnBoardingResult } from "../../store/storeOnBoardingSurvey";
+
+import { postOnBoarding } from "../../APIs/onBoarding/onBoardingApi";
+import { useMutation } from 'react-query';
 
 const purposeButtons = [
   { icon: purpose1, text: "루틴" },
@@ -21,6 +25,7 @@ const purposeButtons = [
 ];
 
 const OnBoardingCheckPurpose = () => {
+  const { gender, ageGroup, symptoms, setPurposes } = OnBoardingResult();
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
   useEffect(() => {
     console.log("마운트됨");
@@ -29,6 +34,17 @@ const OnBoardingCheckPurpose = () => {
       setShowBottomBar(false);
     };
   }, [setShowBottomBar]);
+
+  const postOnBoardingMutation = useMutation(postOnBoarding, {
+    onSuccess: (response) => {
+      console.log('온보딩 정보 보내기 성공:', response);
+    },
+    onError: (error) => {
+      console.error('온보딩 정보 보내기 실패:', error);
+    },
+  })
+
+
 
   const [purposeCheck, setPurposeCheck] = useState(
     purposeButtons.map((purposeButton) => false)
@@ -57,6 +73,34 @@ const OnBoardingCheckPurpose = () => {
     changeBtnColor(idx);
   }
 
+  //'다음으로' 누르면 store 저장 & 서버 전송
+  function setPurposeStore() {
+    const checkedPurposeId = [];
+
+    for (let i = 0; i < purposeCheck.length; i++) {
+      if (purposeCheck[i] === true) {
+        checkedPurposeId.push(i)
+      }
+    }
+    console.log("purposeCheck: ", checkedPurposeId)
+    console.log(OnBoardingResult)
+    setPurposes(checkedPurposeId);
+
+    const requestData = {
+      gender: gender,
+      ageGroup: ageGroup,
+      symptoms: symptoms,
+      purpose: checkedPurposeId,
+    }
+
+    //서버 전송
+
+    postOnBoardingMutation.mutate(requestData);
+
+
+  }
+
+
   const navigate = useNavigate();
   return (
     <>
@@ -64,7 +108,7 @@ const OnBoardingCheckPurpose = () => {
       {/* <div className={styles.backButton} onClick={() => navigate(-1)}>
                 <img style={{ width: `8.89px`, height: `16px` }} src={leftBracket} />
             </div> */}
-      <ProgressBar percent={50}></ProgressBar>
+      <ProgressBar percent={75}></ProgressBar>
       <div className={styles.purposeTop}>
         <div className={styles.purposeTitle}>어떤 목적으로</div>
         <div className={styles.purposeTitle}>헬스메이트를 찾아주셨나요?</div>
@@ -86,10 +130,10 @@ const OnBoardingCheckPurpose = () => {
                 style={
                   purposeCheck[idx] === true
                     ? {
-                        background: `rgba(14, 148, 148, 0.1)`,
-                        color: `#0E9494`,
-                        border: `1px solid #0E9494`,
-                      }
+                      background: `rgba(14, 148, 148, 0.1)`,
+                      color: `#0E9494`,
+                      border: `1px solid #0E9494`,
+                    }
                     : {}
                 }
               >
@@ -110,16 +154,19 @@ const OnBoardingCheckPurpose = () => {
         disabled={
           purposeCheck.filter((element) => element).length > 0 ? false : true
         }
-        onClick={() => navigate("/welcome")}
+        onClick={() => {
+          navigate("/welcome");
+          setPurposeStore();
+        }}
         style={
           purposeCheck.filter((element) => element).length > 0
             ? { position: `fixed`, bottom: `33px` }
             : {
-                position: `fixed`,
-                bottom: `33px`,
-                background: `#F5F6F8`,
-                color: `#8F8F8F`,
-              }
+              position: `fixed`,
+              bottom: `33px`,
+              background: `#F5F6F8`,
+              color: `#8F8F8F`,
+            }
         }
       >
         <p className={styles.NextButtonText}>다음으로</p>
