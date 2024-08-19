@@ -1,14 +1,15 @@
 import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_BACK_URL;
-//const JWT_TOKEN = localStorage.getItem("jwtToken");
+const JWT_TOKEN = localStorage.getItem("jwtToken");
 
 export const client = axios.create({
-    baseURL: "http://3.39.60.18:9000",
+    baseURL: BASE_URL,
     headers: {
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*',
-        'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8',
+        'Jwt': JWT_TOKEN,
+        //'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8',
     },
 });
 
@@ -17,7 +18,8 @@ export const clientNickname = axios.create({
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8',
+        'Jwt': JWT_TOKEN,
+        //        'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8',
     },
 });
 
