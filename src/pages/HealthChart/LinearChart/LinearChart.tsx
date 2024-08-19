@@ -77,8 +77,8 @@ export default function LinearChart({
             }`}
           >
             <div className={s.xAxis}>
-              {xAxisVal.map((date) => (
-                <div className={s.xAtom}>{`${date}`}</div>
+              {xAxisVal.map((date, index) => (
+                <div key={index} className={s.xAtom}>{`${date}`}</div>
               ))}
             </div>
           </div>
