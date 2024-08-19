@@ -9,16 +9,30 @@ export const client = axios.create({
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Jwt': JWT_TOKEN,
-        //'Jwt': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8`,
     },
 
 });
+
+// 인터셉터 추가해 매 요청마다 JWT 토큰 추가
+client.interceptors.request.use(
+    config => {
+        const JWT_TOKEN = localStorage.getItem("jwtToken");
+        console.log("interceptor에서 ㅓ: ", JWT_TOKEN);
+        if (JWT_TOKEN) {
+            config.headers['Jwt'] = JWT_TOKEN; // 'Authorization' 헤더에 추가
+        }
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 
 //홈정보
 export const gethomeInfo = async () => {
     console.log("JWT_TOKEN: ", JWT_TOKEN)
+    console.log("JWT 가져옴: ", localStorage.getItem("jwtToken"))
     try {
         const response = await client.get('/challenges/today');
         console.log(response.data)
