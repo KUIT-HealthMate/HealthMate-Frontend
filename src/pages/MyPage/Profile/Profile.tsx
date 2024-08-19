@@ -119,7 +119,11 @@ export default function Profile() {
         //프로필 이미지
         if (!selectedFile) {
             console.log("파일이 선택되지 않았습니다.: ", previewImg);
-            postProfileMutation.mutate(previewImg);
+
+            const newIsSuccess = [...isSuccess]
+            newIsSuccess[0] = true
+            setIsSuccess(newIsSuccess)
+            //postProfileMutation.mutate(previewImg);
             //  return;
         } else {
             console.log("파일 선택: ", selectedFile);
@@ -176,7 +180,7 @@ export default function Profile() {
                     <div className={styles.nicknameTitle}>닉네임</div>
                     <input
                         className={styles.inputNickname}
-                        //placeholder="증상을 입력해주세요."
+                        placeholder={location.state.name}
                         type="text"
                         //   value={symptomValue}
                         onChange={handleNameChange}

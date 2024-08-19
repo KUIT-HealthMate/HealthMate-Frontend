@@ -28,7 +28,8 @@ export default function MyPageTopBar({
         <div className={s.editNickNameContainer}>
           <div className={s.editName} onClick={() => navigate('/profile', {
             state: {
-              image: `${userProfileImg}`
+              image: `${userProfileImg}`,
+              name: `${userName}`
             }
           })}>프로필 편집하기</div>
           <img src={editNickName} alt="닉네임수정" className={s.editArrow} />
