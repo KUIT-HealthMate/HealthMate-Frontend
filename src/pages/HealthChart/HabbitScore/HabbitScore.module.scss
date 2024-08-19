@@ -111,6 +111,9 @@
   border-radius: 15px;
   position: absolute;
   z-index: 1;
+  &.lowerThenAvg {
+    z-index: 3;
+  }
 
   .userLabel {
     font-family: "Pretendard";
@@ -147,4 +150,5 @@
   font-size: 13px;
   font-weight: 500;
   color: #8f8f8f;
+  margin-top: 4px;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   BarChart,
   Bar,
@@ -6,26 +6,34 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import "../../../pretendard.css";
 
-const weeklyData = [
-  { date: "11일", myScore: 80, avgScore: 50 },
-  { date: "12일", myScore: 60, avgScore: 25 },
-  { date: "13일", myScore: 100, avgScore: 50 },
-  { date: "14일", myScore: 80, avgScore: 50 },
-  { date: "15일", myScore: 75, avgScore: 15 },
-  { date: "16일", myScore: 80, avgScore: 50 },
-  { date: "17일", myScore: 55, avgScore: 50 },
-];
-const monthlyData = [
-  { date: "첫째 주", myScore: 80, avgScore: 50 },
-  { date: "둘째 주", myScore: 60, avgScore: 25 },
-  { date: "셋째 주", myScore: 75, avgScore: 30 },
-  { date: "넷째 주", myScore: 75, avgScore: 15 },
-];
+interface BarGraphProps {
+  data: {
+    date: string;
+    myScore: number;
+    avgScore: number;
+  }[];
+}
+
+// const weeklyData = [
+//   { date: "11일", myScore: 80, avgScore: 50 },
+//   { date: "12일", myScore: 60, avgScore: 25 },
+//   { date: "13일", myScore: 100, avgScore: 50 },
+//   { date: "14일", myScore: 80, avgScore: 50 },
+//   { date: "15일", myScore: 75, avgScore: 15 },
+//   { date: "16일", myScore: 80, avgScore: 50 },
+//   { date: "17일", myScore: 55, avgScore: 50 },
+// ];
+// const monthlyData = [
+//   { date: "첫째 주", myScore: 80, avgScore: 50 },
+//   { date: "둘째 주", myScore: 60, avgScore: 25 },
+//   { date: "셋째 주", myScore: 75, avgScore: 30 },
+//   { date: "넷째 주", myScore: 75, avgScore: 15 },
+// ];
 
 const RoundedBar = (props: any) => {
   const { fill, x, y, width, height } = props;
-  console.log(width, height);
   const radius = width / 2; // 원하는 둥글기 정도
 
   return (
@@ -80,31 +88,31 @@ const CustomBarLabelAvg = (props: any) => {
   );
 };
 
-const BarGraph: React.FC = () => {
-  const [chartType, setChartType] = useState("weekly");
-  const [data, setData] = useState(weeklyData);
-  const [percent, setPercent] = useState(98 / 2 / data.length / 2);
-  const [barSize, setBarSize] = useState(`${percent}%`);
+const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
+  // const [chartType, setChartType] = useState("weekly");
+  // const [data, setData] = useState(weeklyData);
+  // const [percent, setPercent] = useState(98 / 2 / data.length / 2);
+  // const [barSize, setBarSize] = useState(`${percent}%`);
 
   //통신으로 percent값 가져오기
-  useEffect(() => {
-    console.log(chartType);
+  // useEffect(() => {
+  //   if (chartType === "weekly") {
+  //     setData(weeklyData);
+  //     setPercent(98 / 2 / data.length / 2);
+  //     setBarSize(barSize);
+  //     setChartType("weekly");
+  //   } else {
+  //     setData(monthlyData);
+  //     setPercent(98 / 2 / data.length / 2);
+  //     setBarSize(`${percent}%`);
+  //     setChartType("monthly");
+  //   }
+  // }, [barSize, chartType, data.length, percent]);
 
-    if (chartType === "weekly") {
-      setData(weeklyData);
-      setPercent(98 / 2 / data.length / 2);
-      setBarSize(barSize);
-      setChartType("weekly");
-    } else {
-      setData(monthlyData);
-      setPercent(98 / 2 / data.length / 2);
-      setBarSize(`${percent}%`);
-      setChartType("monthly");
-    }
-  }, [barSize, chartType, data.length, percent]);
-
+  const percent = 98 / 2 / data.length / 2;
+  const barSize = `${percent}%`;
   return (
-    <div style={{ width: `100%`, height: `66%` }}>
+    <div style={{ width: `97%`, height: `71%`, margin: `13px 0px 0px 6px` }}>
       {/* <div> */}
       <ResponsiveContainer>
         <BarChart data={data} margin={{ top: 10 }}>
@@ -129,9 +137,9 @@ const BarGraph: React.FC = () => {
               strokeWidth: 1,
               fontSize: "14px",
               fontFamily: "Pretendard",
-              fontStyle: "normal",
-              fontWeight: 500,
+              fontWeight: 80,
               fill: "#8F8F8F",
+              letterSpacing: 1,
             }}
           />
 

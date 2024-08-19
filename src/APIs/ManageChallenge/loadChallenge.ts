@@ -10,6 +10,7 @@ export const loadChallenge = <T>(challengeType: string): Promise<T[]> => {
 
   console.log(localStorage.getItem('jwtToken') as string);
 
+
   // 서버에 요청을 보낸다.
   return fetch(
     serverURL + endpoint,

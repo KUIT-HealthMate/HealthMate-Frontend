@@ -88,8 +88,10 @@ const Router = () => {
         <Route path="/findkeyword" element={<FindKeyword />} />
 
         <Route path="/usage" element={<CoinDepositAndUsage />} />
+        <Route path="/community" element={<Community />} />
 
         <Route path="/community" element={<Community />} />
+
       </Routes>
     </div>
   );

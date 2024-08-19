@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import styles from "./Survey.module.scss";
 import ProgressBar from "./ProgressBar";
-import { useGlobalStoreSurvey, surveyAnswer } from "../../../store/storeSurvey";
+import { useGlobalStoreSurvey, surveyAnswer, totalBtnActive } from "../../../store/storeSurvey";
 import { useNavigate } from "react-router-dom";
 import leftBracket from "../../../assets/leftBraket.svg";
+
 
 interface Props {
   questions: string[];
@@ -31,39 +31,23 @@ const Survey = ({
     currentQuestionIdx: state.currentQuestionIdx,
   }));
 
-  const [btnActive, setBtnActive] = useState(
-    candidates.map((candidate) => false)
-  );
+  const { btnStatus, setBtnStatus, setBtnStatusFalse } = totalBtnActive()
 
   function changeBtnColor(idx: number) {
-    console.log(btnActive);
-    setBtnActive((prevState) => {
-      const newState = [...prevState];
-      newState[idx] = !newState[idx];
-      console.log(newState);
-      return newState;
-    });
+    console.log("changeBtnColor: ", currentQuestionIdx.currentQuestionIdx);
+    setBtnStatus(currentQuestionIdx.currentQuestionIdx, idx)
   }
 
-  function setBtnDefault() {
-    setBtnActive((prevState) => {
-      console.log("setBtnDefault");
-      console.log(prevState);
-
-      const newState = prevState.map(() => false);
-      return newState;
-    });
-  }
 
   function handleButtonClick(idx: number, multipleAble: boolean) {
+    console.log("선택한 문제번호, 선지 idx: ", nextQuestion.currentQuestionIdx, idx, multipleAble)
     if (!multipleAble) {
       //복수 선택 불가
-      const newArr = Array(candidates.length).fill(false);
-      setBtnActive(newArr);
+      setBtnStatusFalse(currentQuestionIdx.currentQuestionIdx);
     } else {
       // 체크한거 수 세서 >limit 면 changeBtnColor X
-      const trueCnt = btnActive.filter((element) => element).length;
-      if (trueCnt >= limit && !btnActive[idx]) {
+      const trueCnt = btnStatus[currentQuestionIdx.currentQuestionIdx].filter((element) => element).length;
+      if (trueCnt >= limit && !btnStatus[currentQuestionIdx.currentQuestionIdx][idx]) {
         console.error("더 이상 선택 불가");
         return;
       }
@@ -81,7 +65,7 @@ const Survey = ({
   function calculateScore(questionIdx: number): number {
     let score = 0;
     for (let i = 0; i < candidates.length; i++) {
-      if (btnActive[i] === true) {
+      if (btnStatus[currentQuestionIdx.currentQuestionIdx][i] === true) {
 
         if (questionIdx <= 2 || questionIdx === 7 || questionIdx === 14) {
           // 오름차순
@@ -101,8 +85,6 @@ const Survey = ({
           }
         }
 
-
-
       }
     }
     return score;
@@ -111,7 +93,7 @@ const Survey = ({
   function findType(questionIdx: number): number {
     let type = 0;
     for (let i = 0; i < candidates.length; i++) {
-      if (btnActive[i] === true) {
+      if (btnStatus[currentQuestionIdx.currentQuestionIdx][i] === true) {
         type = i + 1;
         break;
       }
@@ -140,9 +122,7 @@ const Survey = ({
       const score = calculateScore(currentQuestionIdx.currentQuestionIdx);
       handleAnswer(currentQuestionIdx.currentQuestionIdx, score);
     }
-
-
-    setBtnDefault();
+    // setBtnDefault();
 
     nextQuestion.nextQuestion();
 
@@ -162,7 +142,7 @@ const Survey = ({
   }
 
   function NextButtonActive() {
-    if (btnActive.some((isActive) => isActive)) {
+    if (btnStatus[currentQuestionIdx.currentQuestionIdx].some((isActive) => isActive)) {
       return true;
     } else {
       return false;
@@ -174,10 +154,6 @@ const Survey = ({
   }));
 
   console.log("progressPercent: " + progressPercent);
-
-  useEffect(() => {
-    console.log("useeffect_Survey");
-  }, [btnActive]);
 
   const navigate = useNavigate();
 
@@ -212,7 +188,6 @@ const Survey = ({
         <div className={styles.survey}>
           <div className={styles.question}>
             <div className={styles.questionText}>
-
             </div>
             {
               questions.map((question, idx) => {
@@ -248,7 +223,8 @@ const Survey = ({
                     handleButtonClick(idx, multipleAble);
                   }}
                   style={
-                    btnActive[idx]
+                    btnStatus[nextQuestion.currentQuestionIdx][idx]
+                      //btnActive[idx]
                       ? {
                         background: `rgba(14, 148, 148, 0.1)`,
                         color: `#0E9494`,
