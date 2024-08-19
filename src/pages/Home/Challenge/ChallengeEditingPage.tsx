@@ -1,10 +1,10 @@
-import { useState } from "react";
+
 import { Link } from "react-router-dom";
 import { usePillInfoStore } from "../../../store/usePillInfoStore";
 import { useEffect } from "react";
 import { useGlobalStore } from "../../../store/store";
 import useHabitInfoStore from "../../../store/useHabitInfoStore";
-import { useLocation } from 'react-router-dom';
+
 import { pillInfo } from "../../../store/challengeTypes";
 
 import leftBracket from "../../../assets/leftBraket.svg";
@@ -14,6 +14,7 @@ import s from "./SuppplementChallengeEditingPage.module.scss";
 
 import ChallengeDisplay from "./ChallengeDisplay";
 import { serverRequest } from "../../../APIs/ManageChallenge/serverRequest";
+import useViewingChallengeStore from "./viewingChallengeStore/useViewingChallengeStore";
 
 const SupplementChallengeEditingPage = () => {
   const setShowBottomBar = useGlobalStore((state) => state.setShowBottomBar);
@@ -29,17 +30,21 @@ const SupplementChallengeEditingPage = () => {
 
   const { HabitInfo, deleteHabit } = useHabitInfoStore();
 
-  const location = useLocation();
+  const { viewingChallenge, setViewingChallenge } = useViewingChallengeStore();
 
-  const [challengeDisplayInfo, setChallengeDisplayInfo] = useState<string>("pill");
+
+  // const [challengeDisplayInfo, setChallengeDisplayInfo] = useState<string>("pill");
+
   useEffect(() => {
-    changeEditType(location.state.data);
-  },[location])
+    changeEditType(viewingChallenge);
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
-  console.log(challengeDisplayInfo);
+  console.log("viewingChallenge is: " + viewingChallenge);
 
   const changeEditType = (type: string) => {
-    setChallengeDisplayInfo(type);
+    setViewingChallenge(type);
     const buttons = document.getElementsByClassName(s.challengeName);
     if (type === "pill") {
       (buttons[0] as HTMLElement).style.borderBottom = "3px solid #0E9494";
@@ -98,14 +103,12 @@ const SupplementChallengeEditingPage = () => {
         getIntakeTime={(pill: pillInfo) => getIntakeTime(pill)}
         deleteFunc={(challengeId: string) => handleDeleteFunc("pill", challengeId)}
         challengeType={"pill"}
-        displayInfo={challengeDisplayInfo}
       />
       <ChallengeDisplay
         item={HabitInfo}
         getIntakeTime={() => {}}
         deleteFunc={(challengeId: string) => handleDeleteFunc("habit", challengeId)}
         challengeType={"habit"}
-        displayInfo={challengeDisplayInfo}
       />
     </div>
   );
