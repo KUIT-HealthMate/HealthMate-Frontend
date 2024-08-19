@@ -2,13 +2,14 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import s from "./WeeklyCalander.module.scss";
 import DailyDetails from "../DailyDetails";
-import { CalanderDataInterface } from "../../../../test/mock/mockup";
+import { challanegesType } from "../dataTypes";
+//import { CalanderDataInterface } from "../../../../test/mock/mockup";
 
 export type CalanderDataType = dayjs.Dayjs | null;
 
 interface CalanderProps {
   periodSelect: dayjs.Dayjs;
-  data: CalanderDataInterface;
+  data: challanegesType[];
 }
 
 export default function WeeklyCalander({ periodSelect, data }: CalanderProps) {
@@ -24,8 +25,10 @@ export default function WeeklyCalander({ periodSelect, data }: CalanderProps) {
     setSelectedDay(null);
   }, [periodSelect]);
 
-  const selectColor = (percent: number) => {
-    if (percent <= 30) {
+  const selectColor = (percent: number | undefined) => {
+    if (percent === undefined) {
+      return "";
+    } else if (percent <= 30) {
       return s.under30;
     } else if (percent <= 50) {
       return s.under50;
@@ -110,12 +113,20 @@ export default function WeeklyCalander({ periodSelect, data }: CalanderProps) {
               <div
                 className={`${s.acheivement} ${
                   date !== null
-                    ? selectColor(data[date?.date()].dailyAccomplishment)
+                    ? selectColor(
+                        data.find(
+                          (item) => date.format("YYYY-MM-DD") === item.date
+                        )?.achievementRate
+                      )
                     : ""
                 }`}
               >
                 {date !== null
-                  ? `${data[date?.date()].dailyAccomplishment}%`
+                  ? `${
+                      data.find(
+                        (item) => date.format("YYYY-MM-DD") === item.date
+                      )?.achievementRate
+                    }%`
                   : ""}
               </div>
             </div>

@@ -1,21 +1,23 @@
-import { periodName } from "../HealthChart";
+import { chartDataType, periodName } from "../HealthChart";
 import s from "./HabbitScore.module.scss";
 
 interface HabbitScoreProps {
   period: periodName;
   periodScore: number;
   averageScore: number;
+  dataType: chartDataType;
 }
 
 export default function HabbitScore({
   period,
   periodScore,
   averageScore,
+  dataType,
 }: HabbitScoreProps) {
   const showingPeriod = (period: periodName) => {
-    if (period === "daily") return "일간";
-    else if (period === "weekly") return "주간";
-    else if (period === "monthly") return "월간";
+    if (period === "day") return "일간";
+    else if (period === "week") return "주간";
+    else if (period === "month") return "월간";
   };
 
   const aboutHabbitState = (periodScore: number) => {
@@ -32,13 +34,24 @@ export default function HabbitScore({
     }
   };
 
+  const showingDataType = (dataType: chartDataType) => {
+    switch (dataType) {
+      case "habbit":
+        return "생활습관";
+      case "mealPattern":
+        return "식사습관";
+      case "sleepingPattern":
+        return "수면습관";
+    }
+  };
+
   return (
     <div className={s.componentContainer}>
       <div className={s.contentContainer}>
         <div className={s.titleContainer}>
           <div className={s.title}>{`내 ${showingPeriod(
             period
-          )} 생활습관은`}</div>
+          )} ${showingDataType(dataType)}은`}</div>
           <div className={s.score}>{`${periodScore}점`}</div>
           <div className={s.title}>이에요</div>
         </div>
@@ -78,8 +91,13 @@ export default function HabbitScore({
               >
                 <div className={s.averageCircle} />
               </div>
-              <div className={s.userBar} style={{ width: `${periodScore}%` }}>
-                <div className={s.userLabel}>{periodScore}</div>
+              <div
+                className={`${s.userBar} ${
+                  averageScore >= periodScore ? s.lowerThenAvg : ""
+                }`}
+                style={{ width: `${periodScore}%` }}
+              >
+                <div className={`${s.userLabel} `}>{periodScore}</div>
               </div>
               <div className={s.maxScore}>100</div>
             </div>

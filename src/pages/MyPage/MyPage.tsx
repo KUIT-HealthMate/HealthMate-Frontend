@@ -1,6 +1,9 @@
 import MyPageTopBar from "./MyPageTopBar";
 import s from "./MyPage.module.scss";
 import CoinBlock from "./CoinPage/CoinBlock";
+import MyCommunity from "./MyCommunity/MyCommunity";
+import MyHealthProblems from "./MyHealthProblems/MyHealthProblems";
+import SettingManagement from "./SettingManagement/SettingManage";
 import { useMutation } from 'react-query';
 import { getProfileInfo } from "../../APIs/myPage/profileApi";
 import { useState, useEffect } from "react";
@@ -33,10 +36,9 @@ export default function MyPage() {
     <div className={s.background}>
       <MyPageTopBar userName={profileInfo ? profileInfo.nickname : '쿠잇'} userProfileImg={profileInfo ? profileInfo.profileImage : "null"} />
       <CoinBlock deposit={profileInfo ? profileInfo.coin : 0} />
-      {/* <CoinBlock deposit={120} />
-      <CoinBlock deposit={120} />
-      <CoinBlock deposit={120} />
-      <CoinBlock deposit={120} /> */}
+      <MyCommunity myPosts={12} myComments={8} savedPost={12} />
+      <MyHealthProblems myProblems={["다리통증", "감기", "코로나"]} />
+      <SettingManagement version="ver 1.0" />
     </div>
   );
 }

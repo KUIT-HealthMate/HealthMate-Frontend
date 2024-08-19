@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import PageTopBar from "../../../components/organs/Bars/PageTopBar";
 import forward from "../../../assets/forward.svg";
 import backward from "../../../assets/backward.svg";
 import s from "./ChallengeStatistics.module.scss";
 import StatisticsDetails from "./StatisticsDetails";
-//현재 목업데이터를 챌린지 통계화면에서 로드 후 props로 하위 컴포넌트에 전달
-import { julyMock } from "../../../test/mock/mockup";
+import { getDataByPeriod } from "../../../APIs/ChallengeStatisticsAPI/getDataByPeriod";
+//import { julyMock } from "../../../test/mock/mockup";
+import { dataForCalander } from "./dataTypes";
+//현재 선택된 달력과 기간에 맞는 데이터를 챌린지 통계화면에서 로드 후 props로 하위 컴포넌트에 전달
 //데이터 로드(월간/주간달력선택, 기간변경 시 마다)
 
 export default function ChallengeStatistics() {
   const [period, setPeriod] = useState<dayjs.Dayjs>(dayjs());
+  const [calanderSelect, setCalanderSelect] = useState(true);
+  const [calanderData, setCalanderData] = useState<dataForCalander | null>(
+    null
+  );
+
+  useEffect(() => {
+    getDataByPeriod(period, calanderSelect).then((response) => {
+      setCalanderData(response);
+    });
+  }, [period, calanderSelect]);
 
   const reduceMonth = () => {
     const reducedDay = dayjs(period).subtract(1, "month");
@@ -36,7 +48,7 @@ export default function ChallengeStatistics() {
     //한주 뒤 데이터 받아오기
   };
 
-  const [calanderSelect, setCalanderSelect] = useState(true);
+  //true는 주간, false는 월간
   const selectWeeklyCalander = () => {
     setCalanderSelect(true);
   };
@@ -78,12 +90,14 @@ export default function ChallengeStatistics() {
           </div>
         </div>
       </div>
+
       <StatisticsDetails
         calanderSelect={calanderSelect}
         periodSelect={period}
-        data={julyMock}
+        data={calanderData}
       />
     </>
+    //calanderData가 null일 떄의 처리 추가해야함
     //link가 아니라 주간/월간 선택값(boolean)에 따라서 캘린더만 다르게 렌더링
     //날짜 선택이나 진행표 같은건 다 똑같음
     //캘린더, 캘린더 제외한 하단 화면 전체(날짜선택상태는 여기 있어야됨)로 나눠서
