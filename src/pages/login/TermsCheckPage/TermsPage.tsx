@@ -93,7 +93,7 @@ const TermsPage: React.FC<Props> = ({ modal, setModal }) => {
           </div>
           {isAllEssentialChecksTrue() ? (
             <Link
-              to="/"
+              to="/onboarding"
               className={s.agreeTermsCompleteButton}
               onClick={() => setModal(false)}
             >
