@@ -40,10 +40,8 @@ const EmailCheckPage = () => {
         <button type="button" onClick={() => handleBackbutton()}>
           <img className={s.leftBraketImg} src={leftBraket} alt="" />
         </button>
-        <span className={s.emailCheckText}>이메일을 확인해주세요</span>
         <div className={s.emailWrap}>
           <img src={kakaoTalkIconWithBackground} alt="" />
-          <span className={s.emailText}>user@example.com</span>
         </div>
       </div>
       <button
