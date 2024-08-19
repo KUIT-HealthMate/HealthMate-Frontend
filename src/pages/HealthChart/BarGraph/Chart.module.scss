@@ -1,78 +1,74 @@
 .chart {
-    position: relative;
-    // width: 333px;
+  position: relative;
+  // width: 333px;
 
-    height: 280px;
-    padding-left: 21px;
-    padding-right: 21px;
-    margin: 21px 21px 0px 21px;
+  height: 280px;
+  padding: 0px 21px;
+  margin: 21px 21px 0px 21px;
 
-    background: #FFFFFF;
-    border: 1px solid #EBEBEB;
+  background: #ffffff;
 
-    box-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
+  box-shadow: -2px 0px 20px 0px #00000026;
+  border-radius: 15px;
 
+  .chartTop {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 6px;
 
-    .chartTop {
-        display: flex;
-        height: 30px;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 15px;
-        margin-bottom: 6px;
+    .chartText {
+      margin-top: 26px;
+      margin-left: -5px;
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 150%;
+      /* identical to box height, or 30px */
 
-
-        .chartText {
-            height: 30px;
-
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 20px;
-            line-height: 150%;
-            /* identical to box height, or 30px */
-
-            /* black-200 */
-            color: #1E1E1E;
-        }
-
-        .changeChartBtn {
-            height: 18px;
-            width: 18px;
-        }
+      /* black-200 */
+      color: #1e1e1e;
     }
 
-    .chartBottom {
-        position: absolute;
-        bottom: 18px;
-        display: flex;
-        margin-left: 11px;
-        gap: 21px;
-
-        .legend {
-            display: flex;
-
-            .legendColor {
-                width: 8px;
-                height: 8px;
-                margin-right: 5px;
-                background: #67CFBC;
-            }
-
-            .legendText {
-                font-family: 'Pretendard';
-                font-style: normal;
-                font-weight: 500;
-                font-size: 11px;
-                line-height: 10px;
-                /* identical to box height, or 91% */
-
-                /* 그레이6 */
-                color: #8F8F8F;
-            }
-        }
+    .changeChartBtn {
+      margin-top: 30px;
+      height: 18px;
+      width: 18px;
     }
+  }
 
+  .chartBottom {
+    position: absolute;
+    bottom: 18px;
+    display: flex;
+    margin-left: 11px;
+    gap: 21px;
 
+    .legend {
+      display: flex;
+
+      .legendColor {
+        width: 8px;
+        height: 8px;
+        margin-top: 1px;
+        margin-right: 5px;
+        background: #67cfbc;
+      }
+
+      .legendText {
+        font-family: "Pretendard";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 11px;
+        line-height: 10px;
+        /* identical to box height, or 91% */
+
+        /* 그레이6 */
+        color: #8f8f8f;
+      }
+    }
+  }
 }

@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   background-color: #f4f5fa;
+  padding-bottom: 180px;
 }
 
 .selector {
@@ -60,4 +61,40 @@
   font-family: "Pretendard";
   font-size: 18px;
   font-weight: 700;
+}
+
+.dailyCheckButton {
+  position: fixed;
+  bottom: 89.65px;
+  margin-bottom: 29px;
+  height: 44.3px;
+  width: 48%;
+  margin-left: 26%;
+  background: #f97f59;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 19.9648px;
+  border: 0;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+  text-align: center;
+  color: #ffffff;
+  z-index: 99;
+}
+
+.noData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px;
+  height: 80px;
+  color: #aaaaaa;
+  text-wrap: wrap;
+  font-family: "Pretendard";
+  font-size: 18px;
+  font-weight: 600;
 }

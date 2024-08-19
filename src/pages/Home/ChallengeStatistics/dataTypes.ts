@@ -26,10 +26,7 @@ export type calanderResponseDataType = {
   status: number;
   message: string;
   timestamp: string;
-  result: {
-    challengeResponses: challanegesType[];
-    totalAchievementRate: number;
-  };
+  result: dataForCalander;
 };
 
 export type dataForCalander = {
