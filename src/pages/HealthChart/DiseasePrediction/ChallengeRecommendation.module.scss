@@ -1,0 +1,62 @@
+.challengeRecommendContainer {
+  padding: 46px 21px;
+}
+
+.title {
+  font-family: "Pretendard";
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 17px;
+}
+
+.contentContainer {
+  font-family: "Pretendard";
+  font-size: 15px;
+  font-weight: 700;
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid #dedede;
+  box-shadow: -2px 0px 20px 0px #00000026;
+  height: 52px;
+  padding: 0px 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 12px 0px;
+}
+
+.contentDescription {
+  font-family: "Pretendard";
+  font-size: 15px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.challengeAddButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pretendard";
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #0e9494;
+  width: 107px;
+  height: 35px;
+  border-radius: 15px;
+}
+
+.challengeAddedButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pretendard";
+  font-size: 15px;
+  font-weight: 700;
+  color: #7adcc5;
+  background: #0e9494;
+  width: 107px;
+  height: 35px;
+  border-radius: 15px;
+}

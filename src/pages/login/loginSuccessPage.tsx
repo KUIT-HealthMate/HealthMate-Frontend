@@ -1,16 +1,16 @@
 import queryString from 'query-string';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { usePillInfoStore } from '../../store/usePillInfoStore';
-import useHabitInfoStore from '../../store/useHabitInfoStore';
+// import { usePillInfoStore } from '../../store/usePillInfoStore';
+// import useHabitInfoStore from '../../store/useHabitInfoStore';
 
 export const LoginSuccess = () => {
     const navigate = useNavigate();
-    const { initializePills } = usePillInfoStore();
-    const { initializeHabits } = useHabitInfoStore();
+    // const { initializePills } = usePillInfoStore();
+    // const { initializeHabits } = useHabitInfoStore();
 
     useEffect(() => {
-          
+
         console.log(window.location.search)
         let qs = queryString.parse(window.location.search);
         let jwtToken = "Bearer " + qs['Jwt'];
@@ -26,11 +26,11 @@ export const LoginSuccess = () => {
         console.log("quertStrign: ", jwtToken)
         localStorage.setItem('jwtToken', jwtToken)
         finishLogin(isNewBoolean)
-       
-        initializePills();
-        initializeHabits();
 
-         // eslint-disable-next-line
+        // initializePills();
+        // initializeHabits();
+
+        // eslint-disable-next-line
     }, []);
 
 

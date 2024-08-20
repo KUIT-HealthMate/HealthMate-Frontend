@@ -18,7 +18,9 @@ import {
   setAverageChartData,
   setChartData,
   setHabbitScoreData,
+  setPredictionData,
 } from "./functions";
+import DiseasePrediction from "./DiseasePrediction/DiseasePrediction";
 
 export type periodName = "day" | "week" | "month";
 export type chartDataType = "habbit" | "mealPattern" | "sleepingPattern";
@@ -89,6 +91,7 @@ export default function HealthChart() {
   const habbitScoreData = setHabbitScoreData(dataType, dayData, noneDayData);
   const chartData = setChartData(dataType, noneDayData);
   const chartAverageData = setAverageChartData(dataType, noneDayData);
+  const predictionData = setPredictionData(dataType, dayData, noneDayData);
 
   useEffect(() => {
     getChartData(period, today).then((response) => {
@@ -193,6 +196,7 @@ export default function HealthChart() {
           <DailyHealthChart dataType={dataType} data={dayData} />
         )}
       </div>
+      <DiseasePrediction data={predictionData} />
       <button
         className={s.dailyCheckButton}
         onClick={() => {

@@ -13,6 +13,9 @@ import { useMutation } from 'react-query';
 import { habitDto, supplementDto } from "../../dtos/home/homeDto";
 import { Cookies } from 'react-cookie';
 
+import { usePillInfoStore } from '../../store/usePillInfoStore';
+import useHabitInfoStore from '../../store/useHabitInfoStore';
+
 const cookies = new Cookies();
 
 export const getCookie = (name: string) => {
@@ -22,6 +25,26 @@ export const getCookie = (name: string) => {
 
 const Home = () => {
   const navigate = useNavigate();
+
+  const { initializePills } = usePillInfoStore();
+  const { initializeHabits } = useHabitInfoStore();
+
+  useEffect(() => {
+    console.log("home")
+    // 컴포넌트가 마운트될 때 데이터 가져오기
+
+    //로그인X->로그인 페이지로
+    const JWT_TOKEN = localStorage.getItem('jwtToken');
+    console.log("JWT_TOKEN: ", JWT_TOKEN)
+    if (JWT_TOKEN === null) {
+      navigate('/login')
+    }
+
+    initializePills();
+    initializeHabits();
+    gethomeInfoMutation.mutate();
+    // eslint-disable-next-line
+  }, []);
 
   const [habits, setHabits] = useState<habitDto[]>([]);
   const [supplements, setSupplements] = useState<supplementDto[]>([]);
@@ -41,12 +64,7 @@ const Home = () => {
     },
   })
 
-  useEffect(() => {
-    console.log("home")
-    // 컴포넌트가 마운트될 때 데이터 가져오기
-    gethomeInfoMutation.mutate();
-    // eslint-disable-next-line
-  }, []);
+
 
 
   return (

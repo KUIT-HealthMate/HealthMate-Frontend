@@ -121,3 +121,52 @@ export function setAverageChartData(
     }
   } else return [0, 0, 0, 0];
 }
+
+export function setPredictionData(
+  dataType: chartDataType,
+  dayData: dayResult | null,
+  noneDayData: notDayResult | null
+) {
+  const result = []; // 위험질환, 위험점수, 설명, 추천챌린지 순
+  if (dayData !== null) {
+    if (dataType === "habbit") {
+      result.push(dayData?.life.lifeStyleResponse.riskSymptoms);
+      result.push(dayData?.life.lifeStyleResponse.riskScore);
+      result.push(dayData?.life.lifeStyleResponse.description);
+      result.push(dayData?.life.lifeStyleResponse.challenges);
+      return result;
+    } else if (dataType === "mealPattern") {
+      result.push(dayData?.meal.mealPatternResponse.riskSymptoms);
+      result.push(dayData?.meal.mealPatternResponse.riskScore);
+      result.push(dayData?.meal.mealPatternResponse.description);
+      result.push(dayData?.meal.mealPatternResponse.challenges);
+      return result;
+    } else {
+      result.push(dayData?.sleep.sleepPatternResponse.riskSymptoms);
+      result.push(dayData?.sleep.sleepPatternResponse.riskScore);
+      result.push(dayData?.sleep.sleepPatternResponse.description);
+      result.push(dayData?.sleep.sleepPatternResponse.challenges);
+      return result;
+    }
+  } else {
+    if (dataType === "habbit") {
+      result.push(noneDayData?.life.riskSymptoms);
+      result.push(noneDayData?.life.riskScore);
+      result.push(noneDayData?.life.description);
+      result.push(noneDayData?.life.challenges);
+      return result;
+    } else if (dataType === "mealPattern") {
+      result.push(noneDayData?.life.riskSymptoms);
+      result.push(noneDayData?.life.riskScore);
+      result.push(noneDayData?.life.description);
+      result.push(noneDayData?.life.challenges);
+      return result;
+    } else {
+      result.push(noneDayData?.life.riskSymptoms);
+      result.push(noneDayData?.life.riskScore);
+      result.push(noneDayData?.life.description);
+      result.push(noneDayData?.life.challenges);
+      return result;
+    }
+  }
+}
