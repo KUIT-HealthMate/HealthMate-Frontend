@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import s from "./ManagePage.module.scss";
 import { usePillInfoStore } from "../../../../store/usePillInfoStore";
 
@@ -25,7 +25,7 @@ import ChallengeManageHeader from "./components/ChallengeManageHeader";
 import { SelectedAlarmTimeFormat } from "./utils/Alarm/SelectedAlarmTimeFormat";
 
 const ChallengeManagePage = <T,>({
-  challengeType,
+  challengeType
 }: {
   challengeType: string;
 }) => {
@@ -57,6 +57,18 @@ const ChallengeManagePage = <T,>({
   const [newChallenge, setNewChallenge] = useState<initChallengeInfo<T>>(
     initChallenge(challengeType) as unknown as initChallengeInfo<T>
   );
+
+  const location = useLocation();
+  useEffect(() => {
+    console.log("pending");
+    console.log(location.state?.data);
+    if(location.state?.data !== undefined) {
+      setNewChallenge({...newChallenge,name: location.state?.data});
+    }
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+  
 
   //새로 추가하는 화면인지, 편집하는 화면인지의 정보
   let isAddingNewChallenge: boolean;
