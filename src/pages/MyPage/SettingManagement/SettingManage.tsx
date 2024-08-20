@@ -1,8 +1,7 @@
 import s from "./SettingManagement.module.scss";
 import myCommunity from "../../../assets/settingManagement.png";
 import rightGreyArrow from "../../../assets/rightGreyArrow.svg";
-import { useEffect, useState } from "react";
-import { setAlarm } from "../../../APIs/myPage/setAlarm";
+import { useState } from "react";
 
 interface SettingManagementProps {
   version: string;
@@ -14,11 +13,6 @@ export default function SettingManagement({ version }: SettingManagementProps) {
   const handleAlarmAllow = () => {
     setAlarmAllow(!alarmAllow);
   };
-
-  useEffect(() => {
-    setAlarm(alarmAllow);
-  }, [alarmAllow]);
-
   return (
     <div className={s.blockContainer}>
       <div className={s.titleContainer}>
