@@ -63,6 +63,10 @@ button:hover {
   text-align: center;
 
   padding: 14px 0 14px 0;
+
+  > span {
+    color: #000000;
+  }
 }
 
 .challengeName:nth-child(1) {
