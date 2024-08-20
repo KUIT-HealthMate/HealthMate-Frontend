@@ -1,13 +1,13 @@
 import queryString from 'query-string';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { usePillInfoStore } from '../../store/usePillInfoStore';
-import useHabitInfoStore from '../../store/useHabitInfoStore';
+// import { usePillInfoStore } from '../../store/usePillInfoStore';
+// import useHabitInfoStore from '../../store/useHabitInfoStore';
 
 export const LoginSuccess = () => {
     const navigate = useNavigate();
-    const { initializePills } = usePillInfoStore();
-    const { initializeHabits } = useHabitInfoStore();
+    // const { initializePills } = usePillInfoStore();
+    // const { initializeHabits } = useHabitInfoStore();
 
     useEffect(() => {
 
