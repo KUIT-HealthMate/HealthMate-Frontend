@@ -7,22 +7,23 @@ import deleteImg from "../../../assets/deleteIcon.svg";
 import pencilImg from "../../../assets/pencil.svg";
 import { pillInfo } from "../../../store/challengeTypes";
 import { habitInfo } from "../../../store/challengeTypes";
+import useViewingChallengeStore from "./viewingChallengeStore/useViewingChallengeStore";
 
 interface Props {
   item: (pillInfo | habitInfo)[];
   getIntakeTime: any;
   deleteFunc: (Id: string) => void;
   challengeType: string;
-  displayInfo: string;
 }
 
 const ChallengeDisplay: React.FC<Props> = ({
   item,
   getIntakeTime,
   deleteFunc,
-  challengeType,
-  displayInfo,
+  challengeType
 }) => {
+  const { viewingChallenge } = useViewingChallengeStore();
+
   const changeStyleToEditMode = () => {
     const plusBtn = document.getElementsByClassName(
       s.addPills
@@ -94,9 +95,11 @@ const ChallengeDisplay: React.FC<Props> = ({
     return item.name;
   };
 
+  console.log(viewingChallenge === challengeType);
+
   return (
     <>
-      {displayInfo === challengeType && (
+      {viewingChallenge === challengeType && (
         <div className={s.body}>
           <div className={s.supplementTitle}>
             <span>

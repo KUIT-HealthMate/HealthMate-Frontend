@@ -4,6 +4,7 @@ import { initHabit } from "../pages/Home/Challenge/ManagePage/utils/initChalleng
 import { serverRequest } from "../APIs/ManageChallenge/serverRequest";
 
 interface HabitInfoState {
+  initializeHabits: () => Promise<void>;
   HabitInfo: habitInfo[];
   setHabitInfo: (habit: habitInfo) => void;
 
@@ -16,7 +17,7 @@ interface HabitInfoState {
   deleteHabit: (habitId: string) => void;
 
   // id를 제외한 요소들을 얕은 복사한 habit을 반환합니다.
-  getHabitCopy: (habitId: string) => Omit<habitInfo, "id">;
+  getHabitCopy: (habitId: string) => Omit<habitInfo, "id"> | undefined;
 
   // id와 일치하는 habit의 요소들을 주어진 habit로 설정합니다.
   setHabit: (
@@ -27,18 +28,27 @@ interface HabitInfoState {
 }
 
 const useHabitInfoStore = create<HabitInfoState>((set, get) => {
-  const initializeHabits = async () => {
-    try {
-      const habitArray:habitInfo[] = await serverRequest.loadChallenge<habitInfo>("habits");
-      set({HabitInfo: habitArray});
-    } catch (error) {
-      console.error("Error initializing habits:", error);
-    }
-  }
+  // const initializeHabits = async () => {
+  //   try {
+  //     const habitArray:habitInfo[] = await serverRequest.loadChallenge<habitInfo>("habits");
+  //     set({HabitInfo: habitArray});
+  //   } catch (error) {
+  //     console.error("Error initializing habits:", error);
+  //   }
+  // }
 
-  initializeHabits();
+  // initializeHabits();
 
   return {
+    initializeHabits: async () => {
+      try {
+        const habitArray:habitInfo[] = await serverRequest.loadChallenge<habitInfo>("habits");
+        set({HabitInfo: habitArray});
+      } catch (error) {
+        console.error("Error initializing habits:", error);
+      }
+    },
+
   HabitInfo: [] as habitInfo[],
 
   setHabitInfo: (habit: habitInfo) =>
@@ -83,10 +93,14 @@ const useHabitInfoStore = create<HabitInfoState>((set, get) => {
       return { ...initHabit(), notificationTime: [] };
     } else {
       //Id에 해당하는 habit의 참조를 얻는다
-      const targetHabit: habitInfo = get().HabitInfo.find(
-         // eslint-disable-next-line eqeqeq
+      const tempHabit = get().HabitInfo.find(
+        // eslint-disable-next-line eqeqeq
         (habit) => habit.id == habitId
-      ) as habitInfo;
+      );
+      if(tempHabit === undefined){
+        return undefined;
+      }
+      const targetHabit: habitInfo = tempHabit as habitInfo;
 
       //얕은 복사한 복사본을 생성
       const duplicatedHabit: Omit<habitInfo, "id"> = {

@@ -83,13 +83,13 @@ const ChallengeManagePage = <T,>({
     if (!isAddingNewChallenge) {
       if (isPillChallenge(challengeType)) {
         console.log(challengeType);
-        let { notificationTime, ...rest } = getPillCopy(editingChallengeId);
+        let { notificationTime, ...rest } = getPillCopy(editingChallengeId) as Omit<pillInfo, "id">;
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);
       }
       if (isHabitChallenge(challengeType)) {
         console.log(challengeType);
-        let { notificationTime, ...rest } = getHabitCopy(editingChallengeId);
+        let { notificationTime, ...rest } = getHabitCopy(editingChallengeId) as Omit<habitInfo, "id">;
         setNewChallenge(rest as unknown as initChallengeInfo<T>);
         setAlarmTime(notificationTime);
       }

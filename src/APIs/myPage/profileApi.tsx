@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { profileInfoDto } from '../../dtos/profile/profileDto';
 
+
 const BASE_URL = process.env.REACT_APP_BACK_URL;
-const JWT_TOKEN = localStorage.getItem("jwtToken");
+//const JWT_TOKEN = localStorage.getItem("jwtToken");
+
 
 
 export const clientImg = axios.create({
@@ -10,21 +12,44 @@ export const clientImg = axios.create({
     headers: {
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*',
-        'Jwt': JWT_TOKEN,
-        //'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8',
     },
 });
+// 인터셉터 추가해 매 요청마다 JWT 토큰 추가
+clientImg.interceptors.request.use(
+    config => {
+        const JWT_TOKEN = localStorage.getItem("jwtToken");
+        console.log("온보딩 interceptor에서 jwt: ", JWT_TOKEN);
+        if (JWT_TOKEN) {
+            config.headers['Jwt'] = JWT_TOKEN;
+        }
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 export const client = axios.create({
     baseURL: BASE_URL,
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Jwt': JWT_TOKEN,
-
-        //'Jwt': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjY5MTc3ODA4IiwiaWF0IjoxNzI0MDUwODUzLCJleHAiOjM2MTcyNDA1MDg1MywidXNlcklkIjo2fQ.i3j82Yv3EPZNeyFCYZ-70qVIUNB1SDWj1vRkMdl0U-o',
     },
 });
+// 인터셉터 추가해 매 요청마다 JWT 토큰 추가
+client.interceptors.request.use(
+    config => {
+        const JWT_TOKEN = localStorage.getItem("jwtToken");
+        console.log("온보딩 interceptor에서 jwt: ", JWT_TOKEN);
+        if (JWT_TOKEN) {
+            config.headers['Jwt'] = JWT_TOKEN;
+        }
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 
 //프로필 정보
@@ -52,18 +77,22 @@ export const getProfileInfo = async () => {
 };
 
 
+
 //프로필 수정
 export const postProfile = async (selectedFile: File) => {
     const data = new FormData();
+
     data.append('profileImage', selectedFile);
     try {
         const response = await clientImg.post('/users/edit/profile', data);
+
         console.log(response.data)
         return response.data;
     } catch (error) {
         console.error('프로필 수정 실패:', error);
         throw error;
     }
+
 
 };
 

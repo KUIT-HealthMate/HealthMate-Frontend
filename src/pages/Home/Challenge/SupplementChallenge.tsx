@@ -11,6 +11,7 @@ import SwiperCore, { Pagination, Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 
 import { supplementDto } from "../../../dtos/home/homeDto";
+import useViewingChallengeStore from "./viewingChallengeStore/useViewingChallengeStore";
 
 SwiperCore.use([Pagination, Navigation]);
 
@@ -20,6 +21,7 @@ interface SupplementChallengeProps {
 
 export default function SupplementChallenge(props: SupplementChallengeProps) {
   console.log("SupplementChallenge: ", props.supplements)
+  const { setViewingChallenge} = useViewingChallengeStore();
   // const { PillInfo } = usePillInfoStore();
 
   const splitPillInfo = (array: supplementDto[]) => {
@@ -44,7 +46,7 @@ export default function SupplementChallenge(props: SupplementChallengeProps) {
       <div className={styles.PillChallengeTitle}>
         <img src={pillIcon} className={styles.PillImg} alt="kimpill"></img>
         <h1 className={styles.PillText}>영양제 챌린지</h1>
-        <Link to="/ChallengeEdit" state={{data:"pill"}} className={styles.PillEdit}>
+        <Link to="/ChallengeEdit" className={styles.PillEdit} onClick={() => {setViewingChallenge("pill")}}>
           편집하기<img src={clampR} className={styles.clampR} alt="clamp"></img>
         </Link>
       </div>
