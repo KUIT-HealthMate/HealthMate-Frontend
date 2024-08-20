@@ -60,8 +60,10 @@ const ChallengeManagePage = <T,>({
 
   const location = useLocation();
   useEffect(() => {
-    if(location.state?.challengeName !== undefined) {
-      setNewChallenge({...newChallenge,name: location.state?.challengeName});
+    console.log("pending");
+    console.log(location.state?.data);
+    if(location.state?.data !== undefined) {
+      setNewChallenge({...newChallenge,name: location.state?.data});
     }
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
