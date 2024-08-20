@@ -16,7 +16,10 @@ export default function AIDiagnosis({
   return (
     <div className={s.diagnosisContainer}>
       {rate === undefined ? (
-        <div></div>
+        <div>
+          <div className={s.warning}>AI 진단결과를 불러오는데</div>
+          <div className={s.warning}>문제가 발생했어요.</div>
+        </div>
       ) : (
         <div className={s.AIDiagnosisContainer}>
           <div className={s.title}>{`위험질환: ${symptoms}`}</div>
