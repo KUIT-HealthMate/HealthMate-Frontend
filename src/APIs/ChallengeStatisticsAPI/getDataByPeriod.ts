@@ -21,7 +21,7 @@ export const getDataByPeriod = async (
       "YYYY-MM-DD"
     )}&endDate=${endDate.format("YYYY-MM-DD")}`,
     headers: {
-      Jwt: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjQ5NjU4MTQzIiwiaWF0IjoxNzIzMDg1ODA4LCJleHAiOjE3MjY2ODU4MDgsInVzZXJJZCI6MX0.0y4fkQBnXqIXNJEPt9RZRpCI0HDBCE50KOPeHjelCw8",
+      Jwt: localStorage.getItem('jwtToken') as string,
     },
   };
 
