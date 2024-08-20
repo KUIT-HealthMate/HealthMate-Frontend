@@ -45,8 +45,7 @@ const RoundedBar = (props: any) => {
             L${x + width - radius},${y}
             Q${x + width},${y} ${x + width},${y + radius}
             L${x + width},${y + height}
-
-          Z
+        Z  // Close the path
         `}
       fill={fill}
       stroke="none"
@@ -150,6 +149,7 @@ const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
             shape={RoundedBar}
             label={CustomBarLabelMy}
             barSize={barSize}
+            style={{ marginBottom: '100px' }}
           />
           <Bar
             dataKey="avgScore"
