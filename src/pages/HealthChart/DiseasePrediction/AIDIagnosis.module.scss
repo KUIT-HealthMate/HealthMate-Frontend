@@ -5,8 +5,19 @@
   padding: 31px 7px;
 }
 
+.warning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Pretendard";
+  font-size: 20px;
+  font-weight: 700;
+  color: #aaaaaa;
+}
+
 .title {
-  font-family: Pretendard;
+  font-family: "Pretendard";
   font-size: 20px;
   font-weight: 700;
   color: #000000;
